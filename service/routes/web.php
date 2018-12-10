@@ -67,6 +67,7 @@ Route::group(
                 'index', 'show'
             ]
         ]);
+        Route::any("videos/{video}/snapshot", "VideoController@snapshot");
     }
 );
 
