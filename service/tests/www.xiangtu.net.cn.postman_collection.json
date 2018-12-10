@@ -2,6 +2,7 @@
 	"info": {
 		"name": "www.xiangtu.net.cn",
 		"_postman_id": "a4550aef-5bb4-d44d-728b-f05dbca03e8b",
+		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -554,6 +555,41 @@
 						"user"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "VOD点播签名接口",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://www.xiangtu.net.cn/api/qcloud/signature/vod",
+					"protocol": "https",
+					"host": [
+						"www",
+						"xiangtu",
+						"net",
+						"cn"
+					],
+					"path": [
+						"api",
+						"qcloud",
+						"signature",
+						"vod"
+					]
+				},
+				"description": ""
 			},
 			"response": []
 		}
