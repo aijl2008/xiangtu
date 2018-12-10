@@ -19,11 +19,12 @@
                     @foreach($rows as $row)
                         <tr>
                             <td>{{$row->id}}</td>
-                            <td>{{$row->title}}</td>
-                            <td>
+                            <td></td>
+                            <td style="width: 100px">
                                 @if ($row->cover_url)
-                                    <img src="{{$row->cover_url}}">
+                                    <img class="thumbnail" src="{{$row->cover_url}}">
                                 @endif
+                                <a href="{{route('admin.videos.show', $row->id)}}">{{$row->title}}</a>
                             </td>
                             <td>{{$row->played_number}}</td>
                             <td>{{$row->liked_number}}</td>

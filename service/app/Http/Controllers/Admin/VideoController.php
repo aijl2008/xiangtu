@@ -9,8 +9,10 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Video;
+use App\Models\Vod;
 
 class VideoController extends Controller
 {
@@ -22,7 +24,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        return view('admin.videos.index')->with('rows', Video::query()->paginate());
+        return view('admin.videos.index')->with('rows', Video::query()->orderBy('id', 'desc')->paginate());
     }
 
     /**
@@ -54,7 +56,20 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        return view("my.videos.show")->with('row', $video);
+        return view("admin.videos.show")->with('row', $video)->with('video', (new Vod())->getVideoInfo($video->file_id));
+    }
+
+    public function snapshot(Video $video)
+    {
+        $snapshot = (new Vod())->createSnapshotByTimeOffset($video->file_id);
+        if ($snapshot->code == 0) {
+            return Helper::success(
+                [
+                    'vodTaskId' => $snapshot->vodTaskId
+                ]
+            );
+        }
+        return Helper::error(-1, $snapshot->message);
     }
 
     /**
