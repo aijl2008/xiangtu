@@ -8,8 +8,8 @@ class SignatureController extends Controller
 {
     function vod()
     {
-        $secret_id = config('vod.secret_id');
-        $secret_key = config('vod.secret_key');
+        $secret_id = config('wechat.cloud.api.default.secret_id');
+        $secret_key = config('wechat.cloud.api.default.secret_key');
 
         /**
          * 确定签名的当前时间和失效时间

@@ -28,7 +28,7 @@
     <script type="text/javascript">
         var player = TCPlayer('player-container-id', {
             fileID: '{{ $row->file_id }}',
-            appID: '{!! config("vod.app_id") !!}'
+            appID: '{{config("wechat.cloud.app_id")}}'
         });
     </script>
 @endsection
