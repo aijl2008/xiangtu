@@ -157,11 +157,11 @@
                             }
                         },
                         error: function (result) {
-                            console.log('error', result);
-                            if (result.type == 'video') {
-                                $('#queue_videos').html(result.msg);
-                            } else if (result.type == 'cover') {
-                                $('#queue_video_covers').html(result.msg);
+                            try {
+                                console.log(result);
+                                __alert(result.msg );
+                            } catch (e) {
+                                __alert(result.toString());
                             }
                         },
                         progress: function (result) {
@@ -214,10 +214,7 @@
             // 上传按钮点击事件
             $('#uploadFile').on('click', function () {
                 startUploader();
-                $('#form').reset();
             });
         });
     </script>
-    @endsection
-    </body>
-    </html>
+@endsection
