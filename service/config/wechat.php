@@ -1,5 +1,17 @@
 <?php
 return [
+    /**
+     * 腾讯云
+     */
+    'cloud' => [
+        'app_id' => '1258107170',
+        'api' => [
+            'default' => [
+                'secret_id' => 'AKIDyrfTFpeibYP6dFMyBGDIQzTs7KmIRw8J',
+                'secret_key' => "AHTelhTJ8Da2JsTy2RkWM3oPJ6pSZYTN",
+            ]
+        ]
+    ],
     /*
      * 公众号
      */
