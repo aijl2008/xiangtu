@@ -35,15 +35,16 @@ class VideoController extends Controller
             if (!empty($wechat)) {
                 if ($user = $request->user('api')) {
                     $wechat['followed'] = $user->haveFollowed($item->wechat);
+                } else {
+                    $wechat['followed'] = false;
                 }
-                $wechat['followed'] = 0;
             }
-            $wechat['followed'] = 0;
             $row['wechat'] = $wechat;
             if ($user = $request->user('api')) {
                 $row['liked'] = $user->haveLiked($item);
+            } else {
+                $row['liked'] = false;
             }
-            $row['liked'] = 0;
             $videos[] = $row;
         }
         return Helper::success(new LengthAwarePaginator($videos, $video->count(), 16));
