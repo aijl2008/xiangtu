@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('title', str_limit($row->title))
 @section('content')
-
-
+    <h3>视频管理</h3>
     <div>
         <div class="container">
             <div class="row">

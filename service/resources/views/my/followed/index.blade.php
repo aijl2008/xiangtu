@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '我关注的视频')
+@section('title', '我关注的人')
 @section('content')
     <div id="page-content" class="index-page">
         <div class="container">
@@ -39,45 +39,4 @@
             @endforeach
         </div>
     </div>
-@endsection
-
-
-
-@section('js')
-    <script type="text/javascript">
-        $(function () {
-            $(".be_followed").click(function () {
-                var _this = $(this);
-                console.log(_this.data('wechat-id'));
-                $.ajax(
-                    {
-                        url: _this.data('url'),
-                        type: "post",
-                        data: {
-                            wechat_id: _this.data('wechat-id'),
-                            __method:'DELETE'
-                        },
-                        dataType: "json",
-                        success: function (res) {
-                            if (res.code == 0) {
-                                __alert("已关注");
-                                _this.html('<i class="fa fa-heart"></i>' + res.data.followed_number);
-                            }
-                            else {
-                                __alert(res.msg);
-                            }
-                        },
-                        error: function (res, err, msg) {
-                            if (res.status == 401) {
-                                __alert("请登录");
-                            }
-                            else {
-                                __alert(msg);
-                            }
-                        }
-                    }
-                );
-            });
-        });
-    </script>
 @endsection

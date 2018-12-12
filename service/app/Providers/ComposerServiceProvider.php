@@ -38,8 +38,8 @@ class ComposerServiceProvider extends ServiceProvider
             } else {
                 $view->with('auth', 'guest');
             }
-            $view->with('current_classification', request('classification'));
-            $view->with('classifications', Classification::query()->take(15)->get());
+            $view->with('current', request()->input('classification'));
+            $view->with('navigation', Classification::query()->take(15)->get());
         });
     }
 
