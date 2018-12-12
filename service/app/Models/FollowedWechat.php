@@ -18,8 +18,8 @@ class FollowedWechat extends Model
         'wechat_id'
     ];
 
-//    function video()
-//    {
-//        return $this->hasMany(Video::class, 'wechat_id');
-//    }
+    function video()
+    {
+        return $this->hasMany(Video::class, 'wechat_id');
+    }
 }

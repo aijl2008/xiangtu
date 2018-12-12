@@ -11,31 +11,24 @@ namespace App\Http\Controllers\Api\My;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Video;
 use App\Models\Wechat;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class FollowController extends Controller
 {
     function index(Request $request)
     {
+        $user = $request->user('api');
         return Helper::success(
-            call_user_func(function (Authenticatable $user) {
-                if (!$user) {
-                    return new LengthAwarePaginator([], 0, 20);
-                }
-                return $user->followed()->with(
-                    [
-                        'video' => function (HasMany $query) {
-                            return $query->orderBy('id', 'desc')->take(10);
-                        }
-                    ]
-                )->paginate(20);
-            },
-                $request->user('api')
-            )
+
+            Video::query()->whereHas('followed.followed', function (Builder $builder) use ($user) {
+                $builder->where('followed_id', $user->id);
+            })
+                ->with('wechat')
+                ->orderBy('id', 'desc')
+                ->paginate(16)
         );
     }
 
