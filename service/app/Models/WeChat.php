@@ -40,6 +40,29 @@ class Wechat extends Authenticatable
         return $this->belongsToMany(Followed::class)->withTimestamps();
     }
 
+    function haveFollowed(Wechat $wechat)
+    {
+        if ($wechat && $wechat->id == $this->id) {
+            return true;
+        }
+        foreach ($wechat->followed as $followed) {
+            if ($followed->id == $this->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function haveLiked(Video $video)
+    {
+        foreach ($video->liker as $liker) {
+            if ($liker->id == $this->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     function video()
     {
         return $this->hasMany(Video::class);
