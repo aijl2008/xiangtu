@@ -38,6 +38,8 @@ class VideoController extends Controller
                 } else {
                     $wechat['followed'] = false;
                 }
+            } else {
+                $wechat['followed'] = false;
             }
             $row['wechat'] = $wechat;
             if ($user = $request->user('api')) {

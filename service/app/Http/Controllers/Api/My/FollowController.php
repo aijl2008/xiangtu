@@ -46,13 +46,15 @@ class FollowController extends Controller
         if (!$followed) {
             return Helper::error(-1, "不存在的用户");
         }
-        if ($user->followed()->where("followed_id", $request->input('wechat_id'))->count() > 0) {
+        if ($user->followed()->where("wechat_id", $request->input('wechat_id'))->count() > 0) {
             return Helper::error(-1, "您已经关注过了");
         }
-        $user->followed()->attach($request->input('wechat_id'));
+        $user->followed()->create([
+            "wechat_id" => $request->input('wechat_id')
+        ]);
         return Helper::success(
             [
-                'followed' => $followed
+                'followed' => $user->followed()->count()
             ]
         );
     }
@@ -60,10 +62,10 @@ class FollowController extends Controller
     function destroy(Request $request, $user_id)
     {
         $user = $request->user('api');
-        $user->followed()->detach($user_id);
+        $user->followed()->where("wechat_id", $user_id)->delete();
         return Helper::success(
             [
-                'followed' => $user_id
+                'followed' => $user->followed()->count()
             ]
         );
     }

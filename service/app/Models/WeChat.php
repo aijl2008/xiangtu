@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -35,30 +36,36 @@ class Wechat extends Authenticatable
         return $this->belongsToMany(Video::class)->withTimestamps();
     }
 
+    /**
+     * 我关注的
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     function followed()
     {
-        return $this->belongsToMany(Followed::class)->withTimestamps();
+        return $this->hasMany(FollowedWechat::class, 'followed_id');
+    }
+
+    /**
+     * 关注我的
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    function follower()
+    {
+        return $this->hasMany(FollowedWechat::class, 'wechat_id');
     }
 
     function haveFollowed(Wechat $wechat)
     {
-        if ($wechat && $wechat->id == $this->id) {
-            return true;
-        }
-        foreach ($wechat->followed as $followed) {
-            if ($followed->id == $this->id) {
-                return true;
-            }
-        }
-        return false;
+        return $this->followed()->where('wechat_id', $wechat->id)->count() > 0;
     }
 
     function haveLiked(Video $video)
     {
-        foreach ($video->liker as $liker) {
-            if ($liker->id == $this->id) {
-                return true;
-            }
+
+        if ($this->newQuery()->whereHas('liked', function (Builder $query) use ($video) {
+                $query->where('video_id', $video->id);
+            })->count() > 0) {
+            return true;
         }
         return false;
     }

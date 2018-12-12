@@ -9,7 +9,9 @@ Route::any('mini_program/token', 'Api\MiniProgramController@token')->name('api.m
  * 全部视频
  */
 Route::resource('videos', 'Api\VideoController', [
-    'only' => ['index']
+    'only' => [
+        'index', 'show'
+    ]
 ]);
 /**
  * 视频分类

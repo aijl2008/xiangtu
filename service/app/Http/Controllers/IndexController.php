@@ -17,7 +17,7 @@ class IndexController extends Controller
             })
             ->with('wechat')
             ->orderBy('id', 'desc')
-            ->paginate(20));
+            ->paginate(16));
         $view->with('classification', $request->input('classification', 0));
         return $view;
     }
