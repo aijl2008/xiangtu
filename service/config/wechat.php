@@ -49,6 +49,12 @@ return [
             'secret' => '761a1e5617c5b854acf927d25501b87d',
             'token' => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
+            'response_type' => 'array',
+
+            'log' => [
+                'level' => 'debug',
+                'file' => __DIR__ . '/../../storage/logs/wechat.log',
+            ]
         ],
     ],
 

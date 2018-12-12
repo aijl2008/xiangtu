@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Classification;
 use App\Models\User;
 use App\Models\Wechat;
-use App\Models\Classification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -38,7 +38,8 @@ class ComposerServiceProvider extends ServiceProvider
             } else {
                 $view->with('auth', 'guest');
             }
-            $view->with('classifications',Classification::query()->get());
+            $view->with('current_classification', request('classification'));
+            $view->with('classifications', Classification::query()->take(15)->get());
         });
     }
 

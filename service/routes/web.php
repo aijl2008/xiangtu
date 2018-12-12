@@ -121,4 +121,5 @@ Route::group(
 /**
  * 公众号消息接口
  */
-//Route::any('/wechat', 'WechatServerController@serve')->name('wechat.serve');
+Route::any('/wechat', 'WechatServerController@serve')->name('wechat.serve');
+Route::any('/qr_code/mini_program', 'QRCodeController@miniProgram');
