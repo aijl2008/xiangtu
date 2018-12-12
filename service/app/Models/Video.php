@@ -35,4 +35,8 @@ class Video extends Model
     {
         return $this->belongsTo(Wechat::class);
     }
+
+    function liker(){
+        return $this->belongsToMany(Wechat::class);
+    }
 }
