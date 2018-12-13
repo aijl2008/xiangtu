@@ -9,6 +9,7 @@
 namespace App\Help\Http;
 
 use GuzzleHttp\Promise;
+use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -52,7 +53,9 @@ class Client
 
     static function getJson($url, $option = [])
     {
+        Log::debug($url, $option);
         $Response = (self::getInstance())->client->get($url, $option);
+        Log::debug($Response->getBody());
         return json_decode($Response->getBody());
     }
 }

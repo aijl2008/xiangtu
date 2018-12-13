@@ -11,6 +11,7 @@
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <script src="/jquery/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootbox.min.js"></script>
     <script src="/js/app.js"></script>
     <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
     <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
@@ -173,8 +174,18 @@
             background: rgba(0, 0, 0, .5)
         }
 
+        .avatar {
+            width: 32px;
+        }
+
 
     </style>
+    <script>
+        $(function () {
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+        });
+    </script>
+    @yield('js')
 </head>
 <body>
 <div class="container top">
@@ -188,13 +199,8 @@
         <div class="col-md-6 col-sm-6 text-right">
             <ul class="list-inline top-link link">
                 @if ($auth == 'wechat')
-                    <li><a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>关注</a></li>
-                    <li><a href="{{ route('my.liked.index') }}"><i class="fa fa-play-circle-o"></i>喜欢</a>
-                    </li>
-                    <li><a href="{{ route('my.videos.create') }}"><i class="fa fa-cloud-upload"></i>上传</a></li>
-                    </li>
                     <li><a href="{{ route('wechat.logout') }}"><i class="fa fa-sign-out"></i>退出</a></li>
-                    <a href="{{route('my.videos.index')}}"><img alt="{{$user->name}}" style="width: 32px"
+                    <a href="{{route('my.videos.index')}}"><img class="avatar" alt="{{$user->name}}"
                                                                 src="{{$user->avatar}}"></a>
                 @elseif($auth == 'user')
                     <li><i class="fa fa-user"></i> {{ $user->email }}</li>
@@ -228,6 +234,11 @@
                     <li><a href="{{ route('admin.videos.index') }}"><i class="fa fa-film"></i>视频列表 </a>
                     </li>
                     <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-user"></i>用户管理 </a></li>
+                @elseif($auth=='wechat')
+                    <li><a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a></li>
+                    <li><a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>我的关注</a></li>
+                    <li><a href="{{ route('my.liked.index') }}"><i class="fa fa-play-circle-o"></i>我的收藏 </a></li>
+                    <li><a href="{{ route('my.videos.create') }}"><i class="fa fa-cloud-upload"></i>上传视频 </a></li>
                 @else
 
 

@@ -45,8 +45,8 @@ return [
      */
     'mini_program' => [
         'default' => [
-            'app_id' => 'wx49bbe08c88598089',
-            'secret' => '761a1e5617c5b854acf927d25501b87d',
+            'app_id' => 'wxbe20d80072eaf2d3',
+            'secret' => '0cfb1809377ba6cd225c21968381e98c',
             'token' => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
             'response_type' => 'array',

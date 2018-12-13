@@ -9,7 +9,15 @@
 namespace App\Models;
 
 
-class Log
+use Illuminate\Database\Eloquent\Model;
+
+class Log extends Model
 {
+    protected $fillable = [
+        'action',
+        'from_user_id',
+        'to_user_id',
+        'message'
+    ];
 
 }

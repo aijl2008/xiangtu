@@ -22,10 +22,10 @@ class FollowController extends Controller
     {
         $user = $request->user('api');
         return Helper::success(
-
-            Video::query()->whereHas('followed.followed', function (Builder $builder) use ($user) {
-                $builder->where('followed_id', $user->id);
-            })
+            Video::query()
+                ->whereHas('wechat.follower', function (Builder $builder) use ($user) {
+                    $builder->where('followed_id', $user->id);
+                })
                 ->with('wechat')
                 ->orderBy('id', 'desc')
                 ->paginate(16)

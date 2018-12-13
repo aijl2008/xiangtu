@@ -9,8 +9,9 @@
 namespace App\Http\Controllers\My;
 
 
+use App\Helper;
 use App\Http\Controllers\Controller;
-use App\Models\Classification;
+use App\Http\Requests\VideoRequest;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
@@ -41,13 +42,15 @@ class VideoController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param VideoRequest $request
+     * @return array
      */
-    public function store(Request $request)
+    public function store(VideoRequest $request)
     {
-        //
+        $video = (new Video($request->all()));
+        $request->user('wechat')->video()->save($video);
+        //$video->save();
+        return Helper::success($video->toArray());
     }
 
     /**

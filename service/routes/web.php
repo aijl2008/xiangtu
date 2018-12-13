@@ -112,6 +112,10 @@ Route::group(
 
         Route::post('profile/upload', 'ProfileController@upload');
         Route::resource('profile', 'ProfileController');
+        /**
+         * signature
+         */
+        Route::get("qcloud/signature/vod", "QCloud\SignatureController@Vod")->name('qcloud.signature.vod');
 
 
         Route::Get('statistics', 'StatisticsController')->name('statistics.show');
