@@ -32,6 +32,37 @@ class Vod
         ];
     }
 
+    function getWaitingTaskList($file_id = null)
+    {
+        return $this->getTaskList("WAITING", $file_id);
+    }
+
+    function getProcessingTaskList($file_id = null)
+    {
+        return $this->getTaskList("PROCESSING", $file_id);
+    }
+
+    function getFinishedTaskList($file_id = null)
+    {
+        return $this->getTaskList("FINISH", $file_id);
+    }
+
+    private function getTaskList($status, $file_id = null)
+    {
+        $query = [
+            "Action" => "GetTaskList",
+            "status" => $status
+        ];
+        if ($file_id) {
+            $query["fileId"] = $file_id;
+        }
+
+        $params = array_merge($this->params, $query);
+        $signature = $this->signature($params);
+        $video = $this->send('GET', $this->api . '?' . http_build_query(array_merge($params, ['Signature' => $signature])));
+        return $video;
+    }
+
     function getVideoInfo($file_id)
     {
         $query = [
@@ -45,7 +76,62 @@ class Vod
         return $video;
     }
 
-    function createSnapshotByTimeOffset($file_id)
+    function runProcedure($param)
+    {
+        $query = [
+            "Action" => "RunProcedure",
+        ];
+
+        $params = array_merge($this->params, $query, $param);
+        $signature = $this->signature($params);
+        $video = $this->send('GET', $this->api . '?' . http_build_query(array_merge($params, ['Signature' => $signature])));
+        return $video;
+    }
+
+    function getTaskInfo($task_id)
+    {
+        $query = [
+            "Action" => "GetTaskInfo",
+            "vodTaskId" => $task_id
+        ];
+
+        $params = array_merge($this->params, $query);
+        $signature = $this->signature($params);
+        $video = $this->send('GET', $this->api . '?' . http_build_query(array_merge($params, ['Signature' => $signature])));
+        return $video;
+    }
+
+    private function processFile($file_id, $param = [])
+    {
+        $query = [
+            "Action" => "ProcessFile",
+            "fileId" => $file_id,
+
+        ];
+
+        $params = array_merge($this->params, $query, $param);
+        $signature = $this->signature($params);
+        $video = $this->send('GET', $this->api . '?' . http_build_query(array_merge($params, ['Signature' => $signature])));
+        return $video;
+    }
+
+    function setCoverBySnapshot($file_id)
+    {
+        return $this->processFile($file_id, [
+            "coverBySnapshot.definition" => 10,
+            "positionType" => "Percent",
+            "position" => 10
+        ]);
+    }
+
+    function createSnapshotByTimeOffsetAsCover($file_id, $timeOffset = 1)
+    {
+        return $this->createSnapshotByTimeOffset($file_id, [
+            "timeOffset.0" => $timeOffset,
+        ]);
+    }
+
+    function createSnapshotByTimeOffset($file_id, $param = [])
     {
         $query = [
             "Action" => "CreateSnapshotByTimeOffset",
@@ -55,7 +141,7 @@ class Vod
             "timeOffset.1" => 20
         ];
 
-        $params = array_merge($this->params, $query);
+        $params = array_merge($this->params, $query, $param);
         $signature = $this->signature($params);
         $task = $this->send('GET', $this->api . '?' . http_build_query(array_merge($params, ['Signature' => $signature])));
         return $task;
@@ -139,8 +225,10 @@ class Vod
         if (isset($parsed_url['query'])) {
             parse_str($parsed_url['query'], $query);
         }
+        \Illuminate\Support\Facades\Log::debug($url);
         $res = $this->guzzle->request($method, $url, $options);
         $content = $res->getBody()->getContents();
+        \Illuminate\Support\Facades\Log::debug($content);
         return json_decode($content);
     }
 

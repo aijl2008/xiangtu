@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="Bearer" content="{{  $Bearer??null }}">
     <title>@yield('title')-乡土味</title>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -199,6 +198,7 @@
         <div class="col-md-6 col-sm-6 text-right">
             <ul class="list-inline top-link link">
                 @if ($auth == 'wechat')
+                    <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> 首页</a></li>
                     <li><a href="{{ route('wechat.logout') }}"><i class="fa fa-sign-out"></i>退出</a></li>
                     <a href="{{route('my.videos.index')}}"><img class="avatar" alt="{{$user->name}}"
                                                                 src="{{$user->avatar}}"></a>
@@ -213,7 +213,6 @@
         </div>
     </div>
 </div>
-
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
@@ -227,21 +226,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-
-                @if($auth == 'user')
-                    <li><a href="{{ route('admin.classifications.index') }}"><i class="fa fa-cube"></i>视频分类 </a>
-                    </li>
-                    <li><a href="{{ route('admin.videos.index') }}"><i class="fa fa-film"></i>视频列表 </a>
-                    </li>
-                    <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-user"></i>用户管理 </a></li>
-                @elseif($auth=='wechat')
-                    <li><a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a></li>
-                    <li><a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>我的关注</a></li>
-                    <li><a href="{{ route('my.liked.index') }}"><i class="fa fa-play-circle-o"></i>我的收藏 </a></li>
-                    <li><a href="{{ route('my.videos.create') }}"><i class="fa fa-cloud-upload"></i>上传视频 </a></li>
-                @else
-
-
+                @if (in_array(Route::currentRouteName(), ['home','video.index','video.show']) )
                     <li class="@if(!$current)active @endif"><a href="{{ route('home') }}"><i
                                     class="fa fa-home"></i> 全部</a></li>
                     @foreach($navigation as $item)
@@ -250,6 +235,20 @@
                                         class="fa {{$item->icon}}"></i> {{$item->name}}</a>
                         </li>
                     @endforeach
+                @else
+                    @if($auth == 'user')
+                        <li><a href="{{ route('admin.classifications.index') }}"><i class="fa fa-cube"></i>视频分类 </a>
+                        </li>
+                        <li><a href="{{ route('admin.videos.index') }}"><i class="fa fa-film"></i>视频列表 </a>
+                        </li>
+                        <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-user"></i>用户管理 </a></li>
+                    @elseif($auth=='wechat')
+                        <li><a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a></li>
+                        <li><a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>我的关注</a></li>
+                        <li><a href="{{ route('my.liked.index') }}"><i class="fa fa-play-circle-o"></i>我的收藏 </a></li>
+                        <li><a href="{{ route('my.videos.create') }}"><i class="fa fa-cloud-upload"></i>上传视频 </a></li>
+                    @else
+                    @endif
                 @endif
             </ul>
         </div>

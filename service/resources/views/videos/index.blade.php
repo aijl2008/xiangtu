@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-6 text-right">
                             <a title="{{$row->liked_number}}" href="javascript:void(0)"
-                               data-url="{{route("api.my.liked.store")}}"
+                               data-url="{{route("my.liked.store")}}"
                                data-video-id="{{$row->id}}"
                                class="liked_number"><i class="fa fa-heart"></i>
                             </a>

@@ -13,9 +13,16 @@
                     <h1 class="vid-name"><a href="#">{{$row->title}}</a></h1>
                     <div class="line"></div>
                     <div class="info">
-                        <h5>By <a href="#">Kelvin</a></h5>
+                        <h5>由 <a href="#">{{$row->wechat->nickname}}</a> 上传</h5>
                         <span><i class="fa fa-calendar"></i>{{$row->uploaded_at}}</span>
-                        <span><i class="fa fa-heart"></i>{{$row->liked_number}}</span>
+                        <a title="{{$row->liked_number}}" href="javascript:void(0)"
+                           data-url="{{route("my.liked.store")}}"
+                           data-video-id="{{$row->id}}"
+                           class="liked_number"><i class="fa fa-heart"></i>
+                        </a>
+                        <span title="{{$row->wechat_number}}"><i class="fa fa-heart"></i></span>
+                        <span title="{{$row->moment_number}}"><i class="fa fa-heart"></i> </span>
+                        <span title="{{$row->play_number}}"><i class="fa fa-heart"></i> </span>
                     </div>
                 </div>
             </div>
@@ -25,12 +32,17 @@
     <br/>
 
 
+
+@endsection
+@section("js")
+    <link href="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
     <script type="text/javascript">
-        var player = TCPlayer('player-container-id', {
-            //fileID: '{{ $row->url }}',
-            fileID: '7447398157015849771',
-            appID: '1256993030',
-            //appID: '{!! config("vod.app_id") !!}'
+        $(function () {
+            var player = TCPlayer('player-container-id', {
+                fileID: '{{ $row->file_id }}',
+                appID: '{!! config("wechat.cloud.app_id") !!}'
+            });
         });
     </script>
 @endsection

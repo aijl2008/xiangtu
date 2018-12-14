@@ -25,6 +25,7 @@ class SignatureController extends Controller
             "secretId" => $secret_id,
             "currentTimeStamp" => $current,
             "expireTime" => $expired,
+            'procedure' => 'setCoverBySnapshot()',
             "random" => rand());
 
         /**

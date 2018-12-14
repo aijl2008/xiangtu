@@ -1,11 +1,11 @@
 @extends('layouts.app')
-
+@section('title', '上传视频')
 @section('content')
     <form id="form">
         <div class="form-group">
             <label class="col-md-2 control-label text-right">选择视频</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" value="" name="url" id="url" readonly="readonly">
+                <input class="form-control hide" type="text" value="" name="url" id="url" readonly="readonly">
                 <input type="hidden" value="" name="file_id" id="file_id">
                 <p class="form-control-static" id="queue_videos"><a id="addVideo"
                                                                     href="javascript:void(0);"
@@ -15,7 +15,8 @@
         <div class="form-group">
             <label class="col-md-2 control-label text-right">选择视频封面</label>
             <div class="col-md-10">
-                <input class="form-control" type="text" value="" name="cover_url" id="cover_url" readonly="readonly">
+                <input class="form-control hide" type="text" value="" name="cover_url" id="cover_url"
+                       readonly="readonly">
                 <p class="form-control-static" id="queue_video_covers"><a id="addCover"
                                                                           href="javascript:void(0);"
                                                                           class="btn btn-info">添加封面</a>
@@ -96,8 +97,12 @@
             var uploadCos;
             var uploadTaskId;
 
-            var index = 0;
-            var cosBox = [];
+            /**
+             * 待上传对象，需要在选择文件时赋值。
+             */
+            var videoFileTask;
+            var coverFileTask;
+
             /**
              * 计算签名
              */
@@ -129,72 +134,81 @@
                 });
             };
 
-            var videoFileList = [];
-            var coverFileList = [];
-            // 给addVideo添加监听事件
+
+            /**
+             * 选择视频文件
+             */
+            $('#addVideo').on('click', function () {
+                $('#addVideo-file').click();
+            });
             $('#addVideo-file').on('change', function (e) {
                 var videoFile = this.files[0];
-                videoFileList[0] = videoFile;
+                videoFileTask = videoFile;
                 $('#queue_videos').html(videoFile.name);
                 $("#title").val(videoFile.name);
 
             });
-            $('#addVideo').on('click', function () {
-                $('#addVideo-file').click();
-            });
-            // 给addCover添加监听事件
-            $('#addCover-file').on('change', function (e) {
-                var coverFile = this.files[0];
-                coverFileList[0] = coverFile;
-                $('#queue_video_covers').html(coverFile.name);
-
-            });
+            /**
+             * 选择封面文件
+             */
             $('#addCover').on('click', function () {
                 $('#addCover-file').click();
             });
+            $('#addCover-file').on('change', function (e) {
+                var coverFile = this.files[0];
+                coverFileTask = coverFile;
+                $('#queue_video_covers').html(coverFile.name);
+            });
 
+            /**
+             * 启动上传
+             */
             var startUploader = function () {
                 bootbox.alert({
-                    title: "正在上传，请不要关闭当前页",
+                    title: "乡土味<small>正在上传，请不要关闭当前页</small>",
                     message: "<div class=\"progress\">\n" +
                     "    <div class=\"progress-bar\" style=\"width: 0%;\">\n" +
                     "        <span class=\"sr-only\">0% Complete</span>\n" +
                     "    </div>\n" +
                     "</div>",
                     callback: function () {
-
-                        $('#resultBox').on('click', '[act=cancel-upload]', function () {
-                            var cancelresult = qcVideo.ugcUploader.cancel({
-                                cos: cosBox[$(this).attr('cosnum')],
-                                taskId: $(this).attr('taskId')
-                            });
-                            console.log(cancelresult);
+                        var result = qcVideo.ugcUploader.cancel({
+                            cos: uploadCos,
+                            taskId: $(this).attr('taskId')
                         });
-                        console.log('This was logged in the callback!');
+                        console.log(result);
+                    },
+                    buttons: {
+                        ok: {
+                            label: '取消上传',
+                            callback: function () {
+                                console('Ok');
+                            }
+                        }
                     }
                 });
                 var resultMsg = qcVideo.ugcUploader.start({
-                    videoFile: videoFileList[0],
-                    coverFile: coverFileList[0],
+                    videoFile: videoFileTask,
+                    coverFile: coverFileTask,
                     getSignature: getSignature,
                     allowAudio: 1,
                     success: function (result) {
                         if (result.type == 'video') {
-                            $('#queue_videos').html('上传成功');
+                            console.log('视频上传成功');
                         } else if (result.type == 'cover') {
-                            $('#queue_video_covers').html('上传成功');
+                            console.log('封面上传成功');
                         }
                     },
                     error: function (result) {
                         try {
                             bootbox.alert({
-                                title: "出错了",
+                                title: "乡土味",
                                 message: result.msg,
                                 className: 'bb-alternate-modal'
                             });
                         } catch (e) {
                             bootbox.alert({
-                                title: "出错了",
+                                title: "乡土味",
                                 message: result.toString(),
                                 className: 'bb-alternate-modal'
                             });
@@ -203,11 +217,12 @@
                     progress: function (result) {
                         if (result.type == 'video') {
                             var current_progress = Math.floor(result.curr * 100);
-                            var progress = $(".progress-bar");
-                            progress.css("width", current_progress + "%");
-                            progress.find(".sr-only").text(current_progress + "% 完成");
+                            var progress_bar = $(".progress-bar");
+                            progress_bar.css("width", current_progress + "%");
+                            progress_bar.find(".sr-only").text(current_progress + "% 完成");
+                            uploadTaskId = result.taskId;
+                            uploadCos = result.cos;
                         } else if (result.type == 'cover') {
-                            $('#queue_video_covers').html(Math.floor(result.curr * 100) + '%');
                         }
                     },
                     finish: function (result) {
@@ -225,7 +240,9 @@
                             dataType: 'json',
                             success: function (res) {
                                 if (res && res.code == 0) {
+                                    dialog.modal('hide');
                                     bootbox.alert({
+                                        title: "乡土味",
                                         message: "成功的保存视频",
                                         className: 'bb-alternate-modal',
                                         callback: function () {
@@ -238,14 +255,14 @@
 
                                     if (res.msg) {
                                         bootbox.alert({
-                                            title: "保存视频失败",
+                                            title: "乡土味",
                                             message: res.msg,
                                             className: 'bb-alternate-modal'
                                         });
                                     }
                                     else {
                                         bootbox.alert({
-                                            title: "发布视频失败",
+                                            title: "乡土味",
                                             message: "保存视频失败",
                                             className: 'bb-alternate-modal'
                                         });
@@ -254,7 +271,7 @@
                             },
                             error: function (res, err) {
                                 bootbox.alert({
-                                    title: "发布视频失败",
+                                    title: "乡土味",
                                     message: err,
                                     className: 'bb-alternate-modal'
                                 });
@@ -264,10 +281,13 @@
                 });
             };
 
-            // 上传按钮点击事件
+            /**
+             * 上传按钮点击事件
+             */
             $('#uploadFile').on('click', function () {
-                if (!videoFileList.length) {
+                if (!videoFileTask) {
                     bootbox.alert({
+                        title: "乡土味",
                         message: "请添加视频",
                         className: 'bb-alternate-modal'
                     });
@@ -275,6 +295,7 @@
                 }
                 if (!$('#title').val()) {
                     bootbox.alert({
+                        title: "乡土味",
                         message: "请输入视频名称",
                         className: 'bb-alternate-modal'
                     });
@@ -282,6 +303,7 @@
                 }
                 if (!$("input[name='classification_id']:checked").val()) {
                     bootbox.alert({
+                        title: "乡土味",
                         message: "请选择视频分类",
                         className: 'bb-alternate-modal'
                     });
@@ -289,13 +311,15 @@
                 }
                 if (!$("input[name='visibility']:checked").val()) {
                     bootbox.alert({
+                        title: "乡土味",
                         message: "请选择谁可以看",
                         className: 'bb-alternate-modal'
                     });
                     return;
                 }
-                if (!coverFileList.length) {
+                if (!coverFileTask) {
                     bootbox.confirm({
+                        title: "乡土味",
                         message: "您没有上传视频封面，确定要继续吗？",
                         buttons: {
                             confirm: {

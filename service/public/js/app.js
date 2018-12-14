@@ -12,19 +12,35 @@ $(function () {
                 dataType: "json",
                 success: function (res) {
                     if (res.code == 0) {
-                        __alert("已喜欢");
+                        bootbox.alert({
+                            title: "乡土味",
+                            message: res.msg,
+                            className: 'bb-alternate-modal'
+                        });
                         _this.html('<i class="fa fa-heart"></i>' + res.data.liked_number);
                     }
                     else {
-                        __alert(res.msg);
+                        bootbox.alert({
+                            title: "乡土味",
+                            message: res.msg,
+                            className: 'bb-alternate-modal'
+                        });
                     }
                 },
                 error: function (res, err, msg) {
                     if (res.status == 401) {
-                        __alert("请登录");
+                        bootbox.alert({
+                            title: "乡土味",
+                            message: "收藏视频请先登录",
+                            className: 'bb-alternate-modal'
+                        });
                     }
                     else {
-                        __alert(msg);
+                        bootbox.alert({
+                            title: "乡土味",
+                            message: msg,
+                            className: 'bb-alternate-modal'
+                        });
                     }
                 }
             }

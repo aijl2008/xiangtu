@@ -24,7 +24,7 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         $view = view('my.videos.index');
-        $video = $request->user('wechat')->liked()->with('wechat')->orderBy('id', 'desc');
+        $video = Video::query()->with('wechat')->orderBy('id', 'desc');
         $view->with('rows', $video->paginate());
         $view->with('classification', $request->input('classification', 0));
         return $view;
@@ -47,9 +47,11 @@ class VideoController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        $video = (new Video($request->all()));
-        $request->user('wechat')->video()->save($video);
-        //$video->save();
+        $video = $request->user('wechat')->video()->create($data = $request->all());
+        $vod = new \App\Models\Vod();
+        if (!$video->cover_url) {
+            $vod->createSnapshotByTimeOffsetAsCover($video->file_id, 1);
+        }
         return Helper::success($video->toArray());
     }
 

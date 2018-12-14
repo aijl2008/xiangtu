@@ -25,7 +25,6 @@ class ComposerServiceProvider extends ServiceProvider
                 switch (get_class($user)) {
                     case Wechat::class:
                         $view->with('auth', 'wechat');
-                        $view->with('Bearer', $user ? $user->createToken(request()->userAgent())->accessToken : null);
                         break;
                     case User::class:
                         $view->with('auth', 'user');

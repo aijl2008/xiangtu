@@ -14,6 +14,11 @@ Route::resource('videos', 'Api\VideoController', [
     ]
 ]);
 /**
+ * Vod 事件服务
+ */
+Route::any('vod/service/event', 'Api\Vod\ServiceController@event');
+Route::any('vod/service', 'Api\Vod\ServiceController@event');
+/**
  * 视频分类
  */
 Route::resource('classifications', 'Api\ClassificationController', [
