@@ -11,20 +11,14 @@ namespace App\Http\Controllers\Api\My;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
-    function update(\Illuminate\Http\Request $request)
+    function update(ProfileRequest $request)
     {
         $user = $request->user('api');
-        $row = array();
-        foreach ([
-                     'name', 'avatar', 'email', 'mobile'
-                 ] as $item) {
-            if ($value = $request->input($item)) {
-                $row[$item] = $value;
-            }
-        }
+        $row = $request->data();
         if (empty($row)) {
             return Helper::error(-1, "无更新");
         }

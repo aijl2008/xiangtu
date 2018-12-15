@@ -17,6 +17,7 @@ class Log extends Model
         'action',
         'from_user_id',
         'to_user_id',
+        'video_id',
         'message'
     ];
 

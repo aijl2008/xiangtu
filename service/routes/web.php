@@ -115,15 +115,18 @@ Route::group(
         Route::resource('followed', 'FollowController');
         Route::resource('liked', 'LikeController');
 
-        Route::post('profile/upload', 'ProfileController@upload');
-        Route::resource('profile', 'ProfileController');
+        Route::post('profile/upload', 'ProfileController@upload')->name('profile.upload');
+        Route::post('profile', 'ProfileController@update')->name('profile.update');
+        Route::get('profile', 'ProfileController@index')->name('profile');
         /**
          * signature
          */
         Route::get("qcloud/signature/vod", "QCloud\SignatureController@Vod")->name('qcloud.signature.vod');
 
 
-        Route::Get('statistics', 'StatisticsController')->name('statistics.show');
+        Route::Get('statistics', 'StatisticsController@index')->name('statistics.index');
+        Route::Get('statistics/video', 'StatisticsController@video')->name('statistics.video');
+        Route::Get('statistics/follower', 'StatisticsController@follower')->name('statistics.follower');
     }
 );
 

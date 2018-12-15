@@ -2,6 +2,8 @@
 @section('title', '我收藏的视频')
 
 @section('content')
+    <h3>我收藏的视频</h3>
+    <hr />
     <div class="row">
         @forelse($rows as $row)
             <div class="col-md-4" id="skeleton">

@@ -14,31 +14,21 @@ use App\Models\Wechat;
 use App\Service\Follow;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class FollowController extends Controller
 {
     public function index(Request $request)
     {
         $view = view('my.followed.index');
-        $user = $request->user('wechat')->followed(true);
-        $recommended = false;
-        if ($user->count() == 0) {
-            $user = Wechat::query()->has('video')->inRandomOrder()->limit(10);
-            $recommended = true;
-        }
-        $user->with(
+        $view->with('recommended', Wechat::query()->has('video')->inRandomOrder()->limit(10)->get());
+        $view->with('rows', $request->user('wechat')->followed(true)->with(
             [
                 'video' => function (HasMany $query) {
                     return $query->orderBy('id', 'desc')->take(4);
                 }
             ]
-        );
-        if ($recommended) {
-            return $view->with('rows', new LengthAwarePaginator($user->get(), 0, 20));
-        } else {
-            return $view->with('rows', $user->paginate());
-        }
+        )->paginate());
+        return $view;
 
     }
 

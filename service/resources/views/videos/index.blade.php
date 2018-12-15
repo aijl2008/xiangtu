@@ -24,7 +24,7 @@
 
                     <div class="row">
                         <div class="col-md-3">
-                            <h5><img src="{{$row->wechat->avatar}}" class="avatar img-circle"> 关注 </h5>
+                            <h5><img src="{{$row->wechat->avatar??''}}" class="avatar img-circle"> 关注 </h5>
                         </div>
                         <div class="col-md-6 text-right">
                             <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->updated_at}} </div>

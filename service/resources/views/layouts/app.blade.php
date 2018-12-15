@@ -47,10 +47,12 @@
         <div class="col-md-6 col-sm-6 text-right">
             <ul class="list-inline top-link link">
                 @if ($auth == 'wechat')
-                    <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> 首页</a></li>
-                    <li><a href="{{ route('wechat.logout') }}"><i class="fa fa-sign-out"></i>退出</a></li>
-                    <a href="{{route('my.videos.index')}}"><img class="avatar" alt="{{$user->name}}"
-                                                                src="{{$user->avatar}}"></a>
+                    <li><a class="label label-info" href="{{ route('home') }}"><i class="fa fa-home"></i> 首页</a></li>
+                    <li><a class="label label-warning" href="{{ route('wechat.logout') }}"><i
+                                    class="fa fa-sign-out"></i>退出</a></li>
+                    <li><a class="label label-info" href="{{route('my.videos.index')}}">个人中心</a></li>
+                    <img class="avatar" alt="{{$user->name}}"
+                         src="{{$user->avatar}}">
                 @elseif($auth == 'user')
                     <li><i class="fa fa-user"></i> {{ $user->email }}</li>
                     <li><a href="{{ route('admin.logout') }}"><i class="fa fa-sign-out"></i>退出</a></li>
@@ -92,14 +94,24 @@
                         </li>
                         <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-user"></i>用户管理 </a></li>
                     @elseif($auth=='wechat')
-                        <li id="my_videos_index"><a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a>
+                        <li id="my_videos_index">
+                            <a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a>
                         </li>
-                        <li id="my_followed_index"><a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>我的关注</a>
+                        <li id="my_followed_index">
+                            <a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>我的关注</a>
                         </li>
-                        <li id="my_liked_index"><a href="{{ route('my.liked.index') }}"><i
-                                        class="fa fa-play-circle-o"></i>我的收藏 </a></li>
-                        <li id="my_uploader"><a href="{{ route('my.videos.create') }}"><i
-                                        class="fa fa-cloud-upload"></i>上传视频 </a></li>
+                        <li id="my_liked_index">
+                            <a href="{{ route('my.liked.index') }}"><i class="fa fa-play-circle-o"></i>我的收藏 </a>
+                        </li>
+                        <li id="my_statistics_index">
+                            <a href="{{ route('my.statistics.index') }}"><i class="fa fa-play-circle-o"></i>数据统计 </a>
+                        </li>
+                        <li id="my_uploader">
+                            <a href="{{ route('my.videos.create') }}"><i class="fa fa-cloud-upload"></i>上传视频 </a>
+                        </li>
+                        <li id="my_uploader">
+                            <a href="{{ route('my.profile') }}"><i class="fa fa-cloud-upload"></i>修改资料 </a>
+                        </li>
                     @else
                     @endif
                 @endif

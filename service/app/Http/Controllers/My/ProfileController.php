@@ -11,6 +11,7 @@ namespace App\Http\Controllers\My;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,6 +40,17 @@ class ProfileController extends Controller
             return Helper::error(-1, "无效的上传文件");
         }
         return Helper::error(-1, "请提供上传文件");
+    }
+
+    function update(ProfileRequest $request)
+    {
+        $user = $request->user('wechat');
+        $row = $request->data();
+        if (empty($row)) {
+            return Helper::error(-1, "无更新");
+        }
+        $user->update($row);
+        return Helper::success();
     }
 
 }

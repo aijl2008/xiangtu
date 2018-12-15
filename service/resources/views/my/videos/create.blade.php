@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', '上传视频')
 @section('content')
+    <h3>上传视频</h3>
+    <hr/>
     <form id="form">
         <div class="form-group">
             <label class="col-md-2 control-label text-right">选择视频</label>
@@ -31,15 +33,15 @@
         </div>
         <div class="form-group {{ $errors->has('classification_id') ? 'has-error' : ''}}">
             {!! Form::label('classification_id', '分类', ['class' => 'col-md-2 control-label text-right']) !!}
-            <div class="col-md-10">
+            <div class="col-md-10"><div class="radio">
                 @foreach($navigation as $item)
-                    <div class="radio">
+
                         <label>
                             {!! Form::radio('classification_id', $item->id); !!}
                             {{$item->name}}
                         </label>
-                    </div>
-                @endforeach
+
+                @endforeach </div>
                 {!! $errors->first('classification_id', '<p class="help-block">:message</p>') !!}
             </div>
         </div>

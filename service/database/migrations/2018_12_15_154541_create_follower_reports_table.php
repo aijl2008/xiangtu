@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogsTable extends Migration
+class CreateFollowerReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logs', function (Blueprint $table) {
+        Schema::create('follower_reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('action');
-            $table->string('from_user_id')->default(0);
-            $table->string('to_user_id')->default(0);
-            $table->string('video_id')->default(0);
-            $table->text('message');
+            $table->integer('wechat_id');
+            $table->integer('followed_number');
+            $table->integer('cancel_followed_number');
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logs');
+        Schema::dropIfExists('follower_reports');
     }
 }

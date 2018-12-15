@@ -2,6 +2,8 @@
 @section('title', '我的视频')
 
 @section('content')
+    <h3>我上传的视频</h3>
+    <hr/>
     <div class="row">
         @forelse($rows as $row)
             <div class="col-md-4" id="skeleton">
@@ -9,7 +11,7 @@
                 <a href="{{route('my.videos.show', $row->id)}}">
                     <img class="img-responsive img-rounde" src="{{$row->cover_url?:'/images/default_cover.jpg'}}">
                 </a>
-                    <p> {{$row->title}} </p>
+                <p> {{$row->title}} </p>
                 <!--视频信息-->
                 <div class="row">
                     <div class="col-md-12">

@@ -13,6 +13,7 @@ use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Video;
 use App\Models\Wechat;
+use App\Service\Follow;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class FollowController extends Controller
     function destroy(Request $request, $user_id)
     {
         return (new Follow(
-            Wechat::query()->find($request->input('wechat_id')),
+            Wechat::query()->find($user_id),
             $request->user('api')
         ))->toggle();
     }

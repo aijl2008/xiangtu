@@ -1,10 +1,17 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: ajl
+ * Date: 2018/12/15
+ * Time: 下午10:39
+ */
 
 namespace App\Http\Requests;
 
+
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,28 +31,24 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            "id" => "required|unique:users",
-            "name" => "required",
-           // "avatar" => "url"
+            "nickname" => "required",
+            "avatar" => "url"
         ];
     }
 
     public function messages()
     {
         return [
-            "id.unique" => "用户{$this->input('id')}已经存在了",
-           // "avatar.url" => "用户头像的格式无效"
+            "avatar.url" => "用户头像的格式无效"
         ];
     }
 
-    public function all($keys = NULL)
+    public function data()
     {
         $data = [];
         foreach ([
-                     "id" => "string",
-                     "name" => "string",
+                     "nickname" => "string",
                      "mobile" => "string",
-                     "email" => "string",
                      "avatar" => "string",
                  ] as $field => $type) {
             $value = $this->input($field);
@@ -69,7 +72,6 @@ class UserRequest extends FormRequest
                 }
             }, $value, $type);
         }
-        $data["password"] = "不支持密码登录";
         return $data;
     }
 }

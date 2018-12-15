@@ -46,7 +46,8 @@ class Wechat extends Authenticatable
 
     /**
      * 我关注的
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @param bool $returnUser
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     function followed($returnUser = false)
     {
