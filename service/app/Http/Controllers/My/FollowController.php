@@ -11,6 +11,7 @@ namespace App\Http\Controllers\My;
 
 use App\Http\Controllers\Controller;
 use App\Models\Wechat;
+use App\Service\Follow;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -20,7 +21,7 @@ class FollowController extends Controller
     public function index(Request $request)
     {
         $view = view('my.followed.index');
-        $user = $request->user('wechat')->followed();
+        $user = $request->user('wechat')->followed(true);
         $recommended = false;
         if ($user->count() == 0) {
             $user = Wechat::query()->has('video')->inRandomOrder()->limit(10);
@@ -39,5 +40,13 @@ class FollowController extends Controller
             return $view->with('rows', $user->paginate());
         }
 
+    }
+
+    function store(Request $request)
+    {
+        return (new Follow(
+            Wechat::query()->find($request->input('wechat_id')),
+            $request->user('wechat')
+        ))->toggle();
     }
 }

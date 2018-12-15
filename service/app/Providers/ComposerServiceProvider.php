@@ -37,7 +37,7 @@ class ComposerServiceProvider extends ServiceProvider
             } else {
                 $view->with('auth', 'guest');
             }
-            $view->with('current', request()->input('classification'));
+            $view->with('current', Classification::query()->find(request()->input('classification')));
             $view->with('navigation', Classification::query()->take(15)->get());
         });
     }

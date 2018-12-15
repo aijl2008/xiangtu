@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
+
+    const VISIBILITY_ANY = 1;
+    const VISIBILITY_ONLY_FOLLOWED = 2;
+    const VISIBILITY_ONLY_ME = 3;
     public $timestamps = true;
     protected $fillable = [
         "wechat_id",
@@ -41,6 +45,11 @@ class Video extends Model
         return $this->belongsTo(Wechat::class);
     }
 
+    function classification()
+    {
+        return $this->belongsTo(Classification::class)->withDefault();
+    }
+
     function liker()
     {
         return $this->belongsToMany(Wechat::class);
@@ -48,7 +57,8 @@ class Video extends Model
 
     function followed()
     {
-        return $this->hasMany(VideoWechat::class, 'video_id', 'id');
+        //return $this->hasMany(VideoWechat::class, 'video_id', 'id');
+        return $this->hasManyThrough(FollowedWechat::class, VideoWechat::class, 'wechat_id', 'wechat_id', 'wechat_id');
     }
 
     function getPublishedAtAttribute()

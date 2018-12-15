@@ -2,10 +2,14 @@
 /**
  * 首页
  */
-Route::get("/", "IndexController@index")->name('home');
-Route::get("/vue", "VueController@index");
-Route::get("/videos/{video}", "VideoController@show")->name('video.show');
 
+Route::get("/vue", "VueController@index");
+
+/**
+ * 公开页面，视频播放
+ */
+Route::get("/videos/{video}", "VideoController@show")->name('videos.show');
+Route::get("/", "VideoController@index")->name('home');
 
 /**
  * 管理员登录
@@ -82,6 +86,7 @@ Route::group(
     ],
     function () {
         Route::get('login', 'WechatAuthController@showLoginForm')->name('login.show');
+        Route::get('login/mock/{user}', 'WechatAuthController@mock')->name('login.mock');
         Route::get('login/redirect', 'WechatAuthController@redirect')->name('login.redirect');
         Route::get('login/do', 'WechatAuthController@callback')->name('login.do');
         Route::get('logout', 'WechatAuthController@logout')->name('logout');

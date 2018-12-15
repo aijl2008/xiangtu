@@ -15,11 +15,12 @@ class FollowedWechat extends Model
 {
     protected $table = 'followed_wechat';
     protected $fillable = [
-        'wechat_id'
+        'wechat_id',
+        'followed_id'
     ];
 
-    function video()
-    {
-        return $this->hasMany(Video::class, 'wechat_id');
-    }
+//    function video()
+//    {
+//        return $this->hasMany(Video::class, 'wechat_id');
+//    }
 }

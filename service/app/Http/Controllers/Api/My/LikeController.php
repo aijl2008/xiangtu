@@ -11,7 +11,9 @@ namespace App\Http\Controllers\Api\My;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\Video;
+use App\Service\Like;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -32,34 +34,17 @@ class LikeController extends Controller
 
     function store(Request $request)
     {
-        $user = $request->user('api');
-        $video = Video::query()->find($request->input('video_id'));
-        if (!$video) {
-            return Helper::error(-1, "视频不存在");
-        }
-        if ($user->liked()->where("video_id", $video->id)->count() > 0) {
-            return Helper::error(-1, "您已经喜欢过了");
-        }
-        $user->liked()->attach($video->id);
-        $video->update(
-            [
-                "liked_number" => $user->liked()->count()
-            ]
-        );
-        return Helper::success(
-            [
-                'video' => $video,
-                'liked_number' => $video->liked_number
-            ]
-        );
+        return (new Like(
+            $video = Video::query()->find($request->input('video_id')),
+            $user = $request->user('api')
+        ))->toggle();
     }
 
     function destroy(Request $request, $video_id)
     {
-        $user = $request->user('api');
-        $user->liked()->detach($video_id);
-        return Helper::success(
-            ['liked' => $video_id]
-        );
+        return (new Like(
+            Video::query()->find($video_id),
+            $user = $request->user('api')
+        ))->toggle();
     }
 }

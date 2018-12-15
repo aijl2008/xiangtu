@@ -1,38 +1,39 @@
 @extends('layouts.app')
 @section('title', '我关注的人')
 @section('content')
-    @foreach($rows as $row)
-        <div class="box">
-            <div>
-                <img src="{{$row->avatar}}">
-                <p>{{$row->nickname}}</p>
-                <a href="javascript:void(0)" data-url="{{route("api.my.followed.store")}}" class="be_followed"
-                   data-wechat-id="{{$row->id}}"><i
-                            class="glyphicon glyphicon-eye-open"></i> {{$row->be_followed_number}}</a>
+
+    <div class="row">@foreach($rows as $row)
+            <div class="col-md-2">
+                <img class="avatar-large" src="{{$row->avatar}}">
+                <p>{{$row->nickname}}<a href="javascript:void(0)" data-url="{{route("my.followed.store")}}" class="followed_number"
+                       data-wechat-id="{{$row->id}}">
+                        <i class="glyphicon glyphicon-eye-open"></i> {{$row->be_followed_number}}
+                    </a>
+                </p>
             </div>
-            <div class="box-content">
-                <div class="row">
-
-                    @foreach($row->video as $video)
-                        <div class="col-md-3">
-                            <div class="wrap-vid">
-                                <div class="zoom-container">
-                                    <div class="zoom-caption">
-                                        <span>Video's Tag</span>
-                                        <a href="{{route('video.show', $video->id)}}">
-                                            <i class="fa fa-play-circle-o fa-5x" style="color: #fff"></i>
-                                        </a>
-                                        <p class="title">{{$video->title}}</p>
-                                    </div>
-                                    <img src="{{$video->cover_url}}">
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
+        @endforeach
+    </div>
+    <div class="row">
+        @foreach($rows as $row)
+            @foreach($row->video as $video)
+                <div class="col-md-2">
+                    <a href="{{route('my.videos.show', $row->id)}}">
+                        <img class="img-responsive img-rounde" src="{{$row->cover_url?:'/images/default_cover.jpg'}}">
+                    </a>
+                    <p> {{$row->title}} </p>
                 </div>
-            </div>
-            <div class="line"></div>
-        </div>
-    @endforeach
+            @endforeach
+        @endforeach
+    </div>
+
+    <div class="line"></div>
+
+
+@endsection
+@section('js')
+    <script language="JavaScript">
+        $(function () {
+            $('#my_followed_index').addClass("active")
+        });
+    </script>
 @endsection

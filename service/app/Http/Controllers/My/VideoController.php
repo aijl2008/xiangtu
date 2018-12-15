@@ -24,7 +24,10 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         $view = view('my.videos.index');
-        $video = Video::query()->with('wechat')->orderBy('id', 'desc');
+        $video = $request->user('wechat')
+            ->video()
+            ->with('wechat')
+            ->orderBy('id', 'desc');
         $view->with('rows', $video->paginate());
         $view->with('classification', $request->input('classification', 0));
         return $view;
@@ -61,9 +64,19 @@ class VideoController extends Controller
      * @param Video $video
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Video $video)
+    public function show(Request $request, Video $video)
     {
-        return view("my.videos.show")->with('row', $video);
+        return view("my.videos.show")
+            ->with('row', $video)
+            ->with('related',
+                Video::query()
+                    ->where(
+                        'wechat_id',
+                        '<>',
+                        $request->user('wechat')->id
+                    )->take(4)
+                    ->get()
+            );
     }
 
     /**

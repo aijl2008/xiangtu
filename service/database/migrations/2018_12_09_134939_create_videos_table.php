@@ -22,7 +22,7 @@ class CreateVideosTable extends Migration
             $table->dateTime('uploaded_at');
             $table->string('wechat_id')->default('');
             $table->integer('classification_id')->default(0);
-            $table->integer('visibility')->default(0);
+            $table->integer('visibility')->default(1);
             $table->integer('played_number')->default(0);
             $table->integer('liked_number')->default(0);
             $table->integer('shared_wechat_number')->default(0);

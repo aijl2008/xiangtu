@@ -91,6 +91,7 @@
 
         $(function () {
 
+            $('#my_uploader').addClass("active")
             /**
              * 用于实现取消上传的两个对象。需要在 progress 回调中赋值。
              */

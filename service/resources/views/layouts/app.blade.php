@@ -8,6 +8,7 @@
     <title>@yield('title')-乡土味</title>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    {{--<link href="/css/app.css" rel="stylesheet">--}}
     <script src="/jquery/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootbox.min.js"></script>
@@ -18,172 +19,20 @@
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
-
-    <style>
-
-        #main {
-            margin-bottom: 100px;
-        }
-
-        #navbar {
-        }
-
-        .logo {
-            display: block;
-            padding: 10px 0px;
-        }
-
-        .logo span {
-            font-size: 24px;
-            font-family: "Arial Black";
-        }
-
-        .top {
-            height: 68px;
-        }
-
-        .top ul {
-            margin-top: 20px;
-        }
-
-        footer {
-            margin-top: 200px;
-        }
-
-        footer span {
-            display: block;
-            padding: 20px;
-            font-size: 12px;
-        }
-
-        .no_video {
-            margin: 15px;
-        }
-
-        .no_video p {
-            font-size: 36px;
-        }
-
-        .no_video img {
-
-        }
-
-        .video_title {
-            height: 40px;
-        }
-
-        .video_info {
-            margin: 5px 0px 15px 0px;
-        }
-
-        .zoom-container {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            font-size: 16px;
-            vertical-align: top;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-
-        .zoom-container a {
-            display: block;
-            position: absolute;
-            top: -100%;
-            opacity: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            text-align: center;
-            color: inherit
-        }
-
-        .zoom-container:hover a {
-            opacity: 1;
-            top: 0;
-            z-index: 500
-        }
-
-        .zoom-container:hover a i {
-            top: 50%;
-            position: absolute;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%)
-        }
-
-        .zoom-container img {
-            display: block;
-            width: 100%;
-            height: auto;
-            -webkit-transition: all .5s ease;
-            -moz-transition: all .5s ease;
-            -ms-transition: all .5s ease;
-            -o-transition: all .5s ease;
-            transition: all .5s ease
-        }
-
-        .zoom-container .zoom-caption {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 10;
-            -webkit-transition: all .5s ease;
-            -moz-transition: all .5s ease;
-            -ms-transition: all .5s ease;
-            -o-transition: all .5s ease;
-            transition: all .5s ease;
-            color: #fff
-        }
-
-        .zoom-container .zoom-caption span {
-            background-color: #fd0005;
-            position: absolute;
-            top: 0;
-            padding: 0 7px;
-            font-weight: 700;
-            font-size: 13px
-        }
-
-        .zoom-container .zoom-caption p {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            background: rgba(0, 0, 0, .5);
-            margin: 0;
-            padding: 10px
-        }
-
-        .zoom-container:hover img {
-            -webkit-transform: scale(1.25);
-            -moz-transform: scale(1.25);
-            -ms-transform: scale(1.25);
-            -o-transform: scale(1.25);
-            transform: scale(1.25)
-        }
-
-        .zoom-container:hover .zoom-caption {
-            background: rgba(0, 0, 0, .5)
-        }
-
-        .avatar {
-            width: 32px;
-        }
-
-
-    </style>
     <script>
         $(function () {
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
         });
     </script>
+    <style>
+        .avatar {
+            width: 32px;
+        }
+
+        .avatar-large {
+            width: 132px;
+        }
+    </style>
     @yield('js')
 </head>
 <body>
@@ -207,7 +56,7 @@
                     <li><a href="{{ route('admin.logout') }}"><i class="fa fa-sign-out"></i>退出</a></li>
                 @elseif($auth == 'guest')
                     <li><a href="/"><i class="fa fa-home"></i> 首页</a></li>
-                    <li><a href="{{ route('wechat.login.redirect') }}"><i class="fa fa-comments"></i> 登录</a></li>
+                    <li><a href="{{ route('wechat.login.show') }}"><i class="fa fa-comments"></i> 登录</a></li>
                 @endif
             </ul>
         </div>
@@ -226,11 +75,11 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                @if (in_array(Route::currentRouteName(), ['home','video.index','video.show']) )
+                @if (in_array(Route::currentRouteName(), ['home','videos.index','videos.show','wechat.login.show']) )
                     <li class="@if(!$current)active @endif"><a href="{{ route('home') }}"><i
                                     class="fa fa-home"></i> 全部</a></li>
                     @foreach($navigation as $item)
-                        <li class="@if($item->id==$current)active @endif">
+                        <li class="@if($item->id==($current->id??0))active @endif">
                             <a href="{{ route('home',['classification'=>$item->id]) }}"><i
                                         class="fa {{$item->icon}}"></i> {{$item->name}}</a>
                         </li>
@@ -243,10 +92,14 @@
                         </li>
                         <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-user"></i>用户管理 </a></li>
                     @elseif($auth=='wechat')
-                        <li><a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a></li>
-                        <li><a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>我的关注</a></li>
-                        <li><a href="{{ route('my.liked.index') }}"><i class="fa fa-play-circle-o"></i>我的收藏 </a></li>
-                        <li><a href="{{ route('my.videos.create') }}"><i class="fa fa-cloud-upload"></i>上传视频 </a></li>
+                        <li id="my_videos_index"><a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a>
+                        </li>
+                        <li id="my_followed_index"><a href="{{ route('my.followed.index') }}"><i class="fa fa-user"></i>我的关注</a>
+                        </li>
+                        <li id="my_liked_index"><a href="{{ route('my.liked.index') }}"><i
+                                        class="fa fa-play-circle-o"></i>我的收藏 </a></li>
+                        <li id="my_uploader"><a href="{{ route('my.videos.create') }}"><i
+                                        class="fa fa-cloud-upload"></i>上传视频 </a></li>
                     @else
                     @endif
                 @endif
@@ -286,7 +139,7 @@
     </div>
 </div>
 
-<footer class="footer navbar-fixed-bottom">
+<footer class="footer">
     <div class="container">
         <div class="navbar navbar-default">
             <div class="row">

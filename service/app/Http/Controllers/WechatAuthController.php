@@ -13,7 +13,7 @@ class WechatAuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('login');
+        return view('login')->with('rows',Wechat::query()->has('video')->inRandomOrder()->take(12)->get());
     }
 
     public function redirect()
@@ -38,22 +38,16 @@ class WechatAuthController extends Controller
         return $app->oauth;
     }
 
+    public function mock(Request $request, $id){
+        $wechat = Wechat::query()->findOrFail($id);
+        Auth::guard('wechat')->login($wechat);
+        return redirect()->to(route("my.videos.index"));
+    }
+
     public function callback(Request $request)
     {
         try {
-            //$wechat = $this->oauth()->user()->getOriginal();
-            $wechat = [
-                "openid" => "okwCks9IH7Ct5stEHJ1irHfdyFc8",
-                "nickname" => "Jerry",
-                "sex" => 1,
-                "language" => "zh_CN",
-                "city" => "顺义",
-                "province" => "北京",
-                "country" => "中国",
-                "headimgurl" => "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIzPR12npAHAo9weJh15yydgbG0p8y0tNXJvDdKroeTSgt7XecK95hAVLQlsqHicVMjeRcSmwpBNeg/132",
-                "privilege" => [],
-                "unionid" => "o3yyHjhuIvr1Ggg8PvYfOk2OoX2E"
-            ];
+            $wechat = $this->oauth()->user()->getOriginal();
             if (!array_key_exists('openid', $wechat)) {
                 abort(505, '微信接口返回的值中找不到openid');
             }

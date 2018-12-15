@@ -37,12 +37,29 @@ class Wechat extends Authenticatable
     }
 
     /**
+     * 我关注的人的视频
+     */
+    function fansVideo()
+    {
+        return $this->hasManyThrough(Video::class, FollowedWechat::class);
+    }
+
+    /**
      * 我关注的
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    function followed()
+    function followed($returnUser = false)
     {
-        return $this->hasMany(FollowedWechat::class, 'followed_id');
+        if (!$returnUser) {
+            return $this->hasMany(FollowedWechat::class, 'followed_id', 'id');
+        }
+        return $this->hasManyThrough(
+            Wechat::class,
+            FollowedWechat::class,
+            'followed_id',
+            'id',
+            null, 'wechat_id'
+        );
     }
 
     /**
@@ -51,7 +68,7 @@ class Wechat extends Authenticatable
      */
     function follower()
     {
-        return $this->hasMany(FollowedWechat::class, 'wechat_id');
+        return $this->hasMany(FollowedWechat::class, 'wechat_id', 'id');
     }
 
     function haveFollowed(Wechat $wechat)
