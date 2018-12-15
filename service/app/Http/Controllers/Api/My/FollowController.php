@@ -34,32 +34,17 @@ class FollowController extends Controller
 
     function store(Request $request)
     {
-        $user = $request->user('api');
-        $followed = Wechat::query()->find($request->input('wechat_id'));
-        if (!$followed) {
-            return Helper::error(-1, "不存在的用户");
-        }
-        if ($user->followed()->where("wechat_id", $request->input('wechat_id'))->count() > 0) {
-            return Helper::error(-1, "您已经关注过了");
-        }
-        $user->followed()->create([
-            "wechat_id" => $request->input('wechat_id')
-        ]);
-        return Helper::success(
-            [
-                'followed' => $user->followed()->count()
-            ]
-        );
+        return (new Follow(
+            Wechat::query()->find($request->input('wechat_id')),
+            $request->user('api')
+        ))->toggle();
     }
 
     function destroy(Request $request, $user_id)
     {
-        $user = $request->user('api');
-        $user->followed()->where("wechat_id", $user_id)->delete();
-        return Helper::success(
-            [
-                'followed' => $user->followed()->count()
-            ]
-        );
+        return (new Follow(
+            Wechat::query()->find($request->input('wechat_id')),
+            $request->user('api')
+        ))->toggle();
     }
 }
