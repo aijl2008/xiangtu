@@ -1,76 +1,89 @@
 @extends('layouts.app')
-
+@section('title', '上传视频')
 @section('content')
-    <div id="page-content" class="single-page">
-        <div class="container">
-            <form id="form">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">选择视频</label>
-                    <div class="col-sm-10">
-                        <input type="text" value="" name="url" id="url" readonly="readonly">
-                        <input type="hidden" value="" name="file_id" id="file_id">
-                        <p class="form-control-static" id="queue_videos"><a id="addVideo"
-                                                                            href="javascript:void(0);"
-                                                                            class="btn btn-info">添加视频</a></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">选择视频封面</label>
-                    <div class="col-sm-10">
-                        <input type="text" value="" name="cover_url" id="cover_url" readonly="readonly">
-                        <p class="form-control-static" id="queue_video_covers"><a id="addCover"
-                                                                                  href="javascript:void(0);"
-                                                                                  class="btn btn-info">添加封面</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="col-sm-2 control-label">请输入视频名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="title" id="title" required="">
-                    </div>
-                </div>
-                <div class="form-group {{ $errors->has('classification_id') ? 'has-error' : ''}}">
-                    {!! Form::label('classification_id', '分类', ['class' => 'col-md-2 control-label']) !!}
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            {!! Form::select('classification_id', (new \App\Models\Classification())->toOption()); !!}
-                        </div>
-                        {!! $errors->first('classification_id', '<p class="help-block">:message</p>') !!}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="col-sm-2 control-label">谁可以看</label>
-                    <div class="col-sm-10">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="visibility" id="optionsRadios1" value="1" checked>
-                                任何人都可以看
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="visibility" id="optionsRadios2" value="2">
-                                关注我的人可以看
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="visibility" id="optionsRadios3" value="3">
-                                只有我自己可以看
-                            </label>
-                        </div>
-                    </div>
+    <h3>上传视频</h3>
+    <hr/>
+    <form id="form">
+        <div class="form-group">
+            <label class="col-md-2 control-label text-right">选择视频</label>
+            <div class="col-md-10">
+                <input class="form-control hide" type="text" value="" name="url" id="url" readonly="readonly">
+                <input type="hidden" value="" name="file_id" id="file_id">
+                <p class="form-control-static" id="queue_videos"><a id="addVideo"
+                                                                    href="javascript:void(0);"
+                                                                    class="btn btn-info">添加视频</a></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label text-right">选择视频封面</label>
+            <div class="col-md-10">
+                <input class="form-control hide" type="text" value="" name="cover_url" id="cover_url"
+                       readonly="readonly">
+                <p class="form-control-static" id="queue_video_covers"><a id="addCover"
+                                                                          href="javascript:void(0);"
+                                                                          class="btn btn-info">添加封面</a>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-md-2 control-label text-right">视频名称</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="title" id="title" required="">
+            </div>
+        </div>
+        <div class="form-group {{ $errors->has('classification_id') ? 'has-error' : ''}}">
+            {!! Form::label('classification_id', '分类', ['class' => 'col-md-2 control-label text-right']) !!}
+            <div class="col-md-10"><div class="radio">
+                @foreach($navigation as $item)
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <a id="uploadFile" href="javascript:void(0);" class="btn btn-primary">上传并保存</a>
-                        </div>
-                    </div>
+                        <label>
+                            {!! Form::radio('classification_id', $item->id); !!}
+                            {{$item->name}}
+                        </label>
+
+                @endforeach </div>
+                {!! $errors->first('classification_id', '<p class="help-block">:message</p>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label text-right">谁可以看</label>
+            <div class="col-md-10">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="visibility" id="optionsRadios1" value="1">
+                        任何人都可以看
+                    </label>
                 </div>
-            </form>
-            <input id="addVideo-file" type="file" style="display:none;"/>
-            <input id="addCover-file" type="file" style="display:none;"/>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="visibility" id="optionsRadios2" value="2">
+                        关注我的人可以看
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="visibility" id="optionsRadios3" value="3">
+                        只有我自己可以看
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a id="uploadFile" href="javascript:void(0);" class="btn btn-primary">上传并保存</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div style="display: none">
+        <input type="file" id="addVideo-file">
+        <input type="file" id="addCover-file">
+    </div>
+    <div class="modal fade" id="loadingModal">
+        <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+            <div class="progress progress-striped active" style="margin-bottom: 0;">
+                <div class="progress-bar" style="width: 100%;"></div>
+            </div>
+            <h5>正在加载...</h5>
         </div>
     </div>
 @endsection
@@ -79,141 +92,260 @@
     <script type="text/javascript">
 
         $(function () {
-            var index = 0;
-            var cosBox = [];
+
+            $('#my_uploader').addClass("active")
+            /**
+             * 用于实现取消上传的两个对象。需要在 progress 回调中赋值。
+             */
+            var uploadCos;
+            var uploadTaskId;
+
+            /**
+             * 待上传对象，需要在选择文件时赋值。
+             */
+            var videoFileTask;
+            var coverFileTask;
+
             /**
              * 计算签名
-             **/
+             */
             var getSignature = function (callback) {
                 $.ajax({
-                    url: '{{route("api.qcloud.signature.vod")}}',
+                    url: '{{route("my.qcloud.signature.vod")}}',
                     type: 'GET',
                     dataType: 'json',
                     success: function (res) {
                         if (res.data && res.data.signature) {
                             callback(res.data.signature);
                         } else {
-                            alert('获取签名失败');
-                            return null;
+                            bootbox.alert({
+                                title: "上传错误",
+                                message: "获取签名失败",
+                                className: 'bb-alternate-modal'
+                            });
+                            return;
                         }
                     },
                     error: function (res, err) {
-                        alert('获取签名失败:' + err);
+                        bootbox.alert({
+                            title: "上传错误",
+                            message: '获取签名失败:' + err,
+                            className: 'bb-alternate-modal'
+                        });
+                        return;
                     }
                 });
             };
 
-            /*
-             * 取消上传绑定事件，示例一与示例二通用
+            var dialog = null;
+            /**
+             * 选择视频文件
              */
-            $('#resultBox').on('click', '[act=cancel-upload]', function () {
-                var cancelresult = qcVideo.ugcUploader.cancel({
-                    cos: cosBox[$(this).attr('cosnum')],
-                    taskId: $(this).attr('taskId')
-                });
-                console.log(cancelresult);
+            $('#addVideo').on('click', function () {
+                $('#addVideo-file').click();
             });
-
-
-            var videoFileList = [];
-            var coverFileList = [];
-            // 给addVideo添加监听事件
             $('#addVideo-file').on('change', function (e) {
                 var videoFile = this.files[0];
-                videoFileList[0] = videoFile;
+                videoFileTask = videoFile;
                 $('#queue_videos').html(videoFile.name);
                 $("#title").val(videoFile.name);
 
             });
-            $('#addVideo').on('click', function () {
-                $('#addVideo-file').click();
-            });
-            // 给addCover添加监听事件
-            $('#addCover-file').on('change', function (e) {
-                var coverFile = this.files[0];
-                coverFileList[0] = coverFile;
-                $('#queue_video_covers').html(coverFile.name);
-
-            });
+            /**
+             * 选择封面文件
+             */
             $('#addCover').on('click', function () {
                 $('#addCover-file').click();
             });
+            $('#addCover-file').on('change', function (e) {
+                var coverFile = this.files[0];
+                coverFileTask = coverFile;
+                $('#queue_video_covers').html(coverFile.name);
+            });
 
+            /**
+             * 启动上传
+             */
             var startUploader = function () {
-                if (videoFileList.length) {
-                    //var num = addUploaderMsgBox();
-
-                    var resultMsg = qcVideo.ugcUploader.start({
-                        videoFile: videoFileList[0],
-                        coverFile: coverFileList[0],
-                        getSignature: getSignature,
-                        allowAudio: 1,
-                        success: function (result) {
-                            console.log('success', result);
-                            if (result.type == 'video') {
-                                $('#queue_videos').html('上传成功');
-                            } else if (result.type == 'cover') {
-                                $('#queue_video_covers').html('上传成功');
+                dialog = bootbox.alert({
+                    title: "乡土味<small>正在上传，请不要关闭当前页</small>",
+                    message: "<div class=\"progress\">\n" +
+                    "    <div class=\"progress-bar\" style=\"width: 0%;\">\n" +
+                    "        <span class=\"sr-only\">0% Complete</span>\n" +
+                    "    </div>\n" +
+                    "</div>",
+                    callback: function () {
+                        var result = qcVideo.ugcUploader.cancel({
+                            cos: uploadCos,
+                            taskId: $(this).attr('taskId')
+                        });
+                        console.log(result);
+                    },
+                    buttons: {
+                        ok: {
+                            label: '取消上传',
+                            callback: function () {
+                                console('Ok');
                             }
-                        },
-                        error: function (result) {
-                            try {
-                                console.log(result);
-                                __alert(result.msg );
-                            } catch (e) {
-                                __alert(result.toString());
-                            }
-                        },
-                        progress: function (result) {
-                            if (result.type == 'video') {
-                                $('#queue_videos').html(Math.floor(result.curr * 100) + '%');
-                            } else if (result.type == 'cover') {
-                                $('#queue_video_covers').html(Math.floor(result.curr * 100) + '%');
-                            }
-                        },
-                        finish: function (result) {
-                            if (result.fileId) {
-                                $('#file_id').val(result.fileId);
-                            }
-                            if (result.coverUrl) {
-                                $('#cover_url').val(result.coverUrl);
-                            }
-                            $('#url').val(result.videoUrl);
-                            $.ajax({
-                                url: '{{route("api.my.videos.store")}}',
-                                type: 'POST',
-                                data: $("#form").serialize(),
-                                dataType: 'json',
-                                success: function (res) {
-                                    if (res && res.code == 0) {
-                                        alert("上传成功");
-                                        window.location.href = "{{route('my.videos.index')}}";
-                                    }
-                                    else {
-                                        if (res.msg) {
-                                            alert("保存视频失败," + res.msg);
-                                        }
-                                        else {
-                                            alert("保存视频失败");
-                                        }
-                                    }
-                                },
-                                error: function (res, err) {
-                                    alert('发布视频失败:' + err);
-                                }
+                        }
+                    }
+                });
+                var resultMsg = qcVideo.ugcUploader.start({
+                    videoFile: videoFileTask,
+                    coverFile: coverFileTask,
+                    getSignature: getSignature,
+                    allowAudio: 1,
+                    success: function (result) {
+                        if (result.type == 'video') {
+                            console.log('视频上传成功');
+                        } else if (result.type == 'cover') {
+                            console.log('封面上传成功');
+                        }
+                    },
+                    error: function (result) {
+                        try {
+                            bootbox.alert({
+                                title: "乡土味",
+                                message: result.msg,
+                                className: 'bb-alternate-modal'
+                            });
+                        } catch (e) {
+                            bootbox.alert({
+                                title: "乡土味",
+                                message: result.toString(),
+                                className: 'bb-alternate-modal'
                             });
                         }
-                    });
+                    },
+                    progress: function (result) {
+                        if (result.type == 'video') {
+                            var current_progress = Math.floor(result.curr * 100);
+                            var progress_bar = $(".progress-bar");
+                            progress_bar.css("width", current_progress + "%");
+                            progress_bar.find(".sr-only").text(current_progress + "% 完成");
+                            uploadTaskId = result.taskId;
+                            uploadCos = result.cos;
+                        } else if (result.type == 'cover') {
+                        }
+                    },
+                    finish: function (result) {
+                        if (result.fileId) {
+                            $('#file_id').val(result.fileId);
+                        }
+                        if (result.coverUrl) {
+                            $('#cover_url').val(result.coverUrl);
+                        }
+                        $('#url').val(result.videoUrl);
+                        $.ajax({
+                            url: '{{route("my.videos.store")}}',
+                            type: 'POST',
+                            data: $("#form").serialize(),
+                            dataType: 'json',
+                            success: function (res) {
+                                if (res && res.code == 0) {
+                                    dialog.modal('hide');
+                                    bootbox.alert({
+                                        title: "乡土味",
+                                        message: "成功的保存视频",
+                                        className: 'bb-alternate-modal',
+                                        callback: function () {
+                                            window.location.href = "{{route('my.videos.index')}}";
+                                        }
+                                    });
+                                }
+                                else {
 
-                } else {
-                    alert('请添加视频！\n');
-                }
 
+                                    if (res.msg) {
+                                        bootbox.alert({
+                                            title: "乡土味",
+                                            message: res.msg,
+                                            className: 'bb-alternate-modal'
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert({
+                                            title: "乡土味",
+                                            message: "保存视频失败",
+                                            className: 'bb-alternate-modal'
+                                        });
+                                    }
+                                }
+                            },
+                            error: function (res, err) {
+                                bootbox.alert({
+                                    title: "乡土味",
+                                    message: err,
+                                    className: 'bb-alternate-modal'
+                                });
+                            }
+                        });
+                    }
+                });
             };
 
-            // 上传按钮点击事件
+            /**
+             * 上传按钮点击事件
+             */
             $('#uploadFile').on('click', function () {
-                startUploader();
+                if (!videoFileTask) {
+                    bootbox.alert({
+                        title: "乡土味",
+                        message: "请添加视频",
+                        className: 'bb-alternate-modal'
+                    });
+                    return;
+                }
+                if (!$('#title').val()) {
+                    bootbox.alert({
+                        title: "乡土味",
+                        message: "请输入视频名称",
+                        className: 'bb-alternate-modal'
+                    });
+                    return;
+                }
+                if (!$("input[name='classification_id']:checked").val()) {
+                    bootbox.alert({
+                        title: "乡土味",
+                        message: "请选择视频分类",
+                        className: 'bb-alternate-modal'
+                    });
+                    return;
+                }
+                if (!$("input[name='visibility']:checked").val()) {
+                    bootbox.alert({
+                        title: "乡土味",
+                        message: "请选择谁可以看",
+                        className: 'bb-alternate-modal'
+                    });
+                    return;
+                }
+                if (!coverFileTask) {
+                    bootbox.confirm({
+                        title: "乡土味",
+                        message: "您没有上传视频封面，确定要继续吗？",
+                        buttons: {
+                            confirm: {
+                                label: '继续',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: '取消',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            if (!result) {
+                                return;
+                            }
+                            startUploader();
+                        }
+                    });
+                }
+                else {
+                    startUploader();
+                }
+
             });
         });
     </script>
