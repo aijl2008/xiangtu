@@ -1,50 +1,42 @@
 @extends('layouts.app')
 @section('title', '全部视频')
 @section('content')
-    <div id="page-content" class="index-page">
-        <div class="container">
-            <div class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>编号</th>
-                        <th>标题</th>
-                        <th>封面</th>
-                        <th>播放次数</th>
-                        <th>喜欢人数</th>
-                        <th>分享给好友次数</th>
-                        <th>分享到朋友圈次数</th>
-                        <th>可见范围</th>
-                        <th>上传时间</th>
-                    </tr>
-                    @foreach($rows as $row)
-                        <tr>
-                            <td>{{$row->id}}</td>
-                            <td></td>
-                            <td style="width: 100px">
-                                @if ($row->cover_url)
-                                    <img class="thumbnail" src="{{$row->cover_url}}">
-                                @endif
-                                <a href="{{route('admin.videos.show', $row->id)}}">{{$row->title}}</a>
-                            </td>
-                            <td>{{$row->played_number}}</td>
-                            <td>{{$row->liked_number}}</td>
-                            <td>{{$row->shared_wechat_number}}</td>
-                            <td>{{$row->shared_moment_number}}</td>
-                            <th>visibility</th>
-                            <td>{{$row->created_at}}</td>
-                        </tr>
-                    @endforeach
-                </table>
+    <h3>视频管理</h3>
+    <hr>
+    <div class="rows video-admin">
+        @foreach($rows as $row)
+            <div class="col-md-3">
+                <a href="{{route('admin.videos.show', $row->id)}}">
+                    @if ($row->cover_url)
+                        <img class="img-responsive thumbnail" src="{{$row->cover_url}}">
+                    @else
+                        <img class="img-responsive thumbnail" src="/images/default.jpeg">
+                    @endif
+                </a>
+                <div class="text-nowrap title">{{$row->title}}</div>
+                <dl class="dl-horizontal">
+                    <dt>分类</dt>
+                    <dd class="text-nowrap">{{$row->classification->name}}</dd>
+                    <dt>播放与收藏</dt>
+                    <dd class="text-nowrap">{{$row->played_number}}/{{$row->liked_number}}</dd>
+                    <dt>可见范围</dt>
+                    <dd class="text-nowrap">{{$row->visibility}}</dd>
+                    <dt>发布时间</dt>
+                    <dd class="text-nowrap">{{$row->created_at}}</dd>
+                    <dt>发布人</dt>
+                    <dd class="text-nowrap">{{$row->wechat->nickname}}</dd>
+                </dl>
             </div>
-
-
-            <div class="row">
-                <div class="featured">
-                    <div class="main-vid">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
+    <div class="text-center">{{$rows->links()}}</div>
+    <div class="clearfix"></div>
+@endsection
+
+@section('js')
+    <script language="JavaScript">
+        $(function () {
+            $('#admin_videos_index').addClass("active")
+        });
+    </script>
 @endsection

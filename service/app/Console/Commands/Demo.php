@@ -3,7 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Classification;
+use App\Models\FollowedWechat;
+use App\Models\FollowerReport;
+use App\Models\Log;
 use App\Models\Video;
+use App\Models\VideoReport;
 use App\Models\Wechat;
 use Faker\Factory as Faker;
 use Illuminate\Console\Command;
@@ -45,8 +49,11 @@ class Demo extends Command
         Wechat::query()->getConnection()->table('video_wechat')->truncate();
         Wechat::query()->truncate();
         Video::query()->truncate();
+        VideoReport::query()->truncate();
+        FollowerReport::query()->truncate();
+        Log::query()->truncate();
         Classification::query()->truncate();
-
+        $this->comment('填充分类');
         foreach ([
                      [
                          'name' => '社会',
@@ -114,18 +121,18 @@ class Demo extends Command
                 ]
             );
         }
-        $cover = 0;
-        $avatar = 0;
+        $this->comment('Ok');
         $faker = Faker::create('zh_CN');
+
+        $mockUsersAvatars = file(base_path() . '/database/mock/avatar.txt');
+        $mockVideos = json_decode(file_get_contents(base_path() . '/database/mock/videos.json'));
         for ($i = 0; $i < 100; $i++) {
-            if ($avatar >= 100) {
-                $avatar = 0;
-            }
+            $this->comment('填充用户');
             $wechat = new Wechat(
                 [
                     "open_id" => config('wechat.mini_program.default.app_id') . '|' . $faker->regexify('[0-9A-Z]{32}'),//18+1+42
                     "union_id" => null,
-                    "avatar" => "http://www.xiangtu.net.cn/avatar/" . ++$avatar . '.jpg',
+                    "avatar" => array_pop($mockUsersAvatars),
                     "nickname" => $faker->name,
                     "sex" => $faker->numberBetween(0, 2),
                     "country" => $faker->country,
@@ -135,34 +142,63 @@ class Demo extends Command
                 ]
             );
             $wechat->save();
+            $this->comment($wechat->nickname . ',Ok');
 
-            for ($n = 0; $n < mt_rand(20, 99); $n++) {
-                if ($cover >= 30) {
-                    $cover = 0;
-                }
+            $this->comment('填充视频');
+            for ($n = 0; $n < mt_rand(5, 10); $n++) {
+                $mock = array_pop($mockVideos);
                 $video = new Video(
                     [
-                        "title" => $faker->text,
-                        "url" => $faker->imageUrl(),
-                        "cover_url" => "/cover/" . ++$cover . ".jpg",
-                        "file_id" => $faker->regexify('[1-9][0-9]{15}'),
+                        "title" => $mock->title,
+                        "url" => $mock->url,
+                        "cover_url" => $mock->cover_url,
+                        "file_id" => '',
                         "uploaded_at" => $faker->dateTime,
-                        "classification_id" => $faker->numberBetween(10000, 99999),
+                        "classification_id" => $faker->numberBetween(1, 13),
                         "played_number" => $faker->numberBetween(10000, 99999),
                         "liked_number" => $faker->numberBetween(10000, 99999),
                         "shared_wechat_number" => $faker->numberBetween(10000, 99999),
                         "shared_moment_number" => $faker->numberBetween(10000, 99999),
-                        "visibility" => 1,
+                        "visibility" => $faker->numberBetween(1, 3),
                         "status" => 1
                     ]
                 );
                 $wechat->video()->save($video);
+                $this->comment($video->title . ',Ok');
             }
         }
 
         foreach (Wechat::query()->get() as $wechat) {
-            $wechat->followed()->saveMany(Wechat::query()->inRandomOrder()->take(mt_rand(5, 10))->get());
-            $wechat->liked()->saveMany(Video::query()->inRandomOrder()->take(mt_rand(5, 10))->get());
+            $this->comment('添加收藏');
+            $many = $many = Wechat::query()->inRandomOrder()->take(mt_rand(5, 10))->get();
+            foreach ($many as $item) {
+                $wechat->followed()->save(new FollowedWechat([
+                    'wechat_id' => $item->id,
+                    'followed_id' => $wechat->id
+                ]));
+                Log::query()->create(
+                    ['action' => '关注',
+                        'from_user_id' => $wechat->id,
+                        'to_user_id' => $item->id,
+                        'video_id' => 0,
+                        'message' => $wechat->nickname . '关注了' . $item->nickname
+                    ]
+                );
+            }
+            $this->comment('Ok');
+            $this->comment('添加关注');
+            $wechat->liked()->saveMany($many = Video::query()->inRandomOrder()->take(mt_rand(5, 10))->get());
+            foreach ($many as $item) {
+                Log::query()->create(
+                    ['action' => '收藏',
+                        'from_user_id' => $wechat->id,
+                        'to_user_id' => 0,
+                        'video_id' => $item->id,
+                        'message' => $wechat->nickname . '收藏了一个视频'
+                    ]
+                );
+            }
+            $this->comment('Ok');
         }
 
         $this->comment('Ok');

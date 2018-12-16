@@ -1,83 +1,64 @@
 @extends('layouts.app')
-@section('title', '我关注的视频')
+@section('title', '我关注的人')
 @section('content')
-    <div id="page-content" class="index-page">
-        <div class="container">
-            @foreach($rows as $row)
-                <div class="box">
-                    <div>
-                        <img src="{{$row->avatar}}">
-                        <p>{{$row->nickname}}</p>
-                        <a href="javascript:void(0)" data-url="{{route("api.my.followed.store")}}" class="be_followed"
-                           data-wechat-id="{{$row->id}}"><i
-                                    class="glyphicon glyphicon-eye-open"></i> {{$row->be_followed_number}}</a>
-                    </div>
-                    <div class="box-content">
-                        <div class="row">
-
-                            @foreach($row->video as $video)
-                                <div class="col-md-3">
-                                    <div class="wrap-vid">
-                                        <div class="zoom-container">
-                                            <div class="zoom-caption">
-                                                <span>Video's Tag</span>
-                                                <a href="{{route('video.show', $video->id)}}">
-                                                    <i class="fa fa-play-circle-o fa-5x" style="color: #fff"></i>
-                                                </a>
-                                                <p class="title">{{$video->title}}</p>
-                                            </div>
-                                            <img src="{{$video->cover_url}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                        </div>
-                    </div>
-                    <div class="line"></div>
+    <h3>我关注的人</h3>
+    <hr/>
+    <div class="row">@foreach($rows as $row)
+            <div class="col-md-2">
+                <img class="avatar-large" src="{{$row->avatar}}">
+                <p>
+                    <span class="label label-info">{{$row->nickname}}</span>
+                    <a href="javascript:void(0)"
+                       data-url="{{route("my.followed.store")}}"
+                       class="followed_number label label-info"
+                       data-wechat-id="{{$row->id}}">
+                        <i class="glyphicon glyphicon-eye-open"></i> {{$row->be_followed_number}}
+                    </a>
+                </p>
+            </div>
+        @endforeach
+    </div>
+    <h3>我关注的人的视频</h3>
+    <hr/>
+    <div class="row">
+        @foreach($rows as $row)
+            @foreach($row->video as $video)
+                <div class="col-md-2">
+                    <a href="{{route('my.videos.show', $row->id)}}">
+                        <img class="img-responsive img-rounde" src="{{$video->cover_url?:'/images/default_cover.jpg'}}">
+                    </a>
+                    <p> {{$video->title}} </p>
                 </div>
             @endforeach
-        </div>
+        @endforeach
     </div>
+
+    <h3>推荐关注</h3>
+    <hr/>
+    <div class="row">
+        @foreach($recommended as $row)
+            <div class="col-md-2">
+                <img class="avatar-large thumbnail" src="{{$row->avatar}}">
+                <p class="text-left">
+                    <span class="btn btn-sm btn-info">{{$row->nickname}}</span>
+                    <a href="javascript:void(0)"
+                       data-url="{{route("my.followed.store")}}"
+                       class="followed_number btn btn-sm btn-warning"
+                       data-wechat-id="{{$row->id}}">
+                        关注({{$row->be_followed_number}})
+                    </a>
+                </p>
+            </div>
+        @endforeach
+    </div>
+    <div class="line"></div>
+
+
 @endsection
-
-
-
 @section('js')
-    <script type="text/javascript">
+    <script language="JavaScript">
         $(function () {
-            $(".be_followed").click(function () {
-                var _this = $(this);
-                console.log(_this.data('wechat-id'));
-                $.ajax(
-                    {
-                        url: _this.data('url'),
-                        type: "post",
-                        data: {
-                            wechat_id: _this.data('wechat-id'),
-                            __method:'DELETE'
-                        },
-                        dataType: "json",
-                        success: function (res) {
-                            if (res.code == 0) {
-                                __alert("已关注");
-                                _this.html('<i class="fa fa-heart"></i>' + res.data.followed_number);
-                            }
-                            else {
-                                __alert(res.msg);
-                            }
-                        },
-                        error: function (res, err, msg) {
-                            if (res.status == 401) {
-                                __alert("请登录");
-                            }
-                            else {
-                                __alert(msg);
-                            }
-                        }
-                    }
-                );
-            });
+            $('#my_followed_index').addClass("active")
         });
     </script>
 @endsection

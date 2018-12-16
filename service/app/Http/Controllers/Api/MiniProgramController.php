@@ -54,7 +54,7 @@ class MiniProgramController extends Controller
                     'grant_type' => 'authorization_code'
                 ]
             ]);
-            //{"session_key":"BIvNzqxFU53OFZHOmNGiGA==","openid":"ohdql5DiMiGvw7W6fHRWFRA1yVFw"}
+
             if (property_exists($response, 'errcode') && $response->errcode != 0) {
                 return Helper::error($response->errcode, "微信小程序接口响应给出错误信息：" . $response->errmsg);
             }
@@ -69,10 +69,12 @@ class MiniProgramController extends Controller
                  * 加密算法的初始向量，在小程序中，调用 wx.getUserInfo(Object object)可以得到该值
                  */
                 $iv = $request->input('iv');
+                Log::debug('iv:' . $iv);
                 /**
                  * 包括敏感数据在内的完整用户信息的加密数据，在小程序中，调用 wx.getUserInfo(Object object)可以得到该值
                  */
                 $encryptedData = $request->input('encryptedData');
+                Log::debug('encryptedData:' . $encryptedData);
                 if ($iv && $encryptedData) {
                     $Crypt = new DataCrypt(config('wechat.mini_program.default.app_id'), $response->session_key);
                     $errCode = $Crypt->decryptData($encryptedData, $iv, $data);
@@ -80,12 +82,34 @@ class MiniProgramController extends Controller
                         return Helper::error(__LINE__, '用户数据校验失败,' . $errCode);
                     }
                     $decoded = json_decode($data);
-                    $user->nickname = $decoded->nickName;
-                    $user->avatar = $decoded->avatarUrl;
-                    $user->province = $decoded->province;
-                    $user->city = $decoded->city;
+                    Log::debug('json_decode:', (array)$decoded);
+                    $user->nickname = $decoded->nickName ?: '';
+                    $user->avatar = $decoded->avatarUrl ?: '';
+                    $user->province = $decoded->province ?: '';
+                    $user->city = $decoded->city ?: '';
+                    $user->union_id = $decoded->unionId;
+                } else {
+                    $user->nickname = '';
+                    $user->avatar = '';
+                    $user->province = '';
+                    $user->city = '';
                 }
                 $user->save();
+                \App\Models\Log::query()->create(
+                    [
+                        'action' => '注册',
+                        'from_user_id' => $user->id,
+                        'message' => $decoded?var_export($decoded, true):''
+                    ]
+                );
+            } else {
+                \App\Models\Log::query()->create(
+                    [
+                        'action' => '登录',
+                        'from_user_id' => $user->id,
+                        'message' => 'code:' . $request->input('code')
+                    ]
+                );
             }
             return Helper::success(
                 [

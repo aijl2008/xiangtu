@@ -2,6 +2,8 @@
 @section('title', '视频分类管理')
 
 @section('content')
+    <h3>视频分类管理</h3>
+    <hr>
     @include('layouts/message')
     {!! Form::model($row, [
                                 'method' => 'PATCH',

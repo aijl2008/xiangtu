@@ -9,8 +9,15 @@ Route::any('mini_program/token', 'Api\MiniProgramController@token')->name('api.m
  * 全部视频
  */
 Route::resource('videos', 'Api\VideoController', [
-    'only' => ['index']
+    'only' => [
+        'index', 'show'
+    ]
 ]);
+/**
+ * Vod 事件服务
+ */
+Route::any('vod/service/event', 'Api\Vod\ServiceController@event');
+Route::any('vod/service', 'Api\Vod\ServiceController@event');
 /**
  * 视频分类
  */

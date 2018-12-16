@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Classification;
 use App\Models\User;
 use App\Models\Wechat;
-use App\Models\Classification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -25,7 +25,6 @@ class ComposerServiceProvider extends ServiceProvider
                 switch (get_class($user)) {
                     case Wechat::class:
                         $view->with('auth', 'wechat');
-                        $view->with('Bearer', $user ? $user->createToken(request()->userAgent())->accessToken : null);
                         break;
                     case User::class:
                         $view->with('auth', 'user');
@@ -38,7 +37,8 @@ class ComposerServiceProvider extends ServiceProvider
             } else {
                 $view->with('auth', 'guest');
             }
-            $view->with('classifications',Classification::query()->get());
+            $view->with('current', Classification::query()->find(request()->input('classification')));
+            $view->with('navigation', Classification::query()->take(15)->get());
         });
     }
 

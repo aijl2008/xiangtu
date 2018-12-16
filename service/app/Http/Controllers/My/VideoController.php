@@ -9,8 +9,9 @@
 namespace App\Http\Controllers\My;
 
 
+use App\Helper;
 use App\Http\Controllers\Controller;
-use App\Models\Classification;
+use App\Http\Requests\VideoRequest;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,10 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         $view = view('my.videos.index');
-        $video = $request->user('wechat')->liked()->with('wechat')->orderBy('id', 'desc');
+        $video = $request->user('wechat')
+            ->video()
+            ->with('wechat')
+            ->orderBy('id', 'desc');
         $view->with('rows', $video->paginate());
         $view->with('classification', $request->input('classification', 0));
         return $view;
@@ -41,13 +45,17 @@ class VideoController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param VideoRequest $request
+     * @return array
      */
-    public function store(Request $request)
+    public function store(VideoRequest $request)
     {
-        //
+        $video = $request->user('wechat')->video()->create($data = $request->all());
+        $vod = new \App\Models\Vod();
+        if (!$video->cover_url) {
+            $vod->createSnapshotByTimeOffsetAsCover($video->file_id, 1);
+        }
+        return Helper::success($video->toArray());
     }
 
     /**
@@ -56,9 +64,19 @@ class VideoController extends Controller
      * @param Video $video
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Video $video)
+    public function show(Request $request, Video $video)
     {
-        return view("my.videos.show")->with('row', $video);
+        return view("my.videos.show")
+            ->with('row', $video)
+            ->with('related',
+                Video::query()
+                    ->where(
+                        'wechat_id',
+                        '<>',
+                        $request->user('wechat')->id
+                    )->take(4)
+                    ->get()
+            );
     }
 
     /**

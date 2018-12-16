@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         return [
             "id" => "required|unique:users",
             "name" => "required",
-            "avatar" => "url"
+           // "avatar" => "url"
         ];
     }
 
@@ -34,7 +34,7 @@ class UserRequest extends FormRequest
     {
         return [
             "id.unique" => "用户{$this->input('id')}已经存在了",
-            "avatar.url" => "用户头像的格式无效"
+           // "avatar.url" => "用户头像的格式无效"
         ];
     }
 

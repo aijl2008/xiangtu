@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', '视频分类管理')
 @section('content')
+    <h3>视频分类管理</h3>
+    <hr>
     @include('layouts/message')
     <table class="table table-borderless">
         <thead>
@@ -35,8 +37,10 @@
         </tbody>
     </table>
 @stop
-@section('css')
-@stop
 @section('js')
-    @include('layouts/destroy-confirm')
-@stop
+    <script language="JavaScript">
+        $(function () {
+            $('#admin_classifications_index').addClass("active")
+        });
+    </script>
+@endsection
