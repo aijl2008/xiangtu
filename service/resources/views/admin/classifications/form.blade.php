@@ -40,3 +40,10 @@
         <a href="{{ route('admin.classifications.index', []) }}" class="btn btn-primary">返回列表</a>
     </div>
 </div>
+@section('js')
+    <script language="JavaScript">
+        $(function () {
+            $('#admin_classifications_index').addClass("active")
+        });
+    </script>
+@endsection

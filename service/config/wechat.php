@@ -29,8 +29,8 @@ return [
      */
     'open_platform' => [
         'default' => [
-            'app_id' => "wx52c91b0d11c576f1",
-            'secret' => "67315809b433046685ff40735a8c557c",
+            'app_id' => "wxb783a4e5aad0e5bc",
+            'secret' => "8d14a3b9d67ac84abaf135a012086dec",
             'token' => "",
             'aes_key' => "",
             'oauth' => [

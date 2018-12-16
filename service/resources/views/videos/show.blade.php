@@ -2,19 +2,19 @@
 @section('title', str_limit($row->title))
 @section('content')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 videos">
             <h3 class="vid-name">{{$row->title}}</h3>
-            <video poster="{{$row->cover_url}}"
-                   id="player-container-id" preload="auto"
-                   playsinline webkit-playsinline class="img-responsive">
-            </video>
-            <div class="line"></div>
+            <hr/>
+            <div id="video_container"></div>
             <div class="row">
                 <div class="col-md-6">
                     <h5>
                         <img src="{{$row->wechat->avatar}}" class="img-circle">
-                        <a href="javascript:void(0);" class="followed_number" data-url="{{route('my.followed.store')}}"
-                           data-wechat-id="{{$row->wechat->id}}"> 关注 </a></h5>
+                        <a
+                                href="javascript:void(0);"
+                                class="follow followed_number btn-sm btn-warning"
+                                data-url="{{route('my.followed.store')}}"
+                                data-wechat-id="{{$row->wechat->id}}">关注 </a></h5>
                 </div>
                 <div class="col-md-6 text-right">
                     <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->updated_at}} </div>
@@ -35,7 +35,10 @@
                 @foreach($related as $row)
                     <div class="col-md-3">
                         <a href="{{route('videos.show', $row->id)}}">
-                            <img class="img-responsive" src="{{$row->cover_url?:'/images/default_cover.jpg'}}"/>
+                            <img class="img-responsive lazyload"
+                                 data-original="{{$row->cover_url}}"
+                                 src="/images/loading/ifeng.jpg"
+                            />
                         </a>
                         <p> {{$row->title}} </p>
                     </div>
@@ -43,19 +46,50 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection
 @section("js")
-    <link href="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
-    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+    <script src="//qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
     <script type="text/javascript">
         $(function () {
-            var player = TCPlayer('player-container-id', {
-                fileID: '{{ $row->file_id }}',
-                appID: '{!! config("wechat.cloud.app_id") !!}'
-            });
+            var listener = {
+                playStatus: function (status) {
+                    if (status == 'playing') {
+                        $.ajax(
+                            {
+                                url: "{{route('videos.play', $row->id)}}",
+                                type: "post",
+                                dataType: "json",
+                                success: function (res) {
+                                    console.log(res);
+                                },
+                                error: function (res, err, msg) {
+                                    console.log(res, err, msg);
+                                }
+                            }
+                        );
+                    }
+                    console.log(status);
+                }
+            };
+            var option = {
+                "cover": "{{$row->cover_url}}",
+                "file_id": "{{$row->file_id}}",
+                "app_id": "{{config('wechat.cloud.app_id')}}",
+                "third_video":
+                    {
+                        "urls":
+                            {
+                                20:
+                                    "{{$row->url}}"
+                            }
+                    }
+            };
+            var player = new qcVideo.Player(
+                "video_container",
+                option,
+                listener
+            );
+            player.resize(300, 200);
         });
     </script>
 @endsection

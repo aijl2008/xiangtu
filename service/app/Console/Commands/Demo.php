@@ -122,19 +122,17 @@ class Demo extends Command
             );
         }
         $this->comment('Ok');
-        $cover = 0;
-        $avatar = 0;
         $faker = Faker::create('zh_CN');
+
+        $mockUsersAvatars = file(base_path() . '/database/mock/avatar.txt');
+        $mockVideos = json_decode(file_get_contents(base_path() . '/database/mock/videos.json'));
         for ($i = 0; $i < 100; $i++) {
-            if ($avatar >= 100) {
-                $avatar = 0;
-            }
             $this->comment('填充用户');
             $wechat = new Wechat(
                 [
                     "open_id" => config('wechat.mini_program.default.app_id') . '|' . $faker->regexify('[0-9A-Z]{32}'),//18+1+42
                     "union_id" => null,
-                    "avatar" => "https://www.xiangtu.net.cn/avatar/" . ++$avatar . '.jpg',
+                    "avatar" => array_pop($mockUsersAvatars),
                     "nickname" => $faker->name,
                     "sex" => $faker->numberBetween(0, 2),
                     "country" => $faker->country,
@@ -144,31 +142,29 @@ class Demo extends Command
                 ]
             );
             $wechat->save();
-            $this->comment($wechat->nickname.',Ok');
+            $this->comment($wechat->nickname . ',Ok');
 
             $this->comment('填充视频');
-            for ($n = 0; $n < mt_rand(20, 99); $n++) {
-                if ($cover >= 30) {
-                    $cover = 0;
-                }
+            for ($n = 0; $n < mt_rand(5, 10); $n++) {
+                $mock = array_pop($mockVideos);
                 $video = new Video(
                     [
-                        "title" => $faker->text,
-                        "url" => $faker->imageUrl(),
-                        "cover_url" => "https://www.xiangtu.net.cn/avatar/cover/" . ++$cover . ".jpg",
-                        "file_id" => $faker->regexify('[1-9][0-9]{15}'),
+                        "title" => $mock->title,
+                        "url" => $mock->url,
+                        "cover_url" => $mock->cover_url,
+                        "file_id" => '',
                         "uploaded_at" => $faker->dateTime,
-                        "classification_id" => $faker->numberBetween(10000, 99999),
+                        "classification_id" => $faker->numberBetween(1, 13),
                         "played_number" => $faker->numberBetween(10000, 99999),
                         "liked_number" => $faker->numberBetween(10000, 99999),
                         "shared_wechat_number" => $faker->numberBetween(10000, 99999),
                         "shared_moment_number" => $faker->numberBetween(10000, 99999),
-                        "visibility" => 1,
+                        "visibility" => $faker->numberBetween(1, 3),
                         "status" => 1
                     ]
                 );
                 $wechat->video()->save($video);
-                $this->comment($video->title.',Ok');
+                $this->comment($video->title . ',Ok');
             }
         }
 
@@ -177,8 +173,8 @@ class Demo extends Command
             $many = $many = Wechat::query()->inRandomOrder()->take(mt_rand(5, 10))->get();
             foreach ($many as $item) {
                 $wechat->followed()->save(new FollowedWechat([
-                    'wechat_id' =>$item->id,
-                    'followed_id'=>$wechat->id
+                    'wechat_id' => $item->id,
+                    'followed_id' => $wechat->id
                 ]));
                 Log::query()->create(
                     ['action' => '关注',

@@ -10,7 +10,7 @@ Route::get("/vue", "VueController@index");
  */
 Route::get("/videos/{video}", "VideoController@show")->name('videos.show');
 Route::get("/", "VideoController@index")->name('home');
-
+Route::post("/videos/{video}/play", "VideoController@play")->name('videos.play');
 /**
  * 管理员登录
  */
@@ -55,6 +55,14 @@ Route::group(
                 'show'
             ]
         ]);
+
+        Route::resource("/logs", "LogController", [
+            'only' => [
+                'index'
+            ]
+        ]);
+
+
         /**
          * 用户页
          */

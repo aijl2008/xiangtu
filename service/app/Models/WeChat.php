@@ -17,6 +17,7 @@ class Wechat extends Authenticatable
         "open_id",
         "union_id",
         "avatar",
+        "mobile",
         "nickname",
         "sex",
         "country",

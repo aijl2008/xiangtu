@@ -37,8 +37,10 @@
         </tbody>
     </table>
 @stop
-@section('css')
-@stop
 @section('js')
-    @include('layouts/destroy-confirm')
-@stop
+    <script language="JavaScript">
+        $(function () {
+            $('#admin_classifications_index').addClass("active")
+        });
+    </script>
+@endsection

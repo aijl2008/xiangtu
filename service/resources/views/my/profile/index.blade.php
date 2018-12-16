@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group hide">
                     <label for="inputPassword" class="col-md-2 control-label text-right">avatar</label>
                     <div class="col-md-10">
                         <input class="form-control" type="text" name="avatar" id="avatar" value="{{$user->avatar}}">

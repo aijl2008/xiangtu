@@ -8,8 +8,10 @@
     <title>@yield('title')-乡土味</title>
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    {{--<link href="/css/app.css" rel="stylesheet">--}}
+    <link href="/css/app.css" rel="stylesheet">
     <script src="/jquery/jquery.min.js"></script>
+    <script src="/jquery/jquery.lazyload.min.js"></script>
+    <script src="/jquery/masonry.pkgd.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootbox.min.js"></script>
     <script src="/js/app.js"></script>
@@ -20,23 +22,21 @@
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
     <script>
+        if (top.location !== self.location) {
+            top.location.href = self.location.href;
+        }
         $(function () {
+            $("img.lazyload").lazyload();
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
         });
     </script>
     <style>
-        .avatar {
-            width: 32px;
-        }
 
-        .avatar-large {
-            width: 132px;
-        }
     </style>
     @yield('js')
 </head>
 <body>
-<div class="container top">
+<div id="top" class="container">
     <div class="row">
         <div class="col-md-6 col-sm-6">
             <a href="/" class="logo">
@@ -88,11 +88,14 @@
                     @endforeach
                 @else
                     @if($auth == 'user')
-                        <li><a href="{{ route('admin.classifications.index') }}"><i class="fa fa-cube"></i>视频分类 </a>
-                        </li>
-                        <li><a href="{{ route('admin.videos.index') }}"><i class="fa fa-film"></i>视频列表 </a>
-                        </li>
-                        <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-user"></i>用户管理 </a></li>
+                        <li id="admin_classifications_index"><a href="{{ route('admin.classifications.index') }}"><i
+                                        class="fa fa-cube"></i>视频分类 </a></li>
+                        <li id="admin_logs_index"><a href="{{ route('admin.logs.index') }}"><i class="fa fa-film"></i>事件管理
+                            </a></li>
+                        <li id="admin_videos_index"><a href="{{ route('admin.videos.index') }}"><i
+                                        class="fa fa-film"></i>视频列表 </a></li>
+                        <li id="admin_users_index"><a href="{{ route('admin.users.index') }}"><i class="fa fa-user"></i>用户管理
+                            </a></li>
                     @elseif($auth=='wechat')
                         <li id="my_videos_index">
                             <a href="{{ route('my.videos.index') }}"><i class="fa fa-film"></i>我的视频</a>
@@ -122,9 +125,6 @@
 
 
 <div class="container" id="main">
-    {{--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">--}}
-    {{--Launch demo modal--}}
-    {{--</button>--}}
     @yield('content')
 </div>
 
@@ -151,16 +151,15 @@
     </div>
 </div>
 
-<footer class="footer">
+<div class="clear"></div>
+<footer>
     <div class="container">
-        <div class="navbar navbar-default">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 text-center">
-                    <span>Copyright &copy; 2019.言诺兰科技</span>
-                </div>
-                <div class="col-md-6 col-sm-6 text-center">
-                    <span>工信部互联网备案编号：冀ICP备18036913号</span>
-                </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center">
+                <span class="copyright">Copyright &copy; 2019.言诺兰科技</span>
+            </div>
+            <div class="col-md-6 col-sm-6 text-center">
+                <span class="icp">工信部互联网备案编号：冀ICP备18036913号</span>
             </div>
         </div>
     </div>

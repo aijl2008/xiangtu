@@ -31,3 +31,10 @@
     </table>
     <div class="text-center">{{$rows->links()}}</div>
 @endsection
+@section('js')
+    <script language="JavaScript">
+        $(function () {
+            $('#admin_users_index').addClass("active")
+        });
+    </script>
+@endsection
