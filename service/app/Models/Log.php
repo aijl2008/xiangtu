@@ -21,4 +21,9 @@ class Log extends Model
         'message'
     ];
 
+    function footprint($id)
+    {
+        return $this->where('from_user_id', $id)
+            ->where('action', '播放');
+    }
 }

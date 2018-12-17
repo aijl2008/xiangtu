@@ -47,13 +47,13 @@ return [
         'default' => [
             'app_id' => 'wxbe20d80072eaf2d3',
             'secret' => '0cfb1809377ba6cd225c21968381e98c',
-            'token' => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
-            'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
+            'token' => 'xiangtu',
+            'aes_key' => 'sJWkoqGW7KmXGt1FoIOhh0oy9BPawf8OZU1C8R2Ik65',
             'response_type' => 'array',
 
             'log' => [
                 'level' => 'debug',
-                'file' => __DIR__ . '/../../storage/logs/wechat.log',
+                'file' => '/var/www/xiangtu/service/storage/wechat.log',
             ]
         ],
     ],

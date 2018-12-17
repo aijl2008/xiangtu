@@ -13,7 +13,7 @@
                             data-original="{{$row->cover_url?:''}}">
                 </a>
                 <span class="tag"></span>
-                <p class=""> {{$row->title}} </p>
+                <p class="title"> {{$row->title}} </p>
                 <!--视频信息-->
                 <div class="row">
                     <div class="col-md-3">
@@ -43,5 +43,4 @@
         @endforelse
         <div class="col-md-12 text-center">{{$rows->links()}}</div>
     </div>
-
 @endsection

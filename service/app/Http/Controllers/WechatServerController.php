@@ -2,25 +2,38 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Message;
 use EasyWeChat\Factory;
-use Illuminate\Http\Request;
+use EasyWeChat\Kernel\Messages\Text;
 
 class WechatServerController extends Controller
 {
-    function serve (){
-        $config = [
-            'app_id' => 'wx3cf0f39249eb0exx',
-            'secret' => 'f1c242f4f28f735d4687abb469072axx',
-
-            // 下面为可选项
-            // 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
-            'response_type' => 'array',
-
-            'log' => [
-                'level' => 'debug',
-                'file' => __DIR__.'/wechat.log',
-            ],
-        ];
-        $miniProgram = Factory::miniProgram(config('wechat.mi'));
+    function serve()
+    {
+        $config = config('wechat.mini_program.default');
+        $app = Factory::miniProgram($config);
+        $app->server->push(function ($message) use ($app) {
+            Message::query()->create(
+                [
+                    'to_user_name' => $message["ToUserName"],
+                    'from_user_name' => $message["FromUserName"],
+                    'create_time' => $message["CreateTime"],
+                    'msg_type' => $message["MsgType"],
+                    'content' => $message["Content"] ?? '',
+                    'pic_url' => $message["PicUrl"] ?? '',
+                    'media_id' => $message["MediaId"] ?? '',
+                    'title' => $message["Title"] ?? '',
+                    'app_id' => $message["AppId"] ?? '',
+                    'page_path' => $message["PagePath"] ?? '',
+                    'thumb_url' => $message["ThumbUrl"] ?? '',
+                    'thumb_media_id' => $message["ThumbMediaId"] ?? '',
+                    'event' => $message["Event"] ?? '',
+                    'session_from' => $message["SessionFrom"] ?? ''
+                ]
+            );
+            $app->customer_service->message(new Text("您输入的是：" . $message['Content']))->to($message['FromUserName'])->send();
+        });
+        return $app->server->serve();
     }
 }

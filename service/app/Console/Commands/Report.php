@@ -55,7 +55,7 @@ class Report extends Command
             ->select(DB::raw('video_id, count(id) as aggregate'))
             ->get();
         foreach ($items as $item) {
-            $this->comment('processing ' . $item->video_id);
+            $this->comment('[' . __LINE__ . ']processing ' . $item->video_id);
             $ReportVideo = new VideoReport();
             $ReportVideo->date = $date;
             $ReportVideo->video_id = $item->video_id;
@@ -75,12 +75,37 @@ class Report extends Command
             ))
             ->get();
         foreach ($items as $item) {
-            $this->comment('processing ' . $item->video_id);
-            $ReportVideo = new VideoReport();
+            $this->comment('[' . __LINE__ . ']processing ' . $item->from_user_id);
+            $ReportVideo = new FollowerReport();
             $ReportVideo->date = $date;
             $ReportVideo->wechat_id = $item->from_user_id;
             $ReportVideo->followed_number = $item->followed_number;
             $ReportVideo->cancel_followed_number = 0;
+            $ReportVideo->save();
+        }
+        $items = Log::query()->where('action', '取消关注')
+            ->whereBetween('updated_at', [
+                $date . ' 00:00:00',
+                $date . ' 23:59:59'
+            ])
+            ->groupBy('from_user_id')
+            ->select(DB::raw(
+                'from_user_id, 
+                count(id) as cancel_followed_number'
+            ))
+            ->get();
+        foreach ($items as $item) {
+            $this->comment('[' . __LINE__ . ']processing ' . $item->from_user_id);
+            $ReportVideo = FollowerReport::query()
+                ->where('date', $date)
+                ->where('wechat_id', $item->from_user_id)
+                ->firstOrNew();
+            $ReportVideo->date = $date;
+            $ReportVideo->wechat_id = $item->from_user_id;
+            if (!$ReportVideo->followed_number) {
+                $ReportVideo->followed_number = 0;
+            }
+            $ReportVideo->cancel_followed_number = $item->cancel_followed_number;
             $ReportVideo->save();
         }
         $this->comment('Ok');

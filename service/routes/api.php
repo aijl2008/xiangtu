@@ -13,6 +13,12 @@ Route::resource('videos', 'Api\VideoController', [
         'index', 'show'
     ]
 ]);
+
+/**
+ * 推荐的用户
+ */
+Route::get('wechat/recommend', 'Api\WechatController@recommend');
+
 /**
  * Vod 事件服务
  */
@@ -64,6 +70,12 @@ Route::group(
                  * 我的视频
                  */
                 Route::resource("videos", "VideoController");
+                /**
+                 * 我看过的视频
+                 */
+                Route::resource("history", "HistoryController", [
+                    "only" => "index"
+                ]);
                 /**
                  *  我关注的
                  */

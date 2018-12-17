@@ -10,34 +10,35 @@ namespace App\Http\Controllers\My;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Log;
-use Carbon\Carbon;
+use App\Models\FollowerReport;
+use App\Models\VideoReport;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StatisticsController extends Controller
 {
     function index()
     {
-        $statistics = [
-            'played_number_on_today' => Log::query()
-                ->where('action', '播放')
-                ->where('to_user_id', Auth::guard('wechat')->user->id)
-                ->whereBetween('updated_at', [
-                    date('Y-m-d'),
-                    Carbon::now()->addHours(24)->format('Y-m-d')
-                ])
-                ->count('id'),
-            'follower_on_today' => Log::query()
-                ->where('action', '关注')
-                ->where('to_user_id', Auth::guard('wechat')->user->id)
-                ->whereBetween('updated_at', [
-                    date('Y-m-d'),
-                    Carbon::now()->addHours(24)->format('Y-m-d')
-                ])
-                ->count('id'),
-            ''
-        ];
-        return view('my.statistics.index');
+        $user = Auth::guard('wechat')->user();
+        $followers = FollowerReport::query()
+            ->where('wechat_id', $user->id)
+            ->where('date', '>', date('Y-m-d', time() - 3600 * 24 * 8))
+            ->groupBy('date')
+            ->select(DB::raw(
+                'date, 
+                count(id) as number'
+            ))->get();
+        $play = VideoReport::query()
+            ->where('wechat_id', $user->id)
+            ->where('date', '>', date('Y-m-d', time() - 3600 * 24 * 8))
+            ->groupBy('date')
+            ->select(DB::raw(
+                'date, 
+                count(id) as number'
+            ))->get();
+        return view('my.statistics.index')
+            ->with('followers', $followers)
+            ->with('play', $play);
     }
 
     function video()
