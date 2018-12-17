@@ -137,7 +137,7 @@
                 });
             };
 
-
+            var dialog = null;
             /**
              * 选择视频文件
              */
@@ -167,7 +167,7 @@
              * 启动上传
              */
             var startUploader = function () {
-                bootbox.alert({
+                dialog = bootbox.alert({
                     title: "乡土味<small>正在上传，请不要关闭当前页</small>",
                     message: "<div class=\"progress\">\n" +
                     "    <div class=\"progress-bar\" style=\"width: 0%;\">\n" +

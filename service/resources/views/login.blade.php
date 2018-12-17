@@ -7,9 +7,10 @@
             <div class="row recommend">
                 @foreach($rows as $row)
                     <div class="col-md-3">
-                        <a href="{{route('wechat.login.mock', $row->id)}}"><img style="width: 132px"
-                                                                                src="{{$row->avatar}}"
-                                                                                class="img-responsive img-circle"></a>
+                        <a href="{{route('wechat.login.mock', $row->id)}}">
+                            <img style="width: 132px; height: 132px"
+                                 src="{{$row->avatar}}"
+                                 class="img-responsive img-circle"></a>
                     </div>
                 @endforeach
             </div>

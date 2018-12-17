@@ -4,7 +4,7 @@
 @section('content')
     <div class="row videos">
         @forelse($rows as $row)
-            <div class="col-md-3" id="skeleton">
+            <div class="col-md-3">
                 <!--封面-->
                 <a href="{{route('videos.show', $row->id)}}">
                     <img
