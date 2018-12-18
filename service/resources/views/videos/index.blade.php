@@ -6,7 +6,7 @@
         @forelse($rows as $row)
             <div class="col-md-3">
                 <!--封面-->
-                <a href="{{route('videos.show', $row->id)}}">
+                <a href="{{route('videos.show', $row->id)}}" class="picLink">
                     <img
                             class="img-responsive img-rounde lazyload cover"
                             src="/images/loading/ifeng.jpg"

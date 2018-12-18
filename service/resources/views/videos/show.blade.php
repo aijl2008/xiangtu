@@ -5,7 +5,7 @@
         <div class="col-md-8 videos">
             <h3 class="vid-name">{{$row->title}}</h3>
             <hr/>
-            <div id="video_container"></div>
+            <video id="video_container" width="100%" height="20%"></video>
             <div class="row">
                 <div class="col-md-6">
                     <h5>

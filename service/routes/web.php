@@ -56,6 +56,12 @@ Route::group(
             ]
         ]);
 
+        Route::resource("/messages", "MessageController", [
+            'except' => [
+                'show'
+            ]
+        ]);
+
         Route::resource("/logs", "LogController", [
             'only' => [
                 'index'

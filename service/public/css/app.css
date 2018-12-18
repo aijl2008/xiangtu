@@ -242,6 +242,8 @@ html, body {
 /*margin-top: 20px;*/
 /*}*/
 
+
+
 /*#video_container {*/
 /*}*/
 
@@ -262,9 +264,28 @@ html, body {
 
 .title {
     overflow: hidden;
+    word-break:break-all;
+    text-overflow: ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-pack:center;
+    height: 48px;
+    line-height: 24px;
+    -webkit-box-align:center;
 }
 
 /*.video-admin dt{*/
 /*width: 70px;*/
 /*}*/
 
+.videos .col-md-3 .picLink{display: -webkit-box;width:100%;height:142px;border:1px solid #000;overflow: hidden;-webkit-box-align: center;-webkit-box-pack: center;}
+
+.videos > .col-md-3 h5{margin-top: 0;}
+.videos > .col-md-3 h5 .img-circle{margin-bottom: 10px;width:30px;height:30px;}
+.videos > .col-md-3 {margin-bottom: 10px;}
+.videos > .col-md-3 > .row{height:66px;}
+.videos > .col-md-3 > .row .col-md-3{width:25%;}
+.videos > .col-md-3 > .row .col-md-9{width:75%;}
+.videos .liked_number + span{color:#337ab7;}
+.pagination>li>a, .pagination>li>span{background-color: #f1f1f1;}
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover{background-color: #f1f1f1;}

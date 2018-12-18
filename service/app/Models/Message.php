@@ -22,4 +22,14 @@ class Message extends Model
         'thumb_url',
         'thumb_media_id'
     ];
+
+    function toWechat()
+    {
+        return $this->belongsTo(Wechat::class, 'to_user_name', 'open_id');
+    }
+
+    function fromWechat()
+    {
+        return $this->belongsTo(Wechat::class, 'from_user_name', 'open_id');
+    }
 }

@@ -17,7 +17,7 @@ class WechatServerController extends Controller
             Message::query()->create(
                 [
                     'to_user_name' => $message["ToUserName"],
-                    'from_user_name' => $message["FromUserName"],
+                    'from_user_name' => config("wechat.mini_program.default.app_id") . '|' . $message["FromUserName"],
                     'create_time' => $message["CreateTime"],
                     'msg_type' => $message["MsgType"],
                     'content' => $message["Content"] ?? '',
