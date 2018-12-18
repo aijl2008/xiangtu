@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e8975420-e352-4f60-ac46-4bc20c25bf5c" name="www.xiangtu.net.cn" url="http://154.8.212.215">
+        <fileTransfer host="154.8.212.215" port="22" rootFolder="/var/www/xiangtu/service" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

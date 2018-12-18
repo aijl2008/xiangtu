@@ -1,0 +1,1077 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="85fc201c-4a86-478c-b7d1-44407a5b506e" name="Default" comment="添加Vod模型">
+      <change beforePath="$PROJECT_DIR$/mini_program/README.md" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/service/app/Helper.php" afterPath="$PROJECT_DIR$/service/app/Helper.php" />
+      <change beforePath="$PROJECT_DIR$/service/app/Http/Controllers/My/LikeController.php" afterPath="$PROJECT_DIR$/service/app/Http/Controllers/My/LikeController.php" />
+      <change beforePath="$PROJECT_DIR$/service/app/Http/Controllers/My/QCloud/SignatureController.php" afterPath="$PROJECT_DIR$/service/app/Http/Controllers/My/QCloud/SignatureController.php" />
+      <change beforePath="$PROJECT_DIR$/service/app/Http/Controllers/My/VideoController.php" afterPath="$PROJECT_DIR$/service/app/Http/Controllers/My/VideoController.php" />
+      <change beforePath="$PROJECT_DIR$/service/app/Models/Vod.php" afterPath="$PROJECT_DIR$/service/app/Models/Vod.php" />
+      <change beforePath="$PROJECT_DIR$/service/app/Providers/ComposerServiceProvider.php" afterPath="$PROJECT_DIR$/service/app/Providers/ComposerServiceProvider.php" />
+      <change beforePath="$PROJECT_DIR$/service/public/js/app.js" afterPath="$PROJECT_DIR$/service/public/js/app.js" />
+      <change beforePath="$PROJECT_DIR$/service/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/service/resources/views/layouts/app.blade.php" />
+      <change beforePath="$PROJECT_DIR$/service/resources/views/my/videos/create.blade.php" afterPath="$PROJECT_DIR$/service/resources/views/my/videos/create.blade.php" />
+      <change beforePath="$PROJECT_DIR$/service/resources/views/videos/index.blade.php" afterPath="$PROJECT_DIR$/service/resources/views/videos/index.blade.php" />
+      <change beforePath="$PROJECT_DIR$/service/resources/views/videos/show.blade.php" afterPath="$PROJECT_DIR$/service/resources/views/videos/show.blade.php" />
+      <change beforePath="$PROJECT_DIR$/service/routes/api.php" afterPath="$PROJECT_DIR$/service/routes/api.php" />
+      <change beforePath="$PROJECT_DIR$/service/routes/console.php" afterPath="$PROJECT_DIR$/service/routes/console.php" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/service/composer.json</pharConfigPath>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="destroy-confirm.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/layouts/destroy-confirm.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="46" lean-forward="false" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+              <folding>
+                <marker date="1544439595333" expanded="true" signature="705:719" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/layouts/app.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
+              <folding>
+                <marker date="1544799474495" expanded="true" signature="240:254" ph="..." />
+                <marker date="1544799474495" expanded="true" signature="277:284" ph="..." />
+                <marker date="1544799474495" expanded="true" signature="8572:8581" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="message.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/layouts/message.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1544439595331" expanded="true" signature="5:23" ph="..." />
+                <marker date="1544439595331" expanded="true" signature="97:121" ph="..." />
+                <marker date="1544439595331" expanded="true" signature="146:155" ph="..." />
+                <marker date="1544439595331" expanded="true" signature="226:242" ph="..." />
+                <marker date="1544439595331" expanded="true" signature="292:310" ph="..." />
+                <marker date="1544439595331" expanded="true" signature="338:356" ph="..." />
+                <marker date="1544439595331" expanded="true" signature="406:426" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/videos/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="46" selection-end-column="11" />
+              <folding>
+                <marker date="1544799784165" expanded="true" signature="9:22" ph="..." />
+                <marker date="1544799784165" expanded="true" signature="33:46" ph="..." />
+                <marker date="1544799784165" expanded="true" signature="58:67" ph="..." />
+                <marker date="1544799784165" expanded="true" signature="109:122" ph="..." />
+                <marker date="1544799784165" expanded="true" signature="273:317" ph="..." />
+                <marker date="1544799784165" expanded="true" signature="468:497" ph="..." />
+                <marker date="1544799784165" expanded="true" signature="653:664" ph="..." />
+                <marker date="1544799784165" expanded="true" signature="967:983" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/my/videos/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+              <folding>
+                <marker date="1544694105310" expanded="true" signature="9:22" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="33:48" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="60:69" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="111:124" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="275:319" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="470:499" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="655:666" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="969:985" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="1149:1167" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="1240:1267" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="1319:1327" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="1487:1506" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="1588:1607" ph="..." />
+                <marker date="1544694105310" expanded="true" signature="1690:1707" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/my/videos/create.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="280" column="19" lean-forward="false" selection-start-line="280" selection-start-column="19" selection-end-line="280" selection-end-column="19" />
+              <folding>
+                <marker date="1544798788424" expanded="true" signature="9:22" ph="..." />
+                <marker date="1544798788424" expanded="true" signature="59:68" ph="..." />
+                <marker date="1544798788424" expanded="true" signature="4105:4109" ph="..." />
+                <marker date="1544798788424" expanded="true" signature="4682:4714" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/client/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1544439595341" expanded="true" signature="106:120" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/my/liked/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+              <folding>
+                <marker date="1544694194730" expanded="true" signature="9:22" ph="..." />
+                <marker date="1544694194730" expanded="true" signature="33:43" ph="..." />
+                <marker date="1544694194730" expanded="true" signature="33:50" ph="..." />
+                <marker date="1544694194730" expanded="true" signature="62:71" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/service/resources/views/my/followed/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+              <folding>
+                <element signature="e#1095#1114#0#HTML" expanded="true" />
+                <marker date="1544694141297" expanded="true" signature="9:22" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="33:43" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="33:49" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="60:69" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="84:97" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="171:183" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="209:223" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="287:317" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="378:386" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="465:489" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="617:638" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="978:1009" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="1224:1237" ph="..." />
+                <marker date="1544694141297" expanded="true" signature="1335:1352" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/public/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>videoType</find>
+      <find>startUploader</find>
+      <find>print_r</find>
+      <find>bottom-footer</find>
+      <find>wrap-footer</find>
+      <find>copyright</find>
+      <find>link</find>
+      <find>top-link</find>
+      <find>list-inline</find>
+      <find>menu</find>
+      <find>navbar-header</find>
+      <find>visible-xs</find>
+      <find>heading</find>
+      <find>page-conten</find>
+      <find>index-page</find>
+      <find>zoom</find>
+      <find>haveFollowed</find>
+      <find>input-group</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/service/resources/views/my/videos/create.blade.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/Api/QCloud/SignatureController.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/my/videos/show.blade.php" />
+        <option value="$PROJECT_DIR$/service/app/Models/Vod.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/Admin/VideoController.php" />
+        <option value="$PROJECT_DIR$/素材/template.html" />
+        <option value="$PROJECT_DIR$/service/public/template.html" />
+        <option value="$PROJECT_DIR$/service/public/css/app.css" />
+        <option value="$PROJECT_DIR$/service/resources/views/layouts/app2.blade.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/IndexController.php" />
+        <option value="$PROJECT_DIR$/service/routes/api.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/Api/VideoController.php" />
+        <option value="$PROJECT_DIR$/service/app/Models/WeChat.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/Api/QRCodeController.php" />
+        <option value="$PROJECT_DIR$/service/routes/web.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/WechatServerController.php" />
+        <option value="$PROJECT_DIR$/service/app/Models/FollowedWechat.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/Api/My/FollowController.php" />
+        <option value="$PROJECT_DIR$/service/app/Models/VideoWechat.php" />
+        <option value="$PROJECT_DIR$/service/app/Models/Video.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/Api/My/LikeController.php" />
+        <option value="$PROJECT_DIR$/service/app/Http/Controllers/QRCodeController.php" />
+        <option value="$PROJECT_DIR$/service/config/wechat.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/admin/login.blade.php" />
+        <option value="$PROJECT_DIR$/service/app/Providers/ComposerServiceProvider.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/admin/classifications/index.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/admin/classifications/edit.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/admin/classifications/create.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/admin/videos/show.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/admin/videos/index.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/admin/users/index.blade.php" />
+        <option value="$PROJECT_DIR$/service/public/js/app.js" />
+        <option value="$PROJECT_DIR$/service/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/videos/index.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/my/videos/index.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/my/liked/index.blade.php" />
+        <option value="$PROJECT_DIR$/service/resources/views/my/followed/index.blade.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
+    <include_path>
+      <path value="$PROJECT_DIR$/service/vendor/tencentyun-api/qcloudapi-sdk-php" />
+      <path value="$PROJECT_DIR$/service/vendor/qcloud/vod-sdk-v5" />
+      <path value="$PROJECT_DIR$/service/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/service/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/service/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/service/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/service/vendor/qcloud/cos-sdk-v5" />
+      <path value="$PROJECT_DIR$/service/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/service/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/service/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/service/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/service/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/service/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/service/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/service/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/service/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/service/vendor/laravel/passport" />
+      <path value="$PROJECT_DIR$/service/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/service/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/service/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/service/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/service/vendor/overtrue/wechat" />
+      <path value="$PROJECT_DIR$/service/vendor/zendframework/zend-diactoros" />
+      <path value="$PROJECT_DIR$/service/vendor/overtrue/laravel-wechat" />
+      <path value="$PROJECT_DIR$/service/vendor/overtrue/socialite" />
+      <path value="$PROJECT_DIR$/service/vendor/pimple/pimple" />
+      <path value="$PROJECT_DIR$/service/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/service/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/service/vendor/beyondcode/laravel-dump-server" />
+      <path value="$PROJECT_DIR$/service/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/service/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/service/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/service/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/service/vendor/tencentcloud/tencentcloud-sdk-php" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/service/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/service/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/service/vendor/league/event" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/service/vendor/league/oauth2-server" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/service/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/service/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/service/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/service/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/service/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/service/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/service/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/service/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/service/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/service/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/service/vendor/defuse/php-encryption" />
+      <path value="$PROJECT_DIR$/service/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/service/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/service/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/service/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/service/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/service/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/service/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/service/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/service/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/service/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/service/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/service/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/service/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/service/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/service/vendor/easywechat-composer/easywechat-composer" />
+      <path value="$PROJECT_DIR$/service/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/service/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/service/vendor/guzzle/guzzle" />
+      <path value="$PROJECT_DIR$/service/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/service/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/service/vendor/composer" />
+      <path value="$PROJECT_DIR$/service/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/service/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/service/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/service/vendor/lcobucci/jwt" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="977" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="xiangtu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiangtu" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="xiangtu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiangtu" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="service" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="haveFollowed&#9;null&#9;null" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/service/public/images" />
+      <recent name="$PROJECT_DIR$/service/resources/views/layouts" />
+      <recent name="$PROJECT_DIR$/service/public/jquery" />
+      <recent name="$PROJECT_DIR$/service/resources/views/admin/videos" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85fc201c-4a86-478c-b7d1-44407a5b506e" name="Default" comment="" />
+      <created>1544440416220</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544440416220</updated>
+      <workItem from="1544440417484" duration="7770000" />
+      <workItem from="1544489724695" duration="14463000" />
+      <workItem from="1544580220978" duration="27502000" />
+      <workItem from="1544693199001" duration="655000" />
+    </task>
+    <task id="LOCAL-00001" summary="修改vod的配置文件为最终版">
+      <created>1544450563163</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1544450563163</updated>
+    </task>
+    <task id="LOCAL-00002" summary="修改vod的配置文件为最终版">
+      <created>1544450873266</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1544450873266</updated>
+    </task>
+    <task id="LOCAL-00003" summary="调整管理员页面布局">
+      <created>1544451627651</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1544451627651</updated>
+    </task>
+    <task id="LOCAL-00004" summary="调整视频上传页面的布局">
+      <created>1544451673699</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1544451673700</updated>
+    </task>
+    <task id="LOCAL-00005" summary="添加视频截图的路由">
+      <created>1544451695239</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1544451695239</updated>
+    </task>
+    <task id="LOCAL-00006" summary="添加Vod模型">
+      <created>1544451712561</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1544451712561</updated>
+    </task>
+    <task id="LOCAL-00007" summary="视频列表返回每个视频是否被当前用户关注">
+      <created>1544585915846</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1544585915846</updated>
+    </task>
+    <task id="LOCAL-00008" summary="优化逻辑">
+      <created>1544599248795</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1544599248795</updated>
+    </task>
+    <task id="LOCAL-00009" summary="优化逻辑">
+      <created>1544605184128</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1544605184128</updated>
+    </task>
+    <task id="LOCAL-00010" summary="优化逻辑">
+      <created>1544614661110</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1544614661110</updated>
+    </task>
+    <task id="LOCAL-00011" summary="优化逻辑">
+      <created>1544623515516</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1544623515516</updated>
+    </task>
+    <task id="LOCAL-00012" summary="增加二维码及消息框架">
+      <created>1544623867811</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1544623867811</updated>
+    </task>
+    <task id="LOCAL-00013" summary="更新布局">
+      <created>1544627287968</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1544627287968</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="50390000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1920" height="977" extended-state="0" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33541667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21104972" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="修改vod的配置文件为最终版" />
+    <MESSAGE value="调整管理员页面布局" />
+    <MESSAGE value="调整视频上传页面的布局" />
+    <MESSAGE value="添加视频截图的路由" />
+    <MESSAGE value="添加Vod模型" />
+    <MESSAGE value="视频列表返回每个视频是否被当前用户关注" />
+    <MESSAGE value="优化逻辑" />
+    <MESSAGE value="增加二维码及消息框架" />
+    <MESSAGE value="更新布局" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新布局" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/Api/QCloud/SignatureController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/my/videos/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="51" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/Vod.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/videos/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/Admin/VideoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="58" column="26" lean-forward="false" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/素材/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/1.html" />
+    <entry file="file://$PROJECT_DIR$/service/public/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="39" lean-forward="false" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/public/bootstrap/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98325">
+          <caret line="6555" column="11" lean-forward="false" selection-start-line="6555" selection-start-column="1" selection-end-line="6555" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/public/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16380">
+          <caret line="1092" column="1" lean-forward="false" selection-start-line="995" selection-start-column="0" selection-end-line="1092" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/layouts/app2.blade.php" />
+    <entry file="file://$PROJECT_DIR$/service/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/QueriesRelationships.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="190" column="40" lean-forward="false" selection-start-line="190" selection-start-column="30" selection-end-line="190" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/Api/My/VideoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/VideoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/Log.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/Followed.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/Api/VideoController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="29" column="36" lean-forward="true" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/WechatServerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="61" lean-forward="false" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/Api/QRCodeController.php" />
+    <entry file="file://$PROJECT_DIR$/service/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="95" column="36" lean-forward="false" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/Api/My/FollowController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding>
+            <element signature="e#131#146#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/FollowedWechat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/WeChat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="e#30#71#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/VideoWechat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="13" column="31" lean-forward="false" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Models/Video.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="e#30#48#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/Api/My/LikeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding>
+            <element signature="e#131#146#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/config/wechat.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-351">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Http/Controllers/QRCodeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/config/wechat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="60" column="2" lean-forward="false" selection-start-line="60" selection-start-column="2" selection-end-line="60" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/admin/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="27" lean-forward="true" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/app/Providers/ComposerServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding>
+            <element signature="e#33#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/admin/classifications/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="5" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/admin/classifications/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="8" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/admin/videos/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/admin/classifications/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/admin/videos/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="53" />
+          <folding>
+            <marker date="1544626716384" expanded="true" signature="9:22" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="33:48" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="59:68" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="419:432" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="473:481" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="582:597" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="668:683" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="746:782" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="788:799" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="850:869" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="899:917" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="947:973" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="1003:1029" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="1095:1111" ph="..." />
+            <marker date="1544626716384" expanded="true" signature="1201:1215" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/admin/users/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="53" lean-forward="false" selection-start-line="31" selection-start-column="53" selection-end-line="31" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/layouts/destroy-confirm.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="46" lean-forward="false" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding>
+            <marker date="1544439595333" expanded="true" signature="705:719" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/layouts/message.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1544439595331" expanded="true" signature="5:23" ph="..." />
+            <marker date="1544439595331" expanded="true" signature="97:121" ph="..." />
+            <marker date="1544439595331" expanded="true" signature="146:155" ph="..." />
+            <marker date="1544439595331" expanded="true" signature="226:242" ph="..." />
+            <marker date="1544439595331" expanded="true" signature="292:310" ph="..." />
+            <marker date="1544439595331" expanded="true" signature="338:356" ph="..." />
+            <marker date="1544439595331" expanded="true" signature="406:426" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
+          <folding>
+            <marker date="1544799474495" expanded="true" signature="240:254" ph="..." />
+            <marker date="1544799474495" expanded="true" signature="277:284" ph="..." />
+            <marker date="1544799474495" expanded="true" signature="8572:8581" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/public/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/videos/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="46" selection-end-column="11" />
+          <folding>
+            <marker date="1544799784165" expanded="true" signature="9:22" ph="..." />
+            <marker date="1544799784165" expanded="true" signature="33:46" ph="..." />
+            <marker date="1544799784165" expanded="true" signature="58:67" ph="..." />
+            <marker date="1544799784165" expanded="true" signature="109:122" ph="..." />
+            <marker date="1544799784165" expanded="true" signature="273:317" ph="..." />
+            <marker date="1544799784165" expanded="true" signature="468:497" ph="..." />
+            <marker date="1544799784165" expanded="true" signature="653:664" ph="..." />
+            <marker date="1544799784165" expanded="true" signature="967:983" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/my/videos/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+          <folding>
+            <marker date="1544694105310" expanded="true" signature="9:22" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="33:48" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="60:69" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="111:124" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="275:319" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="470:499" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="655:666" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="969:985" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="1149:1167" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="1240:1267" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="1319:1327" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="1487:1506" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="1588:1607" ph="..." />
+            <marker date="1544694105310" expanded="true" signature="1690:1707" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/my/videos/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="280" column="19" lean-forward="false" selection-start-line="280" selection-start-column="19" selection-end-line="280" selection-end-column="19" />
+          <folding>
+            <marker date="1544798788424" expanded="true" signature="9:22" ph="..." />
+            <marker date="1544798788424" expanded="true" signature="59:68" ph="..." />
+            <marker date="1544798788424" expanded="true" signature="4105:4109" ph="..." />
+            <marker date="1544798788424" expanded="true" signature="4682:4714" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/client/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1544439595341" expanded="true" signature="106:120" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/my/liked/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+          <folding>
+            <marker date="1544694194730" expanded="true" signature="9:22" ph="..." />
+            <marker date="1544694194730" expanded="true" signature="33:43" ph="..." />
+            <marker date="1544694194730" expanded="true" signature="33:50" ph="..." />
+            <marker date="1544694194730" expanded="true" signature="62:71" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/resources/views/my/followed/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="e#1095#1114#0#HTML" expanded="true" />
+            <marker date="1544694141297" expanded="true" signature="9:22" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="33:43" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="33:49" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="60:69" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="84:97" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="171:183" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="209:223" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="287:317" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="378:386" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="465:489" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="617:638" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="978:1009" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="1224:1237" ph="..." />
+            <marker date="1544694141297" expanded="true" signature="1335:1352" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
