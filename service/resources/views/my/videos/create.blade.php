@@ -33,15 +33,16 @@
         </div>
         <div class="form-group {{ $errors->has('classification_id') ? 'has-error' : ''}}">
             {!! Form::label('classification_id', '分类', ['class' => 'col-md-2 control-label text-right']) !!}
-            <div class="col-md-10"><div class="radio">
-                @foreach($navigation as $item)
+            <div class="col-md-10">
+                <div class="radio">
+                    @foreach($navigation as $item)
 
                         <label>
                             {!! Form::radio('classification_id', $item->id); !!}
                             {{$item->name}}
                         </label>
 
-                @endforeach </div>
+                    @endforeach </div>
                 {!! $errors->first('classification_id', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
@@ -254,8 +255,6 @@
                                     });
                                 }
                                 else {
-
-
                                     if (res.msg) {
                                         bootbox.alert({
                                             title: "乡土味",

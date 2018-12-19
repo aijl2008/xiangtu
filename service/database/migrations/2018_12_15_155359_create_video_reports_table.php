@@ -15,6 +15,7 @@ class CreateVideoReportsTable extends Migration
     {
         Schema::create('video_reports', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('wechat_id');
             $table->integer('video_id');
             $table->integer('played_number');
             $table->date('date');

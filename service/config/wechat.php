@@ -1,5 +1,6 @@
 <?php
 return [
+    'original_id' => 'gh_9d18385254ef',
     /**
      * 腾讯云
      */

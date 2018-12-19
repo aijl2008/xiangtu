@@ -33,6 +33,9 @@ class MiniProgramController extends Controller
         try {
 
             if ($request->id) {
+                /**
+                 * 测试代码
+                 */
                 return Helper::success(
                     [
                         'token' => (Wechat::query()->findOrFail($request->id))->createToken($request->userAgent())
@@ -60,9 +63,14 @@ class MiniProgramController extends Controller
             }
             Log::debug('openid:' . $response->openid);
             Log::debug('session_key:' . $response->session_key);
-
+            /**
+             * 查询open_id是否注册过
+             */
             $user = Wechat::query()->where('open_id', config('wechat.mini_program.default.app_id') . '|' . $response->openid)->first();
             if (!$user) {
+                /**
+                 * 新用户
+                 */
                 $user = new Wechat();
                 $user->open_id = config('wechat.mini_program.default.app_id') . '|' . $response->openid;
                 /**
@@ -99,10 +107,13 @@ class MiniProgramController extends Controller
                     [
                         'action' => '注册',
                         'from_user_id' => $user->id,
-                        'message' => $decoded?var_export($decoded, true):''
+                        'message' => $decoded ? var_export($decoded, true) : ''
                     ]
                 );
             } else {
+                /**
+                 * 旧用户
+                 */
                 \App\Models\Log::query()->create(
                     [
                         'action' => '登录',

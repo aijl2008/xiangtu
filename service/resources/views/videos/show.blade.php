@@ -5,18 +5,20 @@
         <div class="col-md-8 videos">
             <h3 class="vid-name">{{$row->title}}</h3>
             <hr/>
-            <video id="video_container" width="100%" height="20%"></video>
+            <video id="player-container-id" width="640" height="360" preload="auto" playsinline
+                   webkit-playsinline>
+            </video>
             <div class="row">
-                <div class="col-md-6">
-                    <h5>
-                        <img src="{{$row->wechat->avatar}}" class="img-circle">
-                        <a
-                                href="javascript:void(0);"
-                                class="follow followed_number btn-sm btn-warning"
-                                data-url="{{route('my.followed.store')}}"
-                                data-wechat-id="{{$row->wechat->id}}">关注 </a></h5>
+                <div class="col-md-3 lg-info">
+                    <img src="/images/user.png" data-original="{{$row->wechat->avatar}}"
+                         class="img-responsive avatar-for-show lazyload img-circle">
+                    <a
+                            href="javascript:void(0);"
+                            class="follow followed_number btn-sm btn-warning"
+                            data-url="{{route('my.followed.store')}}"
+                            data-wechat-id="{{$row->wechat->id}}">关注 </a>
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-9 text-right">
                     <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->updated_at}} </div>
                     <a href="javascript:void(0)"
                        data-url="{{route("my.liked.store")}}"
@@ -30,15 +32,15 @@
             </div>
 
             <br>
-            <h3>相关视频</h3>
+            <div class="tip"><img src="/images/wifi-signal.png"><span>相关视频</span></div>
             <div class="row">
                 @foreach($related as $row)
-                    <div class="col-md-3">
-                        <a href="{{route('videos.show', $row->id)}}">
-                            <img class="img-responsive lazyload"
-                                 data-original="{{$row->cover_url}}"
-                                 src="/images/loading/ifeng.jpg"
-                            />
+                    <div class="col-md-3 related">
+                        <a href="{{route('videos.show', $row->id)}}" class="cover">
+                            <img
+                                    class="thumbnail img-responsive img-rounde lazyload cover"
+                                    src="/images/film.png"
+                                    data-original="{{$row->cover_url?:''}}">
                         </a>
                         <p> {{$row->title}} </p>
                     </div>
@@ -48,29 +50,10 @@
     </div>
 @endsection
 @section("js")
-    <script src="//qzonestyle.gtimg.cn/open/qcloud/video/h5/h5connect.js" charset="utf-8"></script>
+    <link href="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            var listener = {
-                playStatus: function (status) {
-                    if (status == 'playing') {
-                        $.ajax(
-                            {
-                                url: "{{route('videos.play', $row->id)}}",
-                                type: "post",
-                                dataType: "json",
-                                success: function (res) {
-                                    console.log(res);
-                                },
-                                error: function (res, err, msg) {
-                                    console.log(res, err, msg);
-                                }
-                            }
-                        );
-                    }
-                    console.log(status);
-                }
-            };
             var option = {
                 "cover": "{{$row->cover_url}}",
                 "file_id": "{{$row->file_id}}",
@@ -84,12 +67,35 @@
                             }
                     }
             };
-            var player = new qcVideo.Player(
-                "video_container",
-                option,
-                listener
+            // option = {
+            //     fileID: '7447398157015849771', // 请传入需要播放的视频filID 必须
+            //     appID: '1256993030' // 请传入点播账号的appID 必须
+            // };
+            var player = new TCPlayer(
+                "player-container-id",
+                option
             );
-            player.resize(300, 200);
+            player.on("play", function () {
+                $.ajax(
+                    {
+                        url: "{{route('videos.play', $row->id)}}",
+                        type: "post",
+                        dataType: "json",
+                        success: function (res) {
+                            console.log(res);
+                        },
+                        error: function (res, err, msg) {
+                            console.log(res, err, msg);
+                        }
+                    }
+                );
+            });
+            player.on("ready", function () {
+                // var width =  $('.videos').width();
+                // var height = width *2 /3;
+                // player.width(width);
+                // player.height(height);
+            });
         });
     </script>
 @endsection

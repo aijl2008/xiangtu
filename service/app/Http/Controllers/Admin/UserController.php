@@ -9,6 +9,9 @@ class UserController extends Controller
 {
     function index()
     {
-        return view('admin.users.index')->with('rows', Wechat::query()->paginate());
+        return view('admin.users.index')
+            ->with('rows', Wechat::query()
+                ->orderBy('id', 'desc')
+                ->simplePaginate());
     }
 }

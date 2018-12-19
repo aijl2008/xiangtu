@@ -57,13 +57,13 @@
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: {!! $play_date !!}
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: {!! $play_value !!},
                     type: 'line',
                     areaStyle: {}
                 }]
@@ -76,18 +76,18 @@
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: {!! $follower_date !!}
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: {!! $follower_value !!},
                     type: 'line',
                     areaStyle: {}
                 }]
             };
-            char2.setOption(option1);
+            char2.setOption(option2);
 
             var char3 = echarts.init(document.getElementById('chart3'));
 
@@ -95,18 +95,18 @@
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: {!! $upload_date !!}
                 },
                 yAxis: {
                     type: 'value'
                 },
                 series: [{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: {!! $upload_value !!},
                     type: 'line',
                     areaStyle: {}
                 }]
             };
-            char3.setOption(option1);
+            char3.setOption(option3);
         });
     </script>
 @endsection

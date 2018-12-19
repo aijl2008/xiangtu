@@ -42,7 +42,7 @@ class VideoController extends Controller
             )
             ->with('wechat')
             ->orderBy('id', 'desc')
-            ->paginate(16));
+            ->simplePaginate(15));
         $view->with('classification', $request->input('classification', 0));
         return $view;
     }

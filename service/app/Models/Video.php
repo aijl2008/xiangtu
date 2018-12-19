@@ -29,7 +29,8 @@ class Video extends Model
     ];
 
     protected $appends = [
-        'published_at'
+        'published_at',
+        'humans_published_at'
     ];
 
     function getStatusOption()
@@ -59,6 +60,11 @@ class Video extends Model
     {
         //return $this->hasMany(VideoWechat::class, 'video_id', 'id');
         return $this->hasManyThrough(FollowedWechat::class, VideoWechat::class, 'wechat_id', 'wechat_id', 'wechat_id');
+    }
+
+    function getHumansPublishedAtAttribute()
+    {
+        return $this->attributes['humans_published_at'] = Carbon::parse($this->attributes['updated_at'])->diffForHumans();;
     }
 
     function getPublishedAtAttribute()

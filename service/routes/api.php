@@ -96,7 +96,7 @@ Route::group(
         /**
          * 统计
          */
-        Route::Get('statistics', 'My\StatisticsController')->name('users.statistics.show');
+        Route::Get('my/statistics', 'My\StatisticsController')->name('users.statistics.show');
 
     }
 );

@@ -18,7 +18,9 @@ class Log extends Model
         'from_user_id',
         'to_user_id',
         'video_id',
-        'message'
+        'message',
+        'created_at',
+        'updated_at'
     ];
 
     function footprint($id)

@@ -21,7 +21,11 @@ class MessageController extends Controller
     public function index()
     {
         return view('admin.messages.index')
-            ->with('rows', Message::query()->paginate());
+            ->with('rows',
+                Message::query()
+                    ->where('to_user_name', config('wechat.original_id'))
+                    ->paginate()
+            );
     }
 
     /**
@@ -67,33 +71,24 @@ class MessageController extends Controller
      * @param MessageRequest $request
      * @param Message $message
      * @return array
+     * @throws \EasyWeChat\Kernel\Exceptions\BadRequestException
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
+     * @throws \ReflectionException
      */
     public function update(MessageRequest $request, Message $message)
     {
         $config = config('wechat.mini_program.default');
         $to = str_replace($config['app_id'] . '|', '', $message->from_user_name);
         $app = Factory::miniProgram($config);
-        $app->server->push(function ($message) use ($app, $request, $to) {
-
-//                Message::query()->create(
-//                    [
-//                        'to_user_name' => $message["ToUserName"],
-//                        'from_user_name' => $message["FromUserName"],
-//                        'create_time' => $message["CreateTime"],
-//                        'msg_type' => $message["MsgType"],
-//                        'content' => $message["Content"] ?? '',
-//                        'pic_url' => $message["PicUrl"] ?? '',
-//                        'media_id' => $message["MediaId"] ?? '',
-//                        'title' => $message["Title"] ?? '',
-//                        'app_id' => $message["AppId"] ?? '',
-//                        'page_path' => $message["PagePath"] ?? '',
-//                        'thumb_url' => $message["ThumbUrl"] ?? '',
-//                        'thumb_media_id' => $message["ThumbMediaId"] ?? '',
-//                        'event' => $message["Event"] ?? '',
-//                        'session_from' => $message["SessionFrom"] ?? ''
-//                    ]
-//                );
-            $app->customer_service->message(new Text($request->input('message')))->to($to)->send();
+        $content = $request->input('content');
+        $app->server->push(function () use ($app, $content, $to, $message) {
+            $message->reply()->create(
+                [
+                    'content' => $content
+                ]
+            );
+            $app->customer_service->message(new Text($content))->to($to)->send();
         });
         $app->server->serve();
         return Helper::success("", "已回复" . $to);

@@ -168,6 +168,21 @@ class Demo extends Command
             }
         }
 
+        $this->comment('填充播放');
+        for ($i = 0; $i < 1000; $i++) {
+            Log::query()->create(
+                [
+                    'action' => '播放',
+                    'from_user_id' => mt_rand(0, 100),
+                    'to_user_id' => 0,
+                    'video_id' => mt_rand(0, 100),
+                    'message' => 'XX播放了一个视频',
+                    'created_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time())),
+                    'updated_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time()))
+                ]
+            );
+        }
+
         foreach (Wechat::query()->get() as $wechat) {
             $this->comment('添加收藏');
             $many = $many = Wechat::query()->inRandomOrder()->take(mt_rand(5, 10))->get();
@@ -177,11 +192,14 @@ class Demo extends Command
                     'followed_id' => $wechat->id
                 ]));
                 Log::query()->create(
-                    ['action' => '关注',
+                    [
+                        'action' => '关注',
                         'from_user_id' => $wechat->id,
                         'to_user_id' => $item->id,
                         'video_id' => 0,
-                        'message' => $wechat->nickname . '关注了' . $item->nickname
+                        'message' => $wechat->nickname . '关注了' . $item->nickname,
+                        'created_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time())),
+                        'updated_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time())),
                     ]
                 );
             }
@@ -194,10 +212,14 @@ class Demo extends Command
                         'from_user_id' => $wechat->id,
                         'to_user_id' => 0,
                         'video_id' => $item->id,
-                        'message' => $wechat->nickname . '收藏了一个视频'
+                        'message' => $wechat->nickname . '收藏了一个视频',
+                        'created_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time())),
+                        'updated_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time()))
                     ]
                 );
             }
+
+
             $this->comment('Ok');
         }
 

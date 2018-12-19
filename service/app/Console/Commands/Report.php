@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\FollowerReport;
 use App\Models\Log;
+use App\Models\Video;
 use App\Models\VideoReport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,8 @@ class Report extends Command
             $this->comment('[' . __LINE__ . ']processing ' . $item->video_id);
             $ReportVideo = new VideoReport();
             $ReportVideo->date = $date;
+            $video = Video::query()->find($item->video_id);
+            $ReportVideo->wechat_id = $video->wechat->id ?? 0;
             $ReportVideo->video_id = $item->video_id;
             $ReportVideo->played_number = $item->aggregate;
             $ReportVideo->save();

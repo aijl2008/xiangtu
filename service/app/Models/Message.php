@@ -32,4 +32,10 @@ class Message extends Model
     {
         return $this->belongsTo(Wechat::class, 'from_user_name', 'open_id');
     }
+
+    function reply()
+    {
+        return $this->hasOne(Reply::class);
+    }
+
 }

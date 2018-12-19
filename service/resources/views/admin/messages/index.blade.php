@@ -1,28 +1,15 @@
 @extends('layouts.app')
-@section('title', '视频分类管理')
+@section('title', '消息管理')
 @section('content')
-    <h3>视频分类管理</h3>
+    <h3>消息管理</h3>
     <hr>
     @include('layouts/message')
     <table class="table table-borderless">
         <thead>
         <tr>
-            <th>操作</th>
-            <th class="text-nowrap">编号</th>
-            <th class="text-nowrap">收信人</th>
-            <th class="text-nowrap">发信人</th>
-            <th class="text-nowrap">时间</th>
-            <th class="text-nowrap">类型</th>
-
-            <th class="text-nowrap">content</th>
-            <th class="text-nowrap">pic_url</th>
-            <th class="text-nowrap">media_id</th>
-            <th class="text-nowrap">title</th>
-            <th class="text-nowrap">app_id</th>
-            <th class="text-nowrap">page_path</th>
-            <th class="text-nowrap">thumb_url</th>
-            <th class="text-nowrap">thumb_media_id</th>
-            <th class="text-nowrap">session_from</th>
+            <th class="text-nowrap">消息时间</th>
+            <th class="text-nowrap">微信用户</th>
+            <th class="text-nowrap">消息</th>
             <th class="text-nowrap">记录时间</th>
             <th class="text-nowrap">更新时间</th>
         </tr>
@@ -30,26 +17,27 @@
         <tbody>
         @foreach($rows as $row)
             <tr>
-                <td class="text-nowrap">{{ $row->id }}</td>
-                <td class="text-nowrap">{{ $row->to_user_name }}</td>
-                <td class="text-nowrap">{{ $row->fromWechat->nickname??$row->from_user_name }}</td>
                 <td class="text-nowrap">{{ $row->create_time }}</td>
-                <td class="text-nowrap">{{ $row->msg_type }}</td>
+                <td class="text-nowrap">{{ str_limit($row->fromWechat->nickname??$row->from_user_name,24) }}</td>
                 <td class="text-nowrap">
                     @if ($row->msg_type =="text")
-                        <a data-url="{!! route('admin.messages.update', $row->id) !!}"
-                           class="reply">{{ $row->content }}</a>
+                        <div>{{ $row->content }}</div>
+                        <div>
+                            <small>
+                                @if ($row->reply && $row->reply->content)
+                                    回复:{{$row->reply->content}}
+                                @else
+                                    <a data-url="{!! route('admin.messages.update', $row->id) !!}"
+                                       class="reply">点此回复</a>
+                                @endif
+                            </small>
+                        </div>
+                    @elseif($row->msg_type =="image")
+                        <img src="{{ $row->pic_url }}" class="img-responsive">
+                    @else
+                        {{$row->msg_type}}
                     @endif
-
                 </td>
-                <td class="text-nowrap">{{ $row->pic_url }}</td>
-                <td class="text-nowrap">{{ $row->media_id }}</td>
-                <td class="text-nowrap">{{ $row->title }}</td>
-                <td class="text-nowrap">{{ $row->app_id }}</td>
-                <td class="text-nowrap">{{ $row->page_path }}</td>
-                <td class="text-nowrap">{{ $row->thumb_url }}</td>
-                <td class="text-nowrap">{{ $row->thumb_media_id }}</td>
-                <td class="text-nowrap">{{ $row->session_from }}</td>
                 <td class="text-nowrap">{{ $row->created_at }}</td>
                 <td class="text-nowrap">{{ $row->updated_at }}</td>
             </tr>
@@ -99,7 +87,7 @@
                         url: targetUrl,
                         type: "PUT",
                         data: {
-                            message: $('#message').val()
+                            content: $('#message').val()
                         },
                         dataType: "json",
                         success: function (res) {
