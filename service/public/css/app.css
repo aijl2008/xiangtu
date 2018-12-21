@@ -1,24 +1,150 @@
-html, body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
+.avatar-small {
+    width: 32px;
+    height: 32px;
 }
 
-.header {
-    height: 80px;
-    background-color: #fff;
-    border: 1px solid;
+.avatar-middle {
+    width: 48px;
+    height: 48px;
 }
 
-.body {
-    min-height: 100px;
-    border: 1px solid;
+.avatar-large {
+    width: 160px;
+    height: 160px;
+}
+
+.cover {
+    width: 1024px;
+}
+
+.title {
+    background-color: #efefef;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 36px;
+    line-height: 36px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.nickname {
+    display: block;
+    background-color: #efefef;
+    line-height: 22px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.video-info-container {
+    display: block;
+    float: right
+}
+
+.my-videos {
+    display: block;
+    margin-bottom: 50px;
+}
+
+.my-videos .updated_at {
+    display: inline-block;
+    float: right
+}
+
+.my-videos .liked_number {
+    display: inline-block;
+    float: left;
+}
+
+.my-videos .played_number {
+    display: inline-block;
+    float: left;
+}
+
+.avatar-container {
+    display: block;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.avatar-container * {
+    vertical-align: bottom;
+}
+
+.avatar-container a {
+    display: inline-block;
+}
+
+.played_number {
+    color: #cc0000;
+}
+
+.liked_number {
+    color: #cc0000;
+}
+
+.created_at {
+
+}
+
+.user-nav {
+    margin-top: 10px;
+}
+
+.user-nav * {
+    vertical-align: middle;
+}
+
+.user-nav i {
+    color: #cc0000;
+    font-size: 28px;
+    line-height: 28px;
+    margin-right: 10px;
+}
+
+.red {
+    color: #cc0000;
+}
+
+.tip {
+    color: #cc0000;
+}
+
+#top {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.label-default {
+    background-color: #cc0000;
+}
+
+.label-default[href]:hover,
+.label-default[href]:focus {
+    background-color: #5e5e5e;
+}
+
+.my-followed {
+    text-align: center;
+}
+
+.my-followed img {
+    margin-bottom: 5px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.my-followed a {
+    display: inline-block;
+    vertical-align: bottom;
 }
 
 .footer {
     height: 80px;
     color: #666666;
-    background: #EAEAEA;
+    background: #b5b5b5;
 }
 
 .footer .copyright {
@@ -31,18 +157,15 @@ html, body {
     margin: 20px;
 }
 
-.videos .row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -30px;
+#upload-video {
+    margin-bottom: 300px;
 }
 
-.videos .row > [class*='col-'] {
-    display: flex;
-    flex-direction: column;
+.body {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 100px;
+    box-sizing: border-box;
 }
 
 .footer_con {
@@ -55,226 +178,100 @@ html, body {
     margin: 0 auto;
 }
 
-.title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.recommend {
+    padding: 50px;
 }
 
-.container_box {
-    position: relative;
-    min-height: 100%;
-    padding-bottom: 100px;
-    box-sizing: border-box;
+
+
+#player-container-id {
+    width: 480px;
+    height: 360px;
+    margin-bottom: 20px;
 }
 
 /**
  * iphone 5/SE
  */
 @media screen and (min-width: 320px) {
-    .container_box .footer_con {
-        width: 100%;
-    }
-
-    .container_box {
-        overflow-x: hidden;
-    }
-
-    .videos > div > a {
-        display: inline-block;
-        width: 340px;
-        /*height: 340px;*/
-        text-align: center;
-        /*line-height: 340px;*/
-    }
-
-    .videos > div > .cover > img {
-        display: inline-block;
-        width: 340px;
-        /*height: 340px;*/
-        text-align: center;
-        /*line-height: 340px;*/
-    }
-
-    .title {
-        line-height: 40px;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    .videos > div {
-        margin-bottom: 30px;
-    }
-
-    .info .text-right {
-        width: 72.6%;
-    }
-
-    .player-container-id-dimensions {
-        width: 345px;
-        height: 190px;
-        margin-bottom: 20px;
-    }
-
-    .related {
-        margin: 0 auto;
-    }
-
     .recommend {
         display: none;
+    }
+
+    #player-container-id {
+        width: 290px;
+        height: 195px;
+    }
+}
+
+/**
+ * iphone 6/8/8
+ */
+@media screen and (min-width: 375px) {
+    .recommend {
+        display: none;
+    }
+
+    #player-container-id {
+        width: 343px;
+        height: 232px;
+    }
+}
+
+/**
+ * iphone 6/8/8p
+ */
+@media screen and (min-width: 414px) {
+    .recommend {
+        display: none;
+    }
+    #player-container-id {
+        width: 384px;
+        height: 258px;
     }
 }
 
 @media screen and (min-width: 768px) {
-    .container_box .footer_con {
-        width: 750px;
-    }
-
-    .videos > div > a {
-        display: inline-block;
-        width: 360px;
-        /*height: 360px;*/
-        text-align: center;
-        /*line-height: 360px;*/
-    }
-
-    .videos > div > .cover > img {
-        display: inline-block;
-        width: 360px;
-        /*height: 360px;*/
-        text-align: center;
-        /*line-height: 360px;*/
-    }
-
-    .player-container-id-dimensions {
-        width: 640px;
-        height: 360px;
-        margin-bottom: 20px;
-    }
-
     .recommend {
-        display: none;
+        display: block;
     }
+
+    .cover img {
+        min-height: 240px;
+    }
+
+    /*#player-container-id {*/
+        /*width: 720px;*/
+        /*height: 480px;*/
+    /*}*/
 }
 
 @media (min-width: 992px) {
-    .container_box .footer_con {
-        width: 970px;
+    .dl-horizontal dt {
+        float: left;
+        width: 80px;
+        overflow: hidden;
+        clear: left;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
-    .videos > div {
-        margin-bottom: 24px;
-    }
-
-    .videos > div > a {
-        display: inline-block;
-        width: 300px;
-        /*height: 300px;*/
-        text-align: center;
-        /*line-height: 300px;*/
-    }
-
-    .videos > div > .cover > img {
-        display: inline-block;
-        width: 360px;
-        /*height: 360px;*/
-        text-align: center;
-        /*line-height: 360px;*/
-    }
-
-    .player-container-id-dimensions {
-        width: 640px;
-        height: 360px;
-        margin-bottom: 20px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .container_box .footer_con {
-        width: 1170px;
-    }
-
-    .videos > div > a {
-        display: inline-block;
-        width: 360px;
-        /*height: 360px;*/
-        text-align: center;
-        /*line-height: 360px;*/
-    }
-
-    .videos > div > .cover > img {
-        display: inline-block;
-        width: 360px;
-        /*height: 360px;*/
-        text-align: center;
-        /*line-height: 360px;*/
-    }
-
-    .player-container-id-dimensions {
-        width: 764px;
-        height: 400px;
-        margin-bottom: 20px;
+    .dl-horizontal dd {
+        margin-left: 85px;
     }
 
     .recommend {
         display: block;
-        margin-top: 50px;
-        text-align: center;
     }
-}
 
-.avatar-for-show {
+    .cover img {
+        min-height: 272px;
+    }
 
-}
-
-#top {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-#top .avatar {
-    width: 32px;
-    margin: 5px;
-}
-
-.recommend img {
-    width: 96px;
-    height: 96px;
-}
-
-.tip {
-    margin: 10px 0;
-}
-
-.tip img {
-    width: 24px;
-    height: 24px;
-}
-
-.tip strong {
-}
-
-.avatar img {
-    width: 48px;
-    height: 48px;
-}
-
-.info {
-    display: inline;
-}
-
-.info img {
-    margin: 0 auto;
-}
-
-.my-followed p {
-    margin-top: 10px;
-}
-
-.navbar-user {
-    font-size: 24px;
-}
-
-.title{
-    background-color: #efefef;
+    #player-container-id {
+        width: 720px;
+        height: 480px;
+        margin-bottom: 20px;
+    }
 }

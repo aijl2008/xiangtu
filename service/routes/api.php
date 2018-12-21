@@ -89,7 +89,7 @@ Route::group(
                  * 个人资料显示与修改
                  */
                 Route::get('profile', 'ProfileController@index')->name('profile.show');
-                Route::patch('profile', 'ProfileController@update')->name('profile.update');
+                Route::post('profile', 'ProfileController@update')->name('profile.update');
             }
         );
 

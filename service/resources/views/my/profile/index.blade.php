@@ -48,6 +48,9 @@
             <input type="email" name="email" value="awz@awz.cn">
             <input type="file" name="upload_avatar" id="upload_avatar">
         </form>
+        <div class="clearfix"></div>
+        <br />
+        <br />
         @endsection
         @section('js')
             <script>

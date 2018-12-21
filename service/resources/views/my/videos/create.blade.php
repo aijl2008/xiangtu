@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title', '上传视频')
 @section('content')
-    <h3><i class="glyphicon glyphicon-hand-right"></i> 上传视频</h3>
+    <h3 class="red"><i class="glyphicon glyphicon-hand-right"></i> 上传视频</h3>
     <hr/>
-    <form id="form">
+    <form id="upload-video">
         <div class="form-group">
             <label class="col-md-2 control-label text-right">选择视频</label>
             <div class="col-md-10">
@@ -11,7 +11,7 @@
                 <input type="hidden" value="" name="file_id" id="file_id">
                 <p class="form-control-static" id="queue_videos"><a id="addVideo"
                                                                     href="javascript:void(0);"
-                                                                    class="btn btn-sm btn-info">添加视频</a></p>
+                                                                    class="btn btn-sm btn-default">添加视频</a></p>
             </div>
         </div>
         <div class="form-group">
@@ -21,7 +21,7 @@
                        readonly="readonly">
                 <p class="form-control-static" id="queue_video_covers"><a id="addCover"
                                                                           href="javascript:void(0);"
-                                                                          class="btn btn-sm btn-info">添加封面</a>
+                                                                          class="btn btn-sm btn-default">添加封面</a>
                 </p>
             </div>
         </div>
@@ -75,10 +75,16 @@
             </div>
         </div>
     </form>
+    <br />
+    <br />
+    <br />
     <div style="display: none">
         <input type="file" id="addVideo-file">
         <input type="file" id="addCover-file">
     </div>
+    <div class="clearfix"></div>
+    <div style="width: 80px"></div>
+    <div class="clearfix"></div>
     <div class="modal fade" id="loadingModal">
         <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
             <div class="progress progress-striped active" style="margin-bottom: 0;">

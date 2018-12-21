@@ -7,11 +7,10 @@
         @foreach($rows as $row)
             <div class="col-md-3">
                 <a href="{{route('admin.videos.show', $row->id)}}">
-                    @if ($row->cover_url)
-                        <img class="img-responsive thumbnail" src="{{$row->cover_url}}">
-                    @else
-                        <img class="img-responsive thumbnail" src="/images/default.jpeg">
-                    @endif
+                    <img
+                            class="thumbnail img-responsive lazyload cover"
+                            src="/images/loading/video.png"
+                            data-original="{{$row->cover_url?:''}}">
                 </a>
                 <div class="text-nowrap title">{{$row->title}}</div>
                 <dl class="dl-horizontal">

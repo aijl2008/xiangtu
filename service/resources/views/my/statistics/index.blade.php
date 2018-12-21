@@ -4,44 +4,37 @@
     <h3><i class="glyphicon glyphicon-hand-right"></i> 数据统计</h3>
     <hr>
     <div class="row">
-        <div class="col-md-3">
-            <div class="list-group">
-                <a href="#chat1" class="list-group-item active">总体概览</a>
-                <a href="#chat2" class="list-group-item">播放数详情</a>
-                <a href="#chat3" class="list-group-item">粉丝数详情</a>
+        <div class="col-md-3 col-sm-4 col-md-4">
+            <div class="jumbotron" style="background: rgb(8, 183, 6);">
+                <h4>视频今日播放数</h4>
+                <p>1092</p>
             </div>
         </div>
-
-        <div class="col-md-9">
-            <div class="col-md-4">
-                <div class="jumbotron" style="background: rgb(8, 183, 6);">
-                    <h4>视频今日播放数</h4>
-                    <p>1092</p>
-                </div>
+        <div class="col-md-3 col-sm-4 col-md-4">
+            <div class="jumbotron" style="background: rgb(255, 168, 47);">
+                <h4>今日新增粉丝数</h4>
+                <p>2903</p>
             </div>
-            <div class="col-md-4">
-                <div class="jumbotron" style="background: rgb(255, 168, 47);">
-                    <h4>今日新增粉丝数</h4>
-                    <p>2903</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="jumbotron" style="background: rgb(74, 144, 226);">
-                    <h4>视频累计播放数</h4>
-                    <p>10323r45</p>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <h3>近7天视频播放数</h3>
-            <hr/>
-            <div id="chart1" style="width: 640px; height: 480px"></div>
-            <h3>近7天净增粉丝数</h3>
-            <hr/>
-            <div id="chart2" style="width: 640px; height: 480px"></div>
-            <h3>近7天上传视频数</h3>
-            <hr/>
-            <div id="chart3" style="width: 640px; height: 480px"></div>
         </div>
+        <div class="col-md-3 col-sm-4 col-md-4">
+            <div class="jumbotron" style="background: rgb(74, 144, 226);">
+                <h4>视频累计播放数</h4>
+                <p>10323r45</p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <h3>近7天视频播放数</h3>
+        <hr/>
+        <div class="col-md-12" id="chart1" style="width: 640px; height: 480px"></div>
+        <div class="clearfix"></div>
+        <h3>近7天净增粉丝数</h3>
+        <hr/>
+        <div class="col-md-12" id="chart2" style="width: 640px; height: 480px"></div>
+        <div class="clearfix"></div>
+        <h3>近7天上传视频数</h3>
+        <hr/>
+        <div class="col-md-12" id="chart3" style="width: 640px; height: 480px"></div>
+        <div class="clearfix"></div>
     </div>
 @endsection
 @section("js")
