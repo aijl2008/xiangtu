@@ -67,6 +67,32 @@ class Video extends Model
         return $this->attributes['humans_published_at'] = Carbon::parse($this->attributes['updated_at'])->diffForHumans();;
     }
 
+    function getLikedNumberAttribute()
+    {
+        if ($this->attributes['liked_number'] < 10) {
+            return '  ' . $this->attributes['liked_number'];
+        }
+        if ($this->attributes['liked_number'] < 100) {
+            return ' ' . $this->attributes['liked_number'];
+        }
+        if ($this->attributes['liked_number'] > 999) {
+            return '999+';
+        }
+    }
+
+    function getPlayedNumberAttribute()
+    {
+        if ($this->attributes['played_number'] < 10) {
+            return '  ' . $this->attributes['played_number'];
+        }
+        if ($this->attributes['played_number'] < 100) {
+            return ' ' . $this->attributes['played_number'];
+        }
+        if ($this->attributes['played_number'] > 999) {
+            return '999+';
+        }
+    }
+
     function getPublishedAtAttribute()
     {
         $diff = Carbon::parse($this->attributes['updated_at'])->diffInDays(Carbon::now());

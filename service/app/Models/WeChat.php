@@ -64,6 +64,32 @@ class Wechat extends Authenticatable
         );
     }
 
+    function getFollowedNumberAttribute()
+    {
+        if ($this->attributes['followed_number'] < 10) {
+            return '  ' . $this->attributes['followed_number'];
+        }
+        if ($this->attributes['followed_number'] < 100) {
+            return ' ' . $this->attributes['followed_number'];
+        }
+        if ($this->attributes['followed_number'] > 999) {
+            return '999+';
+        }
+    }
+
+    function getBeFollowedNumberAttribute()
+    {
+        if ($this->attributes['be_followed_number'] < 10) {
+            return '  ' . $this->attributes['be_followed_number'];
+        }
+        if ($this->attributes['be_followed_number'] < 100) {
+            return ' ' . $this->attributes['be_followed_number'];
+        }
+        if ($this->attributes['be_followed_number'] > 999) {
+            return '999+';
+        }
+    }
+
     /**
      * 关注我的
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

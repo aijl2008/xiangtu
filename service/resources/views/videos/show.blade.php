@@ -2,15 +2,16 @@
 @section('title', str_limit($row->title))
 @section('content')
     <div class="row">
-        <div class="col-md-8 videos">
+        <div class="col-md-8 video">
             <h3 class="vid-name">{{$row->title}}</h3>
             <hr/>
-            <video id="player-container-id" width="640" height="360" preload="auto" playsinline
+            <video class="img-responsive" id="player-container-id" width="800" height="480" preload="auto" playsinline
                    webkit-playsinline>
             </video>
             <div class="row">
-                <div class="col-md-3 lg-info">
-                    <img src="/images/user.png" data-original="{{$row->wechat->avatar}}"
+                <div class="col-md-3 avatar">
+                    <img src="/images/user-48.png"
+                         data-original="{{$row->wechat->avatar}}"
                          class="img-responsive avatar-for-show lazyload img-circle">
                     <a
                             href="javascript:void(0);"
@@ -32,14 +33,14 @@
             </div>
 
             <br>
-            <div class="tip"><img src="/images/wifi-signal.png"><span>相关视频</span></div>
+            <div class="tip"><img src="/images/wifi-signal-24.png"> <strong>相关视频</strong></div>
             <div class="row">
                 @foreach($related as $row)
                     <div class="col-md-3 related">
                         <a href="{{route('videos.show', $row->id)}}" class="cover">
                             <img
                                     class="thumbnail img-responsive img-rounde lazyload cover"
-                                    src="/images/film.png"
+                                    src="/images/loading.png"
                                     data-original="{{$row->cover_url?:''}}">
                         </a>
                         <p> {{$row->title}} </p>

@@ -68,10 +68,9 @@ html, body {
     box-sizing: border-box;
 }
 
-.info img {
-    margin: 0 auto;
-}
-
+/**
+ * iphone 5/SE
+ */
 @media screen and (min-width: 320px) {
     .container_box .footer_con {
         width: 100%;
@@ -84,17 +83,17 @@ html, body {
     .videos > div > a {
         display: inline-block;
         width: 340px;
-        height: 340px;
+        /*height: 340px;*/
         text-align: center;
-        line-height: 340px;
+        /*line-height: 340px;*/
     }
 
     .videos > div > .cover > img {
         display: inline-block;
         width: 340px;
-        height: 340px;
+        /*height: 340px;*/
         text-align: center;
-        line-height: 340px;
+        /*line-height: 340px;*/
     }
 
     .title {
@@ -114,10 +113,15 @@ html, body {
     .player-container-id-dimensions {
         width: 345px;
         height: 190px;
+        margin-bottom: 20px;
     }
 
     .related {
         margin: 0 auto;
+    }
+
+    .recommend {
+        display: none;
     }
 }
 
@@ -129,22 +133,27 @@ html, body {
     .videos > div > a {
         display: inline-block;
         width: 360px;
-        height: 360px;
+        /*height: 360px;*/
         text-align: center;
-        line-height: 360px;
+        /*line-height: 360px;*/
     }
 
     .videos > div > .cover > img {
         display: inline-block;
         width: 360px;
-        height: 360px;
+        /*height: 360px;*/
         text-align: center;
-        line-height: 360px;
+        /*line-height: 360px;*/
     }
 
     .player-container-id-dimensions {
         width: 640px;
         height: 360px;
+        margin-bottom: 20px;
+    }
+
+    .recommend {
+        display: none;
     }
 }
 
@@ -160,22 +169,23 @@ html, body {
     .videos > div > a {
         display: inline-block;
         width: 300px;
-        height: 300px;
+        /*height: 300px;*/
         text-align: center;
-        line-height: 300px;
+        /*line-height: 300px;*/
     }
 
     .videos > div > .cover > img {
         display: inline-block;
         width: 360px;
-        height: 360px;
+        /*height: 360px;*/
         text-align: center;
-        line-height: 360px;
+        /*line-height: 360px;*/
     }
 
     .player-container-id-dimensions {
         width: 640px;
         height: 360px;
+        margin-bottom: 20px;
     }
 }
 
@@ -187,24 +197,30 @@ html, body {
     .videos > div > a {
         display: inline-block;
         width: 360px;
-        height: 360px;
+        /*height: 360px;*/
         text-align: center;
-        line-height: 360px;
+        /*line-height: 360px;*/
     }
 
     .videos > div > .cover > img {
         display: inline-block;
         width: 360px;
-        height: 360px;
+        /*height: 360px;*/
         text-align: center;
-        line-height: 360px;
+        /*line-height: 360px;*/
     }
 
     .player-container-id-dimensions {
         width: 764px;
         height: 400px;
+        margin-bottom: 20px;
     }
 
+    .recommend {
+        display: block;
+        margin-top: 50px;
+        text-align: center;
+    }
 }
 
 .avatar-for-show {
@@ -221,26 +237,44 @@ html, body {
     margin: 5px;
 }
 
-.videos .info {
-    color: #333;
-    padding: 5%;
+.recommend img {
+    width: 96px;
+    height: 96px;
 }
 
-.videos .lg-info {
-    color: #333;
-    font-size: 40px;
+.tip {
+    margin: 10px 0;
 }
 
-.videos .lg-info a {
-    color: #333;
+.tip img {
+    width: 24px;
+    height: 24px;
 }
 
-.videos .info a {
-    color: #333;
-    text-decoration: none
+.tip strong {
 }
 
-.videos .info img {
+.avatar img {
     width: 48px;
     height: 48px;
+}
+
+.info {
+    display: inline;
+}
+
+.info img {
+    margin: 0 auto;
+}
+
+.my-followed p {
+    margin-top: 10px;
+}
+
+.navbar-user {
+    font-size: 24px;
+}
+
+.title{
+    background-color: #efefef;
 }

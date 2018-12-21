@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '上传视频')
 @section('content')
-    <h3>上传视频</h3>
+    <h3><i class="glyphicon glyphicon-hand-right"></i> 上传视频</h3>
     <hr/>
     <form id="form">
         <div class="form-group">
@@ -11,7 +11,7 @@
                 <input type="hidden" value="" name="file_id" id="file_id">
                 <p class="form-control-static" id="queue_videos"><a id="addVideo"
                                                                     href="javascript:void(0);"
-                                                                    class="btn btn-info">添加视频</a></p>
+                                                                    class="btn btn-sm btn-info">添加视频</a></p>
             </div>
         </div>
         <div class="form-group">
@@ -21,7 +21,7 @@
                        readonly="readonly">
                 <p class="form-control-static" id="queue_video_covers"><a id="addCover"
                                                                           href="javascript:void(0);"
-                                                                          class="btn btn-info">添加封面</a>
+                                                                          class="btn btn-sm btn-info">添加封面</a>
                 </p>
             </div>
         </div>

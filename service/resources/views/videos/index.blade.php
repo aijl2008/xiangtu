@@ -9,16 +9,22 @@
                 <a href="{{route('videos.show', $row->id)}}" class="cover">
                     <img
                             class="thumbnail img-responsive img-rounde lazyload cover"
-                            src="/images/film.png"
+                            src="/images/loading.png"
                             data-original="{{$row->cover_url?:''}}">
                 </a>
                 <span class="tag"></span>
-                <div class="title"> {{$row->title}} </div>
+                <div class="title text-center"> {{$row->title}} </div>
                 <!--视频信息-->
                 <div class="row info">
-                    <div class="col-md-3 col-sm-3 col-xs-3">
-                        <img src="/images/user.png" data-original="{{$row->wechat->avatar??''}}" class="img-circle lazyload">
-                        <a data-href="" class="follow label label-success">关注</a>
+                    <div class="col-md-3 col-sm-3 col-xs-3 avatar">
+                        <img src="/images/user-48.png"
+                             data-original="{{$row->wechat->avatar??''}}"
+                             class="img-circle lazyload">
+                        <a
+                                href="javascript:void(0);"
+                                class="follow followed_number label label-success"
+                                data-url="{{ route('my.followed.store') }}"
+                                data-wechat-id="{{$row->wechat->id}}">关注</a>
                     </div>
                     <div class="col-md-9  col-sm-9 col-xs-9 text-right">
                         <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->humans_published_at}} </div>

@@ -30,33 +30,30 @@
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
         });
     </script>
-    <style>
-        .tip img {
-            width: 32px;
-            height: 32px;
-        }
-    </style>
     @yield('js')
 </head>
 <body>
 <div class="container_box">
     <div id="top" class="container">
         <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="col-md-6 col-sm-3 col-xs-3">
                 <a href="/" class="logo">
                     <img class="img-rounded" src="/images/logo.jpeg">
                     <span></span>
                 </a>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                <ul class="list-inline top-link link" style="font-size: 22px">
+            <div class="col-md-6 col-sm-9 col-xs-9 text-right">
+                <ul class="list-inline navbar-user">
                     @if ($auth == 'wechat')
                         <li><a href="{{ route('home') }}"><i class="fa fa-home"></i></a></li>
                         <li><a href="{{route('my.videos.index')}}"><span
                                         class="fa fa-id-card"></span></a></li>
                         <li><a href="{{ route('wechat.logout') }}"><i
-                                        class="fa fa-sign-out"></i></a></li><img class="avatar" alt="{{$user->name}}"
-                                                                                 src="{{$user->avatar}}">
+                                        class="fa fa-sign-out"></i></a></li><img
+                                src="/images/user-32.png"
+                                class="avatar lazyload img-circle"
+                                alt="{{$user->nickname}}"
+                                data-original="{{$user->avatar}}">
                     @elseif($auth == 'user')
                         <li><i class="fa fa-user"></i> {{ $user->email }}</li>
                         <li><a href="{{ route('admin.logout') }}"><i class="fa fa-sign-out"></i></a></li>

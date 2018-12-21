@@ -17,7 +17,7 @@ $(function () {
                             message: res.msg,
                             className: 'bb-alternate-modal'
                         });
-                        _this.html('<i class="fa fa-heart"></i>' + res.data.liked_number);
+                        _this.html('<i class="fa fa-heart"></i> ' + res.data.liked_number);
                     }
                     else {
                         bootbox.alert({
@@ -49,7 +49,9 @@ $(function () {
 
     $(".followed_number").click(function () {
         var _this = $(this);
+        var reload = _this.data('reload');
         console.log(_this.data('wechat-id'));
+        console.log(_this.data('url'));
         $.ajax(
             {
                 url: _this.data('url'),
@@ -63,9 +65,14 @@ $(function () {
                         bootbox.alert({
                             title: "乡土味",
                             message: res.msg,
-                            className: 'bb-alternate-modal'
+                            className: 'bb-alternate-modal',
+                            callback:function () {
+                                if(reload){
+                                    window.location.reload();
+                                }
+                                _this.html('<i class="fa fa-eye"></i> ' + res.data.be_followed_number);
+                            }
                         });
-                        _this.html('<i class="fa fa-heart"></i>' + res.data.followed_number);
                     }
                     else {
                         bootbox.alert({

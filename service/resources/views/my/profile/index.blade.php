@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '修改资料')
 @section('content')
-    <h3>修改资料</h3>
+    <h3><i class="glyphicon glyphicon-hand-right"></i> 修改资料</h3>
     <hr>
     <div class="row">
         <div id="main-content" class="col-md-8">

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('title', "数据统计")
 @section('content')
-    <h3>数据统计</h3>
+    <h3><i class="glyphicon glyphicon-hand-right"></i> 数据统计</h3>
     <hr>
     <div class="row">
         <div class="col-md-3">
             <div class="list-group">
-                <a href="javascript:void(0);" class="list-group-item active">总体概览</a>
-                <a href="{{route('my.statistics.video')}}" class="list-group-item">播放数详情</a>
-                <a href="{{route('my.statistics.follower')}}" class="list-group-item">粉丝数详情</a>
+                <a href="#chat1" class="list-group-item active">总体概览</a>
+                <a href="#chat2" class="list-group-item">播放数详情</a>
+                <a href="#chat3" class="list-group-item">粉丝数详情</a>
             </div>
         </div>
 

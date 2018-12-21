@@ -66,7 +66,7 @@ class VideoController extends Controller
      */
     public function show(Request $request, Video $video)
     {
-        return view("my.videos.show")
+        return view("videos.show")
             ->with('row', $video)
             ->with('related',
                 Video::query()
