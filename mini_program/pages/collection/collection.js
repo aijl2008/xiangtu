@@ -11,6 +11,7 @@ Page({
     collectionList: [],
     currentPage: 0,
     lastPage: 0,
+    publicMes: '',
   },
 
   /**
