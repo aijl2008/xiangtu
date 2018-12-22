@@ -29,10 +29,7 @@ class VideoController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        $video = (new Video($request->all()));
-        $request->user('api')->video()->save($video);
-        //$video->save();
-        return Helper::success($video->toArray());
+        return Helper::success((new \App\Service\Video())->store($request->all(), $request->user('api')));
     }
 
     /**

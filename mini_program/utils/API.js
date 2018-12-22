@@ -21,6 +21,15 @@ const URL_VIDEO_DETAIL = `${URL_PREFIX}/api/videos/`;
 /*个人信息*/
 const URL_USER_DETAIL = `${URL_PREFIX}/api/my/profile`;
 
+/*vod上传签名*/
+const URL_VOD_SIGNATURE = `${URL_PREFIX}/api/qcloud/signature/vod`;
+
+/*保存上传信息*/
+const URL_VIDEO_UPLOAD_SUCCESS = `${URL_PREFIX}/api/my/videos`;
+
+/*我的视频 */
+const URL_GET_MY_VIDEOS = `${URL_PREFIX}/api/my/videos`;
+
 export {
   URL_PREFIX,
   SUCCESS_CODE,
@@ -31,4 +40,7 @@ export {
   URL_LOGIN,
   URL_VIDEO_DETAIL,
   URL_USER_DETAIL,
+  URL_VOD_SIGNATURE,
+  URL_VIDEO_UPLOAD_SUCCESS,
+  URL_GET_MY_VIDEOS
 };

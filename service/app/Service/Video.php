@@ -9,9 +9,11 @@
 namespace App\Service;
 
 
+use App\Models\Vod;
 use App\Models\Wechat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class Video
 {
@@ -62,7 +64,23 @@ class Video
             $rows->wechat->followed = false;
             $rows->liked = false;
         }
-        //dd($rows);
         return $rows;
+    }
+
+    /**
+     * @param array $data
+     * @param Wechat $Wechat
+     * @return array
+     */
+    function store(Array $data, Wechat $Wechat)
+    {
+        if (!$data['cover_url']) {
+            $vod = new Vod();
+            Log::warning("用户未上传封面");
+            $data['cover_url'] = "https://{$_SERVER["SERVER_NAME"]}/images/video_default_cover.png";
+            $vod->createSnapshotByTimeOffsetAsCover($data['file_id'], 1);
+        }
+        $video = $Wechat->video()->create($data);
+        return $video->toArray();
     }
 }
