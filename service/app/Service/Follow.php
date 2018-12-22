@@ -50,7 +50,7 @@ class Follow
                 [
                     'be_followed_number' => $this->target->be_followed_number
                 ],
-                "已取消关注"
+                "已取消"
             );
             return Helper::error(-1, "您已经关注过了");
         } else {
@@ -73,7 +73,7 @@ class Follow
                 [
                     'be_followed_number' => $this->target->be_followed_number
                 ],
-                "关注成功"
+                "已关注"
             );
         }
     }

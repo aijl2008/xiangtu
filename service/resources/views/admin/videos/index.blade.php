@@ -17,7 +17,7 @@
                     <dt>分类</dt>
                     <dd class="text-nowrap">{{$row->classification->name}}</dd>
                     <dt>播放与收藏</dt>
-                    <dd class="text-nowrap">{{$row->played_number}}/{{$row->liked_number}}</dd>
+                    <dd class="text-nowrap">{{$row->formatted_played_number}}/{{$row->formatted_liked_number}}</dd>
                     <dt>可见范围</dt>
                     <dd class="text-nowrap">{{$row->visibility}}</dd>
                     <dt>发布时间</dt>

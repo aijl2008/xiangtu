@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class VideoController extends Controller
 {
@@ -50,11 +51,14 @@ class VideoController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        $video = $request->user('wechat')->video()->create($data = $request->all());
-        $vod = new \App\Models\Vod();
-        if (!$video->cover_url) {
-            $vod->createSnapshotByTimeOffsetAsCover($video->file_id, 1);
+        $data = $request->all();
+        if (!$data['cover_url']) {
+            $vod = new \App\Models\Vod();
+            Log::warning("用户未上传封面");
+            $data['cover_url'] = "https://{$_SERVER["SERVER_NAME"]}/images/video_default_cover.png";
+            $vod->createSnapshotByTimeOffsetAsCover($data['file_id'], 1);
         }
+        $video = $request->user('wechat')->video()->create($data);
         return Helper::success($video->toArray());
     }
 

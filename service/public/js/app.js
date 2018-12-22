@@ -1,5 +1,5 @@
 $(function () {
-    $(".liked_number").click(function () {
+    $(".like").click(function () {
         var _this = $(this);
         console.log(_this.data('video-id'));
         $.ajax(
@@ -17,7 +17,7 @@ $(function () {
                             message: res.msg,
                             className: 'bb-alternate-modal'
                         });
-                        _this.html('<i class="fa fa-heart"></i> ' + res.data.liked_number);
+                        _this.html(res.msg);
                     }
                     else {
                         bootbox.alert({
@@ -47,7 +47,7 @@ $(function () {
         );
     });
 
-    $(".followed_number").click(function () {
+    $(".follow").click(function () {
         var _this = $(this);
         var reload = _this.data('reload');
         console.log(_this.data('wechat-id'));
@@ -70,7 +70,7 @@ $(function () {
                                 if(reload){
                                     window.location.reload();
                                 }
-                                _this.html('<i class="fa fa-eye"></i> ' + res.data.be_followed_number);
+                                _this.html(res.msg);
                             }
                         });
                     }

@@ -49,7 +49,7 @@ class Like
                 [
                     'liked_number' => $this->video->liked_number
                 ],
-                "已取消收藏"
+                "已取消"
             );
             return Helper::error(-1, "已取消收藏");
         } else {
@@ -67,7 +67,7 @@ class Like
                 [
                     'liked_number' => $this->video->liked_number
                 ],
-                "收藏成功"
+                "已收藏"
             );
         }
     }

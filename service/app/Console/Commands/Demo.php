@@ -124,7 +124,26 @@ class Demo extends Command
         $this->comment('Ok');
         $faker = Faker::create('zh_CN');
 
-        $mockUsersAvatars = file(base_path() . '/database/mock/avatar.txt');
+        $mockUsersAvatars = [];
+        for ($i = 0; $i < 198; $i++) {
+            array_unshift($mockUsersAvatars, 'https://api.xiangtu.net.cn/avatar/' . $i . '.jpg');
+        }
+        for ($i = 0; $i < 198; $i++) {
+            array_unshift($mockUsersAvatars, 'https://api.xiangtu.net.cn/avatar/' . $i . '.jpg');
+        }
+        for ($i = 0; $i < 198; $i++) {
+            array_unshift($mockUsersAvatars, 'https://api.xiangtu.net.cn/avatar/' . $i . '.jpg');
+        }
+        $mockVideoCovers = [];
+        for ($i = 4; $i < 700; $i++) {
+            array_unshift($mockVideoCovers, 'https://api.xiangtu.net.cn/cover/' . $i . '.png');
+        }
+        for ($i = 4; $i < 700; $i++) {
+            array_unshift($mockVideoCovers, 'https://api.xiangtu.net.cn/cover/' . $i . '.png');
+        }
+        for ($i = 4; $i < 700; $i++) {
+            array_unshift($mockVideoCovers, 'https://api.xiangtu.net.cn/cover/' . $i . '.png');
+        }
         $mockVideos = json_decode(file_get_contents(base_path() . '/database/mock/videos.json'));
         for ($i = 0; $i < 100; $i++) {
             $this->comment('填充用户');
@@ -143,7 +162,6 @@ class Demo extends Command
             );
             $wechat->save();
             $this->comment($wechat->nickname . ',Ok');
-
             $this->comment('填充视频');
             for ($n = 0; $n < mt_rand(5, 10); $n++) {
                 $mock = array_pop($mockVideos);
@@ -151,8 +169,8 @@ class Demo extends Command
                     [
                         "title" => $mock->title,
                         "url" => $mock->url,
-                        "cover_url" => $mock->cover_url,
-                        "file_id" => '',
+                        "cover_url" => array_pop($mockVideoCovers),
+                        "file_id" => '5285890783657415584',//京东
                         "uploaded_at" => $faker->dateTime,
                         "classification_id" => $faker->numberBetween(1, 13),
                         "played_number" => $faker->numberBetween(10000, 99999),

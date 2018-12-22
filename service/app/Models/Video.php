@@ -30,7 +30,9 @@ class Video extends Model
 
     protected $appends = [
         'published_at',
-        'humans_published_at'
+        'humans_published_at',
+        "formatted_played_number",
+        "formatted_liked_number",
     ];
 
     function getStatusOption()
@@ -64,10 +66,10 @@ class Video extends Model
 
     function getHumansPublishedAtAttribute()
     {
-        return $this->attributes['humans_published_at'] = Carbon::parse($this->attributes['updated_at'])->diffForHumans();;
+        return $this->attributes['humans_published_at'] = Carbon::parse($this->attributes['updated_at'])->diffForHumans();
     }
 
-    function getLikedNumberAttribute()
+    function getFormattedLikedNumberAttribute()
     {
         if ($this->attributes['liked_number'] < 10) {
             return '  ' . $this->attributes['liked_number'];
@@ -80,7 +82,7 @@ class Video extends Model
         }
     }
 
-    function getPlayedNumberAttribute()
+    function getFormattedPlayedNumberAttribute()
     {
         if ($this->attributes['played_number'] < 10) {
             return '  ' . $this->attributes['played_number'];

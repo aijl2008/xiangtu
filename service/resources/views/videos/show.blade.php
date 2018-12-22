@@ -2,10 +2,10 @@
 @section('title', str_limit($row->title))
 @section('content')
     <div class="row">
-        <div class="col-md-8 video">
+        <div class="col-md-8 video player_container">
             <h3 class="vid-name">{{$row->title}}</h3>
             <hr/>
-            <video id="player-container-id" preload="auto" playsinline
+            <video poster="{{$row->cover_url}}" id="player-container-id" preload="auto" playsinline
                    webkit-playsinline>
             </video>
 
@@ -17,34 +17,36 @@
                         href="javascript:void(0);"
                         class="follow followed_number label label-default"
                         data-url="{{ route('my.followed.store') }}"
-                        data-wechat-id="{{$row->wechat->id}}">关注</a>
+                        data-wechat-id="{{$row->wechat->id}}">@if ($row->wechat->followed)取消@endif关注</a>
             </div>
             <div class="video-info-container">
-                <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->humans_published_at}} </div>
-                <a href="javascript:void(0)"
-                   data-url="{{route("my.liked.store")}}"
-                   data-video-id="{{$row->id}}"
-                   class="liked_number"><i class="fa fa-heart"></i> {{$row->liked_number?:0}}
-                </a>
-                <span class="played_number" title="{{$row->wechat_number}}">
-                                <i class="fa fa-play-circle"></i> {{$row->play_number?:0}}
+                <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->humans_published_at}}
+                    <a
+                            href="javascript:void(0);"
+                            class="like"
+                            data-url="{{ route('my.liked.store') }}"
+                            data-video-id="{{$row->id}}">@if ($row->wechat->followed)取消@endif收藏</a>
+                </div>
+                <span class="liked_number"><i class="fa fa-heart"></i> {{$row->formatted_liked_number?:0}}</span>
+                <span class="played_number" title="{{$row->played_number}}">
+                                <i class="fa fa-play-circle"></i> {{$row->formatted_played_number?:0}}
                             </span>
             </div>
             <div class="clearfix"></div>
 
             <br>
             <div class="tip"><img src="/images/wifi-signal-24.png"> <strong>相关视频</strong></div>
-            <hr >
+            <hr>
             <div class="row">
-                @foreach($related as $row)
+                @foreach($related as $item)
                     <div class="col-md-3 related">
-                        <a href="{{route('videos.show', $row->id)}}">
+                        <a href="{{route('videos.show', $item->id)}}">
                             <img
                                     class="thumbnail img-responsive img-rounde lazyload"
                                     src="/images/loading/video.png"
-                                    data-original="{{$row->cover_url?:''}}">
+                                    data-original="{{$item->cover_url?:''}}">
                         </a>
-                        <p> {{$row->title}} </p>
+                        <p> {{$item->title}} </p>
                     </div>
                 @endforeach
             </div>
@@ -56,10 +58,13 @@
     <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
     <script type="text/javascript">
         $(function () {
+            var player_container_width = $('.player_container').width();
             var option = {
                 "cover": "{{$row->cover_url}}",
-                "file_id": "{{$row->file_id}}",
-                "app_id": "{{config('wechat.cloud.app_id')}}",
+                "fileID": "{{$row->file_id}}",
+                "appID": "{{config('wechat.cloud.app_id')}}",
+                "width": player_container_width,
+                "height": player_container_width * 0.75,
                 "third_video":
                     {
                         "urls":
@@ -69,10 +74,6 @@
                             }
                     }
             };
-            // option = {
-            //     fileID: '7447398157015849771', // 请传入需要播放的视频filID 必须
-            //     appID: '1256993030' // 请传入点播账号的appID 必须
-            // };
             var player = new TCPlayer(
                 "player-container-id",
                 option
