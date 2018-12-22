@@ -19,7 +19,7 @@
   <block wx:elif="{{publicMes == 'empty'}}">
     <component-empty-data>
       <text class="no-data-mes">暂无关注</text>
-      <view class="add-follow">添加关注</view>
+      <navigator class="add-follow" url="/pages/recommend/recommend">添加关注</navigator>
     </component-empty-data>
   </block>
 

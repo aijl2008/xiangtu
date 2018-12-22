@@ -5,7 +5,7 @@
       <image class="video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
     </block>
     <block wx:else>
-      <video poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
+      <video autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
     </block>
 
     <block wx:if="{{currentId != video.id}}">

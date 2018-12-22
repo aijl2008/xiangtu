@@ -9,7 +9,8 @@
     "pages/collection/collection",
     "pages/detail/detail",
     "pages/login/login",
-    "pages/user/record/record"
+    "pages/user/record/record",
+    "pages/recommend/recommend"
   ],
   "window": {
     "navigationStyle": "custom",
