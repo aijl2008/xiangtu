@@ -75,9 +75,9 @@
             </div>
         </div>
     </form>
-    <br />
-    <br />
-    <br />
+    <br/>
+    <br/>
+    <br/>
     <div style="display: none">
         <input type="file" id="addVideo-file">
         <input type="file" id="addCover-file">
@@ -85,14 +85,6 @@
     <div class="clearfix"></div>
     <div style="width: 80px"></div>
     <div class="clearfix"></div>
-    <div class="modal fade" id="loadingModal">
-        <div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
-            <div class="progress progress-striped active" style="margin-bottom: 0;">
-                <div class="progress-bar" style="width: 100%;"></div>
-            </div>
-            <h5>正在加载...</h5>
-        </div>
-    </div>
 @endsection
 @section('js')
     <script src="//imgcache.qq.com/open/qcloud/js/vod/sdk/ugcUploader.js"></script>
@@ -246,7 +238,7 @@
                         $.ajax({
                             url: '{{route("my.videos.store")}}',
                             type: 'POST',
-                            data: $("#form").serialize(),
+                            data: $("#upload-video").serialize(),
                             dataType: 'json',
                             success: function (res) {
                                 if (res && res.code == 0) {
@@ -278,10 +270,13 @@
                                 }
                             },
                             error: function (res, err) {
-                                bootbox.alert({
-                                    title: "乡土味",
-                                    message: err,
-                                    className: 'bb-alternate-modal'
+                                $.each(res.responseJSON.errors, function (idx, message) {
+                                    bootbox.alert({
+                                        title: "乡土味",
+                                        message: message.toString(),
+                                        className: 'bb-alternate-modal'
+                                    });
+                                    return;
                                 });
                             }
                         });

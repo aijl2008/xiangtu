@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Helper;
 use App\Models\Log;
 use App\Models\Video;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,34 +14,7 @@ class VideoController extends Controller
     function index(Request $request)
     {
         $view = view('videos.index');
-        $view->with('rows', Video::query()
-            ->where('visibility', Video::VISIBILITY_ANY)
-            ->when(
-                $classification = $request->input('classification'),
-                function (Builder $builder) use ($classification) {
-                    return $builder->where('classification_id', $classification);
-                }
-            )
-            ->when(
-                $user = $request->user('wechat'),
-                function (Builder $builder) use ($user) {
-                    $builder->orWhere(
-                        function (Builder $builder) use ($user) {
-                            $builder
-                                ->where('visibility', Video::VISIBILITY_ONLY_FOLLOWED)
-                                ->whereHas(
-                                    'followed',
-                                    function (Builder $builder) use ($user) {
-                                        $builder->where('followed_id', $user->id);
-                                    }
-                                );
-                        }
-                    );
-                }
-            )
-            ->with('wechat')
-            ->orderBy('id', 'desc')
-            ->simplePaginate(15));
+        $view->with('rows', (new \App\Service\Video())->paginate($request->user('wechat'), $request->input('classification'), 15));
         $view->with('classification', $request->input('classification', 0));
         return $view;
     }
@@ -53,10 +25,10 @@ class VideoController extends Controller
      * @param Video $video
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Video $video)
+    public function show(\App\Service\Video $videoService, Video $video)
     {
         return view("videos.show")
-            ->with('row', $video)
+            ->with('row', $videoService->show($video, Auth::guard('wechat')->user()))
             ->with('related',
                 Video::query()
                     ->where(

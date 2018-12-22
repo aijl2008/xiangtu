@@ -15,13 +15,9 @@
                 </a>
                 <div class="my-videos">
                     <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->humans_published_at}} </div>
-                    <a href="javascript:void(0)"
-                       data-url="{{route("my.liked.store")}}"
-                       data-video-id="{{$row->id}}"
-                       class="liked_number"><i class="fa fa-heart"></i> {{$row->liked_number?:0}}
-                    </a>
+                    <span class="liked_number"><i class="fa fa-heart"></i> {{$row->formatted_liked_number?:0}}</span>
                     <span class="played_number" title="{{$row->wechat_number}}">
-                                <i class="fa fa-play-circle"></i> {{$row->play_number?:0}}
+                                <i class="fa fa-play-circle"></i> {{$row->formatted_liked_number?:0}}
                             </span>
                 </div>
                 <div class="title text-center"> {{$row->title}} </div>

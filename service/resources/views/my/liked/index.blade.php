@@ -25,14 +25,15 @@
                             data-wechat-id="{{$row->wechat->id}}">关注</a>
                 </div>
                 <div class="video-info-container">
-                    <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->humans_published_at}} </div>
-                    <a href="javascript:void(0)"
-                       data-url="{{route("my.liked.store")}}"
-                       data-video-id="{{$row->id}}"
-                       class="liked_number"><i class="fa fa-heart"></i> {{$row->liked_number?:0}}
-                    </a>
+                    <div class="updated_at"><i class="fa fa-calendar"></i> {{$row->humans_published_at}}
+                        <a
+                                href="javascript:void(0);"
+                                class="like"
+                                data-url="{{ route('my.liked.store') }}"
+                                data-video-id="{{$row->id}}">@if ($row->wechat->followed)取消@endif收藏</a></div>
+                    <span class="liked_number"><i class="fa fa-heart"></i> {{$row->formatted_liked_number?:0}}</span>
                     <span class="played_number" title="{{$row->wechat_number}}">
-                                <i class="fa fa-play-circle"></i> {{$row->play_number?:0}}
+                                <i class="fa fa-play-circle"></i> {{$row->formatted_liked_number?:0}}
                             </span>
                 </div>
                 <div class="clearfix"></div>

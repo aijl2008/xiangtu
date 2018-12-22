@@ -34,7 +34,7 @@ class SignatureController extends Controller
         $signature = base64_encode(hash_hmac('SHA1', $original, $secret_key, true) . $original);
 
         return [
-            "code" => 200,
+            "code" => 0,
             "msg" => "Ok",
             "data" => [
                 "signature" => $signature

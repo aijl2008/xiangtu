@@ -26,6 +26,27 @@
             top.location.href = self.location.href;
         }
         $(function () {
+            $(".cover img").each(function () {
+                var width = $(this).width();
+                var height = $(this).height();
+                if (height != width * 0.75) {
+                    $(this).css("height", width * 0.75);
+                }
+            });
+            $(".avatar-large").each(function () {
+                var width = $(this).width();
+                var height = $(this).height();
+                if (height != width) {
+                    $(this).css("height", width);
+                }
+            });
+            $(".avatar-small").each(function () {
+                var width = $(this).width();
+                var height = $(this).height();
+                if (height != width) {
+                    $(this).css("height", width);
+                }
+            });
             $("img.lazyload").lazyload();
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
         });
@@ -44,21 +65,20 @@
             </div>
             <div class="col-md-6 col-sm-9 col-xs-9 text-right user-nav">
                 @if ($auth == 'wechat')
-                    <a href="{{ route('home') }}"><i class="glyphicon glyphicon-home"></i></a><a
-                            href="{{route('my.videos.index')}}"><i
-                                class="glyphicon glyphicon-user"></i></a><a href="{{ route('wechat.logout') }}"><i
-                                class="glyphicon glyphicon-log-out"></i></a><img
+                    <a href="{{ route('home') }}"><i class="glyphicon glyphicon-home"></i></a><a href="{{ route('wechat.logout') }}"><i
+                                class="glyphicon glyphicon-lock"></i></a><a
+                            href="{{route('my.videos.index')}}"><img
                             src="/images/user-32.png"
                             class="avatar-small lazyload img-circle"
                             alt="{{$user->nickname}}"
-                            data-original="{{$user->avatar}}">
+                            data-original="{{$user->avatar}}"></a>
                 @elseif($auth == 'user')
                     <i>{{ $user->email }}</i>
                     <i class="glyphicon glyphicon-home"></i>
                     <a href="{{ route('admin.logout') }}"><i class="glyphicon glyphicon-log-out"></i></a>
                 @elseif($auth == 'guest')
                     <a href="/"><i class="glyphicon glyphicon-home"></i></a>
-                    <a href="{{ route('wechat.login.show') }}"><i class="glyphicon glyphicon-log-in"></i></a>
+                    <a href="{{ route('wechat.login.show') }}"><i class="glyphicon glyphicon-user"></i></a>
                 @endif
             </div>
         </div>

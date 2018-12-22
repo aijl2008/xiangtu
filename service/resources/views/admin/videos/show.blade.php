@@ -12,7 +12,7 @@
             <div class="info">
                 <h5>By <a href="#">Kelvin</a></h5>
                 <span><i class="fa fa-calendar"></i>{{$row->uploaded_at}}</span>
-                <span><i class="fa fa-heart"></i>{{$row->liked_number}}</span>
+                <span><i class="fa fa-heart"></i>{{$row->formatted_liked_number}}</span>
             </div>
             <div class="line"></div>
             <div class="info">

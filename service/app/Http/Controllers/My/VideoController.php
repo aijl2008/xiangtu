@@ -50,12 +50,7 @@ class VideoController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        $video = $request->user('wechat')->video()->create($data = $request->all());
-        $vod = new \App\Models\Vod();
-        if (!$video->cover_url) {
-            $vod->createSnapshotByTimeOffsetAsCover($video->file_id, 1);
-        }
-        return Helper::success($video->toArray());
+        return Helper::success((new \App\Service\Video())->store($request->all(), $request->user('wechat')));
     }
 
     /**
