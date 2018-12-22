@@ -9,8 +9,7 @@
     "pages/collection/collection",
     "pages/detail/detail",
     "pages/login/login",
-    "pages/user/record/record",
-    "component/noData/noData"
+    "pages/user/record/record"
   ],
   "window": {
     "navigationStyle": "custom",

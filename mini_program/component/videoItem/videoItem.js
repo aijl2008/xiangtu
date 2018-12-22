@@ -58,7 +58,7 @@ Component({
           }
         });
       } else {
-        util.ajaxCommon(`${API.URL_LIKE_VIDEO}`, {
+        util.ajaxCommon(API.URL_LIKE_VIDEO, {
           "video_id": id,
         }, {
           method: 'POST',
@@ -77,7 +77,7 @@ Component({
     followVideo(event) {
       const { id } = event.currentTarget.dataset;
 
-      util.ajaxCommon(`${API.URL_FOLLOWED}`, {
+      util.ajaxCommon(API.URL_FOLLOWED, {
         'wechat_id': id,
       }, {
         method: "POST",
@@ -89,7 +89,7 @@ Component({
             }, {});
           }
         }
-      })
+      });
     },
 
     goVideoDetail(){

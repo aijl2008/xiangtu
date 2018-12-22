@@ -1,12 +1,25 @@
 <!--pages/follow/follow.wxml-->
 <view class="container">
-  <block wx:for="{{videoList}}" wx:key="id" wx:for-item="item">
-    <block wx:if="{{index == 0 || videoList[index-1].published_at != item.published_at}}">
-      <view class="item-header">{{item.published_at}}</view>
-    </block>
+  <block wx:if="{{videoList.length}}">
+    <block wx:for="{{videoList}}" wx:key="id" wx:for-item="item">
+      <block wx:if="{{index == 0 || videoList[index-1].published_at != item.published_at}}">
+        <view class="item-header">{{item.published_at}}</view>
+      </block>
 
-    <component-video-item video="{{item}}" current-id="{{currentId}}" index="{{index}}"
-                          bind:play-video="playVideo"
-                          bind:collection-changed="collentionChanged"></component-video-item>
+      <component-video-item video="{{item}}" current-id="{{currentId}}" index="{{index}}"
+                            bind:play-video="playVideo"
+                            bind:collection-changed="collentionChanged"></component-video-item>
+
+      <block wx:if="{{index == videoList.length - 1}}">
+        <component-no-more></component-no-more>
+      </block>
+
+    </block>
   </block>
+  <block wx:else>
+    <component-empty-data>
+      <text class="no-data-mes">暂无关注</text>
+    </component-empty-data>
+  </block>
+
 </view>
