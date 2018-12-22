@@ -12,6 +12,7 @@ Page({
     currentPage: 0,
     lastPage: 0,
     currentId:0,
+    publicMes: '',
   },
 
   /**
@@ -71,6 +72,9 @@ Page({
 
     if(currentPage >= lastPage){
       /*到底了*/
+      this.setData({
+        publicMes: 'noMore'
+      })
     } else {
       this.getFollowVideoList();
     }
@@ -100,6 +104,10 @@ Page({
               videoList: videoList.concat(res.data.data),
               lastPage: res.data.last_page,
               currentPage,
+            })
+          } else {
+            this.setData({
+              publicMes: 'empty',
             })
           }
         }

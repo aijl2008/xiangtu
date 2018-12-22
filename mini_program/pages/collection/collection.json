@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "component-collection-item": "/component/collectionItem/collectionItem"
+    "component-collection-item": "/component/collectionItem/collectionItem",
+    "component-empty-data": "/component/emptyData/emptyData",
+    "component-no-more": "/component/noMore/noMore"
   }
 }
