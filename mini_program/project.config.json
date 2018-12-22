@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.2",
 	"appid": "wxbe20d80072eaf2d3",
-	"projectname": "mini_program",
+	"projectname": "xiangtu",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -27,13 +27,48 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/user/user",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "uploadList",
+					"pathName": "pages/uploadList/uploadList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "follow",
+					"pathName": "pages/follow/follow",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "collection",
+					"pathName": "pages/collection/collection",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "detail",
+					"pathName": "pages/detail/detail",
+					"query": "id=1"
+				}
+			]
 		}
 	}
 }

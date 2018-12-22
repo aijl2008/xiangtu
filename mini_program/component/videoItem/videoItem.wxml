@@ -1,0 +1,54 @@
+<!--component/videoItem/videoItem.wxml-->
+<view class="video-item-container">
+  <view class="video-container">
+    <block wx:if="{{currentId != video.id}}">
+      <image class="video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
+    </block>
+    <block wx:else>
+      <video poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
+    </block>
+
+    <block wx:if="{{currentId != video.id}}">
+      <text class="video-title">{{video.title}}</text>
+      <view class="author-header">
+        <image src="{{video.wechat.avatar}}" mode="aspectFit" class="header"></image>
+      </view>
+      <block wx:if="{{!video.wechat.followed}}">
+        <text class="user-name">{{video.wechat.nickname}}</text>
+      </block>
+      <view class="video-detail-container">
+        <text class="total-looked-number">{{video.played_number}}</text>
+        <!--<text class="total-time">{{video.played_number}}</text>-->
+      </view>
+    </block>
+  </view>
+  <view class="bottom-message-container" catchtap="goVideoDetail">
+    <block wx:if="{{!video.wechat.followed}}">
+      <text class="follow-btn" catchtap="followVideo" data-id="{{video.wechat.id}}">+ 关注</text>
+    </block>
+    <block wx:else>
+      <text class="user-name">{{video.wechat.nickname}}</text>
+    </block>
+
+    <view class="seat"></view>
+    <view class="message-container" catchtap="changeCollection" data-id="{{video.id}}" data-status="{{video.liked}}"
+          data-index="{{index}}">
+      <block wx:if="{{video.liked}}">
+        <image class="icon" src="/images/liked.png"></image>
+      </block>
+      <block wx:else>
+        <image class="icon" src="/images/like.png"></image>
+      </block>
+
+      <text class="number">{{video.liked_number}}</text>
+    </view>
+    <view class="message-container">
+      <image class="icon" src="/images/icon48_wx_logo.png"></image>
+      <text class="number">{{video.shared_wechat_number}}</text>
+    </view>
+    <view class="message-container">
+      <image class="icon" src="/images/icon_res_download_moments.png"></image>
+      <text class="number">{{video.shared_moment_number}}</text>
+    </view>
+  </view>
+</view>

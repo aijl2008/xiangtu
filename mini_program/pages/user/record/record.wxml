@@ -1,0 +1,17 @@
+<!--pages/user/record/record.wxml-->
+<view class="container">
+  <view class="collection-left-container">
+    <block wx:for="{{historyList}}" wx:key="id" wx:for-item="item">
+      <block wx:if="{{index%2 == 0}}">
+        <component-collection-item collection="{{item}}"></component-collection-item>
+      </block>
+    </block>
+  </view>
+  <view class="collection-right-container">
+    <block wx:for="{{historyList}}" wx:key="id" wx:for-item="item">
+      <block wx:if="{{index%2 == 1}}">
+        <component-collection-item collection="{{item}}"></component-collection-item>
+      </block>
+    </block>
+  </view>
+</view>

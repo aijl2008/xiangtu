@@ -1,0 +1,12 @@
+<!--pages/follow/follow.wxml-->
+<view class="container">
+  <block wx:for="{{videoList}}" wx:key="id" wx:for-item="item">
+    <block wx:if="{{index == 0 || videoList[index-1].published_at != item.published_at}}">
+      <view class="item-header">{{item.published_at}}</view>
+    </block>
+
+    <component-video-item video="{{item}}" current-id="{{currentId}}" index="{{index}}"
+                          bind:play-video="playVideo"
+                          bind:collection-changed="collentionChanged"></component-video-item>
+  </block>
+</view>

@@ -1,0 +1,13 @@
+<!--pages/uploadVideo/uploadVideo.wxml-->
+<view class="container">
+  <block wx:if="{{videoTem}}">
+    <video src="{{videoTem}}" class="video"></video>
+
+    <view class="video-name-container">
+      <text class="name-text">标题</text>
+      <input type="text" class="name-input" placeholder="请输入标题" bindinput="editVideoName" />
+    </view>
+
+    <view class="submit-btn{{videoTem ? '' : 'disabled'}}" bindtap="submit">提交</view>
+  </block>
+</view>

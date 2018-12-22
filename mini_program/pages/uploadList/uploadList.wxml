@@ -1,0 +1,4 @@
+<!--pages/uploadList/uploadList.wxml-->
+<view class="container">
+  <text class="btn" bindtap="jumpToUpload">点击上传视频</text>
+</view>

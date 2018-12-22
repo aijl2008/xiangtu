@@ -1,0 +1,13 @@
+/* pages/user/record/record.wxss */
+.container{
+  width: 100%;
+  padding: 150rpx 32rpx 0 32rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection-left-container,
+.collection-right-container{
+  display: flex;
+  flex-direction: column;
+}
