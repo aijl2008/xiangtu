@@ -1,12 +1,55 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/follow/follow",
+    "pages/user/user",
+    "pages/uploadVideo/uploadVideo",
+    "pages/uploadList/uploadList",
+    "pages/collection/collection",
+    "pages/detail/detail",
+    "pages/login/login",
+    "pages/user/record/record",
+    "component/noData/noData"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true,
+    "navigationBarBackgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/photo-camera.png",
+        "selectedIconPath": "/images/photo-camera.png"
+      },
+      {
+        "pagePath": "pages/follow/follow",
+        "text": "关注",
+        "iconPath": "/images/eye.png",
+        "selectedIconPath": "/images/eye.png"
+      },
+      {
+        "pagePath": "pages/uploadList/uploadList",
+        "text": "上传",
+        "iconPath": "/images/photo-camera.png",
+        "selectedIconPath": "/images/photo-camera.png"
+      },
+      {
+        "pagePath": "pages/collection/collection",
+        "text": "收藏",
+        "iconPath": "/images/heart.png",
+        "selectedIconPath": "/images/heart.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "/images/avatar.png",
+        "selectedIconPath": "/images/avatar.png"
+      }
+    ]
   }
 }
