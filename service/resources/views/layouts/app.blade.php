@@ -65,13 +65,14 @@
             </div>
             <div class="col-md-6 col-sm-9 col-xs-9 text-right user-nav">
                 @if ($auth == 'wechat')
-                    <a href="{{ route('home') }}"><i class="glyphicon glyphicon-home"></i></a><a href="{{ route('wechat.logout') }}"><i
+                    <a href="{{ route('home') }}"><i class="glyphicon glyphicon-home"></i></a><a
+                            href="{{ route('wechat.logout') }}"><i
                                 class="glyphicon glyphicon-lock"></i></a><a
                             href="{{route('my.videos.index')}}"><img
-                            src="/images/user-32.png"
-                            class="avatar-small lazyload img-circle"
-                            alt="{{$user->nickname}}"
-                            data-original="{{$user->avatar}}"></a>
+                                src="/images/user-32.png"
+                                class="avatar-small lazyload img-circle"
+                                alt="{{$user->nickname}}"
+                                data-original="{{$user->avatar}}"></a>
                 @elseif($auth == 'user')
                     <i>{{ $user->email }}</i>
                     <i class="glyphicon glyphicon-home"></i>
@@ -109,7 +110,13 @@
                             <li id="admin_classifications_index"><a href="{{ route('admin.classifications.index') }}"><i
                                             class="fa fa-cube"></i>视频分类 </a></li>
                             <li id="admin_logs_index"><a href="{{ route('admin.logs.index') }}"><i
+                                            class="fa fa-cube"></i>日志管理
+                                </a></li>
+                            <li id="admin_events_index"><a href="{{ route('admin.events.index') }}"><i
                                             class="fa fa-cube"></i>事件管理
+                                </a></li>
+                            <li id="admin_tasks_index"><a href="{{ route('admin.tasks.index') }}"><i
+                                            class="fa fa-cube"></i>任务管理
                                 </a></li>
                             <li id="admin_videos_index"><a href="{{ route('admin.videos.index') }}"><i
                                             class="fa fa-cube"></i>视频列表 </a></li>

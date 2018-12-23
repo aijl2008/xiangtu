@@ -10,6 +10,7 @@ namespace App\Http\Requests;
 
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileRequest extends FormRequest
 {
@@ -32,46 +33,30 @@ class ProfileRequest extends FormRequest
     {
         return [
             "nickname" => "required",
-            "avatar" => "url"
+            "avatar" => "required"
         ];
     }
 
     public function messages()
     {
         return [
-            "avatar.url" => "用户头像的格式无效"
+            "avatar.required" => "用户头像必须提供"
         ];
     }
 
     public function data()
     {
-        $data = [];
-        foreach ([
-                     "nickname" => "string",
-                     "mobile" => "string",
-                     "avatar" => "string",
-                 ] as $field => $type) {
-            $value = $this->input($field);
-            if (is_null($value)) {
-                continue;
-            }
-            $data[$field] = call_user_func(function ($value, $type) {
-                switch ($type) {
-                    case "int":
-                        return (int)$value;
-                        break;
-                    case "string":
-                        return (string)$value;
-                        break;
-                    case "boolean":
-                        return (boolean)$value;
-                        break;
-                    default:
-                        return $value;
-                        break;
+        return [
+            "nickname" => (string)$this->input("nickname"),
+            "mobile" => (string)$this->input("mobile"),
+            "avatar" => call_user_func(function ($contents) {
+                if (substr($contents, 0, 4) == 'http') {
+                    return $contents;
                 }
-            }, $value, $type);
-        }
-        return $data;
+                $filename = "avatar/" . md5($this->user('api')->getAuthIdentifier()) . '.jpg';
+                Storage::disk('public')->put($filename, $contents);
+                return url('/upload/'.$filename);
+            }, $this->input("avatar"))
+        ];
     }
 }

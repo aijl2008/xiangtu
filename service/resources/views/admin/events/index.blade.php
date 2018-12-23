@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', '日志管理')
+@section('title', '事件管理')
 @section('content')
-    <h3>日志管理</h3>
+    <h3>事件管理</h3>
     <hr>
     @include('layouts/message')
     <div class="table-responsive">
@@ -9,9 +9,12 @@
             <thead>
             <tr>
                 <th>编号</th>
-                <th class="text-nowrap">行为</th>
-                <th class="text-nowrap">用户</th>
-                <th class="text-nowrap">消息</th>
+                <th class="text-nowrap">version</th>
+                <th class="text-nowrap">type</th>
+                <th class="text-nowrap">status</th>
+                <th class="text-nowrap">code</th>
+                <th class="text-nowrap">message</th>
+                <th class="text-nowrap">data</th>
                 <th class="text-nowrap">更新时间</th>
             </tr>
             </thead>
@@ -19,10 +22,13 @@
             @foreach($rows as $row)
                 <tr>
                     <td class="text-nowrap">{{ $row->id }}</td>
-                    <td class="text-nowrap">{{ $row->action }}</td>
-                    <td class="text-nowrap">{{ $row->from_user_id }}</td>
+                    <td class="text-nowrap">{{ $row->version }}</td>
+                    <td class="text-nowrap">{{ $row->type }}</td>
+                    <td class="text-nowrap">{{ $row->status }}</td>
+                    <td class="text-nowrap">{{ $row->code }}</td>
+                    <td class="text-nowrap">{{ $row->message }}</td>
                     <td class="text-nowrap">
-                        <pre>{{ $row->message }}</pre>
+                        <pre>{{ $row->data }}</pre>
                     </td>
                     <td class="text-nowrap">{{ $row->updated_at }}</td>
                 </tr>
@@ -35,7 +41,7 @@
 @section('js')
     <script language="JavaScript">
         $(function () {
-            $('#admin_logs_index').addClass("active")
+            $('#admin_events_index').addClass("active")
         });
     </script>
 @endsection

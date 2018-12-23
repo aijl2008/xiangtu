@@ -50,7 +50,13 @@ class VideoController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        return Helper::success((new \App\Service\Video())->store($request->all(), $request->user('wechat')));
+        return Helper::success(
+            (new \App\Service\Video())
+                ->store(
+                    $request->all(),
+                    $request->user('wechat')
+                )
+        );
     }
 
     /**

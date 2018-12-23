@@ -68,6 +68,17 @@ Route::group(
             ]
         ]);
 
+        Route::resource("/events", "EventController", [
+            'only' => [
+                'index'
+            ]
+        ]);
+
+        Route::resource("/tasks", "TaskController", [
+            'only' => [
+                'index','show'
+            ]
+        ]);
 
         /**
          * 用户页
@@ -85,7 +96,7 @@ Route::group(
                 'index', 'show'
             ]
         ]);
-        Route::any("videos/{video}/snapshot", "VideoController@snapshot");
+        Route::any("videos/{video}/snapshot", "VideoController@snapshot")->name('videos.snapshot');
     }
 );
 

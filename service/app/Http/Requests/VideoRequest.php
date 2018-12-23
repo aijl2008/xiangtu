@@ -87,7 +87,6 @@ class VideoRequest extends FormRequest
                      "shared_wechat_number" => 0,
                      "shared_moment_number" => 0,
                      "visibility" => 1,
-                     "status" => 1,
                      "cover_url" => "",
                      "file_id" => 0,
                      "classification_id" => 0
