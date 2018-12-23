@@ -1,4 +1,5 @@
 <!--component/emptyData/emptyData.wxml-->
 <view class="container">
+  <image src="/images/video_default_cover.png" class="empty-icon" mode="widthFix"></image>
   <slot></slot>
 </view>

@@ -22,7 +22,7 @@
   </block>
   <block wx:elif="{{publicMes == 'empty'}}">
     <component-empty-data>
-      <image src="/images/video_default_cover.png"></image>           <text class="no-data-mes">暂无收藏</text>
+      <text class="no-data-mes">暂无收藏</text>
     </component-empty-data>
   </block>
 </view>
