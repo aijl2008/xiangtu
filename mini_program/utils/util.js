@@ -51,17 +51,35 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
   wx.request({
     url,
     header: {
+      Accept: '',
       Authorization: token ? `Bearer ${token}` : '',
     },
     data: finalData,
     method: method,
     success: function (response) {
-      if (typeof success === 'function') {
+      if(response.data.code == 401){
+        wx.showToast({
+          title: 'token异常，请重新登录',
+          icon: 'none',
+          mask: true,
+          complete: (res) => {
+            wx.removeStorage({
+              key: 'token',
+              success(){
+                wx.navigateTo({
+                  url: '/pages/login/login',
+                })
+              }
+            });
+          }
+        })
+      } else  if (typeof success === 'function') {
         success(response.data);
       }
 
     },
     fail: function (res) {
+      console.log('fail', res);
       if (typeof fail === 'function') {
         fail(res);
       } else {
@@ -71,6 +89,7 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
       }
     },
     complete: function (res) {
+      console.log(res);
       wx.hideLoading();
       if (typeof complete === 'function') {
         complete(res);
