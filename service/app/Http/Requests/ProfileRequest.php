@@ -10,6 +10,7 @@ namespace App\Http\Requests;
 
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileRequest extends FormRequest
@@ -32,8 +33,7 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            "nickname" => "required",
-            "avatar" => "required"
+            "nickname" => "required"
         ];
     }
 
@@ -46,17 +46,20 @@ class ProfileRequest extends FormRequest
 
     public function data()
     {
+        Log::error(__METHOD__, [
+            $_FILES, $_POST
+        ]);
         return [
             "nickname" => (string)$this->input("nickname"),
             "mobile" => (string)$this->input("mobile"),
-            "avatar" => call_user_func(function ($contents) {
-                if (substr($contents, 0, 4) == 'http') {
-                    return $contents;
+            "avatar" => call_user_func(function ($request) {
+                if ($request->hasFile('avatar')) {
+                    $filename = $this->avatar->store('avatar/' . date('Ym') . '/', 'public');
+                } else {
+                    return $request->input("avatar");
                 }
-                $filename = "avatar/" . md5($this->user('api')->getAuthIdentifier()) . '.jpg';
-                Storage::disk('public')->put($filename, $contents);
-                return url('/upload/'.$filename);
-            }, $this->input("avatar"))
+                return url('/upload/' . $filename);
+            }, $this)
         ];
     }
 }

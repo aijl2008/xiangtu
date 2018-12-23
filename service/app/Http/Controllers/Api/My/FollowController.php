@@ -22,15 +22,17 @@ class FollowController extends Controller
     function index(Request $request)
     {
         $user = $request->user('api');
-        return Helper::success(
-            Video::query()
-                ->whereHas('wechat.follower', function (Builder $builder) use ($user) {
-                    $builder->where('followed_id', $user->id);
-                })
-                ->with('wechat')
-                ->orderBy('id', 'desc')
-                ->paginate(16)
-        );
+        $videos = Video::query()
+            ->whereHas('wechat.follower', function (Builder $builder) use ($user) {
+                $builder->where('followed_id', $user->id);
+            })
+            //->with('wechat')
+            ->orderBy('id', 'desc')
+            ->paginate(16);
+        foreach ($videos as $video) {
+            $video->wechat->followed = $user->haveFollowed($video->wechat);
+        }
+        return Helper::success($videos);
     }
 
     function store(Request $request)
