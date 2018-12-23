@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [
-        'file_id', 'code', 'code_desc',  'message'
+        'file_id', 'task_id','code', 'code_desc',  'message'
     ];
 
     function video(){

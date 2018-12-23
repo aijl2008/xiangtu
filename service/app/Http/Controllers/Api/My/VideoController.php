@@ -19,7 +19,7 @@ class VideoController extends Controller
         return Helper::success(Video::query()
             ->where('wechat_id', $request->user()->id)
             ->orderBy('id', 'desc')
-            ->paginate(20));
+            ->simplePaginate(20));
     }
 
     /**

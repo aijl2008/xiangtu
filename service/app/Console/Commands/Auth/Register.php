@@ -41,9 +41,10 @@ class Register extends Command
     public function handle()
     {
         $email = $this->ask('请输入邮箱');
+        $name = $this->ask('请输入姓名');
         $password = 'Abcd123@';
         event(new Registered($user = User::create([
-            'name' => '',
+            'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
         ])));

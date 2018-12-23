@@ -11,7 +11,7 @@ namespace App;
 
 class Helper
 {
-    static function success($data = "", $message = '')
+    static function success($data = "", $message = 'success')
     {
         return [
             'code' => 0,

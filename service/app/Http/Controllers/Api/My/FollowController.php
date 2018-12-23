@@ -29,7 +29,7 @@ class FollowController extends Controller
                 })
                 ->with('wechat')
                 ->orderBy('id', 'desc')
-                ->paginate(16)
+                ->simplePaginate(16)
         );
     }
 

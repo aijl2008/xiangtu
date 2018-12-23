@@ -24,7 +24,7 @@ class MessageController extends Controller
             ->with('rows',
                 Message::query()
                     ->where('to_user_name', config('wechat.original_id'))
-                    ->paginate()
+                    ->simplePaginate()
             );
     }
 

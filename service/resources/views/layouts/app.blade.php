@@ -74,7 +74,7 @@
                                 alt="{{$user->nickname}}"
                                 data-original="{{$user->avatar}}"></a>
                 @elseif($auth == 'user')
-                    <i>{{ $user->email }}</i>
+                    <i>{{ $user->name }}</i>
                     <i class="glyphicon glyphicon-home"></i>
                     <a href="{{ route('admin.logout') }}"><i class="glyphicon glyphicon-log-out"></i></a>
                 @elseif($auth == 'guest')
@@ -109,22 +109,22 @@
                         @if($auth == 'user')
                             <li id="admin_classifications_index"><a href="{{ route('admin.classifications.index') }}"><i
                                             class="fa fa-cube"></i>视频分类 </a></li>
-                            <li id="admin_logs_index"><a href="{{ route('admin.logs.index') }}"><i
-                                            class="fa fa-cube"></i>日志管理
-                                </a></li>
-                            <li id="admin_events_index"><a href="{{ route('admin.events.index') }}"><i
-                                            class="fa fa-cube"></i>事件管理
-                                </a></li>
-                            <li id="admin_tasks_index"><a href="{{ route('admin.tasks.index') }}"><i
-                                            class="fa fa-cube"></i>任务管理
-                                </a></li>
                             <li id="admin_videos_index"><a href="{{ route('admin.videos.index') }}"><i
                                             class="fa fa-cube"></i>视频列表 </a></li>
                             <li id="admin_users_index"><a href="{{ route('admin.users.index') }}"><i
                                             class="fa fa-cube"></i>用户管理
                                 </a></li>
+                            <li id="admin_logs_index"><a href="{{ route('admin.logs.index') }}"><i
+                                            class="fa fa-cube"></i>日志查询
+                                </a></li>
+                            <li id="admin_events_index"><a href="{{ route('admin.events.index') }}"><i
+                                            class="fa fa-cube"></i>事件查询
+                                </a></li>
+                            <li id="admin_tasks_index"><a href="{{ route('admin.tasks.index') }}"><i
+                                            class="fa fa-cube"></i>任务查询
+                                </a></li>
                             <li id="admin_users_index"><a href="{{ route('admin.messages.index') }}"><i
-                                            class="fa fa-cube"></i>消息管理
+                                            class="fa fa-cube"></i>客服消息
                                 </a></li>
                         @elseif($auth=='wechat')
                             <li id="my_videos_index">

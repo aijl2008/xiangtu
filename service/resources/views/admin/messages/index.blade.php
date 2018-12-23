@@ -45,6 +45,10 @@
         </tbody>
     </table>
 
+    <div class="clearfix"></div>
+    {{$rows->render()}}
+    <div class="clearfix"></div>
+
     <div id="message-box" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
          aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
