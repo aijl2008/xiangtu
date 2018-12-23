@@ -1,38 +1,24 @@
 <view class="container">
-  <view class="upload">
+  <view class="form-item-container">
     <input class="file_name" placeholder="在上传视频之前，输入视频名称" auto-focus type="text" bindinput="inputChange"/>
-    
-    <view class="page">
-    <view class="page__hd">
-        <text class="page__title">发布到哪个分类</text>
-    </view>
+  </view>
 
-    <view class="page__bd">
-        <view class="section section_gap">
-            <radio-group class="radio-group" bindchange="classificationChange">
-                <radio class="radio" wx:for-items="{{classifications}}" wx:key="name" value="{{item.id}}" checked="{{item.checked}}">
-                    <text>{{item.name}}</text>
-                </radio>
-            </radio-group>
-        </view>
-    </view>
-    <view class="page__hd">
-        <text class="page__title">谁可以看</text>
-    </view>
-    <view class="page__bd">
-        <view class="section section_gap">
-            <radio-group class="radio-group" bindchange="visibilityChange">
-                <radio class="radio" wx:for-items="{{visibilities}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
-                    <text>{{item.value}}</text>
-                </radio>
-            </radio-group>
-        </view>
-    </view>
-</view>
+  <view class="form-item-container">
+    <picker bindchange="bindPickerChangeClassifications" value="{{classification}}" range="{{classificationsShow}}">
+      <view class="form-header">请选择分类</view>
+      <view class="picker">当前选择：{{classifications[classification].name}}</view>
+    </picker>
+  </view>
 
+  <view class="form-item-container">
+    <picker bindchange="bindPickerChangeVisibilities" value="{{visibility}}" range="{{visibilitiesShow}}">
+      <view class="form-header">请选择分类</view>
+      <view class="picker">当前选择：{{visibilities[visibility].name}}</view>
+    </picker>
+  </view>
 
-
-<button class="file_upload" bindtap="chooseFile">上传视频</button>
+  <view class="upload">
+    <button class="file_upload" bindtap="chooseFile">上传视频</button>
   </view>
 </view>
 

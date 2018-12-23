@@ -6,60 +6,66 @@ const app = getApp()
 
 Page(
   {
-  data: {
-    fileName: '',
-    visibility:1,
-    visibilities: [
-      { name: '公开，所有的人可以观看', value: '1', checked: 'true' },
-      { name: '保护，仅我自已和我的粉丝可以观看', value: '2' },
-      { name: '私密，仅我自己可以观看', value: '3' },
-    ],
-    classification:0,
-    classifications: [],
+    data: {
+      fileName: '',
+      visibility: 1,
+      visibilities: [
+        {name: '公开，所有的人可以观看', value: '1'},
+        {name: '保护，仅我自已和我的粉丝可以观看', value: '2'},
+        {name: '私密，仅我自己可以观看', value: '3'},
+      ],
+      visibilitiesShow: ['公开，所有的人可以观看', '保护，仅我自已和我的粉丝可以观看', '私密，仅我自己可以观看'],
+      classification: 0,
+      classifications: [],
+      classificationsShow: [],
 
-  },
+    },
 
 
-  onLoad(options) {
-    this.get_classifications();
-  },
+    onLoad(options) {
+      this.get_classifications();
+    },
 
-  get_classifications() {
-    util.ajaxCommon(API.URL_GET_HEADER_NAV, {}, {
-      success: (res) => {
-        if (res.code == API.SUCCESS_CODE) {
+    get_classifications() {
+      util.ajaxCommon(API.URL_GET_HEADER_NAV, {}, {
+        success: (res) => {
+          if (res.code == API.SUCCESS_CODE) {
+            if (res.data.length) {
+              let classificationsShow = [];
+              for(let item of res.data){
+                classificationsShow.push(item.name);
+              }
 
-          if (res.data.length) {
-            this.setData({
-              classifications: res.data,
-              //activeId: res.data[0].id,
-            }, () => {
-              //this.getVideoList();
-            });
+              this.setData({
+                classifications: res.data,
+                classificationsShow,
+              });
+            }
           }
         }
-      }
-    });
-  },
+      });
+    },
 
-  visibilityChange: function (e) {
-    this.data.visibility = e.detail.value;
-  },
+    bindPickerChangeVisibilities: function (e) {
+      this.setData({
+        visibility: e.detail.value
+      });
+    },
+    bindPickerChangeClassifications: function (e) {
+      this.setData({
+        classification: e.detail.value
+      });
+    },
 
-  classificationChange: function (e) {
-    this.data.classification = e.detail.value;
-  },
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
 
-  /**
- * 生命周期函数--监听页面显示
- */
-  onShow: function () {
+    },
+    getSignature: function (callback) {
 
-  },
-  getSignature: function (callback) {
-
-    util.ajaxCommon(API.URL_VOD_SIGNATURE, {
-    }, {
+      util.ajaxCommon(API.URL_VOD_SIGNATURE, {}, {
         needToken: true,
         success: (res) => {
           console.log(res);
@@ -67,7 +73,6 @@ Page(
           if (res.code == API.SUCCESS_CODE) {
 
 
-            
             if (res.data && res.data.signature) {
               callback(res.data.signature);
             } else {
@@ -77,69 +82,71 @@ Page(
         }
       });
 
-  },
-  inputChange: function (evt) {
-    this.fileName = evt.detail.value;
-  },
-  chooseFile: function () {
-    var This = this;
-    wx.chooseVideo({
-      sourceType: ['album', 'camera'],
-      compressed: true,
-      maxDuration: 60,
-      success: function (file) {
-        VodUploader.start({
-          videoFile: file, //必填，把chooseVideo回调的参数(file)传进来
-          fileName: This.fileName, //选填，视频名称，强烈推荐填写(如果不填，则默认为“来自微信小程序”)
-          getSignature: This.getSignature, //必填，获取签名的函数
-          success: function (result) {
-            console.log('success');
-            console.log(result);
-          },
-          error: function (result) {
-            console.log('error');
-            console.log(result);
-            wx.showModal({
-              title: '上传失败',
-              content: JSON.stringify(result),
-              showCancel: false
-            });
-          },
-          progress: function (result) {
-            console.log('progress');
-            console.log(result);
-            wx.showModal({
-              title: '上传中',
-              content: result.percent * 100 + '%',
-              showCancel: false
-            });
-          },
-          finish: function (result) {
-            console.log('finish');
-            console.log(result);
+    },
+    inputChange: function (evt) {
+      this.setData({
+        fileName: evt.detail.value
+      });
+    },
+    chooseFile: function () {
+      var This = this;
+
+      const { visibility, visibilities, classification, classifications,} = this.data;
+      wx.chooseVideo({
+        sourceType: ['album', 'camera'],
+        compressed: true,
+        maxDuration: 60,
+        success: function (file) {
+          VodUploader.start({
+            videoFile: file, //必填，把chooseVideo回调的参数(file)传进来
+            fileName: This.fileName, //选填，视频名称，强烈推荐填写(如果不填，则默认为“来自微信小程序”)
+            getSignature: This.getSignature, //必填，获取签名的函数
+            success: function (result) {
+              console.log('success');
+              console.log(result);
+            },
+            error: function (result) {
+              console.log('error');
+              console.log(result);
+              wx.showModal({
+                title: '上传失败',
+                content: JSON.stringify(result),
+                showCancel: false
+              });
+            },
+            progress: function (result) {
+              console.log('progress');
+              console.log(result);
+              wx.showModal({
+                title: '上传中',
+                content: result.percent * 100 + '%',
+                showCancel: false
+              });
+            },
+            finish: function (result) {
+              console.log('finish');
+              console.log(result);
 
 
-            /**
-             * 通知服务器上传成功
-             */
-            var formData = {
-              title: result.videoName,
-              url: result.videoUrl,
-              cover_url: "",
-              file_id: result.fileId,
-              visibility: 1,
-              classification_id: 1
-            };
+              /**
+               * 通知服务器上传成功
+               */
+              var formData = {
+                title: result.videoName,
+                url: result.videoUrl,
+                cover_url: "",
+                file_id: result.fileId,
+                visibility: visibilities[visibility].value,
+                classification_id: classifications[classification].value
+              };
 
-            console.log(API.URL_VIDEO_UPLOAD_SUCCESS,formData);
-            util.ajaxCommon(API.URL_VIDEO_UPLOAD_SUCCESS, formData, {
+              util.ajaxCommon(API.URL_VIDEO_UPLOAD_SUCCESS, formData, {
                 method: "POST",
                 needToken: true,
                 success: (res) => {
                   console.log(res);
 
                   if (res.code == API.SUCCESS_CODE) {
-
 
 
                     wx.showModal({
@@ -154,13 +161,9 @@ Page(
                   }
                 }
               });
-
-
-
-            
-          }
-        });
-      }
-    })
-  }
-})
+            }
+          });
+        }
+      })
+    }
+  })
