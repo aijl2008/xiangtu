@@ -2,7 +2,14 @@
 <view class="video-item-container">
   <view class="video-container">
     <block wx:if="{{currentId != video.id}}">
-      <image class="video-image" mode="widthFix" src="{{video.cover_url||'/images/video_default_cover.png'}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
+      <block wx:if="{{loaded}}">
+        <image class="video-image" mode="widthFix" src="{{video.cover_url||'/images/video_default_cover.png'}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
+      </block>
+      <block wx:else>
+        <image class="video-image" mode="widthFix" src="/images/video_default_cover.png" bindtap="videoPlay" data-id="{{video.id}}"></image>
+      </block>
+
+
     </block>
     <block wx:else>
       <video autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
