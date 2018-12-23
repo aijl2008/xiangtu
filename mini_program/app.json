@@ -24,32 +24,32 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/images/home.png",
-        "selectedIconPath": "/images/home.png"
+        "iconPath": "/images/2-home.png",
+        "selectedIconPath": "/images/2-home.png"
       },
       {
         "pagePath": "pages/follow/follow",
         "text": "关注",
-        "iconPath": "/images/eye.png",
-        "selectedIconPath": "/images/eye.png"
+        "iconPath": "/images/2-eye.png",
+        "selectedIconPath": "/images/2-eye.png"
       },
       {
         "pagePath": "pages/uploadList/uploadList",
         "text": "上传",
-        "iconPath": "/images/photo-camera.png",
-        "selectedIconPath": "/images/photo-camera.png"
+        "iconPath": "/images/2-cinema.png",
+        "selectedIconPath": "/images/2-cinema.png"
       },
       {
         "pagePath": "pages/collection/collection",
         "text": "收藏",
-        "iconPath": "/images/heart.png",
-        "selectedIconPath": "/images/heart.png"
+        "iconPath": "/images/2-heart.png",
+        "selectedIconPath": "/images/2-heart.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "/images/avatar.png",
-        "selectedIconPath": "/images/avatar.png"
+        "iconPath": "/images/2-user.png",
+        "selectedIconPath": "/images/2-user.png"
       }
     ]
   }
