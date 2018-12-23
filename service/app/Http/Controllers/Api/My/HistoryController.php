@@ -34,7 +34,7 @@ class HistoryController extends Controller
                         ->pluck('video_id')
                         ->toArray()
                 )
-                ->simplePaginate(16)
+                ->paginate(16)
         );
     }
 }

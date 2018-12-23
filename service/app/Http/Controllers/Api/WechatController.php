@@ -18,21 +18,31 @@ class WechatController extends Controller
     {
         return Helper::success(Wechat::query()
             ->orderBy('id', 'desc')
-            ->simplePaginate(20));
+            ->paginate(20));
     }
 
     public function recommend(Request $request)
     {
         $wechat = $request->user("api");
-        $wechats = Wechat::query()->has('video')->with(
-            [
-                'video' => function (HasMany $query) {
-                    $query->orderBy('updated_at', 'desc')->take(6);
-                }
-            ]
-        )->simplePaginate(16);
+        $wechats = Wechat::query()
+//            ->whereHas([
+//                'video' => function (Builder $query) {
+//                    $query->orderBy('updated_at', 'desc')->take(6);
+//                }
+//            ])
+            ->has('video', '>', 3)
+//            ->with(
+//                'video'
+//                [
+//                    'video' => function (HasMany $query) {
+//                        $query->orderBy('updated_at', 'desc')->take(4);
+//                    }
+//                ]
+            //           )
+            ->paginate(16);
         foreach ($wechats as $item) {
             $item->followed = $item->haveFollower($wechat);
+            $item->video = $item->video()->take(3)->get();
         }
         return Helper::success(
             $wechats

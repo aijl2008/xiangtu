@@ -13,6 +13,7 @@ use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Log;
 use App\Models\Video;
+use App\Models\Wechat;
 use App\Service\Like;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class LikeController extends Controller
                 if (!$user) {
                     return new LengthAwarePaginator([], 0, 20);
                 }
-                return $user->liked()->with('wechat')->simplePaginate(16);
+                return $user->liked()->with('wechat')->paginate(16);
             }, $request->user('api'))
         );
     }
@@ -48,3 +49,5 @@ class LikeController extends Controller
         ))->toggle();
     }
 }
+
+
