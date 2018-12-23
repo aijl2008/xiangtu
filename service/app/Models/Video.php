@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Video extends Model
 {
@@ -11,6 +12,9 @@ class Video extends Model
     const VISIBILITY_ANY = 1;
     const VISIBILITY_ONLY_FOLLOWED = 2;
     const VISIBILITY_ONLY_ME = 3;
+    const STATUS_DISABLE = -100;
+    const STATUS_TRANSFERING = 0;
+    const STATUS_OK = 1;
     public $timestamps = true;
     protected $fillable = [
         "wechat_id",
@@ -112,5 +116,14 @@ class Video extends Model
             $this->attributes['published_at'] = '7天以上';
         }
         return $this->attributes['published_at'];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('status', function (Builder $builder) {
+            $builder->where('status', '=', self::STATUS_OK);
+        });
     }
 }
