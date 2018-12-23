@@ -11,6 +11,7 @@ Page({
     historyList: [],
     currentPage: 0,
     lastPage: 0,
+    publicMes: ''
   },
 
   /**
@@ -68,6 +69,9 @@ Page({
 
     if(currentPage >= lastPage){
       /*到底了*/
+      this.setData({
+        publicMes: 'noMore'
+      });
     } else {
       this.getHistoryList();
     }
@@ -96,6 +100,10 @@ Page({
               historyList: historyList.concat(res.data.data),
               lastPage: res.data.last_page,
               currentPage,
+            })
+          } else {
+            this.setData({
+              publicMes: 'empty',
             })
           }
         }
