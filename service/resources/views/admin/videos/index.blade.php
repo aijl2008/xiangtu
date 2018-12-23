@@ -28,6 +28,7 @@
             </div>
         @endforeach
     </div>
+    <div class="clearfix"></div>
     <div class="text-center">{{$rows->links()}}</div>
     <div class="clearfix"></div>
 @endsection

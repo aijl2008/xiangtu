@@ -33,7 +33,9 @@
             </tbody>
         </table>
     </div>
+    <div class="clearfix"></div>
     {!! $rows->render() !!}
+    <div class="clearfix"></div>
 @stop
 @section('js')
     <script language="JavaScript">

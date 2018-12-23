@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $request->expectsJson()
-            ? response()->json(['message' => $exception->getMessage()], 401)
+            ? response()->json(['code'=>401,'message' => $exception->getMessage()], 200)
             : redirect()->guest($exception->redirectTo() ?? route('wechat.login.show'));
     }
 }

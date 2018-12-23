@@ -19,7 +19,7 @@ class HistoryController extends Controller
     function index(Request $request)
     {
         return Helper::success(
-            (new Log())->footprint($request->user('api')->id)->paginate(16)
+            (new Log())->footprint($request->user('api')->id)->simplePaginate(16)
         );
     }
 }

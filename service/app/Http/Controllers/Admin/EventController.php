@@ -10,6 +10,6 @@ class EventController extends Controller
 {
     function index()
     {
-        return view('admin.events.index')->with('rows', Event::query()->orderBy('id', 'desc')->paginate());
+        return view('admin.events.index')->with('rows', Event::query()->orderBy('id', 'desc')->simplePaginate());
     }
 }

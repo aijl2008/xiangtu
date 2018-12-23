@@ -29,29 +29,16 @@ class Video
             ->when($classification, function (Builder $queries) use ($classification, $user_id) {
                 return $queries->where('classification_id', $classification);
             });
-        $video->offset(0)->take($take);
-        $videos = [];
-        foreach ($video->get() as $item) {
-            $row = $item->toArray();
-            $wechat = $item->wechat->toArray();
-            if (!empty($wechat)) {
-                if ($Wechat) {
-                    $wechat['followed'] = $Wechat->haveFollowed($item->wechat);
-                } else {
-                    $wechat['followed'] = false;
-                }
+        $Paginate = $video->simplePaginate();
+        foreach ($Paginate as $item) {
+            if (!empty($item->wechat->toArray())) {
+                $item->wechat->setAttribute('followed', $Wechat ? $Wechat->haveFollowed($item->wechat) : false);
             } else {
-                $wechat['followed'] = false;
+                $item->wechat->setAttribute('followed', false);
             }
-            $row['wechat'] = (object)$wechat;
-            if ($Wechat) {
-                $row['liked'] = $Wechat->haveLiked($item);
-            } else {
-                $row['liked'] = false;
-            }
-            $videos[] = (object)$row;
+            $item->setAttribute('liked', $Wechat ? $Wechat->haveLiked($item) : false);
         }
-        return new LengthAwarePaginator($videos, $video->count(), $take);
+        return $Paginate;
     }
 
     function show(\App\Models\Video $video, Wechat $Wechat = null)

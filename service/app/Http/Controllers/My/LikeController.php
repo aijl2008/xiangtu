@@ -20,7 +20,7 @@ class LikeController extends Controller
     {
         $view = view('my.liked.index');
         $video = $request->user('wechat')->liked()->with('wechat')->orderBy('id', 'desc');
-        $view->with('rows', $video->paginate());
+        $view->with('rows', $video->simplePaginate());
         $view->with('classification', $request->input('classification', 0));
         return $view;
     }

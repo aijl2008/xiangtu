@@ -27,7 +27,7 @@ class LikeController extends Controller
                 if (!$user) {
                     return new LengthAwarePaginator([], 0, 20);
                 }
-                return $user->liked()->with('wechat')->paginate(16);
+                return $user->liked()->with('wechat')->simplePaginate(16);
             }, $request->user('api'))
         );
     }

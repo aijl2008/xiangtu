@@ -17,7 +17,7 @@ class WechatController extends Controller
     {
         return Helper::success(Wechat::query()
             ->orderBy('id', 'desc')
-            ->paginate(20));
+            ->simplePaginate(20));
     }
 
     public function recommend()
@@ -29,7 +29,7 @@ class WechatController extends Controller
                         $query->orderBy('updated_at', 'desc')->take(6);
                     }
                 ]
-            )->paginate(16)
+            )->simplePaginate(16)
         );
 
     }

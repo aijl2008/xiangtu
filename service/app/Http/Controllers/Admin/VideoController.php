@@ -26,17 +26,8 @@ class VideoController extends Controller
         return view('admin.videos.index')
             ->with('rows', Video::query()
                 ->orderBy('id', 'desc')
-                ->paginate()
+                ->simplePaginate()
             );
-    }
-
-
-    function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
     }
 
     /**
@@ -57,6 +48,7 @@ class VideoController extends Controller
         Task::query()->create(
             [
                 'file_id' => $video->file_id,
+                'task_id' => $snapshot->vodTaskId,
                 'code' => $snapshot->code,
                 'code_desc' => $snapshot->codeDesc,
                 'message' => $snapshot->message

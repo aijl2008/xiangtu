@@ -27,7 +27,7 @@ class FollowController extends Controller
                     return $query->orderBy('id', 'desc')->take(4);
                 }
             ]
-        )->paginate());
+        )->simplePaginate());
         return $view;
 
     }
