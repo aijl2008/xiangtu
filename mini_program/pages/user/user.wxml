@@ -6,7 +6,7 @@
       <view class="user-top-container">
         <image class="user-header" src="{{userInfo.avatar}}" mode="aspectFit"></image>
         <view class="seat"></view>
-        <text class="edit-btn">编辑</text>
+        <navigator class="edit-btn" url="/pages/user/edit/edit">编辑</navigator>
         <text class="share-btn">分享我的主页</text>
       </view>
 

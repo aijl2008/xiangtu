@@ -51,7 +51,7 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
   wx.request({
     url,
     header: {
-      Accept: '',
+      Accept: 'application/json',
       Authorization: token ? `Bearer ${token}` : '',
     },
     data: finalData,
@@ -73,13 +73,12 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
             });
           }
         })
-      } else  if (typeof success === 'function') {
+      } else if (typeof success === 'function') {
         success(response.data);
       }
 
     },
     fail: function (res) {
-      console.log('fail', res);
       if (typeof fail === 'function') {
         fail(res);
       } else {
@@ -89,7 +88,6 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
       }
     },
     complete: function (res) {
-      console.log(res);
       wx.hideLoading();
       if (typeof complete === 'function') {
         complete(res);
