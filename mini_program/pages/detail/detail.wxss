@@ -36,6 +36,7 @@
 .share-msg-container .item-container{
   display: flex;
   align-items: center;
+  border: none;
 }
 
 .share-msg-container .item-container .icon{
