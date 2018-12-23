@@ -281,9 +281,3 @@
 #player-container-id {
     margin-bottom: 5px;
 }
-
-pre {
-    white-space: pre-wrap;
-    max-width: 640px;
-    overflow: auto;
-}

@@ -9,12 +9,11 @@
             <thead>
             <tr>
                 <th>编号</th>
-                <th class="text-nowrap">version</th>
-                <th class="text-nowrap">type</th>
-                <th class="text-nowrap">status</th>
-                <th class="text-nowrap">code</th>
-                <th class="text-nowrap">message</th>
-                <th class="text-nowrap">data</th>
+                <th class="text-nowrap">版本</th>
+                <th class="text-nowrap">类型</th>
+                <th class="text-nowrap">状态</th>
+                <th class="text-nowrap">错误码</th>
+                <th class="text-nowrap">错误描述</th>
                 <th class="text-nowrap">更新时间</th>
             </tr>
             </thead>
@@ -27,10 +26,12 @@
                     <td class="text-nowrap">{{ $row->status }}</td>
                     <td class="text-nowrap">{{ $row->code }}</td>
                     <td class="text-nowrap">{{ $row->message }}</td>
-                    <td class="text-nowrap">
+                    <td class="text-nowrap">{{ $row->updated_at }}</td>
+                </tr>
+                <tr>
+                    <td colspan="7">
                         <pre>{{ $row->data }}</pre>
                     </td>
-                    <td class="text-nowrap">{{ $row->updated_at }}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -42,6 +43,7 @@
     <script language="JavaScript">
         $(function () {
             $('#admin_events_index').addClass("active")
+            //$("pre").css("width", $("pre").parent().width() - 20)
         });
     </script>
 @endsection

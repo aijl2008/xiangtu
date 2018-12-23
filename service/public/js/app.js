@@ -11,6 +11,7 @@ $(function () {
                 },
                 dataType: "json",
                 success: function (res) {
+                    console.log(res);
                     if (res.code == 0) {
                         bootbox.alert({
                             title: "乡土味",
@@ -28,6 +29,7 @@ $(function () {
                     }
                 },
                 error: function (res, err, msg) {
+                    console.log(res, err, msg);
                     if (res.status == 401) {
                         bootbox.alert({
                             title: "乡土味",
@@ -50,8 +52,6 @@ $(function () {
     $(".follow").click(function () {
         var _this = $(this);
         var reload = _this.data('reload');
-        console.log(_this.data('wechat-id'));
-        console.log(_this.data('url'));
         $.ajax(
             {
                 url: _this.data('url'),
@@ -61,13 +61,14 @@ $(function () {
                 },
                 dataType: "json",
                 success: function (res) {
+                    console.log(res);
                     if (res.code == 0) {
                         bootbox.alert({
                             title: "乡土味",
                             message: res.msg,
                             className: 'bb-alternate-modal',
-                            callback:function () {
-                                if(reload){
+                            callback: function () {
+                                if (reload) {
                                     window.location.reload();
                                 }
                                 _this.html(res.msg);
@@ -83,6 +84,7 @@ $(function () {
                     }
                 },
                 error: function (res, err, msg) {
+                    console.log(res, err, msg);
                     if (res.status == 401) {
                         bootbox.alert({
                             title: "乡土味",

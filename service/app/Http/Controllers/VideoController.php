@@ -14,7 +14,15 @@ class VideoController extends Controller
     function index(Request $request)
     {
         $view = view('videos.index');
-        $view->with('rows', (new \App\Service\Video())->paginate($request->user('wechat'), $request->input('classification'), 15));
+        $view->with(
+            'rows',
+            (new \App\Service\Video())
+                ->paginate(
+                    $request->user('wechat'),
+                    $request->input('classification'),
+                    15
+                )
+        );
         $view->with('classification', $request->input('classification', 0));
         return $view;
     }
@@ -46,20 +54,11 @@ class VideoController extends Controller
      * @param Video $video
      * @return array
      */
-    public function play(Video $video)
+    public function play(Request $request, Video $video)
     {
         $video->increment('played_number');
         $user = Auth::guard('wechat')->user();
-        if ($user) {
-            Log::query()->create(
-                [
-                    'action' => '播放',
-                    'from_user_id' => $user->id,
-                    'video_id' => $video->id,
-                    'message' => $user->nickname . '播放了视频' . $video->id
-                ]
-            );
-        }
+        (new Log())->log("播放", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
         return Helper::success();
     }
 }

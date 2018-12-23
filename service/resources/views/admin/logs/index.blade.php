@@ -20,9 +20,9 @@
                 <tr>
                     <td class="text-nowrap">{{ $row->id }}</td>
                     <td class="text-nowrap">{{ $row->action }}</td>
-                    <td class="text-nowrap">{{ $row->from_user_id }}</td>
+                    <td class="text-nowrap">{{ $row->from_user->nickname }}</td>
                     <td class="text-nowrap">
-                        <pre>{{ $row->message }}</pre>
+                        {!! $row->formatted_message  !!}
                     </td>
                     <td class="text-nowrap">{{ $row->updated_at }}</td>
                 </tr>

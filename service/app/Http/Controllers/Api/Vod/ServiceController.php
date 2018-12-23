@@ -31,7 +31,6 @@ class ServiceController extends Controller
                     if ($url) {
                         Video::query()
                             ->where('file_id', $decoded->data->fileId)
-                            ->where('cover_url', '')
                             ->update(
                                 [
                                     'cover_url' => $url,
@@ -43,12 +42,24 @@ class ServiceController extends Controller
                 case 'NewFileUpload':
                     $video = Video::query()->where('file_id', $decoded->data->fileId)->first();
                     if (!$video) {
-                        Log::error("数据异常，找不到ID为的视频");
+                        Log::error("数据异常，找不到file_id为{$decoded->data->fileId}的视频");
                     }
                     $video->wechat->increment('uploaded_number');
+                    (new \App\Models\Log())->log("上传视频", $video->wechat->id, 0, $video->id);
                     break;
 
                 case 'TranscodeComplete':
+                    $video = Video::query()->where('file_id', $decoded->data->fileId)->first();
+                    if (!$video) {
+                        Log::error("数据异常，找不到file_id为{$decoded->data->fileId}的视频");
+                    }
+                    $cover_url = $decoded->data->coverUrl ?: null;
+                    if ($cover_url) {
+                        $video->cover_url = $cover_url;
+                        $video->duration = $decoded->data->duration ?? 0;
+                        $video->status = 1;
+                        $video->save();
+                    }
                     break;
 
                 case 'ProcedureStateChanged':

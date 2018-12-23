@@ -36,14 +36,7 @@ class Like
         }
         if ($this->user->liked()->where("video_id", $this->video->id)->count() > 0) {
             $this->user->liked()->detach($this->video->id);
-            Log::query()->create(
-                [
-                    'action' => '取消收藏',
-                    'from_user_id' => $this->user->id,
-                    'to_user_id' => $this->video->wechat->id,
-                    'message' => $this->user->nickname . '取消收藏了' . $this->video->wechat->nickname . '的视频'
-                ]
-            );
+            (new Log())->log('取消收藏', $this->user->id, $this->video->wechat->id, $this->video->id);
             $this->video->decrement('liked_number');
             return Helper::success(
                 [
@@ -55,14 +48,7 @@ class Like
         } else {
             $this->user->liked()->attach($this->video->id);
             $this->video->increment('liked_number');
-            Log::query()->create(
-                [
-                    'action' => '收藏',
-                    'from_user_id' => $this->user->id,
-                    'to_user_id' => $this->video->wechat->id,
-                    'message' => $this->user->nickname . '收藏了' . $this->video->wechat->nickname . '的视频'
-                ]
-            );
+            (new Log())->log('收藏', $this->user->id, $this->video->wechat->id, $this->video->id);
             return Helper::success(
                 [
                     'liked_number' => $this->video->liked_number

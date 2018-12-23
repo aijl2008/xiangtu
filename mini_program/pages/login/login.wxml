@@ -1,4 +1,10 @@
 <!--pages/login/login.wxml-->
+<view class="logo">
+            <image
+          mode="aspectFit"
+          src="/images/logo.jpeg"
+        ></image>
+</view>
 <view class="container">
   <button class="get-user-btn" with-credentials plain hover-class="none" open-type="getUserInfo"
           bindgetuserinfo="getUserInfo">微信登录</button>

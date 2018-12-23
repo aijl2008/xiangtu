@@ -13,7 +13,6 @@ use App\Models\Task;
 use App\Models\Vod;
 use App\Models\Wechat;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
 class Video
@@ -26,9 +25,11 @@ class Video
             $user_id = 0;
         }
         $video = \App\Models\Video::query()
+            ->with('wechat')
             ->when($classification, function (Builder $queries) use ($classification, $user_id) {
                 return $queries->where('classification_id', $classification);
-            });
+            })
+            ->orderBy('id', 'desc');
         $Paginate = $video->simplePaginate();
         foreach ($Paginate as $item) {
             if (!empty($item->wechat->toArray())) {

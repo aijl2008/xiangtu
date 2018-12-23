@@ -7,19 +7,19 @@
         <div class="col-md-3 col-sm-4 col-md-4">
             <div class="jumbotron" style="background: rgb(8, 183, 6);">
                 <h4>视频今日播放数</h4>
-                <p>1092</p>
+                <p>{{$played_number}}</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-4 col-md-4">
             <div class="jumbotron" style="background: rgb(255, 168, 47);">
                 <h4>今日新增粉丝数</h4>
-                <p>2903</p>
+                <p>{{$be_followed_number}}</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-4 col-md-4">
             <div class="jumbotron" style="background: rgb(74, 144, 226);">
                 <h4>视频累计播放数</h4>
-                <p>10323r45</p>
+                <p>{{$total_played_number}}</p>
             </div>
         </div>
         <div class="clearfix"></div>

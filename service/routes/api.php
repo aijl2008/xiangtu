@@ -18,6 +18,7 @@ Route::resource('videos', 'Api\VideoController', [
  * 推荐的用户
  */
 Route::get('wechat/recommend', 'Api\WechatController@recommend');
+Route::get('wechat/{wechat}', 'Api\WechatController@show');
 
 /**
  * Vod 事件服务

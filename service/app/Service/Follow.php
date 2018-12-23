@@ -35,14 +35,7 @@ class Follow
             return Helper::error(-1, "不允许关注自已");
         }
         if ($this->user->followed()->where("wechat_id", $this->target->id)->count() > 0) {
-            Log::query()->create(
-                [
-                    'action' => '取消关注',
-                    'from_user_id' => $this->user->id,
-                    'to_user_id' => $this->target->id,
-                    'message' => $this->user->nickname . '取消关注了' . $this->target->nickname
-                ]
-            );
+            (new Log())->log('取消关注', $this->user->id, $this->target->id);
             $this->user->followed()->where('wechat_id', $this->target->id)->delete();
             $this->user->decrement('followed_number');
             $this->target->decrement('be_followed_number');
@@ -59,14 +52,7 @@ class Follow
                 "followed_id" => $this->user->id
             ]);
             $this->user->followed()->save($FollowedWechat);
-            Log::query()->create(
-                [
-                    'action' => '关注',
-                    'from_user_id' => $this->user->id,
-                    'to_user_id' => $this->target->id,
-                    'message' => $this->user->nickname . '关注了' . $this->target->nickname
-                ]
-            );
+            (new Log())->log('关注', $this->user->id, $this->target->id);
             $this->user->increment('followed_number');
             $this->target->increment('be_followed_number');
             return Helper::success(

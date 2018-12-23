@@ -22,6 +22,7 @@
 .edit-name{
   width: 60%;
   background: #EEE;
+  margin-top: 100rpx
 }
 
 .edit-name-input{

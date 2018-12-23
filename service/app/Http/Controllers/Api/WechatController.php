@@ -6,6 +6,7 @@ use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Wechat;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Request;
 
 class WechatController extends Controller
 {
@@ -20,17 +21,31 @@ class WechatController extends Controller
             ->simplePaginate(20));
     }
 
-    public function recommend()
+    public function recommend(Request $request)
     {
+        $wechat = $request->user("api");
+        $wechats = Wechat::query()->has('video')->with(
+            [
+                'video' => function (HasMany $query) {
+                    $query->orderBy('updated_at', 'desc')->take(6);
+                }
+            ]
+        )->simplePaginate(16);
+        foreach ($wechats as $item) {
+            $item->followed = $item->haveFollower($wechat);
+        }
         return Helper::success(
-            Wechat::query()->has('video')->with(
-                [
-                    'video' => function (HasMany $query) {
-                        $query->orderBy('updated_at', 'desc')->take(6);
-                    }
-                ]
-            )->simplePaginate(16)
+            $wechats
         );
 
+    }
+
+    function show(Request $request, $id)
+    {
+        return Wechat::query()->with([
+            'video' => function (HasMany $builder) {
+                $builder->orderBy('id', 'desc')->limit(3);
+            }
+        ])->find($id);
     }
 }

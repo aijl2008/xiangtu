@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Wechat;
 use EasyWeChat\Factory;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class WechatAuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('login')->with('rows',Wechat::query()->has('video')->inRandomOrder()->take(12)->get());
+        return view('login')->with('rows', Wechat::query()->has('video')->inRandomOrder()->take(12)->get());
     }
 
     public function redirect()
@@ -38,9 +39,11 @@ class WechatAuthController extends Controller
         return $app->oauth;
     }
 
-    public function mock(Request $request, $id){
+    public function mock(Request $request, $id)
+    {
         $wechat = Wechat::query()->findOrFail($id);
         Auth::guard('wechat')->login($wechat);
+        (new Log())->log("登录", $wechat->id, 0, 0, '模拟');
         return redirect()->to(route("my.videos.index"));
     }
 
@@ -48,23 +51,25 @@ class WechatAuthController extends Controller
     {
         try {
             $wechat = $this->oauth()->user()->getOriginal();
-            if (!array_key_exists('openid', $wechat)) {
-                abort(505, '微信接口返回的值中找不到openid');
+            if (!array_key_exists('unionid', $wechat)) {
+                abort(403, '微信接口返回的值中找不到unionid');
             }
-            $user = Wechat::query()->where('union_id', $wechat['unionid'] ?: $wechat['openid'])->first();
+            $user = Wechat::query()->where('union_id', $wechat['unionid'])->first();
             if (!$user) {
-                $user = new Wechat();
-                $user->open_id = config('wechat.open_platform.default.app_id') . '|' . $wechat['openid'];
-                $user->union_id = $wechat['unionid'];
-                $user->nickname = $wechat['nickname'];
-                $user->sex = $wechat['sex'];
-                $user->province = $wechat['province'];
-                $user->city = $wechat['city'];
-                $user->country = $wechat['country'];
-                $user->avatar = $wechat['headimgurl'];
-                $user->save();
+                abort(403, "您必须首先使用小程序登录过后，才能使用扫描二维码");
+//                $user = new Wechat();
+//                $user->union_id = $wechat['unionid'];
+//                $user->nickname = $wechat['nickname'];
+//                $user->sex = $wechat['sex'];
+//                $user->province = $wechat['province'];
+//                $user->city = $wechat['city'];
+//                $user->country = $wechat['country'];
+//                $user->avatar = $wechat['headimgurl'];
+//                $user->save();
+//                (new Log())->log("注册", $wechat->id, 0, 0, '扫描二维码');
             }
             Auth::guard('wechat')->login($user);
+            (new Log())->log("登录", $user->id, 0, 0, '扫描二维码');
             return redirect()->intended(route("my.videos.index"));
         } catch (AuthorizeFailedException $e) {
             abort(403, "认证已过期");
@@ -73,6 +78,7 @@ class WechatAuthController extends Controller
 
     public function logout(Request $request)
     {
+        (new Log())->log("退出", $request->user('wechat')->id);
         Auth::guard('wechat')->logout();
         $request->session()->invalidate();
         return redirect()->to(route('wechat.login.show'));

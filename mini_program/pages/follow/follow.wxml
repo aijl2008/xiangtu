@@ -18,7 +18,7 @@
   </block>
   <block wx:elif="{{publicMes == 'empty'}}">
     <component-empty-data>
-      <text class="no-data-mes">暂无关注</text>
+      <image src="/images/video_default_cover.png"></image>           <text class="no-data-mes">暂无关注</text>
       <navigator class="add-follow" url="/pages/recommend/recommend">添加关注</navigator>
     </component-empty-data>
   </block>

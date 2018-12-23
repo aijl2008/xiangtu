@@ -24,8 +24,8 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/images/photo-camera.png",
-        "selectedIconPath": "/images/photo-camera.png"
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/home.png"
       },
       {
         "pagePath": "pages/follow/follow",
