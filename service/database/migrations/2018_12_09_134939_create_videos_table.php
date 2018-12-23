@@ -27,6 +27,8 @@ class CreateVideosTable extends Migration
             $table->integer('liked_number')->default(0);
             $table->integer('shared_wechat_number')->default(0);
             $table->integer('shared_moment_number')->default(0);
+            $table->integer('duration')->default(0);
+            $table->integer('size')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

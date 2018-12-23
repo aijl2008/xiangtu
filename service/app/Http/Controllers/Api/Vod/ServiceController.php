@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Vod;
 
 use App\Http\Controllers\Controller;
-use App\Models\Task;
+use App\Models\Event;
 use App\Models\Video;
 use Illuminate\Support\Facades\Log;
 
@@ -15,7 +15,7 @@ class ServiceController extends Controller
             $content = file_get_contents("php://input");
             Log::debug($content);
             $decoded = json_decode($content);
-            Task::query()->create(
+            Event::query()->create(
                 [
                     'version' => $decoded->version,
                     'type' => $decoded->eventType,
@@ -25,18 +25,39 @@ class ServiceController extends Controller
                     'data' => print_r($decoded->data, true)
                 ]
             );
-            if ('CreateSnapshotByTimeOffsetComplete' == $decoded->eventType) {
-                $url = $decoded->data->picInfo[0]->url ?? null;
-                if ($url) {
-                    Video::query()
-                        ->where('file_id', $decoded->data->fileId)
-                        ->where('cover_url', '')
-                        ->update(
-                            [
-                                'cover_url' => $url
-                            ]
-                        );
-                }
+            switch ($decoded->eventType) {
+                case 'CreateSnapshotByTimeOffsetComplete':
+                    $url = $decoded->data->picInfo[0]->url ?? null;
+                    if ($url) {
+                        Video::query()
+                            ->where('file_id', $decoded->data->fileId)
+                            ->where('cover_url', '')
+                            ->update(
+                                [
+                                    'cover_url' => $url,
+                                    'status' => 1
+                                ]
+                            );
+                    }
+                    break;
+                case 'NewFileUpload':
+                    $video = Video::query()->where('file_id', $decoded->data->fileId)->first();
+                    if (!$video) {
+                        Log::error("数据异常，找不到ID为的视频");
+                    }
+                    $video->wechat->increment('uploaded_number');
+                    break;
+
+                case 'TranscodeComplete':
+                    break;
+
+                case 'ProcedureStateChanged':
+                    break;
+                case 'FileDeleted':
+                case 'ClipComplete':
+                case 'ConcatComplete':
+                case 'PullComplete':
+                    break;
             }
         } catch (\Exception $e) {
             Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());

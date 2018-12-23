@@ -34,6 +34,8 @@ class ProfileController extends Controller
             return Helper::error(-1, "无更新");
         }
         $user->update($row);
-        return Helper::success();
+        return Helper::success(
+            $user
+        );
     }
 }

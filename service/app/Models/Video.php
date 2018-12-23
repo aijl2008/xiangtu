@@ -39,8 +39,12 @@ class Video extends Model
     {
         return [
             1 => '正常',
-            0 => '不可用',
+            0 => '转码中',
         ];
+    }
+
+    function task(){
+        return $this->hasMany(Task::class,'file_id','file_id');
     }
 
     function wechat()

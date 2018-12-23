@@ -196,6 +196,9 @@
         display: none;
     }
 
+    .icp{
+        font-size: 9px;
+    }
     /*#player-container-id {*/
     /*width: 290px;*/
     /*height: 195px;*/
@@ -277,4 +280,10 @@
 
 #player-container-id {
     margin-bottom: 5px;
+}
+
+pre {
+    white-space: pre-wrap;
+    max-width: 640px;
+    overflow: auto;
 }

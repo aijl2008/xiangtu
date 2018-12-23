@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [
-        'version', 'type', 'code', 'status', 'message', 'data'
+        'file_id', 'code', 'code_desc',  'message'
     ];
+
+    function video(){
+        return $this->belongsTo(Video::class,'file_id','file_id')->withDefault();
+    }
 }

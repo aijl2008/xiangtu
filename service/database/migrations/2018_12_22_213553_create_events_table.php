@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('file_id')->default('');
-            $table->string('task_id')->default('');
-            $table->string('code_desc')->default('');
+            $table->string('version')->default('');
+            $table->string('type')->default('');
+            $table->string('status')->default('');
             $table->string('code')->default('');
             $table->string("message", 300)->default("");
+            $table->longText("data");
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('events');
     }
 }

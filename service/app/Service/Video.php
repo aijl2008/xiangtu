@@ -9,6 +9,7 @@
 namespace App\Service;
 
 
+use App\Models\Task;
 use App\Models\Vod;
 use App\Models\Wechat;
 use Illuminate\Database\Eloquent\Builder;
@@ -74,11 +75,35 @@ class Video
      */
     function store(Array $data, Wechat $Wechat)
     {
-        if (!$data['cover_url']) {
+        if (strtolower(pathinfo($data['url'])['extension']) != 'mp4') {
+            $data['status'] = 0;
             $vod = new Vod();
-            Log::warning("用户未上传封面");
-            $data['cover_url'] = "https://{$_SERVER["SERVER_NAME"]}/images/video_default_cover.png";
-            $vod->createSnapshotByTimeOffsetAsCover($data['file_id'], 1);
+            $task = $vod->convertVodFile($data['file_id']);
+            Task::query()->create(
+                [
+                    'file_id' => $data['file_id'],
+                    'code' => $task->code,
+                    'code_desc' => $task->codeDesc,
+                    'message' => $task->message
+                ]
+            );
+        } else {
+            $data['status'] = 1;
+            if (!$data['cover_url']) {
+                $vod = new Vod();
+                Log::warning("用户未上传封面");
+                $data['cover_url'] = "https://{$_SERVER["SERVER_NAME"]}/images/video_default_cover.png";
+                $task = $vod->createSnapshotByTimeOffsetAsCover($data['file_id'], 1);
+                Task::query()->create(
+                    [
+                        'file_id' => $data['file_id'],
+                        'code' => $task->code,
+                        'code_desc' => $task->codeDesc,
+                        'message' => $task->message
+                    ]
+                );
+            }
+
         }
         $video = $Wechat->video()->create($data);
         return $video->toArray();

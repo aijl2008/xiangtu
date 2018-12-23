@@ -124,6 +124,21 @@ class Vod
         ]);
     }
 
+    function convertVodFile($file_id, $param = [])
+    {
+        $query = [
+            "Action" => "ConvertVodFile",
+            "fileId" => $file_id,
+            "isScreenshot" => 1,
+            "isWatermark0" => 0
+        ];
+
+        $params = array_merge($this->params, $query, $param);
+        $signature = $this->signature($params);
+        $task = $this->send('GET', $this->api . '?' . http_build_query(array_merge($params, ['Signature' => $signature])));
+        return $task;
+    }
+
     function createSnapshotByTimeOffsetAsCover($file_id, $timeOffset = 1)
     {
         return $this->createSnapshotByTimeOffset($file_id, [

@@ -11,41 +11,32 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Task;
 use App\Models\Video;
 use App\Models\Vod;
 
 class VideoController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     * @param $video
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        return view('admin.videos.index')->with('rows', Video::query()->orderBy('id', 'desc')->paginate());
+        return view('admin.videos.index')
+            ->with('rows', Video::query()
+                ->orderBy('id', 'desc')
+                ->paginate()
+            );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     function create()
     {
-        return view('my.videos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -56,12 +47,21 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        return view("admin.videos.show")->with('row', $video)->with('video', (new Vod())->getVideoInfo($video->file_id));
+        return view("admin.videos.show")
+            ->with('row', $video);
     }
 
     public function snapshot(Video $video)
     {
         $snapshot = (new Vod())->createSnapshotByTimeOffset($video->file_id);
+        Task::query()->create(
+            [
+                'file_id' => $video->file_id,
+                'code' => $snapshot->code,
+                'code_desc' => $snapshot->codeDesc,
+                'message' => $snapshot->message
+            ]
+        );
         if ($snapshot->code == 0) {
             return Helper::success(
                 [

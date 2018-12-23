@@ -126,23 +126,23 @@ class Demo extends Command
 
         $mockUsersAvatars = [];
         for ($i = 0; $i < 198; $i++) {
-            array_unshift($mockUsersAvatars, 'https://api.xiangtu.net.cn/avatar/' . $i . '.jpg');
+            array_unshift($mockUsersAvatars, env('APP_URL') . '/avatar/' . $i . '.jpg');
         }
         for ($i = 0; $i < 198; $i++) {
-            array_unshift($mockUsersAvatars, 'https://api.xiangtu.net.cn/avatar/' . $i . '.jpg');
+            array_unshift($mockUsersAvatars, env('APP_URL') . '/avatar/' . $i . '.jpg');
         }
         for ($i = 0; $i < 198; $i++) {
-            array_unshift($mockUsersAvatars, 'https://api.xiangtu.net.cn/avatar/' . $i . '.jpg');
+            array_unshift($mockUsersAvatars, env('APP_URL') . '/avatar/' . $i . '.jpg');
         }
         $mockVideoCovers = [];
         for ($i = 4; $i < 700; $i++) {
-            array_unshift($mockVideoCovers, 'https://api.xiangtu.net.cn/cover/' . $i . '.png');
+            array_unshift($mockVideoCovers, env('APP_URL') . '/cover/' . $i . '.png');
         }
         for ($i = 4; $i < 700; $i++) {
-            array_unshift($mockVideoCovers, 'https://api.xiangtu.net.cn/cover/' . $i . '.png');
+            array_unshift($mockVideoCovers, env('APP_URL') . '/cover/' . $i . '.png');
         }
         for ($i = 4; $i < 700; $i++) {
-            array_unshift($mockVideoCovers, 'https://api.xiangtu.net.cn/cover/' . $i . '.png');
+            array_unshift($mockVideoCovers, env('APP_URL') . '/cover/' . $i . '.png');
         }
         $mockVideos = json_decode(file_get_contents(base_path() . '/database/mock/videos.json'));
         for ($i = 0; $i < 100; $i++) {
