@@ -18,7 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCollectionList();
   },
 
   /**
@@ -32,7 +31,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      collectionList: [],
+      currentPage: 0,
+      lastPage: 0,
+      publicMes: ''
+    }, () => {
+      this.getCollectionList();
+    });
   },
 
   /**

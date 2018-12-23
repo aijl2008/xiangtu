@@ -9,11 +9,9 @@
       <component-video-item video="{{item}}" current-id="{{currentId}}" index="{{index}}"
                             bind:play-video="playVideo"
                             bind:collection-changed="collentionChanged"></component-video-item>
-
-      <block wx:if="{{publicMes == 'noMore'}}">
-        <component-no-more></component-no-more>
-      </block>
-
+    </block>
+    <block wx:if="{{publicMes == 'noMore'}}">
+      <component-no-more></component-no-more>
     </block>
   </block>
   <block wx:elif="{{publicMes == 'empty'}}">
