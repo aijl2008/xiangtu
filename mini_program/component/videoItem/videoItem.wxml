@@ -2,7 +2,7 @@
 <view class="video-item-container">
   <view class="video-container">
     <block wx:if="{{currentId != video.id}}">
-      <image class="video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
+      <image class="video-image" mode="widthFix" src="{{video.cover_url||'/images/video_default_cover.png'}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
     </block>
     <block wx:else>
       <video autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
@@ -11,7 +11,7 @@
     <block wx:if="{{currentId != video.id}}">
       <text class="video-title">{{video.title}}</text>
       <view class="author-header">
-        <image src="{{video.wechat.avatar}}" mode="aspectFit" class="header"></image>
+        <image src="{{video.wechat.avatar||'/images/user-64.png'}}" mode="aspectFit" class="header"></image>
       </view>
       <block wx:if="{{!video.wechat.followed}}">
         <text class="user-name">{{video.wechat.nickname}}</text>
