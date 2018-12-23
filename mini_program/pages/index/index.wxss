@@ -4,8 +4,6 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: 132rpx;
-  padding-top: 50rpx;
   padding-bottom: 16rpx;
   overflow: hidden;
   background: #FFF;
@@ -15,7 +13,7 @@
 
 
 .header-container{
-  width: 75%;
+  width: 100%;
   height: 66rpx;
   overflow: hidden;
   overflow-x: auto;

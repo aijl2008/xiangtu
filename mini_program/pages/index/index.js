@@ -23,7 +23,6 @@ Page({
   onPullDownRefresh(){
     this.setData({
       videoList: [],
-      activeId: 0,
       currentId: 0,
       currentPage: 0,
       lastPage: 0,

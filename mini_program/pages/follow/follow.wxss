@@ -1,7 +1,6 @@
 /* pages/follow/follow.wxss */
 .container{
   width: 100%;
-  padding-top: 50rpx;
 }
 
 .item-header{

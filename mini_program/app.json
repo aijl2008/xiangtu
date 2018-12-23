@@ -14,10 +14,10 @@
     "pages/user/edit/edit"
   ],
   "window": {
-    "navigationStyle": "custom",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true,
-    "navigationBarBackgroundColor": "#FFFFFF"
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [

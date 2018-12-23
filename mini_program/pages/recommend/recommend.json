@@ -4,7 +4,5 @@
     "component-empty-data": "/component/emptyData/emptyData",
     "component-no-more": "/component/noMore/noMore"
   },
-  "navigationBarTitleText": "推荐用户",
-  "navigationBarTextStyle": "black",
-  "navigationStyle": "default"
+  "navigationBarTitleText": "推荐用户"
 }
