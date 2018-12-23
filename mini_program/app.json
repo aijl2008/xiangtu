@@ -10,7 +10,8 @@
     "pages/detail/detail",
     "pages/login/login",
     "pages/user/record/record",
-    "pages/recommend/recommend"
+    "pages/recommend/recommend",
+    "pages/user/edit/edit"
   ],
   "window": {
     "navigationStyle": "custom",

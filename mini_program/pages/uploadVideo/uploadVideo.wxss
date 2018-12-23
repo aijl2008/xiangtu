@@ -1,7 +1,7 @@
 /**index.wxss**/
 .container{
     width: 100%;
-    padding-top: 120rpx;
+    padding-top: 160rpx;
 }
 
 .form-item-container{

@@ -1,7 +1,7 @@
 /* pages/uploadList/uploadList.wxss */
 .upload-image-btn{
   width: 100%;
-  padding-top: 120rpx;
+  padding-top: 160rpx;
   text-align: center
 }
 
