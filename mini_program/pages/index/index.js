@@ -42,6 +42,21 @@ Page({
 
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (event) {
+    if(event.from == 'button'){
+      const {id, title, cover} = event.target.dataset;
+      console.log(event);
+
+      return {
+        title,
+        path: `/pages/detail/detail?id=${id}`,
+        imageURL: cover,
+      }
+    }
+  },
   getNavList(){
      util.ajaxCommon(API.URL_GET_HEADER_NAV, {}, {
        success: (res) => {

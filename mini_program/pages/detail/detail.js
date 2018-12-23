@@ -78,7 +78,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    const { id, title, cover_url } = this.data.videoDetail;
 
+    return {
+      title,
+      path: `/pages/detail/detail?id=${id}`,
+      imageURL: cover_url,
+    }
   },
 
   getVideoDetail(){

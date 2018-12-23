@@ -1,7 +1,7 @@
 <!--component/recommendItem/recommendItem.wxml-->
 <view class="recommend-item-contaienr">
   <view class="user-msg-container">
-    <image class="header" src="{{recommend.avatar}}"></image>
+    <image class="header" src="{{recommend.avatar||'/images/user-64.png'}}"></image>
 
     <view class="detail-container">
       <text class="nick-name">{{recommend.nickname}}</text>
@@ -15,8 +15,15 @@
 
   <block wx:if="{{recommend.video.length}}">
     <view class="video-list-container">
-      <block wx:for="{{recommend.video}}" :key="id">
-        <image class="video-item" src="{{item.cover_url}}" bindtap="jumpVideoDetail" data-id="{{item.id}}"></image>
+      <block wx:for="{{[0,1,2]}}" :key="*this">
+        <block wx:if="{{recommend.video[item]}}">
+          <image class="video-item" src="{{recommend.video[item].cover_url||'/images/video_default_cover.png'}}"
+                 bindtap="jumpVideoDetail" data-id="{{recommend.video[item].id}}"></image>
+        </block>
+        <block wx:else>
+          <image class="video-item" src="/images/video_default_cover.png"></image>
+        </block>
+
       </block>
     </view>
   </block>

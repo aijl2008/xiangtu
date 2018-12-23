@@ -100,6 +100,7 @@
 
 .video-item-container .bottom-message-container .seat{
   flex: 1;
+  height: 60rpx;
 }
 
 .video-item-container .bottom-message-container .message-container{
@@ -107,6 +108,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: none;
 }
 
 .video-item-container .bottom-message-container .message-container .icon{

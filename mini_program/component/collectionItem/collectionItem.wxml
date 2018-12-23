@@ -1,13 +1,13 @@
 <!--component/collectionItem/collectionItem.wxml-->
 <view class="collention-item-container" bindtap="goVideoDetail">
-  <image class="video-cover-image" mode="widthFix" src="{{collection.cover_url}}">
+  <image class="video-cover-image" mode="widthFix" src="{{collection.cover_url||'/images/video_default_cover.png'}}">
     <view class="bottom-container">
       <text class="played-number">{{collection.played_number}}</text>
     </view>
   </image>
   <text class="video-name">{{collection.title}}</text>
   <view class="user-msg-container">
-    <image class="user-header" src="{{collection.wechat.avatar}}"></image>
+    <image class="user-header" src="{{collection.wechat.avatar||'/images/user-64.png'}}"></image>
     <text class="user-name">{{collection.wechat.nickname}}</text>
   </view>
 </view>
