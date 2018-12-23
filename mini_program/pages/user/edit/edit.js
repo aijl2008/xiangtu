@@ -99,9 +99,10 @@ Page({
           },
 
           success: (result) => {
-            if(result.code === 0){
+            const resultJSON = JSON.parse(result.data);
+            if(resultJSON.code === 0){
               this.setData({
-                userInfo: result.data
+                ['userInfo.avatar']: resultJSON.data.avatar,
               })
             }
           }
@@ -120,6 +121,10 @@ Page({
       method: "POST",
       success:(res) => {
         if(res.code === 0){
+
+          this.setData({
+            ['userInfo.nickname']: res.data.nickname,
+          })
         }
       }
     })
