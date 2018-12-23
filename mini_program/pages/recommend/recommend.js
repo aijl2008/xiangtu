@@ -1,4 +1,4 @@
-// pages/collection/collection.js
+// pages/recommend/recommend.js
 import * as util from "../../utils/util";
 import * as API from "../../utils/API";
 
@@ -8,17 +8,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    collectionList: [],
+    recommendList: [],
     currentPage: 0,
     lastPage: 0,
-    publicMes: '',
+    publicMes: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCollectionList();
+    this.getRecommendList();
   },
 
   /**
@@ -52,12 +52,13 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh(){
     this.setData({
+      videoList: [],
       currentPage: 0,
-      collectionList: [],
+      lastPage: 0,
     }, () => {
-      this.getCollectionList();
+      this.getRecommendList();
     })
   },
 
@@ -69,8 +70,11 @@ Page({
 
     if(currentPage >= lastPage){
       /*到底了*/
+      this.setData({
+        publicMes: 'noMore'
+      })
     } else {
-      this.getCollectionList();
+      this.getRecommendList();
     }
 
   },
@@ -82,11 +86,11 @@ Page({
 
   },
 
-  getCollectionList(){
-    let { collectionList, currentPage } = this.data;
+  getRecommendList() {
+    let { recommendList, currentPage } = this.data;
 
     currentPage += 1;
-    util.ajaxCommon(API.URL_LIKE_VIDEO, {
+    util.ajaxCommon(API.URL_RECOMMEND_USER, {
       page: currentPage,
     }, {
       needToken: true,
@@ -94,13 +98,17 @@ Page({
         if(res.code == API.SUCCESS_CODE){
           if(res.data.data.length){
             this.setData({
-              collectionList: collectionList.concat(res.data.data),
+              recommendList: recommendList.concat(res.data.data),
               lastPage: res.data.last_page,
               currentPage,
+            })
+          } else {
+            this.setData({
+              publicMes: 'empty',
             })
           }
         }
       }
     });
-  }
+  },
 })

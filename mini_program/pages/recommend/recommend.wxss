@@ -1,0 +1,5 @@
+/* pages/recommend/recommend.wxss */
+.container{
+  width: 100%;
+  padding-top: 120rpx;
+}

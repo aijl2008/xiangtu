@@ -1,2 +1,4 @@
 <!--component/emptyData/emptyData.wxml-->
-<text>component/emptyData/emptyData.wxml</text>
+<view class="container">
+  <slot></slot>
+</view>

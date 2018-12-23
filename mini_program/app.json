@@ -10,7 +10,7 @@
     "pages/detail/detail",
     "pages/login/login",
     "pages/user/record/record",
-    "component/noData/noData"
+    "pages/recommend/recommend"
   ],
   "window": {
     "navigationStyle": "custom",

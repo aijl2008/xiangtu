@@ -41,6 +41,9 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
     }
   }
 
+  wx.showLoading({
+    mask: true,
+  });
   let finalData = {};
   let token = wx.getStorageSync('token');
   Object.assign(finalData, data);
@@ -68,6 +71,7 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
       }
     },
     complete: function (res) {
+      wx.hideLoading();
       if (typeof complete === 'function') {
         complete(res);
       }

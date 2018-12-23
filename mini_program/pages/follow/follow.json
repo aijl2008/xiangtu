@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "component-video-item": "/component/videoItem/videoItem"
+    "component-video-item": "/component/videoItem/videoItem",
+    "component-empty-data": "/component/emptyData/emptyData",
+    "component-no-more": "/component/noMore/noMore"
   }
 }

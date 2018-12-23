@@ -13,3 +13,20 @@
   line-height: 1;
   margin: 10rpx 0;
 }
+
+.no-data-mes{
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.add-follow{
+  margin-top: 32rpx;
+  width: 300rpx;
+  font-size: 32rpx;
+  line-height: 0;
+  padding: 50rpx 0;
+  text-align: center;
+  color: #FFF;
+  border-radius: 50rpx;
+  background: #00AA00;
+}
