@@ -24,6 +24,15 @@
                     <dd class="text-nowrap">{{$row->created_at}}</dd>
                     <dt>发布人</dt>
                     <dd class="text-nowrap">{{$row->wechat->nickname}}</dd>
+                    <dt>状态</dt>
+                    <dd class="text-nowrap">
+                        @foreach($status as $key => $value)
+                            <a href='{{route('admin.videos.status', ['id'=>$row->id,'status'=>$key])}}'>
+                                <span class="label @if($key==$row->status)label-primary @else label-info @endif "
+                                      aria-hidden="true">{{$value}}</span>
+                            </a>
+                        @endforeach
+                    </dd>
                 </dl>
             </div>
         @endforeach
