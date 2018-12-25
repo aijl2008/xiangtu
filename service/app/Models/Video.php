@@ -43,8 +43,9 @@ class Video extends Model
         ];
     }
 
-    function task(){
-        return $this->hasMany(Task::class,'file_id','file_id');
+    function task()
+    {
+        return $this->hasMany(Task::class, 'file_id', 'file_id');
     }
 
     function wechat()
@@ -112,5 +113,13 @@ class Video extends Model
             $this->attributes['published_at'] = '7天以上';
         }
         return $this->attributes['published_at'];
+    }
+
+    function getCoverUrlAttribute()
+    {
+        if (stripos($this->attributes['cover_url'], '1258107170.vod2.myqcloud.com')) {
+            return "https://www.xiangtu.net.cn/cos/" . base64_encode($this->attributes['cover_url']);
+        }
+        return $this->attributes['cover_url'];
     }
 }

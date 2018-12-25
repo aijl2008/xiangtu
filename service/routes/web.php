@@ -76,7 +76,7 @@ Route::group(
 
         Route::resource("/tasks", "TaskController", [
             'only' => [
-                'index','show'
+                'index', 'show'
             ]
         ]);
 
@@ -160,3 +160,5 @@ Route::group(
  */
 Route::any('/wechat', 'WechatServerController@serve')->name('wechat.serve');
 Route::any('/qr_code/mini_program', 'QRCodeController@miniProgram');
+
+Route::get('/cos/{url}', "CosController");
