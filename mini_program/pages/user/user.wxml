@@ -4,10 +4,10 @@
     <image class="bg-header" src="{{userInfo.avatar}}" mode="aspectFill"></image>
     <view class="header">
       <view class="user-top-container">
-        <image class="user-header" src="{{userInfo.avatar}}" mode="aspectFit"></image>
+        <image binderror="errImg" class="user-header" src="{{userInfo.avatar}}" mode="aspectFit"></image>
         <view class="seat"></view>
         <navigator class="edit-btn" url="/pages/user/edit/edit">编辑</navigator>
-        <text class="share-btn">分享我的主页</text>
+        <text bindtap="save_to_album" class="share-btn">分享我的主页</text>
       </view>
 
       <view class="username-container">{{userInfo.nickname}}</view>

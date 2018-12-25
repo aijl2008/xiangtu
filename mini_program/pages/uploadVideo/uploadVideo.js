@@ -69,12 +69,21 @@ Page(
         needToken: true,
         success: (res) => {
           console.log(res);
-
+          wx.showToast({
+            title:"正在准备",
+            icon: 'loading',
+            duration: 5000,
+            mask: true
+          });
           if (res.code == API.SUCCESS_CODE) {
-
-
             if (res.data && res.data.signature) {
               callback(res.data.signature);
+              wx.showToast({
+                title: "开始上传",
+                icon: 'loading',
+                duration: 5000,
+                mask: true
+              });
             } else {
               return '获取签名失败';
             }
@@ -97,10 +106,12 @@ Page(
         compressed: true,
         maxDuration: 60,
         success: function (file) {
-          wx.showLoading({
+          wx.showToast({
+            title: "选择文件",
+            duration: 5000,
+            icon: 'loading',
             mask: true
           });
-
           VodUploader.start({
             videoFile: file, //必填，把chooseVideo回调的参数(file)传进来
             fileName: This.fileName, //选填，视频名称，强烈推荐填写(如果不填，则默认为“来自微信小程序”)
@@ -126,6 +137,7 @@ Page(
               wx.showToast({
                 title: `上传中${result.percent * 100}%`,
                 icon: 'loading',
+                duration: 5000,
                 mask: true,
               });
             },
@@ -150,8 +162,6 @@ Page(
                 needToken: true,
                 success: (res) => {
                   console.log(res);
-
-                  wx.hideToast();
                   if (res.code == API.SUCCESS_CODE) {
                     wx.showToast({
                       title: '上传成功',
@@ -160,6 +170,7 @@ Page(
                         wx.navigateBack({
                           delta: 1
                         });
+                        wx.hideToast();
                       }
                     });
                   }

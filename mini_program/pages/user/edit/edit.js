@@ -8,7 +8,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
+    userInfo: {
+      "avatar": "/images/user-64.png",
+      "nickname": "",
+      "followed_number": 0,
+      "be_followed_number": 0,
+      "uploaded_number": 0
+    },
+  },
+
+  errImg: function (e) {
+    this.setData({
+      ["userInfo.avatar"]: "/images/user-64.png"
+    });
   },
 
   /**

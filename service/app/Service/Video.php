@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Log;
 
 class Video
 {
-    function paginate(Wechat $Wechat = null, $classification = 0, $take = 16)
+    function paginate(Wechat $Wechat = null, $classification = 0, $take = 16, $simple = true)
     {
         if ($Wechat) {
             $user_id = $Wechat->id;
@@ -30,7 +30,11 @@ class Video
                 return $queries->where('classification_id', $classification);
             })
             ->orderBy('id', 'desc');
-        $Paginate = $video->simplePaginate();
+        if ($simple) {
+            $Paginate = $video->simplePaginate($take);
+        } else {
+            $Paginate = $video->paginate($take);
+        }
         foreach ($Paginate as $item) {
             if (!empty($item->wechat->toArray())) {
                 $item->wechat->setAttribute('followed', $Wechat ? $Wechat->haveFollowed($item->wechat) : false);

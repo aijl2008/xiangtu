@@ -130,7 +130,7 @@ Route::group(
         'as' => 'my.'
     ],
     function () {
-        /**
+        /**f
          * 首页
          */
         Route::get("/", "HomeController@index")->name('home');

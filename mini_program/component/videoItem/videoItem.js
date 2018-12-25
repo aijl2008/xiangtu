@@ -69,9 +69,25 @@ Component({
           needToken: true,
           success: (res) => {
             if(res.code == API.SUCCESS_CODE){
+              wx.showToast({
+                title: res.msg,
+                mask: true,
+                icon: "success",
+                duration: 2500,
+                image: "/images/smiling.png"
+              });
               this.triggerEvent('collection-changed', {
                 index: index,
                 liked: false,
+              });
+            }
+            else{
+              wx.showToast({
+                title: res.msg,
+                mask: true,
+                icon: "success",
+                duration:2500,
+                image: "/images/sad.png"
               });
             }
           }
@@ -84,9 +100,25 @@ Component({
           needToken: true,
           success: (res) => {
             if(res.code == API.SUCCESS_CODE){
+              wx.showToast({
+                title: res.msg,
+                mask: true,
+                icon: "success",
+                duration: 2500,
+                image: "/images/smiling.png"
+              });
               this.triggerEvent('collection-changed', {
                 index: index,
                 liked: true,
+              });
+            }
+            else {
+              wx.showToast({
+                title: res.msg,
+                mask: true,
+                icon: "success",
+                duration: 2500,
+                image: "/images/sad.png"
               });
             }
           }
@@ -103,9 +135,25 @@ Component({
         needToken: true,
         success: (res) => {
           if(res.code == API.SUCCESS_CODE){
+            wx.showToast({
+              title: res.msg,
+              mask: true,
+              icon: "success",
+              duration: 2500,
+              image:"/images/smiling.png"
+            });
             this.triggerEvent('follow-changed', {
               id,
             }, {});
+          }
+          else {
+            wx.showToast({
+              title: res.msg,
+              mask: true,
+              icon: "success",
+              duration: 2500,
+              image: "/images/sad.png"
+            });
           }
         }
       });

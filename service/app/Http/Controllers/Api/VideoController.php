@@ -16,7 +16,15 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
-        return Helper::success((new \App\Service\Video())->paginate($request->user("api"), $request->input('classification'), 16));
+        return Helper::success(
+            (new \App\Service\Video())
+                ->paginate(
+                    $request->user("api"),
+                    $request->input('classification'),
+                    16,
+                    false
+                )
+        );
 
     }
 

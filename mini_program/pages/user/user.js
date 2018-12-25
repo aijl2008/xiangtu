@@ -8,7 +8,53 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
+    userInfo: {
+      "avatar": "/images/user-64.png",
+      "nickname": "",
+      "followed_number": 0,
+      "be_followed_number": 0,
+      "uploaded_number": 0
+    },
+  },
+
+  save_to_album() {
+    wx.downloadFile({ // 调用wx.downloadFile接口将图片下载到小程序本地
+      url: API.QR_CODE + "?scene=pages/user/user",
+      success(res) {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success(res) {
+            wx.hideLoading()
+            wx.showModal({
+              title: '分享二维码已保存到系统相册',
+              content: '快去分享给朋友，让更多的朋友发现这里的美好',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          },
+          fail(res) {
+            wx.hideLoading()
+            console.log('分享失败')
+          }
+        })
+      },
+      fail: function (res) {
+        wx.hideLoading()
+        console.log('分享失败')
+      }
+    })
+  },
+
+
+  errImg: function (e) {
+    this.setData({
+      ["userInfo.avatar"]: "/images/user-64.png"
+    });
   },
 
   /**
@@ -68,6 +114,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+
 
   getUserMes(){
     util.ajaxCommon(API.URL_USER_DETAIL, {}, {

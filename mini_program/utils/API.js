@@ -30,9 +30,13 @@ const URL_VIDEO_UPLOAD_SUCCESS = `${URL_PREFIX}/api/my/videos`;
 /*我的视频 */
 const URL_GET_MY_VIDEOS = `${URL_PREFIX}/api/my/videos`;
 
+/*我看过的视频 */
+const URL_GET_MY_HISTORY = `${URL_PREFIX}/api/my/history`;
+
 /*推荐用户 */
 const URL_RECOMMEND_USER = `${URL_PREFIX}/api/wechat/recommend`;
 
+const QR_CODE = `${URL_PREFIX}/qr_code/mini_program`;
 export {
   URL_PREFIX,
   SUCCESS_CODE,
@@ -47,4 +51,6 @@ export {
   URL_VIDEO_UPLOAD_SUCCESS,
   URL_GET_MY_VIDEOS,
   URL_RECOMMEND_USER,
+  URL_GET_MY_HISTORY,
+  QR_CODE
 };

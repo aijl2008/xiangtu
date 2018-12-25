@@ -89,7 +89,7 @@ Page({
     let { historyList, currentPage } = this.data;
 
     currentPage += 1;
-    util.ajaxCommon(API.URL_LIKE_VIDEO, {
+    util.ajaxCommon(API.URL_GET_MY_HISTORY, {
       page: currentPage,
     }, {
       needToken: true,

@@ -41,8 +41,10 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
     }
   }
 
-  wx.showLoading({
+  wx.showToast({
     mask: true,
+    title: "网络请求中",
+    icon: "loading",
   });
   let finalData = {};
   let token = wx.getStorageSync('token');
@@ -59,7 +61,7 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
     success: function (response) {
       if(response.data.code == 401){
         wx.showToast({
-          title: 'token异常，请重新登录',
+          title: '请重新登录',
           icon: 'none',
           mask: true,
           complete: (res) => {
@@ -83,12 +85,13 @@ const ajaxCommon = function(url, data, {method = "GET", needToken, success, fail
         fail(res);
       } else {
         wx.showToast({
-          title: '您的网络不太给力'
+          title: '网络不太给力',
+          image:"/images/sad.png"
         })
       }
     },
     complete: function (res) {
-      wx.hideLoading();
+      wx.hideToast();
       if (typeof complete === 'function') {
         complete(res);
       }
