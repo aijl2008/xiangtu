@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Task;
 use App\Models\Video;
 use App\Models\Vod;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VideoController extends Controller
 {
@@ -21,13 +23,23 @@ class VideoController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index ()
     {
-        return view('admin.videos.index')
-            ->with('rows', Video::query()
-                ->orderBy('id', 'desc')
-                ->simplePaginate()
-            );
+        return view ( 'admin.videos.index' )
+            ->with ( 'rows' , Video::query ()
+                ->withoutGlobalScope ( 'status' )
+                ->orderBy ( 'id' , 'desc' )
+                ->simplePaginate ()
+            )->with ( 'status' , $this->getOption () );
+    }
+
+    public function getOption ()
+    {
+        return [
+            Video::STATUS_TRANSFERING => '转码中' ,
+            Video::STATUS_DISABLE     => '屏蔽' ,
+            Video::STATUS_OK          => '正常' ,
+        ];
     }
 
     /**
@@ -36,32 +48,32 @@ class VideoController extends Controller
      * @param Video $video
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Video $video)
+    public function show ( Video $video )
     {
-        return view("admin.videos.show")
-            ->with('row', $video);
+        return view ( "admin.videos.show" )
+            ->with ( 'row' , $video );
     }
 
-    public function snapshot(Video $video)
+    public function snapshot ( Video $video )
     {
-        $snapshot = (new Vod())->createSnapshotByTimeOffset($video->file_id);
-        Task::query()->create(
+        $snapshot = ( new Vod() )->createSnapshotByTimeOffset ( $video->file_id );
+        Task::query ()->create (
             [
-                'file_id' => $video->file_id,
-                'task_id' => $snapshot->vodTaskId,
-                'code' => $snapshot->code,
-                'code_desc' => $snapshot->codeDesc,
-                'message' => $snapshot->message
+                'file_id'   => $video->file_id ,
+                'task_id'   => $snapshot->vodTaskId ,
+                'code'      => $snapshot->code ,
+                'code_desc' => $snapshot->codeDesc ,
+                'message'   => $snapshot->message
             ]
         );
-        if ($snapshot->code == 0) {
-            return Helper::success(
+        if ( $snapshot->code == 0 ) {
+            return Helper::success (
                 [
                     'vodTaskId' => $snapshot->vodTaskId
                 ]
             );
         }
-        return Helper::error(-1, $snapshot->message);
+        return Helper::error ( -1 , $snapshot->message );
     }
 
     /**
@@ -70,7 +82,7 @@ class VideoController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit ( $id )
     {
         //
     }
@@ -82,7 +94,7 @@ class VideoController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update ( Request $request , $id )
     {
         //
     }
@@ -93,8 +105,19 @@ class VideoController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy ( $id )
     {
         //
+    }
+
+    public function status ( Request $request , $id )
+    {
+        try {
+            $Video = Video::withoutGlobalScope ( 'status' )->findOrFail ( $id );
+            $Video->update ( [ 'status' => $request->input ( 'status' ) ] );
+            return redirect ()->to ( route ( 'admin.videos.index' ) )->with ( 'message' , '成功' );
+        } catch ( \Exception $exception ) {
+            return redirect ()->to ( route ( 'admin.videos.index' ) )->with ( 'message' , '失败' );
+        }
     }
 }

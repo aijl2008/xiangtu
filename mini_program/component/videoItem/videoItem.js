@@ -27,6 +27,25 @@ Component({
    * 组件的初始数据
    */
   data: {
+    loaded: false,
+  },
+
+  attached() {
+    const { cover_url } = this.data.video;
+
+    if(cover_url){
+      wx.downloadFile({
+        url: cover_url,
+        success: (res) => {
+          if (res.statusCode === 200) {
+            this.setData({
+              loaded: true,
+              [`video.cover_url`]: res.tempFilePath
+            })
+          }
+        }
+      });
+    }
   },
 
   /**

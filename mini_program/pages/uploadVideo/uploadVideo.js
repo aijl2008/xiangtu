@@ -97,6 +97,10 @@ Page(
         compressed: true,
         maxDuration: 60,
         success: function (file) {
+          wx.showLoading({
+            mask: true
+          });
+
           VodUploader.start({
             videoFile: file, //必填，把chooseVideo回调的参数(file)传进来
             fileName: This.fileName, //选填，视频名称，强烈推荐填写(如果不填，则默认为“来自微信小程序”)
@@ -106,6 +110,8 @@ Page(
               console.log(result);
             },
             error: function (result) {
+              wx.hideLoading();
+              wx.hideToast();
               console.log('error');
               console.log(result);
               wx.showModal({
@@ -117,16 +123,15 @@ Page(
             progress: function (result) {
               console.log('progress');
               console.log(result);
-              wx.showModal({
-                title: '上传中',
-                content: result.percent * 100 + '%',
-                showCancel: false
+              wx.showToast({
+                title: `上传中${result.percent * 100}%`,
+                icon: 'loading',
+                mask: true,
               });
             },
-            finish: function (result) {
+            finish:(result) => {
               console.log('finish');
               console.log(result);
-
 
               /**
                * 通知服务器上传成功
@@ -146,17 +151,16 @@ Page(
                 success: (res) => {
                   console.log(res);
 
+                  wx.hideToast();
                   if (res.code == API.SUCCESS_CODE) {
-
-
-                    wx.showModal({
+                    wx.showToast({
                       title: '上传成功',
-                      content: 'fileId:' + result.fileId + '\nvideoName:' + result.videoName,
-                      showCancel: false
-                    });
-
-                    wx.navigateTo({
-                      url: '/pages/uploadList/uploadList'
+                      mask: true,
+                      complete: (res) => {
+                        wx.navigateBack({
+                          delta: 1
+                        });
+                      }
                     });
                   }
                 }

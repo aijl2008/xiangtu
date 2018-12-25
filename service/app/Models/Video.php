@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
@@ -11,6 +12,9 @@ class Video extends Model
     const VISIBILITY_ANY = 1;
     const VISIBILITY_ONLY_FOLLOWED = 2;
     const VISIBILITY_ONLY_ME = 3;
+    const STATUS_DISABLE = -100;
+    const STATUS_TRANSFERING = 0;
+    const STATUS_OK = 1;
     public $timestamps = true;
     protected $fillable = [
         "wechat_id",
@@ -115,11 +119,22 @@ class Video extends Model
         return $this->attributes['published_at'];
     }
 
+
     function getCoverUrlAttribute()
     {
         if (stripos($this->attributes['cover_url'], '1258107170.vod2.myqcloud.com')) {
             return "https://www.xiangtu.net.cn/cos/" . base64_encode($this->attributes['cover_url']);
         }
         return $this->attributes['cover_url'];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('status', function (Builder $builder) {
+            $builder->where('status', '=', self::STATUS_OK);
+        });
+
     }
 }

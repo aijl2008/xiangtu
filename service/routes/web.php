@@ -97,6 +97,7 @@ Route::group(
             ]
         ]);
         Route::any("videos/{video}/snapshot", "VideoController@snapshot")->name('videos.snapshot');
+        Route::get("videos/{video}/status", "VideoController@status")->name('videos.status');
     }
 );
 
