@@ -108,6 +108,31 @@ Page(
             success: function (result) {
               console.log('success');
               console.log(result);
+            },
+            error: function (result) {
+              wx.hideLoading();
+              wx.hideToast();
+              console.log('error');
+              console.log(result);
+              wx.showModal({
+                title: '上传失败',
+                content: JSON.stringify(result),
+                showCancel: false
+              });
+            },
+            progress: function (result) {
+              console.log('progress');
+              console.log(result);
+              wx.showToast({
+                title: `上传中${result.percent * 100}%`,
+                icon: 'loading',
+                mask: true,
+              });
+            },
+            finish:(result) => {
+              console.log('finish');
+              console.log(result);
+
               /**
                * 通知服务器上传成功
                */
@@ -140,32 +165,6 @@ Page(
                   }
                 }
               });
-            },
-            error: function (result) {
-              wx.hideLoading();
-              wx.hideToast();
-              console.log('error');
-              console.log(result);
-              wx.showModal({
-                title: '上传失败',
-                content: JSON.stringify(result),
-                showCancel: false
-              });
-            },
-            progress: function (result) {
-              console.log('progress');
-              console.log(result);
-              wx.showToast({
-                title: `上传中${result.percent * 100}%`,
-                icon: 'loading',
-                mask: true,
-              });
-            },
-            finish:(result) => {
-              console.log('finish');
-              console.log(result);
-
-
             }
           });
         }
