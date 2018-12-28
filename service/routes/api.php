@@ -13,7 +13,7 @@ Route::resource('videos', 'Api\VideoController', [
         'index', 'show'
     ]
 ]);
-
+Route::post("/videos/{video}/play", "VideoController@play")->name('api.videos.play');
 /**
  * 推荐的用户
  */

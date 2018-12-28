@@ -25,7 +25,6 @@ class VideoController extends Controller
                     false
                 )
         );
-
     }
 
     function show(Video $video)

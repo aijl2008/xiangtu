@@ -25,20 +25,7 @@ class WechatController extends Controller
     {
         $wechat = $request->user("api");
         $wechats = Wechat::query()
-//            ->whereHas([
-//                'video' => function (Builder $query) {
-//                    $query->orderBy('updated_at', 'desc')->take(6);
-//                }
-//            ])
             ->has('video', '>', 3)
-//            ->with(
-//                'video'
-//                [
-//                    'video' => function (HasMany $query) {
-//                        $query->orderBy('updated_at', 'desc')->take(4);
-//                    }
-//                ]
-            //           )
             ->paginate(16);
         foreach ($wechats as $item) {
             $item->followed = $item->haveFollower($wechat);

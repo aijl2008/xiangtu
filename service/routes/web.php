@@ -163,3 +163,6 @@ Route::any('/wechat', 'WechatServerController@serve')->name('wechat.serve');
 Route::any('/qr_code/mini_program', 'QRCodeController@miniProgram');
 
 Route::get('/cos/{url}', "CosController");
+
+Route::get('image', 'ImageController');
+Route::get('graph', 'JpGraphController');
