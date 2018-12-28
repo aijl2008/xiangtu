@@ -1,0 +1,16 @@
+<!--pages/user/statistics.wxml-->
+<view class="container">
+
+
+<view wx:for="{{graphs}}" wx:for-item="item">
+      <view class="item-header">{{item.title}}</view>
+      <view>
+        <image
+          style="width: 200px; height: 200px; background-color: #eeeeee;"
+          mode="scaleToFill"
+          src="{{item.src}}"
+        ></image>
+      </view>
+    </view>
+</view>
+

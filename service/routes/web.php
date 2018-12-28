@@ -160,9 +160,11 @@ Route::group(
  * 公众号消息接口
  */
 Route::any('/wechat', 'WechatServerController@serve')->name('wechat.serve');
-Route::any('/qr_code/mini_program', 'QRCodeController@miniProgram');
+Route::any('/qr_code/user', 'QRCodeController@user');
+Route::any('/qr_code/video', 'QRCodeController@video');
 
 Route::get('/cos/{url}', "CosController");
+Route::get('/artron/{url}', "ArtronController");
 
 Route::get('image', 'ImageController');
 Route::get('graph', 'JpGraphController');

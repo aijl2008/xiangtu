@@ -11,7 +11,9 @@
     "pages/login/login",
     "pages/user/record/record",
     "pages/recommend/recommend",
-    "pages/user/edit/edit"
+    "pages/user/edit/edit",
+    "line-chart",
+    "pages/user/statistics"
   ],
   "window": {
     "backgroundTextStyle": "light",

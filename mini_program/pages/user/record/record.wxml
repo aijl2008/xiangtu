@@ -1,6 +1,6 @@
 <!--pages/user/record/record.wxml-->
 <view class="container">
-  <block wx:if="{{collectionList.length}}">
+  <block wx:if="{{historyList.length}}">
     <view class="collection-left-container">
       <block wx:for="{{historyList}}" wx:key="id" wx:for-item="item">
         <block wx:if="{{index%2 == 0}}">
@@ -25,7 +25,4 @@
       <text class="no-data-msg">暂无浏览记录</text>
     </component-empty-data>
   </block>
-
-
-
 </view>

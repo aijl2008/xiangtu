@@ -4,21 +4,20 @@ import * as API from '../../utils/API';
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    videoList: [],
-    activeId: 0,
-    currentId: 0,
-    currentPage: 0,
-    lastPage: 0,
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        videoList: [],
+        activeId: 0,
+        currentId: 0,
+        currentPage: 0,
+        lastPage: 0,
+    },
 
   onPullDownRefresh() {
     this.setData({
       videoList: [],
-      activeId: 0,
       currentId: 0,
       currentPage: 0,
       lastPage: 0,
@@ -27,123 +26,147 @@ Page({
     })
   },
 
-  onReachBottom() {
-    const { currentPage, lastPage } = this.data;
+    onReachBottom() {
+      console.log("onReachBottom");
+        const {currentPage, lastPage} = this.data;
 
-    if (currentPage >= lastPage) {
-      /*到底了*/
-    } else {
-      this.getVideoList();
-    }
+        if (currentPage >= lastPage) {
+            /*到底了*/
+        } else {
+            this.getVideoList();
+        }
 
-  },
+    },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        this.getVideoList();
+    },
 
-  getVideoList() {
-    let { activeId, currentPage, videoList } = this.data;
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
 
-    currentPage += 1;
-    console.log(API.URL_GET_MY_VIDEOS);
-    util.ajaxCommon(API.URL_GET_MY_VIDEOS, {
-      classification: activeId,
-      page: currentPage,
-    }, {
-        success: (res) => {
-          console.log(res);
-          if (res.code == API.SUCCESS_CODE) {
-            console.log(res.data.data.length);
-            if (res.data.data.length) {
-              this.setData({
-                videoList: videoList.concat(res.data.data),
-                lastPage: res.data.last_page,
-                currentPage,
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+      let _ = this;
+      wx.getStorage({
+        key: "need-refresh",
+        success: function (res) {
+          console.log(res.data)
+          if (res.data == "1"){
+            _.setData({
+              videoList: [],
+              activeId: 0,
+              currentId: 0,
+              currentPage: 0,
+              lastPage: 0,
+            }, () => {
+              _.getVideoList();
+              wx.removeStorage({
+                key: "need-refresh",
+                success: function (res) {
+                }
               })
-            }
-            console.log(this.data);
+            });
           }
-        },
-        error:(res)=>{
-          console.log(res);
+         
         }
       })
-  },
 
-  playVideo(event) {
-    if (this.videoContext) {
-      this.videoContext.stop();
-    }
 
-    const { id } = event.detail;
+    },
 
-    this.setData({
-      currentId: id,
-    }, () => {
-      this.videoContext = wx.createVideoContext(`video_${id}`);
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+      
+    },
 
-      console.log(this.videoContext);
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
 
-      this.videoContext.play();
-    });
-  },
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
 
-  },
+    },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
 
-  },
+    },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.getVideoList();
-  },
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+    },
 
-  },
+    jumpToUpload() {
+        wx.navigateTo({
+            url: '/pages/uploadVideo/uploadVideo'
+        });
+    },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
 
-  },
+    getVideoList() {
+      let { activeId, currentPage, videoList } = this.data;
+      currentPage += 1;
+      util.ajaxCommon(API.URL_GET_MY_VIDEOS, {
+        classification: activeId,
+        page: currentPage,
+      }, {
+          loading:false,
+          success: (res) => {
+            if (res.code == API.SUCCESS_CODE) {
+              if (res.data.data.length) {
+                this.setData({
+                  videoList: videoList.concat(res.data.data),
+                  lastPage: res.data.last_page,
+                  currentPage,
+                })
+              }
+            }
+          }
+        })
+    },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
 
-  },
+    playVideo(event) {
+      if (this.videoContext) {
+        this.videoContext.stop();
+      }
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+      const { id } = event.detail;
 
-  },
+      this.setData({
+        currentId: id,
+      }, () => {
+        this.videoContext = wx.createVideoContext(`video_${id}`);
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+        console.log(this.videoContext);
 
-  },
+        this.videoContext.play();
+      });
+    },
 
-  jumpToUpload(){
-    wx.navigateTo({
-      url: '/pages/uploadVideo/uploadVideo'
-    });
-  }
+
+
+
 })

@@ -1,7 +1,7 @@
 /* pages/login/login.wxss */
 .container{
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,13 +11,13 @@
 .login-icon{
   width: 264rpx;
   height: 264rpx;
-  margin-bottom: 40rpx;
+  margin-bottom: 100rpx;
   border-radius: 50%;
   transform: translate3d(0, -50rpx, 0);
 }
 
 .container .get-user-btn{
-  width: 60%;
+  width: 260rpx;
   height: 80rpx;
   background: #00AA00;
   border-radius: 40rpx;

@@ -145,11 +145,11 @@ class Demo extends Command
             array_unshift($mockVideoCovers, env('APP_URL') . '/cover/' . $i . '.png');
         }
         $mockVideos = json_decode(file_get_contents(base_path() . '/database/mock/videos.json'));
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $this->comment('填充用户');
             $wechat = new Wechat(
                 [
-                    "open_id" => config('wechat.mini_program.default.app_id') . '|' . $faker->regexify('[0-9A-Z]{32}'),//18+1+42
+                    "open_id" => $faker->regexify('[0-9A-Z]{32}'),//18+1+42
                     "union_id" => null,
                     "avatar" => array_pop($mockUsersAvatars),
                     "nickname" => $faker->name,
@@ -169,7 +169,7 @@ class Demo extends Command
                     [
                         "title" => $mock->title,
                         "url" => $mock->url,
-                        "cover_url" => array_pop($mockVideoCovers),
+                        "cover_url" => $mock->cover_url,
                         "file_id" => '5285890783657415584',//京东
                         "uploaded_at" => $faker->dateTime,
                         "classification_id" => $faker->numberBetween(1, 13),

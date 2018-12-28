@@ -6,6 +6,7 @@ const URL_GET_HEADER_NAV = `${URL_PREFIX}/api/classifications`;
 
 /*视频列表*/
 const URL_GET_VIDEOS = `${URL_PREFIX}/api/videos`;
+const URL_PLAY_VIDEO = `${URL_PREFIX}/api/videos`;
 
 /*收藏、收藏列表*/
 const URL_LIKE_VIDEO = `${URL_PREFIX}/api/my/liked`;
@@ -36,21 +37,27 @@ const URL_GET_MY_HISTORY = `${URL_PREFIX}/api/my/history`;
 /*推荐用户 */
 const URL_RECOMMEND_USER = `${URL_PREFIX}/api/wechat/recommend`;
 
-const QR_CODE = `${URL_PREFIX}/qr_code/mini_program`;
+const QR_CODE_USER = `${URL_PREFIX}/qr_code/user`;
+const QR_CODE_VIDEO = `${URL_PREFIX}/qr_code/video`;
+const GRAPH = `${URL_PREFIX}/grapth`;
+
 export {
-  URL_PREFIX,
-  SUCCESS_CODE,
-  URL_GET_HEADER_NAV,
-  URL_GET_VIDEOS,
-  URL_LIKE_VIDEO,
-  URL_FOLLOWED,
-  URL_LOGIN,
-  URL_VIDEO_DETAIL,
-  URL_USER_DETAIL,
-  URL_VOD_SIGNATURE,
-  URL_VIDEO_UPLOAD_SUCCESS,
-  URL_GET_MY_VIDEOS,
-  URL_RECOMMEND_USER,
-  URL_GET_MY_HISTORY,
-  QR_CODE
+    URL_PREFIX,
+    SUCCESS_CODE,
+    URL_GET_HEADER_NAV,
+    URL_GET_VIDEOS,
+    URL_LIKE_VIDEO,
+    URL_FOLLOWED,
+    URL_LOGIN,
+    URL_VIDEO_DETAIL,
+    URL_USER_DETAIL,
+    URL_VOD_SIGNATURE,
+    URL_VIDEO_UPLOAD_SUCCESS,
+    URL_GET_MY_VIDEOS,
+    URL_RECOMMEND_USER,
+    URL_GET_MY_HISTORY,
+    QR_CODE_USER,
+    QR_CODE_VIDEO,
+    URL_PLAY_VIDEO,
+    GRAPH
 };
