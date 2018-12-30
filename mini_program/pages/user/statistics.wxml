@@ -1,16 +1,27 @@
 <!--pages/user/statistics.wxml-->
-<view class="container">
+<view class="container" catchtap='get_statistics_data'>
+    <view class="statistics-block">
+        <text class='statistic-name'>视频今日播放数</text>
+        <text class="statistics-number">{{data.played_number}}</text>
+    </view>
+    <view class="statistics-block">
+        <text class='statistics-name'>今日新增粉丝数</text>
+        <text class="statistics-number">{{data.be_followed_number}}</text>
+    </view>
+    <view class="statistics-block">
+        <text class="statistics-name">视频累计播放数</text>
+        <text class="statistics-number">{{data.total_played_number}}</text>
+    </view>
 
+    <view>
+        <image class='statistics-image' mode='aspectFit' binderror='failedToLoadImage' src="{{data.follower}}"></image>
+    </view>
 
-<view wx:for="{{graphs}}" wx:for-item="item">
-      <view class="item-header">{{item.title}}</view>
-      <view>
-        <image
-          style="width: 200px; height: 200px; background-color: #eeeeee;"
-          mode="scaleToFill"
-          src="{{item.src}}"
-        ></image>
-      </view>
+    <view>
+        <image class='statistics-image' mode='aspectFit' binderror='failedToLoadImage' src="{{data.play}}"></image>
+    </view>
+
+    <view>
+        <image class='statistics-image' mode='aspectFit' binderror='failedToLoadImage' src="{{data.upload}}"></image>
     </view>
 </view>
-

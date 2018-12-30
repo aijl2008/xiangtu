@@ -39,10 +39,16 @@ class WechatController extends Controller
 
     function show(Request $request, $id)
     {
-        return Wechat::query()->with([
+        $wechat = Wechat::query()->with([
             'video' => function (HasMany $builder) {
                 $builder->orderBy('id', 'desc')->limit(3);
             }
-        ])->find($id);
+        ])->findOrFail($id);
+        if ($user = $request->user('api')){
+            $wechat->followed = $user->haveFollowed($wechat);
+        }
+        return Helper::success(
+            $wechat
+        );
     }
 }

@@ -146,9 +146,6 @@ Page({
             currentId: id,
         }, () => {
             this.videoContext = wx.createVideoContext(`video_${id}`);
-
-            console.log(this.videoContext);
-
             this.videoContext.play();
         });
     },

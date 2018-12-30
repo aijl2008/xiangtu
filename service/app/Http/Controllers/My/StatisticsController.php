@@ -29,15 +29,4 @@ class StatisticsController extends Controller
             ->with('upload_date', json_encode(array_keys($statistics['upload'])))
             ->with('upload_value', json_encode(array_values($statistics['upload'])));
     }
-
-
-    function video()
-    {
-        return view('my.statistics.video');
-    }
-
-    function follower()
-    {
-        return view('my.statistics.follower');
-    }
 }

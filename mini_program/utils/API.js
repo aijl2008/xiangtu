@@ -8,6 +8,8 @@ const URL_GET_HEADER_NAV = `${URL_PREFIX}/api/classifications`;
 const URL_GET_VIDEOS = `${URL_PREFIX}/api/videos`;
 const URL_PLAY_VIDEO = `${URL_PREFIX}/api/videos`;
 
+const URL_MEMBER_DETAIL = `${URL_PREFIX}/api/users/`;
+
 /*收藏、收藏列表*/
 const URL_LIKE_VIDEO = `${URL_PREFIX}/api/my/liked`;
 
@@ -39,7 +41,8 @@ const URL_RECOMMEND_USER = `${URL_PREFIX}/api/wechat/recommend`;
 
 const QR_CODE_USER = `${URL_PREFIX}/qr_code/user`;
 const QR_CODE_VIDEO = `${URL_PREFIX}/qr_code/video`;
-const GRAPH = `${URL_PREFIX}/grapth`;
+
+const URL_statistics = `${URL_PREFIX}/api/my/statistics`;
 
 export {
     URL_PREFIX,
@@ -59,5 +62,6 @@ export {
     QR_CODE_USER,
     QR_CODE_VIDEO,
     URL_PLAY_VIDEO,
-    GRAPH
+  URL_statistics,
+  URL_MEMBER_DETAIL
 };

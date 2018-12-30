@@ -1,4 +1,5 @@
 <!--pages/user/record/record.wxml-->
+<view>
 <view class="container">
   <block wx:if="{{historyList.length}}">
     <view class="collection-left-container">
@@ -16,13 +17,15 @@
       </block>
     </view>
 
-    <block wx:if="{{publicMes == 'noMore'}}">
-      <component-no-more></component-no-more>
-    </block>
   </block>
   <block wx:elif="{{publicMes == 'empty'}}">
     <component-empty-data>
       <text class="no-data-msg">暂无浏览记录</text>
     </component-empty-data>
   </block>
+</view>
+
+    <block wx:if="{{publicMes == 'noMore'}}">
+      <component-no-more></component-no-more>
+    </block>
 </view>

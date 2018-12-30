@@ -6,32 +6,22 @@
  * Time: 20:34
  */
 
-namespace App\Http\Controllers\Api\My;
+namespace App\Http\Controllers;
 
 
-use App\Helper;
-use App\Http\Controllers\Controller;
+use App\Models\Wechat;
 use App\Service\Statistics;
-use Illuminate\Support\Facades\Auth;
 
 class StatisticsController extends Controller
 {
-    function __invoke()
-    {
-        return Helper::success(
-            (new Statistics())->make(Auth::guard('api')->user(), true)
-        );
-    }
-
-
-
-    function make()
+    function make($value, $key, $title = "", $traffic = "")
     {
         \JpGraph\JpGraph::load();
         \JpGraph\JpGraph::module('bar');
 
-        $data = array(19, 23, 34, 38, 45, 67, 20);
-        $ydata = array("2018-12-21", "2018-12-22", "2018-12-21", "2018-12-21", "2018-12-21", "2018-12-21", "2018-12-21");
+
+        $data = $value;
+        $ydata = $key;
 
         $graph = new \Graph(600, 400); //创建新的Graph对象
         $graph->SetScale("textlin"); //刻度样式
@@ -44,13 +34,11 @@ class StatisticsController extends Controller
         $barplot->SetFillColor('blue'); //设置颜色
         $barplot->value->Show(); //设置显示数字
         $graph->Add($barplot); //将柱形图添加到图像中
-        $title = "图标实例";
         $title = @mb_convert_encoding($title, "GBK", "auto");
         $graph->title->Set($title);
         $mouth = "月份";
         $mouth = @mb_convert_encoding($mouth, "GBK", "auto");
-        $graph->xaxis->title->Set($mouth); //设置标题和X-Y轴标题
-        $traffic = "流量(Mbits)";
+        //$graph->xaxis->title->Set($mouth); //设置标题和X-Y轴标题
         $traffic = @mb_convert_encoding($traffic, "GBK", "auto");
         $graph->yaxis->title->Set($traffic);
         $graph->title->SetColor("red");
@@ -66,18 +54,33 @@ class StatisticsController extends Controller
     }
 
 
-    function upload()
+    function upload(Wechat $user)
     {
-        $this->make();
+        $data = (new Statistics())->make($user);
+        $this->make(
+            array_values($data['upload']),
+            array_keys($data['upload']),
+            "近7天视频上传数"
+        );
     }
 
-    function play()
+    function play(Wechat $user)
     {
-        $this->make();
+        $data = (new Statistics())->make($user);
+        $this->make(
+            array_values($data['play']),
+            array_keys($data['play']),
+            "近7天视频播放数"
+        );
     }
 
-    function follower()
+    function follower(Wechat $user)
     {
-        $this->make();
+        $data = (new Statistics())->make($user);
+        $this->make(
+            array_values($data['followers']),
+            array_keys($data['followers']),
+            "近7天新增粉丝数"
+        );
     }
 }

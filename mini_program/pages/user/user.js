@@ -18,6 +18,26 @@ Page({
         },
     },
 
+    copyUrl(){
+      var self = this;
+      wx.setClipboardData({
+        data: "https://www.xiangtu.net.cn/",
+        success: function (res) {
+          // wx.showModal({
+          //   title: '提示',
+          //   content: '网址复制成功',
+          //   success: function (res) {
+          //     if (res.confirm) {
+          //       console.log('确定')
+          //     } else if (res.cancel) {
+          //       console.log('取消')
+          //     }
+          //   }
+          // })
+        }
+      });
+    },
+
     save_to_album() {
         wx.showLoading({
             title: '正在制作二维码'

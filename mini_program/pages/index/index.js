@@ -117,9 +117,11 @@ Page({
         if (this.videoContext) {
             this.videoContext.stop();
         }
-
+      console.log("ABC",event.detail);
         const {id} = event.detail;
-
+      console.log(id,typeof(id));
+      const id2 = event.detail;
+      console.log(id2, typeof (id2));
         this.setData({
             currentId: id,
         }, () => {

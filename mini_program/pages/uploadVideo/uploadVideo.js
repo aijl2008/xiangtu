@@ -84,7 +84,7 @@ Page(
                             wx.showToast({
                                 title: "上传中",
                                 icon: 'loading',
-                                duration: 5000,
+                                duration: 50000,
                                 mask: true
                             });
                         } else {
@@ -109,7 +109,7 @@ Page(
         chooseFile: function () {
             var This = this;
 
-            const {visibility, visibilities, classification, classifications,} = this.data;
+          const { visibility, visibilities, classification, classifications, fileName} = this.data;
             wx.chooseVideo({
                 sourceType: ['album', 'camera'],
                 compressed: true,
@@ -138,9 +138,9 @@ Page(
                             console.log('progress');
                             console.log(result);
                             wx.showToast({
-                                title: `上传中${result.percent * 100}%`,
+                              title: `上传中${parseInt(result.percent * 100)}%`,
                                 icon: 'loading',
-                                duration: 5000,
+                                duration: 50000,
                                 mask: true,
                             });
                         },
@@ -152,13 +152,15 @@ Page(
                              * 通知服务器上传成功
                              */
                             var formData = {
-                                title: result.videoName,
+                              title: fileName,
                                 url: result.videoUrl,
                                 cover_url: "",
                                 file_id: result.fileId,
                                 visibility: visibilities[visibility].value,
-                                classification_id: classifications[classification].value
+                                classification_id: classifications[classification].id
                             };
+
+                          console.log(formData);
 
                             util.ajaxCommon(API.URL_VIDEO_UPLOAD_SUCCESS, formData, {
                                 method: "POST",

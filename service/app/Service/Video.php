@@ -19,15 +19,21 @@ class Video
 {
     function paginate(Wechat $Wechat = null, $classification = 0, $take = 16, $simple = true)
     {
-        if ($Wechat) {
-            $user_id = $Wechat->id;
-        } else {
-            $user_id = 0;
-        }
-        $video = \App\Models\Video::query()
+       $video = \App\Models\Video::query()
             ->with('wechat')
-            ->when($classification, function (Builder $queries) use ($classification, $user_id) {
+            ->when($classification, function (Builder $queries) use ($classification) {
                 return $queries->where('classification_id', $classification);
+            })
+            ->when(!$Wechat, function (Builder $queries) {
+                return $queries->where('visibility', 1);
+            })
+            ->when($Wechat, function (Builder $queries) use ($Wechat) {
+                return $queries->where('visibility', 1)
+                    ->orWhere(function (Builder $queries)use ($Wechat){
+                        $queries->where('visibility', 2)
+                            ->whereIn("wechat_id", $Wechat->follower()->pluck('wechat_id')->toArray());
+                    })
+                    ->orWhere('wechat_id',$Wechat->id);
             })
             ->orderBy('id', 'desc');
         if ($simple) {

@@ -22,14 +22,15 @@
     <!--<view class="content-item-container">
       <text class="item-name">获取个人页面路径</text>
     </view>
-
-    <view class="content-item-container">
-      <text class="item-name">PC上传长视频</text>
-    </view>-->
-    <!-- <navigator class="content-item-container" url="/pages/user/statistics">
+ -->
+    <view class="content-item-container" catchtap='copyUrl'>
+      <image class="item-icon" src="/images/map.png"></image>
+      <text class="item-name">获取电脑版地址</text>
+    </view>
+    <navigator class="content-item-container" url="/pages/user/statistics">
       <image class="item-icon" src="/images/line-chart.png"></image>
       <text class="item-name">统计数据</text>
-    </navigator> -->
+    </navigator>
     <navigator class="content-item-container" url="/pages/user/record/record">
       <image class="item-icon" src="/images/timer_2.png"></image>
       <text class="item-name">浏览记录</text>

@@ -1,0 +1,35 @@
+<!--pages/member/member.wxml-->
+<view class="member-container">
+  <view class="member-msg-container">
+    <image class="member-header" src="{{user.avatar||'/images/user-64.png'}}"></image>
+    <view class="member-detail-container">
+      <text class="member-nick-name">{{user.nickname}}</text>
+      <text class="member-numbers">视频数{{user.uploaded_number}} · 粉丝{{user.be_followed_number}}</text>
+    </view>
+    <!--关注与取消关注-->
+    <block wx:if="{{!user.followed}}">
+      <view data-id='{{user.id}}' class="member-follow-btn" bindtap="followUser">关注</view>
+    </block>
+    <block wx:else>
+    <view data-id='{{user.id}}' class="member-unfollow-btn" bindtap="cancelFollowUser">取消关注</view>
+    </block>
+  </view>
+  <!--视频列表-->
+  <block wx:if="{{user.video.length}}">
+      <block wx:for="{{[0,1,2,3,4]}}" :key="*this">
+        <block wx:if="{{user.video[item]}}">
+          <image mode="widthFix" class="member-video-item" src="{{user.video[item].cover_url||'/images/video_default_cover.png'}}" bindtap="jumpVideoDetail" data-id="{{user.video[item].id}}"></image>
+        </block>
+      </block>
+  </block>
+  <block wx:if="{{publicMes == 'noMore'}}">
+      <component-no-more></component-no-more>
+  </block>
+
+  <block wx:elif="{{!user.video.length}}">
+    <component-empty-data>
+      <text class="no-data-msg">没有上传视频</text>
+    </component-empty-data>
+  </block>
+</view>
+

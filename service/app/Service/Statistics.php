@@ -14,8 +14,36 @@ use Illuminate\Support\Facades\DB;
 
 class Statistics
 {
-    function make($user)
+    function make($user, $url = false)
     {
+        $played_number = Log::query()
+            ->where('action', '播放')
+            ->where('to_user_id', $user->id)
+            ->whereBetween('created_at', [
+                date('Y-m-d', time()),
+                date('Y-m-d', time() + 3600 * 24)
+            ])->count('id');
+        $be_followed_number = Log::query()
+            ->where('action', '关注')
+            ->where('to_user_id', $user->id)
+            ->whereBetween('created_at', [
+                date('Y-m-d', time()),
+                date('Y-m-d', time() + 3600 * 24)
+            ])->count('id');
+        $total_played_number = Log::query()
+            ->where('action', '播放')
+            ->where('to_user_id', $user->id)
+            ->count('id');
+
+        if ($url) {
+            return ['played_number' => $played_number
+                , 'be_followed_number' => $be_followed_number
+                , 'total_played_number' => $total_played_number
+                , 'follower' => "https://www.xiangtu.net.cn/statistics/follower/".$user->id
+                , 'play' => "https://www.xiangtu.net.cn/statistics/play/".$user->id
+                , 'upload' => "https://www.xiangtu.net.cn/statistics/upload/".$user->id
+            ];
+        }
         $followers = $this->fill();
         foreach (Log::query()
                      ->where('action', '关注')
@@ -69,24 +97,7 @@ class Statistics
             }
         }
 
-        $played_number = Log::query()
-            ->where('action', '播放')
-            ->where('to_user_id', $user->id)
-            ->whereBetween('created_at', [
-                date('Y-m-d', time()),
-                date('Y-m-d', time() + 3600 * 24)
-            ])->count('id');
-        $be_followed_number = Log::query()
-            ->where('action', '关注')
-            ->where('to_user_id', $user->id)
-            ->whereBetween('created_at', [
-                date('Y-m-d', time()),
-                date('Y-m-d', time() + 3600 * 24)
-            ])->count('id');
-        $total_played_number = Log::query()
-            ->where('action', '播放')
-            ->where('to_user_id', $user->id)
-            ->count('id');
+
         return ['played_number' => $played_number
             , 'be_followed_number' => $be_followed_number
             , 'total_played_number' => $total_played_number
@@ -94,6 +105,7 @@ class Statistics
             , 'play' => $play
             , 'upload' => $upload];
     }
+
 
     function fill()
     {

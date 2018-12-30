@@ -1,10 +1,10 @@
 <!--component/recommendItem/recommendItem.wxml-->
 <view class="recommend-item-contaienr">
   <view class="user-msg-container">
-    <image class="header" src="{{recommend.avatar||'/images/user-64.png'}}"></image>
+    <image class="header" src="{{recommend.avatar||'/images/user-64.png'}}" data-id="{{recommend.id}}" bindtap="gotoMemberHomePage"></image>
 
     <view class="detail-container">
-      <text class="nick-name">{{recommend.nickname}}</text>
+      <text class="nick-name" data-id="{{recommend.id}}"  bindtap="gotoMemberHomePage">{{recommend.nickname}}</text>
       <text class="msg">视频数{{recommend.uploaded_number}} · 粉丝{{recommend.be_followed_number}}</text>
     </view>
 

@@ -29,6 +29,14 @@ const checkToken = function () {
     }
 }
 
+const gotoMemberHomePage = function(){
+
+}
+
+const gotoVideoPlayerPagem = function (){
+
+}
+
 /**
  * 全局通用网络请求方法
  */

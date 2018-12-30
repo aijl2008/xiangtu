@@ -1,0 +1,68 @@
+.member-container{
+  width: 100%;
+  padding: 32rpx;
+}
+
+.member-msg-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.member-header{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.member-detail-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: 16rpx;
+}
+
+.member-nick-name{
+  font-size: 36rpx;
+  line-height: 1;
+  color: #000;
+}
+
+.member-numbers{
+  color: #ccc;
+  font-size: 24rpx;
+  line-height: 1;
+  margin-top: 12rpx;
+}
+
+.member-follow-btn{
+  font-size: 24rpx;
+  color: #FFF;
+  line-height: 0;
+  padding: 24rpx 24rpx;
+  background: #00AA00;
+  border-radius: 4rpx;
+}
+
+.member-unfollow-btn{
+  font-size: 24rpx;
+  color: #FFF;
+  line-height: 0;
+  padding: 24rpx 24rpx;
+  background: #ccc;
+  border-radius: 4rpx;
+}
+
+.member-video-list-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12rpx;
+}
+
+.member-video-item{
+  width: 50%;
+  padding: 10rpx;
+  border-radius: 8rpx;
+}

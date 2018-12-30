@@ -151,8 +151,6 @@ Route::group(
 
 
         Route::Get('statistics', 'StatisticsController@index')->name('statistics.index');
-        Route::Get('statistics/video', 'StatisticsController@video')->name('statistics.video');
-        Route::Get('statistics/follower', 'StatisticsController@follower')->name('statistics.follower');
     }
 );
 
@@ -168,3 +166,7 @@ Route::get('/artron/{url}', "ArtronController");
 
 Route::get('image', 'ImageController');
 Route::get('graph', 'JpGraphController');
+
+Route::Get('statistics/play/{user}', 'StatisticsController@play')->name('statistics.video');
+Route::Get('statistics/follower/{user}', 'StatisticsController@follower')->name('statistics.follower');
+Route::Get('statistics/upload/{user}', 'StatisticsController@upload')->name('statistics.follower');

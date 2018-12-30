@@ -8,21 +8,14 @@ Page({
      * 页面的初始数据
      */
     data: {
-        userInfo: {
-            "id": "0",
-            "avatar": "/images/user-64.png",
-            "nickname": "",
-            "followed_number": 0,
-            "be_followed_number": 0,
-            "uploaded_number": 0
-        },
-        graphs: []
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      this.get_statistics_data();
     },
 
     /**
@@ -37,7 +30,7 @@ Page({
      */
     onShow: function () {
         if (util.checkToken()) {
-            this.getUserMes();
+            
         }
     },
 
@@ -76,22 +69,20 @@ Page({
 
     },
 
-    getUserMes() {
-        util.ajaxCommon(API.URL_USER_DETAIL, {}, {
+    failedToLoadImage: function (e) {
+        console.log(e);
+    },
+
+  get_statistics_data() {
+        util.ajaxCommon(API.URL_statistics, {}, {
             method: "GET",
             needToken: true,
             success: (res) => {
                 if (res.code == 0) {
                     this.setData({
-                        userInfo: res.data.user,
-                        graphs: [
-                            {"title": "近7天视频播放数", "src": API.GRAPH + res.data.user.id + "1.png"},
-                            {"title": "近7天净增粉丝数", "src": API.GRAPH + res.data.user.id + "2.png"},
-                            {"title": "近7天上传视频数", "src": API.GRAPH + res.data.user.id + "3.png"}
-                        ]
+                        data:res.data
                     })
                 }
-
                 console.log(this.data);
             }
         })

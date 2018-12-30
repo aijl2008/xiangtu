@@ -3,20 +3,21 @@
     <view class="video-container">
         <block wx:if="{{currentId != video.id}}">
             <block wx:if="{{loaded}}">
-                <image class="video-image" mode="widthFix" src="{{video.cover_url||'/images/video_default_cover.png'}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
+                <image class="video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
             </block>
             <block wx:else>
                 <image class="video-image" mode="widthFix" src="/images/video_default_cover.png" bindtap="videoPlay" data-id="{{video.id}}"></image>
             </block>
         </block>
         <block wx:else>
-            <video autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
+            <video binderror="video_not_found" autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
         </block>
 
         <block wx:if="{{currentId != video.id}}">
             <text class="video-title">{{video.title}}</text>
             <view class="author-header">
-                <image src="{{video.wechat.avatar||'/images/user-64.png'}}" mode="aspectFit" class="header"></image>
+            <!--点击头像进入个人主页-->
+                <image data-id="{{video.wechat.id}}" bindtap="gotoMemberHomePage" src="{{video.wechat.avatar||'/images/user-64.png'}}" mode="aspectFit" class="header"></image>
             </view>
             <block wx:if="{{!video.wechat.followed}}">
                 <text class="user-name">{{video.wechat.nickname}}</text>
@@ -34,8 +35,9 @@
         <block wx:else>
             <text class="user-name">{{video.wechat.nickname}}</text>
         </block>
-
+        <!--点击该区域进入详情-->
         <view class="seat" catchtap="goVideoDetail"></view>
+        <!--收藏数-->
         <view class="message-container" catchtap="changeCollection" data-id="{{video.id}}"
               data-index="{{index}}">
             <block wx:if="{{video.liked}}">
@@ -47,6 +49,7 @@
 
             <text class="number">{{video.liked_number}}</text>
         </view>
+        <!--分享给好友-->
         <button class="message-container" open-type="share" plain hover-class="none" hover-stop-propagation
                 data-id="{{video.id}}" data-title="{{video.title}}" data-cover="{{video.cover_url}}">
             <image class="icon" src="/images/icon48_wx_logo.png"></image>

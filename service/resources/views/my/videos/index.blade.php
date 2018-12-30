@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 <a href="{{route('videos.show', $row->id)}}" class="cover">
                     <img
-                            class="thumbnail img-responsive img-rounde lazyload cover"
+                            class="img-responsive img-rounde lazyload"
                             src="/images/loading/video.png"
                             data-original="{{$row->cover_url?:''}}">
                 </a>

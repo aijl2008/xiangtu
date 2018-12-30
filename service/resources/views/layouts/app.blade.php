@@ -29,8 +29,8 @@
             $(".cover img").each(function () {
                 var width = $(this).width();
                 var height = $(this).height();
-                if (height != width * 0.75) {
-                    $(this).css("height", width * 0.75);
+                if (height != width / 1.5) {
+                    $(this).css("height", width / 1.5);
                 }
             });
             $(".avatar-large").each(function () {

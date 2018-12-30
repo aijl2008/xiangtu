@@ -48,6 +48,7 @@ Component({
         }
     },
 
+
     /**
      * 组件的方法列表
      */
@@ -57,14 +58,33 @@ Component({
             util.ajaxCommon(`${API.URL_PLAY_VIDEO}/${id}/play`, {}, {
                 method: 'POST',
                 needToken: false,
+                loading: false,
                 success: (res) => {
-                    console.log(res);
+                    console.log("播放次数累加成功");
                 }
             });
             this.triggerEvent('play-video', {
                 id,
             });
         },
+
+      gotoMemberHomePage(event) {
+        const { id } = event.currentTarget.dataset;
+
+        wx.navigateTo({
+          url: `/pages/member/member?id=${id}`,
+        })
+      },
+
+      video_not_found(){
+        wx.showToast({
+          title: "该视频无法播放",
+          mask: true,
+          icon: "success",
+          duration: 2500,
+          image: "/images/sad.png"
+        });
+      },
         changeCollection(event) {
             const {id, index, status} = event.currentTarget.dataset;
             if (status) {

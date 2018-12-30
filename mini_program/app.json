@@ -13,7 +13,8 @@
     "pages/recommend/recommend",
     "pages/user/edit/edit",
     "line-chart",
-    "pages/user/statistics"
+    "pages/user/statistics",
+    "pages/member/member"
   ],
   "window": {
     "backgroundTextStyle": "light",

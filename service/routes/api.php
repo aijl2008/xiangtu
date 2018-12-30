@@ -21,6 +21,15 @@ Route::get('wechat/recommend', 'Api\WechatController@recommend');
 Route::get('wechat/{wechat}', 'Api\WechatController@show');
 
 /**
+ * 全部用户
+ */
+Route::resource('users', 'Api\WechatController',[
+    "only" => [
+        "index", "show"
+    ]
+]);
+
+/**
  * Vod 事件服务
  */
 Route::any('vod/service/event', 'Api\Vod\ServiceController@event');
@@ -54,12 +63,6 @@ Route::group(
          */
         Route::get("wechat/signature/share", "Wechat\SignatureController@share")->name('wechat.signature.share');
 
-
-        /**
-         * 全部用户
-         */
-        Route::resource('users', 'WechatController');
-
         Route::group(
             [
                 'prefix' => 'my',
@@ -91,6 +94,11 @@ Route::group(
                  */
                 Route::get('profile', 'ProfileController@index')->name('profile.show');
                 Route::post('profile', 'ProfileController@update')->name('profile.update');
+
+
+                Route::Get('statistics/video', 'StatisticsController@video')->name('statistics.video');
+                Route::Get('statistics/follower', 'StatisticsController@follower')->name('statistics.follower');
+                Route::Get('statistics/upload', 'StatisticsController@upload')->name('statistics.follower');
             }
         );
 

@@ -40,6 +40,14 @@ Component({
             });
         },
 
+      gotoMemberHomePage(event) {
+          const { id } = event.currentTarget.dataset;
+
+          wx.navigateTo({
+            url: `/pages/member/member?id=${id}`,
+          })
+        },
+
         jumpVideoDetail(event) {
             const {id} = event.currentTarget.dataset;
 
