@@ -7,9 +7,18 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {
-
-    },
+  data: {
+    navbar: ['总体概述', '播放详情', '粉丝详情'],
+    //count:[0,2,3],                                  //记录不同状态记录的数量
+    currentTab: 3,
+  },
+  navbarTap: function (e) {
+    var that = this;
+    that.setData({
+      currentTab: e.currentTarget.dataset.idx,
+      TypeItem: that.data.navbar[that.data.currentTab]
+    })
+  },
 
     /**
      * 生命周期函数--监听页面加载
@@ -29,9 +38,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        if (util.checkToken()) {
-            
-        }
     },
 
     /**
@@ -52,7 +58,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+      this.get_statistics_data();
     },
 
     /**

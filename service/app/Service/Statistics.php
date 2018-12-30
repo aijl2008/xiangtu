@@ -20,15 +20,15 @@ class Statistics
             ->where('action', '播放')
             ->where('to_user_id', $user->id)
             ->whereBetween('created_at', [
-                date('Y-m-d', time()),
-                date('Y-m-d', time() + 3600 * 24)
+                date('m-d', time()),
+                date('m-d', time() + 3600 * 24)
             ])->count('id');
         $be_followed_number = Log::query()
             ->where('action', '关注')
             ->where('to_user_id', $user->id)
             ->whereBetween('created_at', [
-                date('Y-m-d', time()),
-                date('Y-m-d', time() + 3600 * 24)
+                date('m-d', time()),
+                date('m-d', time() + 3600 * 24)
             ])->count('id');
         $total_played_number = Log::query()
             ->where('action', '播放')
@@ -49,8 +49,8 @@ class Statistics
                      ->where('action', '关注')
                      ->where('to_user_id', $user->id)
                      ->whereBetween('created_at', [
-                         date('Y-m-d', time() - 3600 * 24 * 8),
-                         date('Y-m-d', time() + 3600 * 24)
+                         date('m-d', time() - 3600 * 24 * 8),
+                         date('m-d', time() + 3600 * 24)
                      ])
                      ->groupBy(DB::raw('left(created_at,10)'))
                      ->select(DB::raw(
@@ -66,8 +66,8 @@ class Statistics
                      ->where('action', '播放')
                      ->where('to_user_id', $user->id)
                      ->whereBetween('created_at', [
-                         date('Y-m-d', time() - 3600 * 24 * 8),
-                         date('Y-m-d', time() + 3600 * 24)
+                         date('m-d', time() - 3600 * 24 * 8),
+                         date('m-d', time() + 3600 * 24)
                      ])
                      ->groupBy(DB::raw('left(created_at,10)'))
                      ->select(DB::raw(
@@ -84,8 +84,8 @@ class Statistics
                      ->where('action', '上传视频')
                      ->where('from_user_id', $user->id)
                      ->whereBetween('created_at', [
-                         date('Y-m-d', time() - 3600 * 24 * 8),
-                         date('Y-m-d', time() + 3600 * 24)
+                         date('m-d', time() - 3600 * 24 * 8),
+                         date('m-d', time() + 3600 * 24)
                      ])
                      ->groupBy(DB::raw('left(created_at,10)'))
                      ->select(DB::raw(
@@ -111,7 +111,7 @@ class Statistics
     {
         $ret = [];
         for ($i = time() - 3600 * 24 * 6; $i <= time(); $i = $i + 3600 * 24) {
-            $ret[date('Y-m-d', $i)] = 0;
+            $ret[date('m-d', $i)] = 0;
         }
         return $ret;
     }
