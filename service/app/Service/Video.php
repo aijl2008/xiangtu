@@ -17,24 +17,44 @@ use Illuminate\Support\Facades\Log;
 
 class Video
 {
-    function paginate(Wechat $Wechat = null, $classification = 0, $take = 16, $simple = true)
+    function paginate(Wechat $Wechat = null, $classification = 0, $wechat_id, $take = 16, $simple = true)
     {
-       $video = \App\Models\Video::query()
+        if ($wechat_id) {
+            $video = \App\Models\Video::query()
+                ->where('wechat_id', $wechat_id);
+            if ($Wechat) {
+                if ($Wechat->haveFollowedWechatId($wechat_id)) {
+                    $video->whereIn('visibility', [1, 2]);
+                } else {
+                    $video->where('visibility', 1);
+                }
+            } else {
+                $video->where('visibility', 1);
+            }
+        } else {
+            $video = \App\Models\Video::query()
+                ->where(function (Builder $builder) use ($Wechat) {
+                    $builder->where('visibility', 1)
+                        ->when($Wechat, function (Builder $builder) use ($Wechat) {
+                            $builder->orWhere(function (Builder $builder) use ($Wechat) {
+                                $followed = $Wechat->followed()
+                                    ->pluck('wechat_id')
+                                    ->toArray();
+                                Log::debug(__METHOD__, $followed);
+                                $builder->whereIn("wechat_id", $followed)->where('visibility', 2);
+                            })->orWhere(function (Builder $builder) use ($Wechat) {
+                                $builder->where(
+                                    "wechat_id",
+                                    $Wechat->id
+                                )->where('visibility', 3);
+                            });
+                        });
+                });
+        }
+        $video->when($classification, function (Builder $queries) use ($classification) {
+            return $queries->where('classification_id', $classification);
+        })
             ->with('wechat')
-            ->when($classification, function (Builder $queries) use ($classification) {
-                return $queries->where('classification_id', $classification);
-            })
-            ->when(!$Wechat, function (Builder $queries) {
-                return $queries->where('visibility', 1);
-            })
-            ->when($Wechat, function (Builder $queries) use ($Wechat) {
-                return $queries->where('visibility', 1)
-                    ->orWhere(function (Builder $queries)use ($Wechat){
-                        $queries->where('visibility', 2)
-                            ->whereIn("wechat_id", $Wechat->follower()->pluck('wechat_id')->toArray());
-                    })
-                    ->orWhere('wechat_id',$Wechat->id);
-            })
             ->orderBy('id', 'desc');
         if ($simple) {
             $Paginate = $video->simplePaginate($take);

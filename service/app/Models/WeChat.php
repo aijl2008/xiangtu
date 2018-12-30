@@ -75,6 +75,19 @@ class Wechat extends Authenticatable
     }
 
     /**
+     * 我是否关注了某人
+     * @param $id
+     * @return bool
+     */
+    function haveFollowedWechatId($id)
+    {
+        if (!$id) {
+            return false;
+        }
+        return $this->followed()->where('wechat_id', $id)->count() > 0;
+    }
+
+    /**
      * 某人是否关注了我
      * @param Wechat $wechat
      * @return bool

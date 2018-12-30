@@ -21,6 +21,7 @@ class VideoController extends Controller
                 ->paginate(
                     $request->user("api"),
                     $request->input('classification'),
+                    $request->input('wechat_id'),
                     16,
                     false
                 )

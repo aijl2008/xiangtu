@@ -32,7 +32,6 @@ Component({
 
     attached() {
         const {cover_url} = this.data.video;
-
         if (cover_url) {
             wx.downloadFile({
                 url: cover_url,
@@ -53,6 +52,13 @@ Component({
      * 组件的方法列表
      */
     methods: {
+        goVideoDetail() {
+            const {id} = this.data.video;
+            wx.navigateTo({
+                url: `/pages/detail/detail?id=${id}`,
+            })
+        },
+
         videoPlay(event) {
             const {id} = event.currentTarget.dataset;
             util.ajaxCommon(`${API.URL_PLAY_VIDEO}/${id}/play`, {}, {
@@ -68,25 +74,26 @@ Component({
             });
         },
 
-      gotoMemberHomePage(event) {
-        const { id } = event.currentTarget.dataset;
+        goMemberDetail(event) {
+            const {id} = event.currentTarget.dataset;
+            wx.navigateTo({
+                url: `/pages/member/member?id=${id}`,
+            })
+        },
 
-        wx.navigateTo({
-          url: `/pages/member/member?id=${id}`,
-        })
-      },
+        video_not_found() {
+            wx.showToast({
+                title: "该视频无法播放",
+                mask: true,
+                icon: "success",
+                duration: 2500,
+                image: "/images/sad.png"
+            });
+        },
 
-      video_not_found(){
-        wx.showToast({
-          title: "该视频无法播放",
-          mask: true,
-          icon: "success",
-          duration: 2500,
-          image: "/images/sad.png"
-        });
-      },
         changeCollection(event) {
             const {id, index, status} = event.currentTarget.dataset;
+            console.log(event.currentTarget.dataset);
             if (status) {
                 util.ajaxCommon(`${API.URL_LIKE_VIDEO}/${id}`, {}, {
                     method: 'DELETE',
@@ -94,7 +101,6 @@ Component({
                     loading: false,
                     success: (res) => {
                         if (res.code == API.SUCCESS_CODE) {
-                          console.log(res);
                             wx.showToast({
                                 title: res.msg,
                                 mask: true,
@@ -126,13 +132,13 @@ Component({
                     loading: false,
                     needToken: true,
                     success: (res) => {
-                      console.log(res);
+                        console.log(res);
                         if (res.code == API.SUCCESS_CODE) {
                             wx.showToast({
                                 title: res.msg,
                                 mask: true,
                                 icon: "success",
-                              duration: 1500,
+                                duration: 1500,
                                 image: "/images/smiling.png"
                             });
                             this.triggerEvent('collection-changed', {
@@ -145,7 +151,7 @@ Component({
                                 title: res.msg,
                                 mask: true,
                                 icon: "success",
-                              duration: 1500,
+                                duration: 1500,
                                 image: "/images/sad.png"
                             });
                         }
@@ -167,7 +173,7 @@ Component({
                             title: res.msg,
                             mask: true,
                             icon: "success",
-                          duration: 1500,
+                            duration: 1500,
                             image: "/images/smiling.png"
                         });
                         this.triggerEvent('follow-changed', {
@@ -179,7 +185,7 @@ Component({
                             title: res.msg,
                             mask: true,
                             icon: "success",
-                          duration: 1500,
+                            duration: 1500,
                             image: "/images/sad.png"
                         });
                     }
@@ -187,43 +193,35 @@ Component({
             });
         },
 
-        goVideoDetail() {
-            const {id} = this.data.video;
-            wx.navigateTo({
-                url: `/pages/detail/detail?id=${id}`,
-            })
-        },
 
         saveVideoToAlbum(event) {
             let id = event.currentTarget.dataset.id;
             wx.showToast({
                 title: '正在制作二维码',
-                icon:"loading"
+                icon: "loading",
+                duration: 50000
             });
             wx.downloadFile({
                 url: `${API.QR_CODE_VIDEO}?page=pages/detail/detail&scene=${id}`,
                 success(res) {
+                    wx.hideToast();
                     wx.saveImageToPhotosAlbum({
                         filePath: res.tempFilePath,
                         success(res) {
-                            wx.hideLoading()
                             wx.showModal({
                                 title: '分享二维码已保存到系统相册',
                                 content: '快去分享给朋友，让更多的朋友发现这里的美好',
                                 success: function (res) {
                                     if (res.confirm) {
-                                        console.log('用户点击确定')
                                     } else if (res.cancel) {
-                                        console.log('用户点击取消')
                                     }
                                 }
                             })
                         },
                         fail(res) {
-                          console.log(res);
-                            wx.hideLoading();
+                            wx.hideToast();
                             wx.showToast({
-                                title: res.errMsg || '分享失败',
+                                title: '分享失败',
                                 icon: 'success',
                                 image: "/images/sad.png",
                                 duration: 1500
@@ -232,12 +230,10 @@ Component({
                     })
                 },
                 fail: function (res) {
-                    wx.hideLoading()
-                    console.log('下载失败')
+                    console.log('下载失败');
                 },
-                complete: function(){
-                    console.log('下载完成')
-                    //wx.hideToast();
+                complete: function () {
+                    console.log('下载完成');
                 }
             })
         },

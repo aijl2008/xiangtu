@@ -6,7 +6,7 @@
                 <image class="video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
             </block>
             <block wx:else>
-                <image class="video-image" mode="widthFix" src="/images/video_default_cover.png" bindtap="videoPlay" data-id="{{video.id}}"></image>
+                <image class="video-image" mode="widthFix" src="/images/video_cover_720_480.png" bindtap="videoPlay" data-id="{{video.id}}"></image>
             </block>
         </block>
         <block wx:else>
@@ -17,7 +17,7 @@
             <text class="video-title">{{video.title}}</text>
             <view class="author-header">
             <!--点击头像进入个人主页-->
-                <image data-id="{{video.wechat.id}}" bindtap="gotoMemberHomePage" src="{{video.wechat.avatar||'/images/user-64.png'}}" mode="aspectFit" class="header"></image>
+                <image data-id="{{video.wechat.id}}" bindtap="goMemberDetail" src="{{video.wechat.avatar||'/images/user-64.png'}}" mode="aspectFit" class="header"></image>
             </view>
             <block wx:if="{{!video.wechat.followed}}">
                 <text class="user-name">{{video.wechat.nickname}}</text>

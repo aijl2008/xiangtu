@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "component-recommend-item": "/component/recommendItem/recommendItem",
+    "component-member-item": "/component/memberItem/memberItem",
     "component-empty-data": "/component/emptyData/emptyData",
     "component-no-more": "/component/noMore/noMore"
   },

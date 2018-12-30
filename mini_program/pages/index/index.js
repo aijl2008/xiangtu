@@ -31,11 +31,20 @@ Page({
         })
     },
 
+    onHide:function () {
+        if (this.videoContext) {
+            this.videoContext.stop();
+        }
+    },
+
     onReachBottom() {
         const {currentPage, lastPage} = this.data;
 
         if (currentPage >= lastPage) {
             /*到底了*/
+            this.setData({
+                publicMes: 'noMore'
+            })
         } else {
             this.getVideoList();
         }
@@ -57,7 +66,7 @@ Page({
             }
         }
     },
-    
+
     getNavList() {
         util.ajaxCommon(API.URL_GET_HEADER_NAV, {}, {
             loading: false,
@@ -117,11 +126,7 @@ Page({
         if (this.videoContext) {
             this.videoContext.stop();
         }
-      console.log("ABC",event.detail);
         const {id} = event.detail;
-      console.log(id,typeof(id));
-      const id2 = event.detail;
-      console.log(id2, typeof (id2));
         this.setData({
             currentId: id,
         }, () => {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Wechat;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Service\Video;
 use Illuminate\Http\Request;
 
 class WechatController extends Controller
@@ -39,14 +39,11 @@ class WechatController extends Controller
 
     function show(Request $request, $id)
     {
-        $wechat = Wechat::query()->with([
-            'video' => function (HasMany $builder) {
-                $builder->orderBy('id', 'desc')->limit(3);
-            }
-        ])->findOrFail($id);
-        if ($user = $request->user('api')){
+        $wechat = Wechat::query()->findOrFail($id);
+        if ($user = $request->user('api')) {
             $wechat->followed = $user->haveFollowed($wechat);
         }
+        $wechat->video = (new Video())->paginate($user, null, $id, 16, false);
         return Helper::success(
             $wechat
         );

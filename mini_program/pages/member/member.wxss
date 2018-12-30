@@ -66,3 +66,17 @@
   padding: 10rpx;
   border-radius: 8rpx;
 }
+
+
+.video-list-container{
+  width: 100%;
+  padding: 32rpx 32rpx 0 32rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection-left-container,
+.collection-right-container{
+  display: flex;
+  flex-direction: column;
+}

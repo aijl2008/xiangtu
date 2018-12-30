@@ -109,9 +109,17 @@ Page({
             util.ajaxCommon(`${API.URL_LIKE_VIDEO}/${id}`, {}, {
                 method: 'DELETE',
                 needToken: true,
-                loading:false,
+                loading: false,
                 success: (res) => {
                     if (res.code == API.SUCCESS_CODE) {
+                        wx.showToast({
+                            title: res.msg,
+                            mask: true,
+                            icon: "success",
+                            duration: 1500,
+                            image: "/images/sad.png"
+                        });
+
                         Object.assign(videoDetail, {
                             liked: false,
                             liked_number: videoDetail.liked_number - 1
@@ -122,13 +130,13 @@ Page({
                         });
                     }
                     else {
-                      wx.showToast({
-                        title: res.msg,
-                        mask: true,
-                        icon: "success",
-                        duration: 1500,
-                        image: "/images/sad.png"
-                      });
+                        wx.showToast({
+                            title: res.msg,
+                            mask: true,
+                            icon: "success",
+                            duration: 1500,
+                            image: "/images/sad.png"
+                        });
                     }
                 }
             });
@@ -140,6 +148,15 @@ Page({
                 loading: false,
                 success: (res) => {
                     if (res.code == API.SUCCESS_CODE) {
+
+                        wx.showToast({
+                            title: res.msg,
+                            mask: true,
+                            icon: "success",
+                            duration: 1500,
+                            image: "/images/smiling.png"
+                        });
+
                         Object.assign(videoDetail, {
                             liked: true,
                             liked_number: videoDetail.liked_number + 1
@@ -150,13 +167,13 @@ Page({
                         });
                     }
                     else {
-                      wx.showToast({
-                        title: res.msg,
-                        mask: true,
-                        icon: "success",
-                        duration: 1500,
-                        image: "/images/sad.png"
-                      });
+                        wx.showToast({
+                            title: res.msg,
+                            mask: true,
+                            icon: "success",
+                            duration: 1500,
+                            image: "/images/sad.png"
+                        });
                     }
                 }
             });
@@ -180,39 +197,39 @@ Page({
                         })
                     }
                     else {
-                      wx.showToast({
-                        title: res.msg,
-                        mask: true,
-                        icon: "success",
-                        duration: 1500,
-                        image: "/images/sad.png"
-                      });
+                        wx.showToast({
+                            title: res.msg,
+                            mask: true,
+                            icon: "success",
+                            duration: 1500,
+                            image: "/images/sad.png"
+                        });
                     }
                 }
             })
         } else {
             util.ajaxCommon(`${API.URL_FOLLOWED}`, {
-              'wechat_id': videoDetail.wechat.id,
+                'wechat_id': videoDetail.wechat.id,
             }, {
                 method: "POST",
                 needToken: true,
                 loading: false,
                 success: (res) => {
-              
+
                     if (res.code == API.SUCCESS_CODE) {
                         this.setData({
                             ['videoDetail.wechat.followed']: true,
                         })
                     }
                     else {
-                      console.log(res.msg);
-                      wx.showToast({
-                        title: res.msg,
-                        mask: true,
-                        icon: "success",
-                        duration: 1500,
-                        image: "/images/sad.png"
-                      });
+                        console.log(res.msg);
+                        wx.showToast({
+                            title: res.msg,
+                            mask: true,
+                            icon: "success",
+                            duration: 1500,
+                            image: "/images/sad.png"
+                        });
                     }
                 }
             })
@@ -223,6 +240,7 @@ Page({
         let {currentPage, videoList, videoDetail} = this.data;
 
         currentPage += 1;
+        let _this = this;
 
         util.ajaxCommon(API.URL_GET_VIDEOS, {
             wechat_id: videoDetail.wechat.id,
@@ -237,8 +255,14 @@ Page({
                             currentPage,
                         })
                     }
+                    console.log(_this.data);
                 }
             }
         })
     },
+
+    saveVideoToAlbum(event) {
+        let id = event.currentTarget.dataset.id;
+        util.saveVideoToAlbum(id);
+    }
 })

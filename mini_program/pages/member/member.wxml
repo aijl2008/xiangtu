@@ -15,18 +15,28 @@
     </block>
   </view>
   <!--视频列表-->
-  <block wx:if="{{user.video.length}}">
-      <block wx:for="{{[0,1,2,3,4]}}" :key="*this">
-        <block wx:if="{{user.video[item]}}">
-          <image mode="widthFix" class="member-video-item" src="{{user.video[item].cover_url||'/images/video_default_cover.png'}}" bindtap="jumpVideoDetail" data-id="{{user.video[item].id}}"></image>
+
+  <view class="video-list-container">
+    <view class="collection-left-container">
+      <block wx:for="{{user.video.data}}" wx:key="id" wx:for-item="item">
+        <block wx:if="{{index%2 == 0}}">
+          <component-member-item member="{{item}}"></component-member-item>
         </block>
       </block>
-  </block>
+    </view>
+    <view class="collection-right-container">
+      <block wx:for="{{user.video.data}}" wx:key="id" wx:for-item="item">
+        <block wx:if="{{index%2 == 1}}">
+          <component-member-item member="{{item}}"></component-member-item>
+        </block>
+      </block>
+    </view>
+  </view>
   <block wx:if="{{publicMes == 'noMore'}}">
       <component-no-more></component-no-more>
   </block>
 
-  <block wx:elif="{{!user.video.length}}">
+  <block wx:elif="{{!user.video.data.length}}">
     <component-empty-data>
       <text class="no-data-msg">没有上传视频</text>
     </component-empty-data>
