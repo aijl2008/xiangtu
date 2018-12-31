@@ -1,28 +1,29 @@
 <!--pages/collection/collection.wxml-->
-<view class="container">
-  <block wx:if="{{collectionList.length}}">
-    <view class="collection-left-container">
-      <block wx:for="{{collectionList}}" wx:key="id" wx:for-item="item">
-        <block wx:if="{{index%2 == 0}}">
-          <component-collection-item collection="{{item}}"></component-collection-item>
-        </block>
-      </block>
+<block wx:if="{{collectionList.length}}">
+    <view class="container">
+        <view class="collection-left-container">
+            <block wx:for="{{collectionList}}" wx:key="id" wx:for-item="item">
+                <block wx:if="{{index%2 == 0}}">
+                    <component-collection-item collection="{{item}}"></component-collection-item>
+                </block>
+            </block>
+        </view>
+        <view class="collection-right-container">
+            <block wx:for="{{collectionList}}" wx:key="id" wx:for-item="item">
+                <block wx:if="{{index%2 == 1}}">
+                    <component-collection-item collection="{{item}}"></component-collection-item>
+                </block>
+            </block>
+        </view>
     </view>
-    <view class="collection-right-container">
-      <block wx:for="{{collectionList}}" wx:key="id" wx:for-item="item">
-        <block wx:if="{{index%2 == 1}}">
-          <component-collection-item collection="{{item}}"></component-collection-item>
+    <view>
+        <block wx:if="{{publicMes == 'noMore'}}">
+            <component-no-more></component-no-more>
         </block>
-      </block>
     </view>
-
-    <block wx:if="{{publicMes == 'noMore'}}">
-      <component-no-more></component-no-more>
-    </block>
-  </block>
-  <block wx:elif="{{publicMes == 'empty'}}">
+</block>
+<block wx:elif="{{publicMes == 'empty'}}">
     <component-empty-data>
-      <text class="no-data-mes">暂无收藏</text>
+        <text class="no-data-mes">暂无收藏</text>
     </component-empty-data>
-  </block>
-</view>
+</block>

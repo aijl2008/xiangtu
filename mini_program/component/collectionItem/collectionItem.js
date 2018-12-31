@@ -41,7 +41,6 @@ Component({
     methods: {
         goVideoDetail() {
             const {id} = this.data.collection;
-
             wx.navigateTo({
                 url: `/pages/detail/detail?id=${id}`,
             })

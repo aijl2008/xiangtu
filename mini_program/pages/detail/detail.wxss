@@ -76,22 +76,22 @@
   font-weight: bold;
 }
 
-.user-msg-container .followe{
+.user-msg-container .follow{
   width: 120rpx;
   font-size: 24rpx;
   line-height: 0;
-  padding: 18rpx 0;
+  padding: 18rpx;
   text-align: center;
   border-radius: 8rpx;
   color: #FFF;
   background: #00AA00;
 }
 
-.user-msg-container .followed{
+.user-msg-container .cancel-follow{
   width: 120rpx;
   font-size: 24rpx;
   line-height: 0;
-  padding: 18rpx 0;
+  padding: 18rpx;
   text-align: center;
   border-radius: 8rpx;
   border: 1rpx solid #CCC;

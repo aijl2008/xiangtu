@@ -41,9 +41,13 @@ class WechatController extends Controller
     {
         $wechat = Wechat::query()->findOrFail($id);
         if ($user = $request->user('api')) {
+            $wechat->onself = ($id == $user->id);
             $wechat->followed = $user->haveFollowed($wechat);
+        } else {
+            $wechat->onself = false;
+            $wechat->followed = false;
         }
-        $wechat->video = (new Video())->paginate($user, null, $id, 16, false);
+        $wechat->video = (new Video())->paginate($user, 0, $id, 10, false);
         return Helper::success(
             $wechat
         );

@@ -12,7 +12,8 @@
     "pages/recommend/recommend",
     "pages/user/edit/edit",
     "pages/user/statistics",
-    "pages/member/member"
+    "pages/member/member",
+    "pages/inform/inform"
   ],
   "window": {
     "backgroundTextStyle": "light",

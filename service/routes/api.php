@@ -13,7 +13,9 @@ Route::resource('videos', 'Api\VideoController', [
         'index', 'show'
     ]
 ]);
-Route::post("/videos/{video}/play", "VideoController@play")->name('api.videos.play');
+Route::post("/videos/play/{video}", "VideoController@play")->name('api.videos.play');
+Route::post("/videos/share_to_wechat/{video}", "VideoController@shareToWechat")->name('api.videos.share_to_wechat');
+Route::post("/videos/share_to_moment/{video}", "VideoController@shareToMoment")->name('api.videos.share_to_moment');
 /**
  * 推荐的用户
  */

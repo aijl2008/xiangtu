@@ -39,7 +39,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        
     },
 
     /**
@@ -60,6 +59,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh() {
+        console.log("onPullDownRefresh");
         this.setData({
             videoList: [],
             currentId: 0,
@@ -74,6 +74,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+        console.log("onReachBottom");
         const {currentPage, lastPage} = this.data;
 
         if (currentPage >= lastPage) {
@@ -135,13 +136,11 @@ Page({
         })
     },
 
-    playVideo(event) {
+    playFollowedVideo(event) {
         if (this.videoContext) {
             this.videoContext.stop();
         }
-
         const {id} = event.detail;
-
         this.setData({
             currentId: id,
         }, () => {

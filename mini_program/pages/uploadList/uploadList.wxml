@@ -7,6 +7,11 @@
 <view class="video-container">
     <block wx:for="{{videoList}}" wx:key="id">
         <component-my-video-item video="{{item}}" current-id="{{currentId}}" index="{{index}}"
-                              bind:play-video="playVideo"></component-my-video-item>
+                              bind:play-video="playMyVideo"></component-my-video-item>
     </block>
+    <view>
+        <block wx:if="{{publicMes == 'noMore'}}">
+            <component-no-more></component-no-more>
+        </block>
+    </view>
 </view>

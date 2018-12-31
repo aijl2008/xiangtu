@@ -77,7 +77,6 @@ Page(
                 needToken: true,
                 loading:false,
                 success: (res) => {
-                    console.log(res);
                     if (res.code == API.SUCCESS_CODE) {
                         if (res.data && res.data.signature) {
                             callback(res.data.signature);
@@ -120,14 +119,10 @@ Page(
                         fileName: This.fileName,
                         getSignature: This.getSignature, 
                         success: function (result) {
-                            console.log('success');
-                            console.log(result);
                         },
                         error: function (result) {
                             wx.hideLoading();
                             wx.hideToast();
-                            console.log('error');
-                            console.log(result);
                             wx.showModal({
                                 title: '上传失败',
                                 content: JSON.stringify(result),
@@ -135,8 +130,6 @@ Page(
                             });
                         },
                         progress: function (result) {
-                            console.log('progress');
-                            console.log(result);
                             wx.showToast({
                               title: `上传中${parseInt(result.percent * 100)}%`,
                                 icon: 'loading',
@@ -145,8 +138,6 @@ Page(
                             });
                         },
                         finish: (result) => {
-                            console.log('finish');
-                            console.log(result);
 
                             /**
                              * 通知服务器上传成功
@@ -160,14 +151,12 @@ Page(
                                 classification_id: classifications[classification].id
                             };
 
-                          console.log(formData);
 
                             util.ajaxCommon(API.URL_VIDEO_UPLOAD_SUCCESS, formData, {
                                 method: "POST",
                                 needToken: true,
                                 loading:false,
                                 success: (res) => {
-                                    console.log(res);
                                     if (res.code == API.SUCCESS_CODE) {
                                         wx.showToast({
                                             title: '上传成功',

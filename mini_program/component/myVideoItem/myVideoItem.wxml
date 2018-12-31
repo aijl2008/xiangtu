@@ -1,11 +1,18 @@
 <!--component/myVideoItem/myVideoItem.wxml-->
 <view class="my-video-item-container">
     <view class="my-video-container">
-        <block wx:if="{{loaded}}">
-            <image class="my-video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
+        <!--非当前视频显示封面-->
+        <block wx:if="{{currentId != video.id}}">
+            <block wx:if="{{loaded}}">
+                <image class="my-video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="startPlayer" data-id="{{video.id}}"></image>
+            </block>
+            <block wx:else>
+                <image class="my-video-image" mode="widthFix" src="/images/video_cover_720_480.png" bindtap="startPlayer" data-id="{{video.id}}"></image>
+            </block>
         </block>
+        <!--当前视频显示播放器-->
         <block wx:else>
-            <image class="my-video-image" mode="widthFix" src="/images/video_cover_720_480.png" bindtap="videoPlay" data-id="{{video.id}}"></image>
+            <video autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
         </block>
         <text class="my-video-title">{{video.title}}</text>
         <block wx:if="{{video.status == 1}}">
@@ -21,7 +28,8 @@
             <view class="seat" catchtap="goVideoDetail"></view>
             <!--收藏数-->
             <view class="message-container" catchtap="changeCollection" data-id="{{video.id}}" data-index="{{index}}">
-                <image class="icon" src="/images/liked.png"></image><text class="number">{{video.liked_number}}</text>
+                <image class="icon" src="/images/liked.png"></image>
+                <text class="number">{{video.liked_number}}</text>
             </view>
             <!--分享给好友-->
             <button class="message-container" open-type="share" plain hover-class="none" hover-stop-propagation

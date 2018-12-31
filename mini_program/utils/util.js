@@ -31,11 +31,11 @@ const checkToken = function () {
     }
 }
 
-const gotoMemberHomePage = function(){
+const gotoMemberHomePage = function () {
 
 }
 
-const gotoVideoPlayerPagem = function (){
+const gotoVideoPlayerPagem = function () {
 
 }
 
@@ -88,6 +88,8 @@ const ajaxCommon = function (url, data, {method = "GET", loading = true, needTok
             } else if (typeof success === 'function') {
                 success(response.data);
             }
+            else {
+            }
             if (loading) {
                 wx.hideToast();
             }
@@ -111,22 +113,23 @@ const ajaxCommon = function (url, data, {method = "GET", loading = true, needTok
     })
 };
 
-const saveVideoToAlbum = function (id) {
+const saveMemberToAlbum = function (id) {
     wx.showToast({
         title: '正在制作二维码',
         icon: "loading",
         duration: 50000
     });
     wx.downloadFile({
-        url: `${API.QR_CODE_VIDEO}?page=pages/detail/detail&scene=${id}`,
+        url: `${API.QR_CODE_USER}?page=pages/member/member&scene=${id}`,
         success(res) {
             wx.hideToast();
             wx.saveImageToPhotosAlbum({
                 filePath: res.tempFilePath,
                 success(res) {
                     wx.showModal({
-                        title: '分享二维码已保存到系统相册',
-                        content: '快去分享给朋友，让更多的朋友发现这里的美好',
+                        title: '二维码已保存到手机相册',
+                        content: '请从手机相册选择图片并分享',
+                        showCancel: false,
                         success: function (res) {
                             if (res.confirm) {
                             } else if (res.cancel) {
@@ -149,15 +152,114 @@ const saveVideoToAlbum = function (id) {
             console.log('下载失败');
         },
         complete: function () {
-            console.log('下载完成');
         }
     })
 }
 
-module.exports = {
+const inform = function (data) {
+    ajaxCommon(
+        API.URL_INFORM,
+        data,
+        {
+            method: 'POST',
+            needToken: false,
+            loading: false,
+            success: (res) => {
+                wx.showModal({
+                    title: '系统提示',
+                    content: '举报成功',
+                    showCancel: false,
+                    success: function (res) {
+                        wx.navigateBack({
+                            delta: 1
+                        })
+                    }
+                })
+            }
+        }
+    );
+}
+
+const saveVideoToAlbum = function (id) {
+    wx.showToast({
+        title: '正在制作二维码',
+        icon: "loading",
+        duration: 50000
+    });
+    wx.downloadFile({
+        url: `${API.QR_CODE_VIDEO}?page=pages/detail/detail&scene=${id}`,
+        success(res) {
+            wx.hideToast();
+            wx.saveImageToPhotosAlbum({
+                filePath: res.tempFilePath,
+                success(res) {
+                    wx.showModal({
+                        title: '二维码已保存到手机相册',
+                        content: '请从手机相册选择图片并分享',
+                        showCancel: false,
+                        success: function (res) {
+                            LogShareVideoToMoment(id);
+                        }
+                    })
+                },
+                fail(res) {
+                    wx.hideToast();
+                    wx.showToast({
+                        title: '分享失败',
+                        icon: 'success',
+                        image: "/images/sad.png",
+                        duration: 1500
+                    });
+                }
+            })
+        },
+        fail: function (res) {
+            console.log('下载失败');
+        },
+        complete: function () {
+        }
+    })
+}
+
+const LogPlayVideo = function (id) {
+    ajaxCommon(API.URL_PLAY_VIDEO + id, {}, {
+        method: 'POST',
+        needToken: false,
+        loading: false,
+        success: (res) => {
+        }
+    });
+};
+
+const LogShareVideoToWechat = function (id) {
+    ajaxCommon(API.URL_SHARE_VIDEO_TO_WECHAT + id, {}, {
+        method: 'POST',
+        needToken: false,
+        loading: false,
+        success: (res) => {
+        }
+    });
+};
+
+const LogShareVideoToMoment = function (id) {
+    ajaxCommon(API.URL_SHARE_VIDEO_TO_MOMENT + id, {}, {
+        method: 'POST',
+        needToken: false,
+        loading: false,
+        success: (res) => {
+        }
+    });
+};
+module
+    .exports = {
     formatTime,
     formatNumber,
     ajaxCommon,
     checkToken,
     saveVideoToAlbum,
+    saveMemberToAlbum,
+    inform,
+    LogPlayVideo,
+    LogShareVideoToWechat,
+    LogShareVideoToMoment
 }

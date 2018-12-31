@@ -17,19 +17,31 @@ use Illuminate\Support\Facades\Log;
 
 class Video
 {
+    /**
+     * @param Wechat|null $Wechat 当前登录用户
+     * @param int $classification 分类
+     * @param $wechat_id 查询指定用户
+     * @param int $take 每页数
+     * @param bool $simple 是否启用简单分页
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Contracts\Pagination\Paginator
+     */
     function paginate(Wechat $Wechat = null, $classification = 0, $wechat_id, $take = 16, $simple = true)
     {
         if ($wechat_id) {
-            $video = \App\Models\Video::query()
-                ->where('wechat_id', $wechat_id);
-            if ($Wechat) {
-                if ($Wechat->haveFollowedWechatId($wechat_id)) {
-                    $video->whereIn('visibility', [1, 2]);
+            if ($wechat_id == $Wechat->id) {
+                $video = \App\Models\Video::query()->withoutGlobalScopes()->where('wechat_id', $wechat_id);
+            } else {
+                $video = \App\Models\Video::query()
+                    ->where('wechat_id', $wechat_id);
+                if ($Wechat) {
+                    if ($Wechat->haveFollowedWechatId($wechat_id)) {
+                        $video->whereIn('visibility', [1, 2]);
+                    } else {
+                        $video->where('visibility', 1);
+                    }
                 } else {
                     $video->where('visibility', 1);
                 }
-            } else {
-                $video->where('visibility', 1);
             }
         } else {
             $video = \App\Models\Video::query()
@@ -40,7 +52,6 @@ class Video
                                 $followed = $Wechat->followed()
                                     ->pluck('wechat_id')
                                     ->toArray();
-                                Log::debug(__METHOD__, $followed);
                                 $builder->whereIn("wechat_id", $followed)->where('visibility', 2);
                             })->orWhere(function (Builder $builder) use ($Wechat) {
                                 $builder->where(

@@ -20,7 +20,6 @@ Page({
      */
     onLoad: function (options) {
         let id = options.scene || options.id;
-        console.log(id, options);
         this.setData({
             id,
         }, () => {
@@ -80,12 +79,36 @@ Page({
      */
     onShareAppMessage: function () {
         const {id, title, cover_url} = this.data.videoDetail;
-
+        util.LogShareVideoToWechat(id);
         return {
             title,
             path: `/pages/detail/detail?id=${id}`,
             imageURL: cover_url,
         }
+    },
+
+    getVideoList() {
+        let {currentPage, videoList, videoDetail} = this.data;
+
+        currentPage += 1;
+        let _this = this;
+
+        util.ajaxCommon(API.URL_GET_VIDEOS, {
+            wechat_id: videoDetail.wechat.id,
+            page: currentPage,
+        }, {
+            success: (res) => {
+                if (res.code == API.SUCCESS_CODE) {
+                    if (res.data.data.length) {
+                        this.setData({
+                            videoList: videoList.concat(res.data.data),
+                            lastPage: res.data.last_page,
+                            currentPage,
+                        })
+                    }
+                }
+            }
+        })
     },
 
     getVideoDetail() {
@@ -222,7 +245,6 @@ Page({
                         })
                     }
                     else {
-                        console.log(res.msg);
                         wx.showToast({
                             title: res.msg,
                             mask: true,
@@ -236,33 +258,21 @@ Page({
         }
     },
 
-    getVideoList() {
-        let {currentPage, videoList, videoDetail} = this.data;
-
-        currentPage += 1;
-        let _this = this;
-
-        util.ajaxCommon(API.URL_GET_VIDEOS, {
-            wechat_id: videoDetail.wechat.id,
-            page: currentPage,
-        }, {
-            success: (res) => {
-                if (res.code == API.SUCCESS_CODE) {
-                    if (res.data.data.length) {
-                        this.setData({
-                            videoList: videoList.concat(res.data.data),
-                            lastPage: res.data.last_page,
-                            currentPage,
-                        })
-                    }
-                    console.log(_this.data);
-                }
-            }
-        })
-    },
-
     saveVideoToAlbum(event) {
         let id = event.currentTarget.dataset.id;
         util.saveVideoToAlbum(id);
+    },
+
+    showMore(event) {
+        wx.showActionSheet({
+            itemList: ["举报"],
+            success: function (res) {
+                if (res.tapIndex === 0) {
+                    wx.navigateTo({
+                        url: '/pages/inform/inform?video_id=' + event.target.dataset.id,
+                    })
+                }
+            }
+        });
     }
 })

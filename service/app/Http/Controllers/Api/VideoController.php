@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Log;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,13 @@ class VideoController extends Controller
         );
     }
 
-    function show(Video $video)
+    function show(Request $request, Video $video)
     {
+        $video->increment('played_number');
+        $user = $request->user('api');
+        $video->wechat()->increment('played_number');
+        (new Log())->log("播放", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
+
         return Helper::success((new \App\Service\Video())->show($video, Auth::guard('api')->user()));
     }
 }

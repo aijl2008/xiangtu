@@ -1,30 +1,31 @@
 <!--component/videoItem/videoItem.wxml-->
 <view class="video-item-container">
     <view class="video-container">
+        <!--非当前视频显示封面-->
         <block wx:if="{{currentId != video.id}}">
             <block wx:if="{{loaded}}">
-                <image class="video-image" mode="widthFix" src="{{video.cover_url}}" bindtap="videoPlay" data-id="{{video.id}}"></image>
+                <image data-index='{{index}}' bindtap="startPlayer" class="video-image" mode="widthFix" src="{{video.cover_url}}" data-id="{{video.id}}"></image>
             </block>
             <block wx:else>
-                <image class="video-image" mode="widthFix" src="/images/video_cover_720_480.png" bindtap="videoPlay" data-id="{{video.id}}"></image>
+                <image data-index='{{index}}' bindtap="startPlayer" class="video-image" mode="widthFix" src="/images/video_cover_720_480.png" data-id="{{video.id}}"></image>
             </block>
         </block>
+        <!--当前视频显示播放器-->
         <block wx:else>
-            <video binderror="video_not_found" autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
+            <video autoplay poster="{{video.cover_url}}" src="{{video.url}}" class="video" id="video_{{video.id}}"></video>
         </block>
-
+        <!--非当前视频显示用户信息-->
         <block wx:if="{{currentId != video.id}}">
             <text class="video-title">{{video.title}}</text>
             <view class="author-header">
-            <!--点击头像进入个人主页-->
+                <!--点击头像进入个人主页-->
                 <image data-id="{{video.wechat.id}}" bindtap="goMemberDetail" src="{{video.wechat.avatar||'/images/user-64.png'}}" mode="aspectFit" class="header"></image>
             </view>
             <block wx:if="{{!video.wechat.followed}}">
                 <text class="user-name">{{video.wechat.nickname}}</text>
             </block>
             <view class="video-detail-container">
-                <text class="total-looked-number">{{video.played_number}}</text>
-                <!--<text class="total-time">{{video.played_number}}</text>-->
+                <text class="total-looked-number">{{video.played_number}}次播放</text>
             </view>
         </block>
     </view>
@@ -47,19 +48,24 @@
                 <image class="icon" src="/images/like.png"></image>
             </block>
 
-            <text class="number">{{video.liked_number}}</text>
+            <text class="number">{{video.formatted_liked_number}}</text>
         </view>
         <!--分享给好友-->
         <button class="message-container" open-type="share" plain hover-class="none" hover-stop-propagation
                 data-id="{{video.id}}" data-title="{{video.title}}" data-cover="{{video.cover_url}}">
             <image class="icon" src="/images/icon48_wx_logo.png"></image>
-            <text class="number">{{video.shared_wechat_number}}</text>
+            <text class="number">{{video.formatted_shared_wechat_number}}</text>
         </button>
         <!--分享到朋友圈-->
         <button class="message-container" catchtap="saveVideoToAlbum" plain hover-class="none" hover-stop-propagation
                 data-id="{{video.id}}">
             <image class="icon" src="/images/icon_res_download_moments.png"></image>
-            <text class="number">{{video.shared_moment_number}}</text>
+            <text class="number">{{video.formatted_shared_moment_number}}</text>
+        </button>
+        <!--更多-->
+        <button  catchtap="showMore" class="message-container" plain hover-class="none" hover-stop-propagation
+                data-id="{{video.id}}">
+            <image class="icon" src="/images/more.png"></image>
         </button>
     </view>
 </view>

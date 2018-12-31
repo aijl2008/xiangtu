@@ -6,7 +6,9 @@ const URL_GET_HEADER_NAV = `${URL_PREFIX}/api/classifications`;
 
 /*视频列表*/
 const URL_GET_VIDEOS = `${URL_PREFIX}/api/videos`;
-const URL_PLAY_VIDEO = `${URL_PREFIX}/api/videos`;
+const URL_PLAY_VIDEO = `${URL_PREFIX}/api/videos/play/`;
+const URL_SHARE_VIDEO_TO_WECHAT = `${URL_PREFIX}/api/videos/share_to_wechat/`;
+const URL_SHARE_VIDEO_TO_MOMENT = `${URL_PREFIX}/api/videos/share_to_moment/`;
 
 const URL_MEMBER_DETAIL = `${URL_PREFIX}/api/users/`;
 
@@ -44,6 +46,8 @@ const QR_CODE_VIDEO = `${URL_PREFIX}/qr_code/video`;
 
 const URL_statistics = `${URL_PREFIX}/api/my/statistics`;
 
+const URL_INFORM = `${URL_PREFIX}/api/inform`;
+
 export {
     URL_PREFIX,
     SUCCESS_CODE,
@@ -62,6 +66,9 @@ export {
     QR_CODE_USER,
     QR_CODE_VIDEO,
     URL_PLAY_VIDEO,
-  URL_statistics,
-  URL_MEMBER_DETAIL
+    URL_INFORM,
+    URL_statistics,
+    URL_MEMBER_DETAIL,
+    URL_SHARE_VIDEO_TO_WECHAT,
+    URL_SHARE_VIDEO_TO_MOMENT,
 };

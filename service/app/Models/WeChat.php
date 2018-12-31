@@ -130,6 +130,7 @@ class Wechat extends Authenticatable
      */
     function haveLiked(Video $video)
     {
+        return $this->liked()->where('video_id', $video->id)->count() > 0;
         if ($this->newQuery()->whereHas('liked', function (Builder $query) use ($video) {
                 $query->where('video_id', $video->id);
             })->count() > 0) {

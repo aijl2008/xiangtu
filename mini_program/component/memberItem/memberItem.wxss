@@ -24,15 +24,26 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 8rpx;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.7);
+}
+.th_image{
+  width:33rpx;
+height:29rpx;
+float:left;
+margin-top:8rpx;
+margin-right: 8rpx;
 }
 
 .video-cover-image .bottom-container .played-number{
   font-size: 20rpx;
+  line-height: 44rpx;
+  color: #FFF;
+}
+.video-cover-image .bottom-container .played-time{
+  font-size: 20rpx;
   line-height: 1;
   color: #FFF;
 }
-
 .video-name{
   display: block;
   width: 100%;

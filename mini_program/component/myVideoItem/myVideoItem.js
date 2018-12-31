@@ -1,5 +1,4 @@
 // component/myVideoItem/myVideoItem.js
-import * as API from '../../utils/API';
 import * as util from '../../utils/util';
 
 Component({
@@ -61,46 +60,15 @@ Component({
 
         saveVideoToAlbum(event) {
             let id = event.currentTarget.dataset.id;
-            wx.showToast({
-                title: '正在制作二维码',
-                icon: "loading",
-                duration: 50000
+            util.saveVideoToAlbum(id);
+        },
+
+        startPlayer(event) {
+            const {id} = event.currentTarget.dataset;
+            util.LogPlayVideo(id);
+            this.triggerEvent('play-video', {
+                id,
             });
-            wx.downloadFile({
-                url: `${API.QR_CODE_VIDEO}?page=pages/detail/detail&scene=${id}`,
-                success(res) {
-                    wx.hideToast();
-                    wx.saveImageToPhotosAlbum({
-                        filePath: res.tempFilePath,
-                        success(res) {
-                            wx.showModal({
-                                title: '分享二维码已保存到系统相册',
-                                content: '快去分享给朋友，让更多的朋友发现这里的美好',
-                                success: function (res) {
-                                    if (res.confirm) {
-                                    } else if (res.cancel) {
-                                    }
-                                }
-                            })
-                        },
-                        fail(res) {
-                            wx.hideToast();
-                            wx.showToast({
-                                title: '分享失败',
-                                icon: 'success',
-                                image: "/images/sad.png",
-                                duration: 1500
-                            });
-                        }
-                    })
-                },
-                fail: function (res) {
-                    console.log('下载失败');
-                },
-                complete: function () {
-                    console.log('下载完成');
-                }
-            })
         },
     }
-})
+});

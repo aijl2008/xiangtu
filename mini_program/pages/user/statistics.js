@@ -89,7 +89,6 @@ Page({
                         data:res.data
                     })
                 }
-                console.log(this.data);
             }
         })
     }

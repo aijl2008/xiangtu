@@ -13,7 +13,8 @@ Page({
         lastPage: 0,
         publicMes: '',
         id: 0,
-        member: {}
+        member: {},
+        showModal: false
     },
 
     /**
@@ -64,6 +65,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+        console.log("onPullDownRefresh");
         this.setData({
             VideoList: [],
             currentPage: 0,
@@ -118,11 +120,8 @@ Page({
                     _this.setData({
                         user: res.data
                     });
-                    console.log(res, videoList, currentPage, member);
-                    console.log(_this.data);
                 }
                 else {
-                    console.log(res.code);
                 }
             }
         })
@@ -130,7 +129,6 @@ Page({
 
 
     followUser(event) {
-        console.log(event.currentTarget.dataset);
         const {id} = event.currentTarget.dataset;
 
         util.ajaxCommon(API.URL_FOLLOWED, {
@@ -149,7 +147,6 @@ Page({
     },
 
     cancelFollowUser(event) {
-        console.log(event.currentTarget.dataset);
         const {id} = event.currentTarget.dataset;
 
         util.ajaxCommon(API.URL_FOLLOWED, {
@@ -173,5 +170,26 @@ Page({
         wx.navigateTo({
             url: `/pages/detail/detail?id=${id}`,
         })
+    }, shareUser: function () {
+        this.setData({
+            showModal: true
+        })
+    },
+
+    preventTouchMove: function () {
+
+    },
+
+
+    cancelShareUser: function () {
+        this.setData({
+            showModal: false
+        })
+    },
+
+    saveMemberToAlbum(event) {
+        let id = event.currentTarget.dataset.id;
+        util.saveMemberToAlbum(id);
     }
+
 })

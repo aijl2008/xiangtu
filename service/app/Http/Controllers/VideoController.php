@@ -62,4 +62,20 @@ class VideoController extends Controller
         (new Log())->log("播放", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
         return Helper::success();
     }
+
+    public function shareToWechat(Request $request, Video $video)
+    {
+        $video->increment('shared_wechat_number');
+        $user = Auth::guard('wechat')->user();
+        (new Log())->log("分享到聊天", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
+        return Helper::success();
+    }
+
+    public function shareToMoment(Request $request, Video $video)
+    {
+        $video->increment('shared_moment_number');
+        $user = Auth::guard('wechat')->user();
+        (new Log())->log("分享到朋友圈", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
+        return Helper::success();
+    }
 }

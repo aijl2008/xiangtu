@@ -73,6 +73,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+        console.log("onReachBottom");
         const {currentPage, lastPage} = this.data;
 
         if (currentPage >= lastPage) {
@@ -108,8 +109,7 @@ Page({
                             collectionList: collectionList.concat(res.data.data),
                             lastPage: res.data.last_page,
                             currentPage,
-                        })
-                        console.log(collectionList);
+                        });
                     } else {
                         this.setData({
                             publicMes: 'empty',

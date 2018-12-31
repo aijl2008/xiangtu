@@ -37,6 +37,8 @@ class Video extends Model
         'humans_published_at',
         "formatted_played_number",
         "formatted_liked_number",
+        "formatted_shared_wechat_number",
+        "formatted_shared_moment_number",
     ];
 
     function getStatusOption()
@@ -103,6 +105,42 @@ class Video extends Model
             return '999+';
         }
     }
+
+    function getFormattedSharedWechatNumberAttribute()
+    {
+        if ($this->attributes['shared_wechat_number'] < 10) {
+            return '  ' . $this->attributes['shared_wechat_number'];
+        }
+        if ($this->attributes['shared_wechat_number'] < 100) {
+            return ' ' . $this->attributes['shared_wechat_number'];
+        }
+        if ($this->attributes['shared_wechat_number'] > 999) {
+            return '999+';
+        }
+    }
+
+    function getFormattedSharedMomentNumberAttribute()
+    {
+        if ($this->attributes['shared_moment_number'] < 10) {
+            return '  ' . $this->attributes['shared_moment_number'];
+        }
+        if ($this->attributes['shared_moment_number'] < 100) {
+            return ' ' . $this->attributes['shared_moment_number'];
+        }
+        if ($this->attributes['shared_moment_number'] > 999) {
+            return '999+';
+        }
+    }
+
+    function getFormattedDurationAttribute()
+    {
+        if ($this->attributes['duration']) {
+            return $this->attributes['duration'];
+        }
+        return "";
+
+    }
+
 
     function getPublishedAtAttribute()
     {

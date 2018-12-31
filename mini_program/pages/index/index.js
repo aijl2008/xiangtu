@@ -31,13 +31,17 @@ Page({
         })
     },
 
-    onHide:function () {
+    onHide: function () {
         if (this.videoContext) {
-            this.videoContext.stop();
+            let player = this.videoContext;
+            setTimeout(function () {
+                player.pause();
+            },500);
         }
     },
 
     onReachBottom() {
+        console.log("onReachBottom");
         const {currentPage, lastPage} = this.data;
 
         if (currentPage >= lastPage) {
@@ -57,8 +61,7 @@ Page({
     onShareAppMessage: function (event) {
         if (event.from == 'button') {
             const {id, title, cover} = event.target.dataset;
-            console.log(event);
-
+            util.LogShareVideoToWechat(id);
             return {
                 title,
                 path: `/pages/detail/detail?id=${id}`,
@@ -122,18 +125,15 @@ Page({
         });
     },
 
-    playVideo(event) {
+    playHomeVideo(event) {
         if (this.videoContext) {
-            this.videoContext.stop();
+            this.videoContext.pause();
         }
         const {id} = event.detail;
         this.setData({
             currentId: id,
         }, () => {
             this.videoContext = wx.createVideoContext(`video_${id}`);
-
-            console.log(this.videoContext);
-
             this.videoContext.play();
         });
     },
@@ -143,8 +143,7 @@ Page({
 
         let liked_number = this.data.videoList[index].liked_number;
         const likeCountStr = `videoList[${index}].liked`;
-        const likeNumberStr = `videoList[${index}].liked_number`;
-
+        const likeNumberStr = `videoList[${index}].formatted_liked_number`;
 
         this.setData({
             [likeCountStr]: liked,
@@ -165,5 +164,5 @@ Page({
         this.setData({
             videoList,
         })
-    },
+    }
 })
