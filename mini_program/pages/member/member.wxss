@@ -79,7 +79,7 @@
 
 .video-list-container{
   width: 100%;
-  padding: 32rpx 32rpx 0 32rpx;
+  padding: 32rpx 0;
   display: flex;
   justify-content: space-between;
 }
