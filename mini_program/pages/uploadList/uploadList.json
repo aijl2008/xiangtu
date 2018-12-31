@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "component-video-item": "/component/videoItem/videoItem"
+    "component-my-video-item": "/component/myVideoItem/myVideoItem"
   },
   "navigationBarTitleText": "上传列表"
 }

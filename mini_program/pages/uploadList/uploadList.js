@@ -3,7 +3,6 @@ import * as util from '../../utils/util';
 import * as API from '../../utils/API';
 
 Page({
-
     /**
      * 页面的初始数据
      */

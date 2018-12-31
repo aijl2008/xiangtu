@@ -23,6 +23,7 @@
   width: 100%;
   font-size: 24rpx;
   line-height: 1;
+  color: #AAA;
 }
 
 .share-msg-container{

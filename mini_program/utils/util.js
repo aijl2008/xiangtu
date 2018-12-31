@@ -88,6 +88,9 @@ const ajaxCommon = function (url, data, {method = "GET", loading = true, needTok
             } else if (typeof success === 'function') {
                 success(response.data);
             }
+            if (loading) {
+                wx.hideToast();
+            }
 
         },
         fail: function (res) {
@@ -101,9 +104,6 @@ const ajaxCommon = function (url, data, {method = "GET", loading = true, needTok
             }
         },
         complete: function (res) {
-            if (loading) {
-                wx.hideToast();
-            }
             if (typeof complete === 'function') {
                 complete(res);
             }
