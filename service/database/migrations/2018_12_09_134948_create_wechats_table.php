@@ -28,6 +28,7 @@ class CreateWechatsTable extends Migration
             $table->integer('followed_number')->default(0);
             $table->integer('be_followed_number')->default(0);
             $table->integer('uploaded_number')->default(0);
+            $table->integer('played_number')->default(0);
             $table->timestamps();
         });
     }

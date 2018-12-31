@@ -10,7 +10,6 @@ Route::get("/vue", "VueController@index");
  */
 Route::get("/videos/{video}", "VideoController@show")->name('videos.show');
 Route::get("/", "VideoController@index")->name('home');
-Route::post("/videos/{video}/play", "VideoController@play")->name('videos.play');
 /**
  * 管理员登录
  */
@@ -24,11 +23,8 @@ Route::group(
         Route::get('login', 'LoginController@showLoginForm')->name('login.show');
         Route::post('login', 'LoginController@login')->name('login.do');
         Route::get('logout', 'LoginController@logout')->name('logout');
-
         Route::get('register', 'RegisterController@showRegistrationForm')->name('register.show');
         Route::post('register', 'RegisterController@register')->name('register.do');
-
-
     }
 );
 

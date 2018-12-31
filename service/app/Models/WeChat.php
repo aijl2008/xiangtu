@@ -23,6 +23,10 @@ class Wechat extends Authenticatable
         "country",
         "province",
         "city",
+        "followed_number",
+        "be_followed_number",
+        "uploaded_number",
+        "played_number",
         "status"
     ];
 
