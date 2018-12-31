@@ -61,8 +61,7 @@
 
 .container .header-container .username-container{
   margin: 12rpx 0 0 32rpx;
-  width: 128rpx;
-  text-align: center;
+  text-align: left;
   font-size: 36rpx;
   font-weight: bold;
   line-height: 1;

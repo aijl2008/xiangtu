@@ -14,6 +14,8 @@
       <view class="follow-container">
         <text class="follow-number">关注 {{userInfo.followed_number}}</text>
         <text class="fans-number">粉丝 {{userInfo.be_followed_number}}</text>
+        <text class="fans-number">视频 {{userInfo.uploaded_number}}</text>
+        <text class="fans-number">播放 {{userInfo.played_number}}</text>
       </view>
     </view>
   </view>
