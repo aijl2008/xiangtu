@@ -7,7 +7,6 @@ Page({
     data: {},
 
     getUserInfo(res) {
-        console.log(res);
         wx.login({
             success(codeRes) {
                 if (codeRes.code) {
@@ -26,10 +25,29 @@ Page({
                                     delta: 1
                                 });
                             }
-                        }
+                            else {
+                                wx.showToast({
+                                    title: result.data.msg,
+                                    image: "/images/sad.png"
+                                });
+                            }
+                        },
+                        fail: function (res) {
+                            wx.showToast({
+                                title: "获取用户失败",
+                                image: "/images/sad.png"
+                            });
+                        },
+                    });
+                }
+                else {
+                    console.log(res);
+                    wx.showToast({
+                        title: '登录失败！',
+                        image: "/images/sad.png"
                     });
                 }
             }
         });
     }
-})
+});
