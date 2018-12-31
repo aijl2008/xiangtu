@@ -28,6 +28,10 @@ Route::resource('users', 'Api\WechatController',[
         "index", "show"
     ]
 ]);
+/**
+ * 举报
+ */
+Route::post("inform", "InformController");
 
 /**
  * Vod 事件服务
