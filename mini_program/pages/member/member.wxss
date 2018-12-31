@@ -53,6 +53,15 @@
   border-radius: 4rpx;
 }
 
+.member-share-btn{
+  font-size: 24rpx;
+  color: darkslategrey;
+  line-height: 0;
+  padding: 24rpx 24rpx;
+  background: #ccc;
+  border-radius: 4rpx;
+}
+
 .member-video-list-container{
   width: 100%;
   display: flex;

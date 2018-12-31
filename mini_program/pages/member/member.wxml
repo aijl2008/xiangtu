@@ -6,6 +6,7 @@
       <text class="member-nick-name">{{user.nickname}}</text>
       <text class="member-numbers">视频数{{user.uploaded_number}} · 粉丝{{user.be_followed_number}}</text>
     </view>
+    <view data-id='{{user.id}}' class="member-share-btn" bindtap="followUser">分享他</view>
     <!--关注与取消关注-->
     <block wx:if="{{!user.followed}}">
       <view data-id='{{user.id}}' class="member-follow-btn" bindtap="followUser">关注</view>
@@ -13,6 +14,9 @@
     <block wx:else>
     <view data-id='{{user.id}}' class="member-unfollow-btn" bindtap="cancelFollowUser">取消关注</view>
     </block>
+    <view>
+      <view>{{user.played_number}}播放|{{user.be_followed_nymber}}粉丝|{{user.followed_number}}关注|{{user.uploaded_number}}视频|</view>
+    </view>
   </view>
   <!--视频列表-->
 
