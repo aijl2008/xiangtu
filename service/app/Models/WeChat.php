@@ -212,7 +212,6 @@ class Wechat extends Authenticatable
      */
     function getFormattedPlayedNumberAttribute()
     {
-        dd($this->attributes);
         if ($this->attributes['played_number'] < 10) {
             return '  ' . $this->attributes['played_number'];
         }

@@ -56,7 +56,6 @@ class QRCodeController
         $response = $miniProgram->app_code->getUnlimit($scene, [
             "path" => $page
         ]);
-        return $response;
         if (!$response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
             return Helper::error(-1, "创建失败");
         }
