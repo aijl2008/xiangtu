@@ -28,7 +28,7 @@ class Video
     function paginate(Wechat $Wechat = null, $classification = 0, $wechat_id, $take = 16, $simple = true)
     {
         if ($wechat_id) {
-            if ($wechat_id == $Wechat->id) {
+            if ($Wechat && $wechat_id == $Wechat->id) {
                 $video = \App\Models\Video::query()->withoutGlobalScopes()->where('wechat_id', $wechat_id);
             } else {
                 $video = \App\Models\Video::query()

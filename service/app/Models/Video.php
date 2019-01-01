@@ -39,6 +39,7 @@ class Video extends Model
         "formatted_liked_number",
         "formatted_shared_wechat_number",
         "formatted_shared_moment_number",
+        "formatted_duration",
     ];
 
     function getStatusOption()

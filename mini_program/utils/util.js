@@ -31,9 +31,6 @@ const checkToken = function () {
     }
 }
 
-const gotoMemberHomePage = function () {
-
-}
 
 const gotoVideoPlayerPagem = function () {
 

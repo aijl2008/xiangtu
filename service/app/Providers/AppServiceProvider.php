@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         DB::listen(function (QueryExecuted $query) {
-            Log::info($query->sql, $query->bindings);
+            Log::info('[' . str_pad($query->time, 10, ' ') . ']' . $query->sql, $query->bindings);
         });
     }
 }

@@ -9,10 +9,10 @@
                 <!--关注与取消关注-->
                 <block wx:if="{{!user.onself}}">
                     <block wx:if="{{!user.followed}}">
-                        <view data-id='{{user.id}}' class="member-follow-btn" bindtap="followUser">+关注</view>
+                        <view data-id='{{user.id}}' class="follow-btn" bindtap="followUser">+关注</view>
                     </block>
                     <block wx:else>
-                        <view data-id='{{user.id}}' class="member-unfollow-btn" bindtap="cancelFollowUser">取消关注</view>
+                        <view data-id='{{user.id}}' class="unfollow-btn" bindtap="cancelFollowUser">取消关注</view>
                     </block>
                 </block>
             </view>
@@ -38,19 +38,19 @@
     <view class="header">
         <view class="em-follow-container">
             <view class="follow-number">
-                <text class='th_fontw'> {{user.followed_number}}</text>
+                <text class='th_fontw'> {{user.formatted_followed_number}}</text>
                 <text>关注</text>
             </view>
             <view class="fans-number">
-                <text class='th_fontw'>{{user.be_followed_number}}</text>
+                <text class='th_fontw'>{{user.formatted_be_followed_number}}</text>
                 <text> 粉丝</text>
             </view>
             <view class="fans-number">
-                <text class='th_fontw'> {{user.uploaded_number}}</text>
+                <text class='th_fontw'> {{user.formatted_uploaded_number}}</text>
                 <text> 视频</text>
             </view>
             <view class="fans-number">
-                <text class='th_fontw'> {{user.played_number}}</text>
+                <text class='th_fontw'> {{user.formatted_played_number}}</text>
                 <text> 播放</text>
             </view>
         </view>

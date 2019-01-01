@@ -4,7 +4,7 @@
 
     <view class="video-msg-container">
         <text class="video-title">{{videoDetail.title}}</text>
-        <text class="total-looked-number">{{videoDetail.played_number}}次观看,发布于{{videoDetail.humans_published_at}}</text>
+        <text class="total-looked-number">{{videoDetail.formatted_played_number}}次观看,发布于{{videoDetail.humans_published_at}}</text>
         <view class="share-msg-container">
             <!--收藏-->
             <view class="item-container" bindtap="changeCollection">

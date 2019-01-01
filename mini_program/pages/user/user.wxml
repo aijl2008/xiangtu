@@ -12,10 +12,10 @@
 
       <view class="username-container">{{userInfo.nickname}}</view>
       <view class="follow-container">
-        <text class="follow-number">关注 {{userInfo.followed_number}}</text>
-        <text class="fans-number">粉丝 {{userInfo.be_followed_number}}</text>
-        <text class="fans-number">视频 {{userInfo.uploaded_number}}</text>
-        <text class="fans-number">播放 {{userInfo.played_number}}</text>
+        <text class="follow-number">关注 {{userInfo.formatted_followed_number}}</text>
+        <text class="fans-number">粉丝 {{userInfo.formatted_be_followed_number}}</text>
+        <text class="fans-number">视频 {{userInfo.formatted_uploaded_number}}</text>
+        <text class="fans-number">播放 {{userInfo.formatted_played_number}}</text>
       </view>
     </view>
   </view>

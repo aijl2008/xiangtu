@@ -30,6 +30,13 @@ class Wechat extends Authenticatable
         "status"
     ];
 
+    protected $appends = [
+        "formatted_followed_number",
+        "formatted_be_followed_number",
+        "formatted_uploaded_number",
+        "formatted_played_number",
+    ];
+
     function getAvatarAttribute()
     {
         return str_replace('http://', 'https://', $this->attributes['avatar']);
@@ -152,52 +159,70 @@ class Wechat extends Authenticatable
      * 我的关注数
      * @return string
      */
-//    function getFollowedNumberAttribute()
-//    {
-//        if ($this->attributes['followed_number'] < 10) {
-//            return '  ' . $this->attributes['followed_number'];
-//        }
-//        if ($this->attributes['followed_number'] < 100) {
-//            return ' ' . $this->attributes['followed_number'];
-//        }
-//        if ($this->attributes['followed_number'] > 999) {
-//            return '999+';
-//        }
-//    }
+    function getFormattedFollowedNumberAttribute()
+    {
+        if ($this->attributes['followed_number'] < 10) {
+            return '  ' . $this->attributes['followed_number'];
+        }
+        if ($this->attributes['followed_number'] < 100) {
+            return ' ' . $this->attributes['followed_number'];
+        }
+        if ($this->attributes['followed_number'] > 999) {
+            return '999+';
+        }
+    }
 
     /**
      * 我的粉丝数
      * @return string
      */
-//    function getBeFollowedNumberAttribute()
-//    {
-//        if ($this->attributes['be_followed_number'] < 10) {
-//            return '  ' . $this->attributes['be_followed_number'];
-//        }
-//        if ($this->attributes['be_followed_number'] < 100) {
-//            return ' ' . $this->attributes['be_followed_number'];
-//        }
-//        if ($this->attributes['be_followed_number'] > 999) {
-//            return '999+';
-//        }
-//    }
+    function getFormattedBeFollowedNumberAttribute()
+    {
+        if ($this->attributes['be_followed_number'] < 10) {
+            return '  ' . $this->attributes['be_followed_number'];
+        }
+        if ($this->attributes['be_followed_number'] < 100) {
+            return ' ' . $this->attributes['be_followed_number'];
+        }
+        if ($this->attributes['be_followed_number'] > 999) {
+            return '999+';
+        }
+    }
 
     /**
      * 我的视频数
      * @return string
      */
-//    function getUploadedNumberAttribute()
-//    {
-//        if ($this->attributes['uploaded_number'] < 10) {
-//            return '  ' . $this->attributes['uploaded_number'];
-//        }
-//        if ($this->attributes['uploaded_number'] < 100) {
-//            return ' ' . $this->attributes['uploaded_number'];
-//        }
-//        if ($this->attributes['uploaded_number'] > 999) {
-//            return '999+';
-//        }
-//    }
+    function getFormattedUploadedNumberAttribute()
+    {
+        if ($this->attributes['uploaded_number'] < 10) {
+            return '  ' . $this->attributes['uploaded_number'];
+        }
+        if ($this->attributes['uploaded_number'] < 100) {
+            return ' ' . $this->attributes['uploaded_number'];
+        }
+        if ($this->attributes['uploaded_number'] > 999) {
+            return '999+';
+        }
+    }
+
+    /**
+     * 我的视频数
+     * @return string
+     */
+    function getFormattedPlayedNumberAttribute()
+    {
+        dd($this->attributes);
+        if ($this->attributes['played_number'] < 10) {
+            return '  ' . $this->attributes['played_number'];
+        }
+        if ($this->attributes['played_number'] < 100) {
+            return ' ' . $this->attributes['uploaded_number'];
+        }
+        if ($this->attributes['played_number'] > 999) {
+            return '999+';
+        }
+    }
 
     function updateRememberToken()
     {

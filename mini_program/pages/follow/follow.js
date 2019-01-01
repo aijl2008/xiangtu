@@ -125,14 +125,14 @@ Page({
     collentionChanged(event) {
         const {index, liked} = event.detail;
 
-        let liked_number = this.data.videoList[index].liked_number;
+        let formatted_liked_number = this.data.videoList[index].formatted_liked_number;
         const likeCountStr = `videoList[${index}].liked`;
-        const likeNumberStr = `videoList[${index}].liked_number`;
+        const likeNumberStr = `videoList[${index}].formatted_liked_number`;
 
 
         this.setData({
             [likeCountStr]: liked,
-            [likeNumberStr]: liked ? liked_number + 1 : liked_number - 1,
+            [likeNumberStr]: liked ? formatted_liked_number + 1 : formatted_liked_number - 1,
         })
     },
 

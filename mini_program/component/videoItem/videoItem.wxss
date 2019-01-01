@@ -83,7 +83,7 @@
 }
 
 .video-item-container .bottom-message-container .follow-btn{
-  padding: 20rpx 16rpx;
+  padding: 24rpx 12rpx;
   line-height: 0;
   font-size: 24rpx;
   color: #FFF;

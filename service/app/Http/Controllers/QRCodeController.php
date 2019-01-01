@@ -24,6 +24,10 @@ class QRCodeController
         if (!$scene) {
             return Helper::error(-1, "请指定scene");
         }
+        $page = trim($request->input('page'));
+        if (!$page) {
+            return Helper::error(-1, "请指定page");
+        }
         $video = Video::query()->find($scene);
         if (!$video) {
             return Helper::error(-1, "非法的scene");
@@ -49,7 +53,10 @@ class QRCodeController
          * qr_code
          */
         $miniProgram = Factory::miniProgram(config('wechat.mini_program.default'));
-        $response = $miniProgram->app_code->getUnlimit($scene);
+        $response = $miniProgram->app_code->getUnlimit($scene, [
+            "path" => $page
+        ]);
+        return $response;
         if (!$response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
             return Helper::error(-1, "创建失败");
         }
@@ -61,11 +68,11 @@ class QRCodeController
          * fingerprint
          */
         $fingerprint = Image::make(base_path('/public/images/fingerprint.png'));
-        $fingerprint->resize(120, 120);
+        $fingerprint->resize(80, 80);
         $canvas->insert($fingerprint, 'bottom-left', 25, 25);
-        $canvas->text('常按识别图片', 160, 580, function ($font) {
+        $canvas->text('常按识别二维码即可播放视频', 120, 600, function ($font) {
             $font->file(base_path('/public/images/hei.ttf'));
-            $font->size(48);
+            $font->size(32);
             $font->color('#333');
         });
         return $canvas->response();
@@ -79,6 +86,10 @@ class QRCodeController
         if (!$scene) {
             return Helper::error(-1, "请指定scene");
         }
+        $page = trim($request->input('page'));
+        if (!$page) {
+            return Helper::error(-1, "请指定page");
+        }
         $wechat = Wechat::query()->find($scene);
         if (!$wechat) {
             return Helper::error(-1, "非法的scene");
@@ -89,11 +100,12 @@ class QRCodeController
         $canvas = Image::canvas(720, 650, '#ffffff');
 
         /**
-         * cover
+         * avatar
          */
-        $cover = Image::make($wechat->avatar);
-        $cover->resize(720, 480);
-        $canvas->insert($cover);
+        $avatar = Image::make($wechat->avatar);
+        $avatar->resize(720, 720);
+        $avatar->crop(720, 480);
+        $canvas->insert($avatar);
         $canvas->text(str_limit($wechat->nickname, 17, ''), 50, 50, function ($font) {
             $font->file(base_path('/public/images/hei.ttf'));
             $font->size(36);
@@ -104,7 +116,9 @@ class QRCodeController
          * qr_code
          */
         $miniProgram = Factory::miniProgram(config('wechat.mini_program.default'));
-        $response = $miniProgram->app_code->getUnlimit($scene);
+        $response = $miniProgram->app_code->getUnlimit($scene, [
+            'path' => $page
+        ]);
         if (!$response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
             return Helper::error(-1, "创建失败");
         }
@@ -116,11 +130,11 @@ class QRCodeController
          * fingerprint
          */
         $fingerprint = Image::make(base_path('/public/images/fingerprint.png'));
-        $fingerprint->resize(120, 120);
+        $fingerprint->resize(80, 80);
         $canvas->insert($fingerprint, 'bottom-left', 25, 25);
-        $canvas->text('常按识别图片', 160, 580, function ($font) {
+        $canvas->text('常按识别图片', 120, 600, function ($font) {
             $font->file(base_path('/public/images/hei.ttf'));
-            $font->size(48);
+            $font->size(36);
             $font->color('#333');
         });
         return $canvas->response();

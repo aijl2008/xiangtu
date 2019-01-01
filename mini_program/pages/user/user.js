@@ -12,9 +12,9 @@ Page({
             "id": "0",
             "avatar": "/images/user-64.png",
             "nickname": "",
-            "followed_number": 0,
-            "be_followed_number": 0,
-            "uploaded_number": 0
+            "formatted_followed_number": 0,
+            "formatted_be_followed_number": 0,
+            "formatted_uploaded_number": 0
         },
     },
 

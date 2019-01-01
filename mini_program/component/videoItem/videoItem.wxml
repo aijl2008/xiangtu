@@ -25,7 +25,7 @@
                 <text class="user-name">{{video.wechat.nickname}}</text>
             </block>
             <view class="video-detail-container">
-                <text class="total-looked-number">{{video.played_number}}次播放</text>
+                <text class="total-looked-number">{{video.formatted_played_number}}次播放</text>
             </view>
         </block>
     </view>

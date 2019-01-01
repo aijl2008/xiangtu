@@ -40,7 +40,7 @@ Component({
             });
         },
 
-      gotoMemberHomePage(event) {
+      goMemberDetail(event) {
           const { id } = event.currentTarget.dataset;
 
           wx.navigateTo({

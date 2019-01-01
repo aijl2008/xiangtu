@@ -145,7 +145,7 @@ Page({
 
                         Object.assign(videoDetail, {
                             liked: false,
-                            liked_number: videoDetail.liked_number - 1
+                            formatted_liked_number: videoDetail.formatted_liked_number - 1
                         });
 
                         this.setData({
@@ -182,7 +182,7 @@ Page({
 
                         Object.assign(videoDetail, {
                             liked: true,
-                            liked_number: videoDetail.liked_number + 1
+                            formatted_liked_number: videoDetail.formatted_liked_number + 1
                         });
 
                         this.setData({
