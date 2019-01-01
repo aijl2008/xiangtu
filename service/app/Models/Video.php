@@ -161,9 +161,6 @@ class Video extends Model
 
     function getCoverUrlAttribute()
     {
-        if (stripos($this->attributes['cover_url'], '1258107170.vod2.myqcloud.com')) {
-            return "https://www.xiangtu.net.cn/cos/" . base64_encode($this->attributes['cover_url']);
-        }
         if (stripos($this->attributes['cover_url'], 'artimg.net')) {
             return "https://www.xiangtu.net.cn/artron/" . base64_encode($this->attributes['cover_url']);
         }

@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
+use Intervention\Image\Facades\Image;
 
 class ArtronController extends Controller
 {
-    function __invoke($url)
+    function __invoke($encodedUrl)
     {
-        $url = base64_decode($url);
+        if ($cache = Cache::get($encodedUrl)) {
+            $image = Image::make($cache);
+            return $image;
+        }
+        $url = base64_decode($encodedUrl);
         if (!$url) {
             abort(403);
         }
@@ -21,6 +27,7 @@ class ArtronController extends Controller
                 ]
             ]);
             $data = $response->getBody()->getContents();
+            Cache::put($encodedUrl, $data, 60);
             return response($data, 200, [
                 'Content-Type' => 'image/png',
             ]);

@@ -145,7 +145,7 @@ class Demo extends Command
             array_unshift($mockVideoCovers, env('APP_URL') . '/cover/' . $i . '.png');
         }
         $mockVideos = json_decode(file_get_contents(base_path() . '/database/mock/videos.json'));
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $this->comment('填充用户');
             $wechat = new Wechat(
                 [
@@ -173,10 +173,10 @@ class Demo extends Command
                         "file_id" => '5285890783657415584',//京东
                         "uploaded_at" => $faker->dateTime,
                         "classification_id" => $faker->numberBetween(1, 13),
-                        "played_number" => $faker->numberBetween(10000, 99999),
-                        "liked_number" => $faker->numberBetween(10000, 99999),
-                        "shared_wechat_number" => $faker->numberBetween(10000, 99999),
-                        "shared_moment_number" => $faker->numberBetween(10000, 99999),
+                        "played_number" => 0,
+                        "liked_number" => 0,
+                        "shared_wechat_number" => 0,
+                        "shared_moment_number" => 0,
                         "visibility" => $faker->numberBetween(1, 3),
                         "status" => 1
                     ]
