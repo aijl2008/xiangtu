@@ -9,9 +9,9 @@
 namespace App\Http\Controllers;
 
 use App\Helper;
+use App\Models\MiniProgram;
 use App\Models\Video;
 use App\Models\Wechat;
-use EasyWeChat\Factory;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -19,7 +19,6 @@ class QRCodeController
 {
     function video(Request $request)
     {
-
         $scene = trim($request->input('scene'));
         if (!$scene) {
             return Helper::error(-1, "请指定scene");
@@ -41,7 +40,8 @@ class QRCodeController
          * cover
          */
         $cover = Image::make($video->cover_url);
-        $cover->resize(720, 480);
+        $cover->resize(720, 720 * $cover->getWidth() / $cover->getHeight());
+        $cover->crop(720, 480);
         $canvas->insert($cover);
         $canvas->text(str_limit($video->title, 17, ''), 50, 50, function ($font) {
             $font->file(base_path('/public/images/hei.ttf'));
@@ -52,14 +52,7 @@ class QRCodeController
         /**
          * qr_code
          */
-        $miniProgram = Factory::miniProgram(config('wechat.mini_program.default'));
-        $response = $miniProgram->app_code->getUnlimit($scene, [
-            "path" => $page
-        ]);
-        if (!$response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
-            return Helper::error(-1, "创建失败");
-        }
-        $qrcode = Image::make($response->getBodyContents());
+        $qrcode = Image::make((new MiniProgram())->getWxaCodeUnLimit($scene, $page)->getBody()->getContents());
         $qrcode->resize(160, 160);
         $canvas->insert($qrcode, 'bottom-right', 10, 10);
 
@@ -114,14 +107,7 @@ class QRCodeController
         /**
          * qr_code
          */
-        $miniProgram = Factory::miniProgram(config('wechat.mini_program.default'));
-        $response = $miniProgram->app_code->getUnlimit($scene, [
-            'path' => $page
-        ]);
-        if (!$response instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
-            return Helper::error(-1, "创建失败");
-        }
-        $qrcode = Image::make($response->getBodyContents());
+        $qrcode = Image::make((new MiniProgram())->getWxaCodeUnLimit($scene, $page)->getBody()->getContents());
         $qrcode->resize(160, 160);
         $canvas->insert($qrcode, 'bottom-right', 10, 10);
 

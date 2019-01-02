@@ -54,7 +54,7 @@ return [
 
             'log' => [
                 'level' => 'debug',
-                'file' => '/var/www/xiangtu/service/storage/wechat.log',
+                'file' => storage_path() . '/wechat.log',
             ]
         ],
     ],
