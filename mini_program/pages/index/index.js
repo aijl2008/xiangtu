@@ -32,12 +32,9 @@ Page({
     },
 
     onHide: function () {
-        if (this.videoContext) {
-            let player = this.videoContext;
-            setTimeout(function () {
-                player.pause();
-            },500);
-        }
+      this.setData({
+        currentId: 0
+      });
     },
 
     onReachBottom() {
