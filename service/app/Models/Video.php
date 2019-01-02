@@ -135,7 +135,7 @@ class Video extends Model
 
     function getFormattedDurationAttribute()
     {
-        if ($this->attributes['duration']) {
+        if (isset($this->attributes['duration']) && $this->attributes['duration']) {
             return $this->attributes['duration'];
         }
         return "";
@@ -164,7 +164,7 @@ class Video extends Model
         if (stripos($this->attributes['cover_url'], 'artimg.net')) {
             return "https://www.xiangtu.net.cn/artron/" . base64_encode($this->attributes['cover_url']);
         }
-        return $this->attributes['cover_url'];
+        return str_replace('http://', 'https://', $this->attributes['cover_url']);
     }
 
     protected static function boot()
