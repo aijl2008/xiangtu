@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a0b6ded291cc0a99d966888074a0039",
+    "content-hash": "5a7cc0c87af9e5a7fd74a87680bf1ac2",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -808,16 +808,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+                "reference": "9f83dded91781a01c63574e387eaa769be769115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9f83dded91781a01c63574e387eaa769be769115",
+                "reference": "9f83dded91781a01c63574e387eaa769be769115",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -828,18 +828,19 @@
             },
             "require": {
                 "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -869,13 +870,14 @@
             "keywords": [
                 "http",
                 "message",
+                "psr-7",
                 "request",
                 "response",
                 "stream",
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
+            "time": "2018-12-04T20:46:45+00:00"
         },
         {
             "name": "intervention/image",
@@ -2807,6 +2809,52 @@
             "time": "2018-04-14T11:35:29+00:00"
         },
         {
+            "name": "ralouphie/getallheaders",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "reference": "5601c8a83fbba7ef674a7369456d12f1e0d0eafa",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "time": "2016-02-11T07:05:27+00:00"
+        },
+        {
             "name": "ramsey/uuid",
             "version": "3.8.0",
             "source": {
@@ -4104,56 +4152,6 @@
             "time": "2018-10-02T16:36:10+00:00"
         },
         {
-            "name": "tencentcloud/tencentcloud-sdk-php",
-            "version": "3.0.33",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/TencentCloud/tencentcloud-sdk-php.git",
-                "reference": "b6f2c76f54c9ae79c9356cf60e7ee291755221e2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/TencentCloud/tencentcloud-sdk-php/zipball/b6f2c76f54c9ae79c9356cf60e7ee291755221e2",
-                "reference": "b6f2c76f54c9ae79c9356cf60e7ee291755221e2",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3",
-                "guzzlehttp/psr7": "^1.4",
-                "php": ">=5.6.33"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/QcloudApi/QcloudApi.php"
-                ],
-                "psr-4": {
-                    "TencentCloud\\": "./src/TencentCloud"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "coolli",
-                    "email": "tencentcloudapi@tencent.com",
-                    "homepage": "https://cloud.tencent.com/document/sdk/PHP",
-                    "role": "Developer"
-                }
-            ],
-            "description": "TencentCloudApi php sdk",
-            "homepage": "https://github.com/TencentCloud/tencentcloud-sdk-php",
-            "time": "2018-11-15T08:01:24+00:00"
-        },
-        {
             "name": "tencentyun-api/qcloudapi-sdk-php",
             "version": "2.0.0",
             "source": {
@@ -4303,6 +4301,71 @@
                 "environment"
             ],
             "time": "2018-07-29T20:33:41+00:00"
+        },
+        {
+            "name": "whichbrowser/parser",
+            "version": "v2.0.37",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WhichBrowser/Parser-PHP.git",
+                "reference": "9c6ad8eadc23294b1c66d92876c11f13c5d4cf48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WhichBrowser/Parser-PHP/zipball/9c6ad8eadc23294b1c66d92876c11f13c5d4cf48",
+                "reference": "9c6ad8eadc23294b1c66d92876c11f13c5d4cf48",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/cache": "^1.0"
+            },
+            "require-dev": {
+                "icomefromthenet/reverse-regex": "0.0.6.3",
+                "phpunit/php-code-coverage": "^2.2|^3.0",
+                "phpunit/phpunit": "^4.0|^5.0",
+                "satooshi/php-coveralls": "^1.0",
+                "squizlabs/php_codesniffer": "2.5.*",
+                "symfony/yaml": ">=2.8"
+            },
+            "suggest": {
+                "cache/array-adapter": "Allows testing of the caching functionality"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WhichBrowser\\": [
+                        "src/",
+                        "tests/src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Niels Leenheer",
+                    "email": "niels@leenheer.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Useragent sniffing library for PHP",
+            "homepage": "http://whichbrowser.net",
+            "keywords": [
+                "browser",
+                "sniffing",
+                "ua",
+                "useragent"
+            ],
+            "time": "2018-10-02T09:26:41+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

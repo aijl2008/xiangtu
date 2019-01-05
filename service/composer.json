@@ -15,7 +15,7 @@
         "overtrue/laravel-wechat": "~4.0",
         "qcloud/vod-sdk-v5": "^1.2",
         "rulin132/jpgraph": "^4.2",
-        "tencentcloud/tencentcloud-sdk-php": "^3.0"
+        "whichbrowser/parser": "^2.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

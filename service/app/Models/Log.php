@@ -59,6 +59,10 @@ class Log extends Model
         if (substr($this->attributes["message"], 0, 10) == 'stdClass::') {
             return "<pre>{$this->attributes["message"]}</pre>";
         }
+        if (preg_match("/\[([^\[]+)](.+)/", $this->attributes["message"], $match)) {
+            $result = new \WhichBrowser\Parser($match[2]);
+            return $match[1] . " " . $result->toString();
+        }
         return $this->attributes["message"];
     }
 }

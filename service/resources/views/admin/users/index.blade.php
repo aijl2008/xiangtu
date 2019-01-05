@@ -21,9 +21,9 @@
             <tr>
                 <td>
                     @if($row->open_id)
-                        <div title="{{$row->open_id}}">openId已记录</div> @endif
+                        <div title="{{$row->open_id}}">openId::{{$row->open_id}}</div> @endif
                     @if($row->union_id)
-                        <div title="{{$row->union_id}}">unionId已记录</div> @endif
+                        <div title="{{$row->union_id}}">unionId::{{$row->union_id}}</div> @endif
                 </td>
                 <td>{{$row->nickname}}@if($row->sex) <br/>{{$row->sex==1?'男':'女'}} @endif</td>
                 <td>
