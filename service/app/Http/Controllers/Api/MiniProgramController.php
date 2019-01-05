@@ -72,7 +72,7 @@ class MiniProgramController extends Controller
                  * 新用户
                  */
                 $user = new Wechat();
-                $user->open_id = config('wechat.mini_program.default.app_id') . '|' . $response->openid;
+                $user->open_id = $response->openid;
                 /**
                  * 加密算法的初始向量，在小程序中，调用 wx.getUserInfo(Object object)可以得到该值
                  */
@@ -107,7 +107,7 @@ class MiniProgramController extends Controller
                     [
                         'action' => '注册',
                         'from_user_id' => $user->id,
-                        'message' => $decoded ? var_export($decoded, true) : ''
+                        'message' => json_encode($request->ips()) . "," . $request->userAgent()
                     ]
                 );
             } else {
@@ -118,7 +118,7 @@ class MiniProgramController extends Controller
                     [
                         'action' => '登录',
                         'from_user_id' => $user->id,
-                        'message' => 'code:' . $request->input('code')
+                        'message' => json_encode($request->ips()) . "," . $request->userAgent()
                     ]
                 );
             }
