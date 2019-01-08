@@ -3,7 +3,11 @@
 @section('content')
     <h3>用户管理</h3>
     <hr>
-
+    <form action="" method="get" class="form-inline">
+        {!! Form::input('text', 'nickname', null, ['class' => 'form-control', 'placeholder' => '昵称']) !!}
+        <button type="submit" class="btn btn-default">搜索</button>
+    </form>
+    <br />
     <table class="table table-borderless">
         <tr>
             <th>用户标识</th>

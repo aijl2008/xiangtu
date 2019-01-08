@@ -20,6 +20,8 @@ class CreateLogsTable extends Migration
             $table->string('to_user_id')->default(0);
             $table->string('video_id')->default(0);
             $table->text('message');
+            $table->string('ips')->default(0);
+            $table->text('user_agent')->default(0);
             $table->timestamps();
         });
     }

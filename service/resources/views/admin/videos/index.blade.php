@@ -3,14 +3,11 @@
 @section('content')
     <h3>视频管理</h3>
     <hr>
-    <div class="rows video-admin">
+    <div class="rows video-admin" id="waterfall-container">
         @foreach($rows as $row)
-            <div class="col-md-3">
-                <a href="{{route('admin.videos.show', $row->id)}}">
-                    <img
-                            class="thumbnail img-responsive lazyload cover"
-                            src="/images/loading/video.png"
-                            data-original="{{$row->cover_url?:''}}">
+            <div class="pin">
+                <a class="cover" href="{{route('admin.videos.show', $row->id)}}">
+                    <img src="{{$row->cover_url?:'/images/loading/video.png'}}">
                 </a>
                 <div class="text-nowrap title">{{$row->title}}</div>
                 <dl class="dl-horizontal">
@@ -19,7 +16,7 @@
                     <dt>播放与收藏</dt>
                     <dd class="text-nowrap">{{$row->formatted_played_number}}/{{$row->formatted_liked_number}}</dd>
                     <dt>可见范围</dt>
-                    <dd class="text-nowrap">{{$row->visibility}}</dd>
+                    <dd class="text-nowrap">{{$visibilities[$row->visibility]??'未知'}}</dd>
                     <dt>发布时间</dt>
                     <dd class="text-nowrap">{{$row->created_at}}</dd>
                     <dt>发布人</dt>

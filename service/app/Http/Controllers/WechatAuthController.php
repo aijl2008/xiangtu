@@ -43,7 +43,7 @@ class WechatAuthController extends Controller
     {
         $wechat = Wechat::query()->findOrFail($id);
         Auth::guard('wechat')->login($wechat);
-        (new Log())->log("登录", $wechat->id, 0, 0, '模拟');
+        (new Log())->setRequest($request)->log("登录", $wechat->id, 0, 0, '模拟');
         return redirect()->to(route("my.videos.index"));
     }
 
@@ -69,7 +69,7 @@ class WechatAuthController extends Controller
 //                (new Log())->log("注册", $wechat->id, 0, 0, '扫描二维码');
             }
             Auth::guard('wechat')->login($user);
-            (new Log())->log("登录", $user->id, 0, 0, '扫描二维码');
+            (new Log())->setRequest($request)->log("登录", $user->id, 0, 0, '扫描二维码');
             return redirect()->intended(route("my.videos.index"));
         } catch (AuthorizeFailedException $e) {
             abort(403, "认证已过期");
@@ -78,7 +78,7 @@ class WechatAuthController extends Controller
 
     public function logout(Request $request)
     {
-        (new Log())->log("退出", $request->user('wechat')->id);
+        (new Log())->setRequest($request)->log("退出", $request->user('wechat')->id);
         Auth::guard('wechat')->logout();
         $request->session()->invalidate();
         return redirect()->to(route('wechat.login.show'));

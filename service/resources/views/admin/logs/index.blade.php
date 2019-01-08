@@ -10,8 +10,10 @@
             <tr>
                 <th>编号</th>
                 <th class="text-nowrap">行为</th>
+                <th class="text-nowrap">内容</th>
                 <th class="text-nowrap">用户</th>
-                <th class="text-nowrap">消息</th>
+                <th class="text-nowrap">来自</th>
+                <th class="text-nowrap">应用</th>
                 <th class="text-nowrap">更新时间</th>
             </tr>
             </thead>
@@ -20,10 +22,10 @@
                 <tr>
                     <td class="text-nowrap">{{ $row->id }}</td>
                     <td class="text-nowrap">{{ $row->action }}</td>
+                    <td class="text-nowrap">{!! $row->formatted_message  !!}</td>
                     <td class="text-nowrap">{{ $row->from_user->nickname }}</td>
-                    <td class="text-nowrap">
-                        {!! $row->formatted_message  !!}
-                    </td>
+                    <td class="text-nowrap">{!! $row->formatted_ips  !!}</td>
+                    <td class="text-nowrap">{!! $row->formatted_user_agent  !!}</td>
                     <td class="text-nowrap">{{ $row->updated_at }}</td>
                 </tr>
             @endforeach

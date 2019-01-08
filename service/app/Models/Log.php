@@ -10,9 +10,16 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Log extends Model
 {
+
+    /**
+     * @var Request
+     */
+    protected $request = null;
+
     protected $fillable = [
         'action',
         'from_user_id',
@@ -26,6 +33,16 @@ class Log extends Model
     protected $appends = [
         'formatted_message'
     ];
+
+    /**
+     * @param Request $request
+     * @return $this
+     */
+    function setRequest(Request $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
 
     function footprint($id)
     {
@@ -46,22 +63,52 @@ class Log extends Model
                 'from_user_id' => $from_user_id,
                 'to_user_id' => $to_user_id,
                 'video_id' => $video_id,
-                'message' => $message
+                'message' => $message,
+                'ips' => json_encode($this->request->ips()),
+                'user_agent' => $this->request->userAgent()
             ]
         );
     }
 
+    function getFormattedIpsAttribute()
+    {
+        if (!isset($this->attributes["ips"]) || !$this->attributes["ips"]) {
+            return "";
+        }
+        $ips = [];
+        foreach ((array)json_decode($this->attributes["ips"], true) as $ip) {
+            $ips[] = IpLocation::getInstance($ip)->__toString();
+        }
+        return implode('', $ips);
+    }
+
+    function getFormattedUserAgentAttribute()
+    {
+        if (!isset($this->attributes["user_agent"]) || !$this->attributes["user_agent"]) {
+            return "";
+        }
+        $result = (new \WhichBrowser\Parser($this->attributes["user_agent"]));
+        return $result->toString();
+    }
+
     function getFormattedMessageAttribute()
     {
-        if (!isset($this->attributes["message"]) || !$this->attributes["message"]) {
-            return "";
+        if (in_array($this->attributes['action'], ['播放', '分享到聊天'])) {
+            $video = Video::query()->withoutGlobalScopes()->find($this->attributes["video_id"]);
+            if (!$video) {
+                return "未知视频";
+            }
+            return $video->wechat->nickname . '的视频，' . $video->title;
+        }
+        if ($this->attributes['action'] == '上传视频') {
+            $video = Video::query()->withoutGlobalScopes()->find($this->attributes["video_id"]);
+            if (!$video) {
+                return "未知视频";
+            }
+            return $video->title;
         }
         if (substr($this->attributes["message"], 0, 10) == 'stdClass::') {
             return "<pre>{$this->attributes["message"]}</pre>";
-        }
-        if (preg_match("/\[([^\[]+)](.+)/", $this->attributes["message"], $match)) {
-            $result = new \WhichBrowser\Parser($match[2]);
-            return $match[1] . " " . $result->toString();
         }
         return $this->attributes["message"];
     }

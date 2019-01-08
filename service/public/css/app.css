@@ -1,3 +1,8 @@
+#waterfall-container .pin {
+    width: 260px;
+    margin: 10px;
+}
+
 .avatar-small {
     width: 32px;
     height: 32px;
@@ -196,9 +201,10 @@
         display: none;
     }
 
-    .icp{
+    .icp {
         font-size: 9px;
     }
+
     /*#player-container-id {*/
     /*width: 290px;*/
     /*height: 195px;*/

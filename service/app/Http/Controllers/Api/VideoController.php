@@ -34,7 +34,7 @@ class VideoController extends Controller
         $video->increment('played_number');
         $user = $request->user('api');
         $video->wechat()->increment('played_number');
-        (new Log())->log("播放", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
+        (new Log())->setRequest($request)->log("播放", $user ? $user->id : 0, $video->wechat->id, $video->id);
 
         return Helper::success((new \App\Service\Video())->show($video, Auth::guard('api')->user()));
     }

@@ -13,6 +13,7 @@ use App\Helper;
 use App\Models\FollowedWechat;
 use App\Models\Log;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Follow
 {
@@ -26,7 +27,7 @@ class Follow
 
     }
 
-    function toggle()
+    function toggle(Request $request)
     {
         if (!$this->target) {
             return Helper::error(-1, "用户不存在");
@@ -35,7 +36,7 @@ class Follow
             return Helper::error(-1, "不允许关注自已");
         }
         if ($this->user->followed()->where("wechat_id", $this->target->id)->count() > 0) {
-            (new Log())->log('取消关注', $this->user->id, $this->target->id);
+            (new Log())->setRequest($request)->log('取消关注', $this->user->id, $this->target->id);
             $this->user->followed()->where('wechat_id', $this->target->id)->delete();
             $this->user->decrement('followed_number');
             $this->target->decrement('be_followed_number');
@@ -52,7 +53,7 @@ class Follow
                 "followed_id" => $this->user->id
             ]);
             $this->user->followed()->save($FollowedWechat);
-            (new Log())->log('关注', $this->user->id, $this->target->id);
+            (new Log())->setRequest($request)->log('关注', $this->user->id, $this->target->id);
             $this->user->increment('followed_number');
             $this->target->increment('be_followed_number');
             return Helper::success(

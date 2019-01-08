@@ -42,6 +42,25 @@ class Video extends Model
         "formatted_duration",
     ];
 
+
+    public function getOption()
+    {
+        return [
+            self::STATUS_TRANSFERING => '转码中',
+            self::STATUS_DISABLE => '屏蔽',
+            self::STATUS_OK => '正常',
+        ];
+    }
+
+    function getVisibilitiesOptions()
+    {
+        return [
+            '1' => '仅自己可见',
+            '2' => '关注我的人可见',
+            '3' => '任何人可见'
+        ];
+    }
+
     function getStatusOption()
     {
         return [

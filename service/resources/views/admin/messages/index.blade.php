@@ -68,7 +68,7 @@
 @section('js')
     <script language="JavaScript">
         $(function () {
-            $('#admin_classifications_index').addClass("active");
+            $('#admin_events_index').addClass("active");
             var targetUrl;
             $('.reply').click(function () {
                 targetUrl = $(this).data("url");

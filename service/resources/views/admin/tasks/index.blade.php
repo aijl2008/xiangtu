@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '事件管理')
 @section('content')
-    <h3>事件管理</h3>
+    <h3>任务管理</h3>
     <hr>
     @include('layouts/message')
     <div class="table-responsive">
@@ -9,11 +9,11 @@
             <thead>
             <tr>
                 <th>编号</th>
-                <th class="text-nowrap">video</th>
-                <th class="text-nowrap">file_id</th>
-                <th class="text-nowrap">task_id</th>
-                <th class="text-nowrap">code</th>
-                <th class="text-nowrap">message</th>
+                <th class="text-nowrap">关联视频</th>
+                <th class="text-nowrap">腾讯云文件编号</th>
+                <th class="text-nowrap">腾讯云任务编号</th>
+                <th class="text-nowrap">任务状态</th>
+                <th class="text-nowrap">上下文消息</th>
                 <th class="text-nowrap">更新时间</th>
             </tr>
             </thead>
@@ -40,7 +40,7 @@
 @section('js')
     <script language="JavaScript">
         $(function () {
-            $('#admin_logs_index').addClass("active")
+            $('#admin_tasks_index').addClass("active")
         });
     </script>
 @endsection

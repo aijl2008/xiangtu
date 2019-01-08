@@ -14,16 +14,17 @@ class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param $video
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return view('admin.messages.index')
             ->with('rows',
                 Message::query()
                     ->where('to_user_name', config('wechat.original_id'))
+                    ->orderBy('id', 'desc')
                     ->simplePaginate()
             );
     }

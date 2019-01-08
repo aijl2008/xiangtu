@@ -45,7 +45,7 @@ class ServiceController extends Controller
                         Log::error("数据异常，找不到file_id为{$decoded->data->fileId}的视频");
                     }
                     $video->wechat->increment('uploaded_number');
-                    (new \App\Models\Log())->log("上传视频", $video->wechat->id, 0, $video->id);
+                    (new \App\Models\Log())->setRequest(request())->log("上传视频", $video->wechat->id, 0, $video->id);
                     break;
 
                 case 'TranscodeComplete':
