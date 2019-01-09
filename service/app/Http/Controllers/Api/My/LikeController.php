@@ -11,9 +11,7 @@ namespace App\Http\Controllers\Api\My;
 
 use App\Helper;
 use App\Http\Controllers\Controller;
-use App\Models\Log;
 use App\Models\Video;
-use App\Models\Wechat;
 use App\Service\Like;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
@@ -38,7 +36,7 @@ class LikeController extends Controller
         return (new Like(
             $video = Video::query()->find($request->input('video_id')),
             $user = $request->user('api')
-        ))->toggle();
+        ))->toggle($request);
     }
 
     function destroy(Request $request, $video_id)
@@ -46,7 +44,7 @@ class LikeController extends Controller
         return (new Like(
             Video::query()->find($video_id),
             $user = $request->user('api')
-        ))->toggle();
+        ))->toggle($request);
     }
 }
 

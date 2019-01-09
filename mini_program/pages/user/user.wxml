@@ -7,7 +7,13 @@
         <navigator url="/pages/member/member?id={{userInfo.id}}"><image binderror="errImg" class="user-header" src="{{userInfo.avatar}}" mode="aspectFit"></image></navigator>
         <view class="seat"></view>
         <navigator class="edit-btn" url="/pages/user/edit/edit">编辑</navigator>
-        <text bindtap="saveMemberToAlbum" class="share-btn">分享我的主页</text>
+        <component-share-member
+          share="{{userInfo}}" 
+          tip="分享我的主页"
+          className="button-style-b"
+        >
+        </component-share-member>
+        <!-- <text bindtap="saveMemberToAlbum" class="share-btn">分享我的主页</text> -->
       </view>
 
       <view class="username-container">{{userInfo.nickname}}</view>

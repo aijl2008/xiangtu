@@ -52,7 +52,7 @@ class ProfileController extends Controller
         }
         $affected = $user->update($row);
         if ($affected) {
-            Log::query()->create(
+            (new Log())->setRequest($request)->create(
                 [
                     'action' => '修改资料',
                     'from_user_id' => $user->id,

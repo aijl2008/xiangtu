@@ -86,7 +86,11 @@ Page({
             imageURL: cover_url,
         }
     },
-
+  goHome(){
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+  },
     getVideoList() {
         let {currentPage, videoList, videoDetail} = this.data;
 

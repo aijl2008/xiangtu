@@ -58,6 +58,12 @@ Route::group(
             ]
         ]);
 
+        Route::resource("/informs", "InformsController", [
+            'only' => [
+                'index'
+            ]
+        ]);
+
         Route::resource("/logs", "LogController", [
             'only' => [
                 'index'

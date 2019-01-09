@@ -13,7 +13,7 @@ Page({
         activeId: 0,
         currentId: 0,
         currentPage: 0,
-        lastPage: 0,
+        lastPage: 0
     },
 
     onLoad(options) {

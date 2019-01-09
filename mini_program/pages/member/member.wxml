@@ -5,7 +5,13 @@
         <view class="member-detail-container">
             <text class="member-nick-name">{{user.nickname}}</text>
             <view class="th_share_box">
-                <view data-id='{{user.id}}' class="member-share-btn" bindtap="shareUser">分享TA</view>
+                <component-share-member
+                  share="{{user}}" 
+                  tip="分享TA"
+                  className="button-style-a"
+                  >
+                </component-share-member>
+                <!-- <view data-id='{{user.id}}' class="member-share-btn" bindtap="shareUser">分享TA</view> -->
                 <!--关注与取消关注-->
                 <block wx:if="{{!user.onself}}">
                     <block wx:if="{{!user.followed}}">

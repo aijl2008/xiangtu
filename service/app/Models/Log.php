@@ -27,7 +27,9 @@ class Log extends Model
         'video_id',
         'message',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'ips',
+        'user_agent'
     ];
 
     protected $appends = [
@@ -93,6 +95,19 @@ class Log extends Model
 
     function getFormattedMessageAttribute()
     {
+        if (preg_match("/\[([^\[]+)](.+)/", $this->attributes["message"], $match)) {
+            $result = new \WhichBrowser\Parser($match[2]);
+            dump($this->attributes['id']);
+            $item = Log::query()->find($this->attributes['id']);
+            $item->ips = $match[1];
+            $item->user_agent = str_limit($match[2], 255);
+            $item->save();
+            $ips = [];
+            foreach ((array)json_decode($match[1], true) as $ip) {
+                $ips[] = IpLocation::getInstance($ip)->__toString();
+            }
+            return implode('', $ips) . " " . $result->toString();
+        }
         if (in_array($this->attributes['action'], ['播放', '分享到聊天'])) {
             $video = Video::query()->withoutGlobalScopes()->find($this->attributes["video_id"]);
             if (!$video) {

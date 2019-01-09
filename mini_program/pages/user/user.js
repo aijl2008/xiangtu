@@ -20,9 +20,20 @@ Page({
 
     copyUrl(){
       var self = this;
+      var url = "https://www.xiangtu.net.cn/";
       wx.setClipboardData({
-        data: "https://www.xiangtu.net.cn/",
+        data: url,
         success: function (res) {
+          wx.showModal({
+            title: '网址已复制',
+            content: url,
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+              } else if (res.cancel) {
+              }
+            }
+          })
         }
       });
     },

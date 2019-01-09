@@ -40,7 +40,7 @@ class FollowController extends Controller
         return (new Follow(
             Wechat::query()->find($request->input('wechat_id')),
             $request->user('api')
-        ))->toggle();
+        ))->toggle($request);
     }
 
     function destroy(Request $request, $user_id)
@@ -48,6 +48,6 @@ class FollowController extends Controller
         return (new Follow(
             Wechat::query()->find($user_id),
             $request->user('api')
-        ))->toggle();
+        ))->toggle($request);
     }
 }

@@ -103,22 +103,22 @@ class MiniProgramController extends Controller
                     $user->city = '';
                 }
                 $user->save();
-                \App\Models\Log::query()->create(
+                (new \App\Models\Log())->setRequest($request)->create(
                     [
                         'action' => '注册',
                         'from_user_id' => $user->id,
-                        'message' => json_encode($request->ips()) . "," . $request->userAgent()
+                        'message' => ''
                     ]
                 );
             } else {
                 /**
                  * 旧用户
                  */
-                \App\Models\Log::query()->create(
-                    [
+                (new \App\Models\Log())->setRequest($request)->create(
+                [
                         'action' => '登录',
                         'from_user_id' => $user->id,
-                        'message' => json_encode($request->ips()) . "," . $request->userAgent()
+                        'message' => ""
                     ]
                 );
             }

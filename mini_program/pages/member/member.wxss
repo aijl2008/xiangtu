@@ -38,19 +38,6 @@
     margin-top: 12rpx;
 }
 
-.follow-btn {
-    font-size: 24rpx;
-    line-height: 52rpx;
-    color: #FFF;
-    padding: 24rpx 12rpx;
-    background: #00AA00;
-    border-radius: 25rpx;
-    width: 35%;
-    float: left;
-    margin-left: 15rpx;
-    text-align: center;
-    height: 52rpx;
-}
 
 .th_share_box {
     width: 100%;
@@ -62,7 +49,6 @@
     font-size: 24rpx;
     line-height: 52rpx;
     color: #FFF;
-    padding: 24rpx 12rpx;
     background: #CCCCCC;
     border-radius: 25rpx;
     width: 35%;
@@ -72,18 +58,20 @@
     height: 52rpx;
 }
 
-.member-share-btn {
+
+.follow-btn {
     font-size: 24rpx;
     line-height: 52rpx;
-    background: #ccc;
+    color: #FFF;
+    background: #00AA00;
     border-radius: 25rpx;
     width: 35%;
+    float: left;
+    margin-left: 15rpx;
     text-align: center;
     height: 52rpx;
-    color: #fff;
-    float: left;
-
 }
+
 
 .em-follow-container {
     width: 100%;
@@ -189,7 +177,6 @@
     float: left;
     height: 150rpx;
     background: none;
-
 }
 
 button::after {

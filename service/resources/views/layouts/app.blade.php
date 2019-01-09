@@ -130,6 +130,9 @@
                             <li id="admin_users_index"><a href="{{ route('admin.messages.index') }}"><i
                                             class="fa fa-cube"></i>客服消息
                                 </a></li>
+                            <li id="admin_informs_index"><a href="{{ route('admin.informs.index') }}"><i
+                                            class="fa fa-cube"></i>举报信息
+                                </a></li>
                         @elseif($auth=='wechat')
                             <li id="my_videos_index">
                                 <a href="{{ route('my.videos.index') }}"><i class="fa fa-cube"></i>我的视频</a>

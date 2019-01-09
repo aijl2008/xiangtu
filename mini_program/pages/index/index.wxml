@@ -1,4 +1,7 @@
 <!--index.wxml-->
+<!-- <block wx:for="{{navList}}" wx:key="status">
+<component-share-video share="{{item}}"></component-share-video>
+</block> -->
 <view class="container">
     <view class="header-seat-container">
         <view class="header-container">
