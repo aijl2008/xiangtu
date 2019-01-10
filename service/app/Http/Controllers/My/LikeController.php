@@ -30,6 +30,6 @@ class LikeController extends Controller
         return (new Like(
             $video = Video::query()->find($request->input('video_id')),
             $user = $request->user('wechat')
-        ))->toggle();
+        ))->toggle($request);
     }
 }

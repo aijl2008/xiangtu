@@ -59,7 +59,7 @@ class VideoController extends Controller
         $video->increment('played_number');
         $user = Auth::guard('wechat')->user();
         $video->wechat()->increment('played_number');
-        (new Log())->setRequest($request)->log("播放", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
+        (new Log())->setRequest($request)->log("播放", $user ? $user->id : 0, $video->wechat->id, $video->id);
         return Helper::success();
     }
 
@@ -85,7 +85,7 @@ class VideoController extends Controller
     {
         $video->increment('shared_moment_number');
         $user = Auth::guard('wechat')->user();
-        (new Log())->setRequest($request)->log("分享到朋友圈", $user ? $user->id : 0, $video->wechat->id, $video->id, json_encode($request->ips()) . "," . $request->userAgent());
+        (new Log())->setRequest($request)->log("分享到朋友圈", $user ? $user->id : 0, $video->wechat->id, $video->id);
         return Helper::success();
     }
 }

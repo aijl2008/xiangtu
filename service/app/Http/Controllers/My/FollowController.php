@@ -37,6 +37,6 @@ class FollowController extends Controller
         return (new Follow(
             Wechat::query()->find($request->input('wechat_id')),
             $request->user('wechat')
-        ))->toggle();
+        ))->toggle($request);
     }
 }

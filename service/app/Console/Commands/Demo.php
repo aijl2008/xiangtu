@@ -194,7 +194,7 @@ class Demo extends Command
                     'from_user_id' => mt_rand(0, 100),
                     'to_user_id' => 0,
                     'video_id' => mt_rand(0, 100),
-                    'message' => 'XX播放了一个视频',
+                    'message' => '',
                     'created_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time())),
                     'updated_at' => date('Y-m-d H:i:s', mt_rand(time() - 3600 * 24 * 7, time()))
                 ]

@@ -97,10 +97,10 @@ class Log extends Model
     {
         if (preg_match("/\[([^\[]+)](.+)/", $this->attributes["message"], $match)) {
             $result = new \WhichBrowser\Parser($match[2]);
-            dump($this->attributes['id']);
             $item = Log::query()->find($this->attributes['id']);
             $item->ips = $match[1];
             $item->user_agent = str_limit($match[2], 255);
+            $item->message = '';
             $item->save();
             $ips = [];
             foreach ((array)json_decode($match[1], true) as $ip) {

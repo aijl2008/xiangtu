@@ -87,7 +87,8 @@ class MiniProgramController extends Controller
                     $Crypt = new DataCrypt(config('wechat.mini_program.default.app_id'), $response->session_key);
                     $errCode = $Crypt->decryptData($encryptedData, $iv, $data);
                     if ($errCode !== 0) {
-                        return Helper::error(__LINE__, '用户数据校验失败,' . $errCode);
+                        Log::error('decryptData失败，', ['errCode' => $errCode, "iv" => $iv, "data" => $data, "encryptedData" => $encryptedData]);
+                        return Helper::error(__LINE__, '用户数据校验失败' . $errCode);
                     }
                     $decoded = json_decode($data);
                     Log::debug('json_decode:', (array)$decoded);
@@ -115,7 +116,7 @@ class MiniProgramController extends Controller
                  * 旧用户
                  */
                 (new \App\Models\Log())->setRequest($request)->create(
-                [
+                    [
                         'action' => '登录',
                         'from_user_id' => $user->id,
                         'message' => ""

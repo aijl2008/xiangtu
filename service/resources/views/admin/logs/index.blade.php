@@ -22,10 +22,10 @@
                 <tr>
                     <td class="text-nowrap">{{ $row->id }}</td>
                     <td class="text-nowrap">{{ $row->action }}</td>
-                    <td class="text-nowrap">{!! $row->formatted_message  !!}</td>
+                    <td class="text-nowrap">{!! str_limit($row->formatted_message,20)  !!}</td>
                     <td class="text-nowrap">{{ $row->from_user->nickname }}</td>
                     <td class="text-nowrap">{!! $row->formatted_ips  !!}</td>
-                    <td class="text-nowrap">{!! $row->formatted_user_agent  !!}</td>
+                    <td class="text-nowrap"><span  title="{!! $row->formatted_user_agen !!}">{!! str_limit($row->formatted_user_agent,20)  !!}</span></td>
                     <td class="text-nowrap">{{ $row->updated_at }}</td>
                 </tr>
             @endforeach
