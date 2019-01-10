@@ -18,10 +18,10 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id' => "",
-            'secret' => "",
-            'token' => "",
-            'aes_key' => "",
+            'app_id' => "wxda5f7e86d91086d5",
+            'secret' => "1b09e65b71c01f7631efb3a71b7c145e",
+            'token' => "wechatapiawzcn",
+            'aes_key' => "wechatapiawzcn",
         ],
     ],
 

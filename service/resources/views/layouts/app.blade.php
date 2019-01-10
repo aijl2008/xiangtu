@@ -49,7 +49,7 @@
                     $(this).css("height", width);
                 }
             });
-            // $("img.lazyload").lazyload();
+            $("img.lazyload").lazyload();
             $('#waterfall-container').waterfall();
 
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
@@ -127,7 +127,7 @@
                             <li id="admin_tasks_index"><a href="{{ route('admin.tasks.index') }}"><i
                                             class="fa fa-cube"></i>任务查询
                                 </a></li>
-                            <li id="admin_users_index"><a href="{{ route('admin.messages.index') }}"><i
+                            <li id="admin_message_index"><a href="{{ route('admin.messages.index') }}"><i
                                             class="fa fa-cube"></i>客服消息
                                 </a></li>
                             <li id="admin_informs_index"><a href="{{ route('admin.informs.index') }}"><i

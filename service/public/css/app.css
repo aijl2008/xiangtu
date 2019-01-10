@@ -50,7 +50,7 @@
 
 .my-videos {
     display: block;
-    margin-bottom: 50px;
+    margin: 10px 0;
 }
 
 .my-videos .updated_at {
@@ -61,11 +61,13 @@
 .my-videos .liked_number {
     display: inline-block;
     float: left;
+    margin: 0 10px;
 }
 
 .my-videos .played_number {
     display: inline-block;
     float: left;
+    margin: 0 10px;
 }
 
 .avatar-container {
