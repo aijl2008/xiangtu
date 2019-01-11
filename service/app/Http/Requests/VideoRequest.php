@@ -23,11 +23,19 @@ class VideoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            "title:required",
-            //"url" => "required|unique:videos",
-            "url" => "required",
-        ];
+        $video = $this->route("video");
+        if ($video) {
+            return [
+                "title:required",
+                "url" => "required|unique:videos,url," . $this->route("video")->id
+            ];
+        } else {
+            return [
+                "title:required",
+                "url" => "required|unique:videos"
+            ];
+        }
+
     }
 
 
@@ -40,61 +48,17 @@ class VideoRequest extends FormRequest
         ];
     }
 
-    public function all($keys = NULL)
+    public function data()
     {
-        $data = [];
-        foreach ([
-                     "wechat_id" => "int",
-                     "title" => "string",
-                     "cover_url" => "string",
-                     "file_id" => "string",
-                     "url" => "string",
-                     "uploaded_at" => "int",
-                     "played_number" => "int",
-                     "liked_number" => "int",
-                     "shared_wechat_number" => "int",
-                     "shared_moment_number" => "int",
-                     "visibility" => "int",
-                     "classification_id" => "int",
-                     "status" => "int"
-                 ] as $field => $type) {
-            $value = $this->input($field);
-            if (is_null($value)) {
-                continue;
-            }
-            $data[$field] = call_user_func(function ($value, $type) {
-                switch ($type) {
-                    case "int":
-                        return (int)$value;
-                        break;
-                    case "string":
-                        return (string)$value;
-                        break;
-                    case "boolean":
-                        return (boolean)$value;
-                        break;
-                    default:
-                        return $value;
-                        break;
-                }
-            }, $value, $type);
-        }
-
-        foreach ([
-                     "uploaded_at" => date("Y-m-d H:i:s"),
-                     "played_number" => 0,
-                     "liked_number" => 0,
-                     "shared_wechat_number" => 0,
-                     "shared_moment_number" => 0,
-                     "visibility" => 1,
-                     "cover_url" => "",
-                     "file_id" => 0,
-                     "classification_id" => 0
-                 ] as $field => $value) {
-            if (!key_exists($field, $data)) {
-                $data[$field] = $value;
-            }
-        }
+        $data = [
+            "title" => (string)$this->input("title"),
+            "cover_url" => (string)$this->input("cover_url"),
+            "file_id" => (string)$this->input("file_id"),
+            "url" => (string)$this->input("url"),
+            "visibility" => (int)$this->input("visibility"),
+            "classification_id" => (int)$this->input("classification_id"),
+            "uploaded_at" => $this->input("uploaded_at", date('Y-m-d H:i:s'))
+        ];
         return $data;
     }
 }

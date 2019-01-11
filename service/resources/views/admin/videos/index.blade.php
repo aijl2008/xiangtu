@@ -3,12 +3,14 @@
 @section('content')
     <h3>视频管理</h3>
     <hr>
-    <div class="rows video-admin" id="waterfall-container">
+    <div class="rows video-admin">
         @foreach($rows as $row)
-            <div class="pin">
-                <a class="cover" href="{{route('admin.videos.show', $row->id)}}">
-                    <img src="{{$row->cover_url?:'/images/loading/video.png'}}">
-                </a>
+            <div class="col-md-4">
+                <div class="fixed-image">
+                    <a class="cover" href="{{route('admin.videos.show', $row->id)}}">
+                        <img src="{{$row->cover_url?:'/images/loading/video.png'}}">
+                    </a>
+                </div>
                 <div class="text-nowrap title">{{$row->title}}</div>
                 <dl class="dl-horizontal">
                     <dt>分类</dt>
@@ -20,7 +22,7 @@
                     <dt>发布时间</dt>
                     <dd class="text-nowrap">{{$row->created_at}}</dd>
                     <dt>发布人</dt>
-                    <dd class="text-nowrap">{{$row->wechat->nickname}}</dd>
+                    <dd class="text-nowrap">{{$row->wechat->nickname??'未知用户'}}</dd>
                     <dt>状态</dt>
                     <dd class="text-nowrap">
                         @foreach($status as $key => $value)

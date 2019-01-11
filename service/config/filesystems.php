@@ -13,8 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
-
+    'default' => 'public',
     /*
     |--------------------------------------------------------------------------
     | Default Cloud Filesystem Disk
@@ -50,8 +49,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => base_path('/public/upload'),
-            'url' => '/upload',
+            'root' => base_path('/public/storage'),
+            'url' => '/storage',
             'visibility' => 'public',
         ],
 

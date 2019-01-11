@@ -140,6 +140,7 @@ Route::group(
          * 视频列表
          */
         Route::resource("videos", "VideoController");
+        Route::post("videos/upload_cover", "VideoController@uploadCover")->name("videos.upload_cover");
         Route::resource('followed', 'FollowController');
         Route::resource('liked', 'LikeController');
 
@@ -161,7 +162,7 @@ Route::group(
  */
 Route::any('/wechat', 'WechatServerController@serve')->name('wechat.serve');
 Route::any('/official_account', 'WechatServerController@official_account')->name('wechat.official_account');
-
+Route::any('/official_account/qrcode', 'WechatServerController@qrcode')->name('wechat.official_account.qrcode');
 
 Route::any('/qr_code/user', 'QRCodeController@user');
 Route::any('/qr_code/video', 'QRCodeController@video');

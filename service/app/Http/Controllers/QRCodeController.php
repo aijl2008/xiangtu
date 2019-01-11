@@ -13,12 +13,21 @@ use App\Models\MiniProgram;
 use App\Models\Video;
 use App\Models\Wechat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class QRCodeController
 {
     function video(Request $request)
     {
+        $file = md5($request->url());
+        if (!$request->input("nocache") && Storage::exists($file)) {
+            if ($request->input('download')) {
+                return response()->download(Storage::path($file));
+            }
+            $image = Image::make(Storage::path($file));
+            return $image->response();
+        }
         $scene = trim($request->input('scene'));
         if (!$scene) {
             return Helper::error(-1, "请指定scene");
@@ -67,13 +76,24 @@ class QRCodeController
             $font->size(32);
             $font->color('#333');
         });
+        Storage::put($file, $canvas->encode());
+        if ($request->input('download')) {
+            return response()->download(Storage::path($file));
+        }
         return $canvas->response();
     }
 
 
     function user(Request $request)
     {
-
+        $file = md5($request->url());
+        if (!$request->input("nocache") && Storage::exists($file)) {
+            if ($request->input('download')) {
+                return response()->download(Storage::path($file));
+            }
+            $image = Image::make(Storage::path($file));
+            return $image->response();
+        }
         $scene = trim($request->input('scene'));
         if (!$scene) {
             return Helper::error(-1, "请指定scene");
@@ -122,6 +142,10 @@ class QRCodeController
             $font->size(36);
             $font->color('#333');
         });
+        Storage::put($file, $canvas->encode());
+        if ($request->input('download')) {
+            return response()->download(Storage::path($file));
+        }
         return $canvas->response();
     }
 }

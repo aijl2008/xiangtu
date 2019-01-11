@@ -20,12 +20,12 @@ class Video
     /**
      * @param Wechat|null $Wechat 当前登录用户
      * @param int $classification 分类
-     * @param $wechat_id 查询指定用户
+     * @param int $wechat_id 查询指定用户
      * @param int $take 每页数
      * @param bool $simple 是否启用简单分页
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Contracts\Pagination\Paginator
      */
-    function paginate(Wechat $Wechat = null, $classification = 0, $wechat_id, $take = 16, $simple = true)
+    function paginate(Wechat $Wechat = null, $classification = 0, $wechat_id = 0, $take = 16, $simple = true)
     {
         if ($wechat_id) {
             if ($Wechat && $wechat_id == $Wechat->id) {

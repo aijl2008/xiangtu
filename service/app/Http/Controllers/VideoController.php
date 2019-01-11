@@ -20,6 +20,7 @@ class VideoController extends Controller
                 ->paginate(
                     $request->user('wechat'),
                     $request->input('classification'),
+                    0,
                     15
                 )
         );

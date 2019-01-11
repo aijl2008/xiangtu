@@ -289,3 +289,27 @@
 #player-container-id {
     margin-bottom: 5px;
 }
+
+.fixed-image {
+
+    padding: 4px;
+    width: 360px;
+    height: 240px;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.fixed-image img {
+    margin: 0 auto;
+    max-width: 300px;
+    max-height: 240px;
+}

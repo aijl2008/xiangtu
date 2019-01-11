@@ -50,7 +50,7 @@
                 }
             });
             $("img.lazyload").lazyload();
-            $('#waterfall-container').waterfall();
+            // $('#waterfall-container').waterfall();
 
             $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
         });
@@ -190,7 +190,7 @@
         </div>
     </div>
 
-    <div class="clear"></div>
+    <div class="clearfix"></div>
     <div class="container footer_con">
         <div class="row footer">
             <div class="col-md-6 col-sm-6 text-center">

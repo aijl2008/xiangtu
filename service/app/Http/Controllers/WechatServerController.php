@@ -50,6 +50,15 @@ class WechatServerController extends Controller
         return $app->server->serve();
     }
 
+    function qrcode()
+    {
+        $config = config('wechat.official_account.default');
+        $app = Factory::officialAccount($config);
+        $result = $app->qrcode->forever(56);
+        return $app->qrcode->url($result['ticket']);
+        return $result;
+    }
+
     function official_account()
     {
         $config = config('wechat.official_account.default');

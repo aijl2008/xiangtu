@@ -16,13 +16,14 @@ class Video extends Model
     const STATUS_TRANSFERING = 0;
     const STATUS_OK = 1;
     public $timestamps = true;
+
     protected $fillable = [
         "wechat_id",
+        "uploaded_at",
         "title",
         "url",
         "cover_url",
         "file_id",
-        "uploaded_at",
         "played_number",
         "liked_number",
         "shared_wechat_number",
@@ -102,6 +103,9 @@ class Video extends Model
 
     function getFormattedLikedNumberAttribute()
     {
+        if (!array_key_exists('liked_numberliked_number', $this->attributes)) {
+            return '  0';
+        }
         if ($this->attributes['liked_number'] < 10) {
             return '  ' . $this->attributes['liked_number'];
         }
@@ -115,6 +119,9 @@ class Video extends Model
 
     function getFormattedPlayedNumberAttribute()
     {
+        if (!array_key_exists('played_number', $this->attributes)) {
+            return '  0';
+        }
         if ($this->attributes['played_number'] < 10) {
             return '  ' . $this->attributes['played_number'];
         }
@@ -128,6 +135,9 @@ class Video extends Model
 
     function getFormattedSharedWechatNumberAttribute()
     {
+        if (!array_key_exists('shared_wechat_number', $this->attributes)) {
+            return '  0';
+        }
         if ($this->attributes['shared_wechat_number'] < 10) {
             return '  ' . $this->attributes['shared_wechat_number'];
         }
@@ -141,6 +151,9 @@ class Video extends Model
 
     function getFormattedSharedMomentNumberAttribute()
     {
+        if (!array_key_exists('shared_moment_number', $this->attributes)) {
+            return '  0';
+        }
         if ($this->attributes['shared_moment_number'] < 10) {
             return '  ' . $this->attributes['shared_moment_number'];
         }

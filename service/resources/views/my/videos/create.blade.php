@@ -19,6 +19,8 @@
             <div class="col-md-10">
                 <input class="form-control hide" type="text" value="" name="cover_url" id="cover_url"
                        readonly="readonly">
+                <input type="file" id="cover" name="cover" class="hide">
+                <img class="thumbnail img-responsive hide" src="">
                 <p class="form-control-static" id="queue_video_covers"><a id="addCover"
                                                                           href="javascript:void(0);"
                                                                           class="btn btn-sm btn-default">添加封面</a>
@@ -80,10 +82,7 @@
     <br/>
     <div style="display: none">
         <input type="file" id="addVideo-file">
-        <input type="file" id="addCover-file">
     </div>
-    <div class="clearfix"></div>
-    <div style="width: 80px"></div>
     <div class="clearfix"></div>
 @endsection
 @section('js')
@@ -154,12 +153,51 @@
              * 选择封面文件
              */
             $('#addCover').on('click', function () {
-                $('#addCover-file').click();
+                $('#cover').click();
             });
-            $('#addCover-file').on('change', function (e) {
-                var coverFile = this.files[0];
-                coverFileTask = coverFile;
-                $('#queue_video_covers').html(coverFile.name);
+            $('#cover').on('change', function (e) {
+                var formElement = document.querySelector("form");
+                var formData = new FormData(formElement);
+                $.ajax({
+                    url: "{{route('my.videos.upload_cover')}}",
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function () {
+                        var files = $('input[name="cover"]').prop('files');
+                        console.log(files);
+                        if (files.length == 0) {
+                            bootbox.alert({
+                                title: "乡土味",
+                                message: "请选择图片",
+                                className: 'bb-alternate-modal'
+                            });
+                            return false;
+                        }
+                    },
+                    success: function (res) {
+                        if (res.code == 0) {
+                            $(".thumbnail").attr("src", res.data.url);
+                            $("#cover_url").val(res.data.url).show();
+                        }
+                        else {
+                            bootbox.alert({
+                                title: "乡土味",
+                                message: res.msg,
+                                className: 'bb-alternate-modal'
+                            });
+                        }
+                    },
+                    error: function () {
+                        bootbox.alert({
+                            title: "乡土味",
+                            message: "封面上传失败",
+                            className: 'bb-alternate-modal'
+                        });
+                    }
+                });
             });
 
             /**
@@ -167,7 +205,7 @@
              */
             var startUploader = function () {
                 dialog = bootbox.alert({
-                    title: "乡土味<small>正在上传，请不要关闭当前页</small>",
+                    title: "正在上传，请不要关闭当前页",
                     message: "<div class=\"progress\">\n" +
                     "    <div class=\"progress-bar\" style=\"width: 0%;\">\n" +
                     "        <span class=\"sr-only\">0% Complete</span>\n" +
@@ -240,6 +278,14 @@
                             type: 'POST',
                             data: $("#upload-video").serialize(),
                             dataType: 'json',
+                            beforeSend: function () {
+                                dialog.modal('hide');
+                                dialog = bootbox.alert({
+                                    title: "乡土味",
+                                    message: "正在保存视频，请不要关闭当前页",
+                                    className: 'bb-alternate-modal'
+                                });
+                            },
                             success: function (res) {
                                 if (res && res.code == 0) {
                                     dialog.modal('hide');
@@ -320,7 +366,7 @@
                     });
                     return;
                 }
-                if (!coverFileTask) {
+                if (!$('#cover_url').val()) {
                     bootbox.confirm({
                         title: "乡土味",
                         message: "您没有上传视频封面，确定要继续吗？",

@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -29,6 +30,7 @@ class VideoController extends Controller
             ->with('wechat')
             ->orderBy('id', 'desc');
         $view->with('rows', $video->simplePaginate());
+        $view->with('status', (new Video())->getOption());
         $view->with('classification', $request->input('classification', 0));
         return $view;
     }
@@ -53,7 +55,7 @@ class VideoController extends Controller
         return Helper::success(
             (new \App\Service\Video())
                 ->store(
-                    $request->all(),
+                    $request->data(),
                     $request->user('wechat')
                 )
         );
@@ -81,36 +83,54 @@ class VideoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param Video $video
+     * @return $this
      */
-    public function edit($id)
+    public function edit(Video $video)
     {
-        //
+        return view("my.videos.edit")->with("row", $video);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param VideoRequest $request
+     * @param Video $video
+     * @return array
      */
-    public function update(Request $request, $id)
+    public function update(VideoRequest $request, Video $video)
     {
-        //
+        $video->update($request->data());
+        return Helper::success();
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param Video $video
+     * @return array
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Video $video)
     {
-        //
+        $video->wechat()->decrement('uploaded_number', 1);
+        $video->task()->delete();
+        $video->followed()->delete();
+        $video->liker()->detach();
+        $video->delete();
+
+        return Helper::success();
+    }
+
+    public function uploadCover(Request $request)
+    {
+        if ($request->ajax()) {
+            $file = $request->file('cover');
+            if (!$file) {
+                return Helper::error(-1, "请选择图片" . var_export($_POST, true));
+            }
+            $path = $file->store('upload');
+            return Helper::success(
+                [
+                    "url" => asset(Storage::url($path))
+                ]
+            );
+        }
     }
 }
