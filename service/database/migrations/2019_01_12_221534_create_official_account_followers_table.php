@@ -13,7 +13,7 @@ class CreateFollowersTable extends Migration
      */
     public function up()
     {
-        Schema::create('followers', function (Blueprint $table) {
+        Schema::create('official_account_followers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('app_id');
             $table->string('from_open_id');

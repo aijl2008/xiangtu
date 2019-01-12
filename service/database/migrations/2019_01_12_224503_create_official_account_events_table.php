@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateEventLogsTable extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEventLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_logs', function (Blueprint $table) {
+        Schema::create('official_account_events', function (Blueprint $table) {
             $table->increments('id');
             $table->string("ToUserName");
             $table->string("FromUserName");
@@ -22,7 +22,6 @@ class CreateEventLogsTable extends Migration
             $table->string("Event");//subscribe(订阅)、unsubscribe(取消订阅),SCAN
             $table->string('EventKey');//事件KEY值，qrscene_为前缀，后面为二维码的参数值
             $table->string('Ticket');//二维码的ticket，可用来换取二维码图片
-
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ class CreateEventLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_logs');
+        Schema::dropIfExists('events');
     }
 }
