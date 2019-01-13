@@ -15,11 +15,26 @@ class CreateOfficialAccountFollowersTable extends Migration
     {
         Schema::create('official_account_followers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('app_id');
-            $table->string('from_open_id');
-            $table->string('open_id');
-            $table->dateTime('followed_at');
-            $table->dateTime('canceled_at');
+            $table->string('original_id')->default("");
+            $table->string('from_open_id')->default("");
+            $table->string('open_id')->default("");
+            $table->string('nickname')->default("");
+            $table->string('sex')->default("");
+            $table->string('language')->default("");
+            $table->string('city')->default("");
+            $table->string('province')->default("");
+            $table->string('country')->default("");
+            $table->string('headimgurl')->default("");
+            $table->string('subscribe_time')->default("");
+            $table->string('unionid')->default("");
+            $table->string('remark')->default("");
+            $table->integer('groupid')->default(0);
+            $table->string('tagid_list')->default("");
+            $table->string('subscribe_scene')->default("");
+            $table->string('qr_scene')->default("");
+            $table->string('qr_scene_str')->default("");
+            $table->dateTime('followed_at')->nullable();
+            $table->dateTime('canceled_at')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +46,6 @@ class CreateOfficialAccountFollowersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('followers');
+        Schema::dropIfExists('official_account_followers');
     }
 }

@@ -2,35 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Wechat\OfficialAccount\OfficialAccount;
+use App\Models\Wechat\OfficialAccount\Follower;
 use App\Service\Wechat\OfficialAccount\EventMessageHandler;
+use App\Service\Wechat\OfficialAccount\FileMessageHandler;
 use App\Service\Wechat\OfficialAccount\ImageMessageHandler;
+use App\Service\Wechat\OfficialAccount\LinkMessageHandler;
+use App\Service\Wechat\OfficialAccount\LocationMessageHandler;
+use App\Service\Wechat\OfficialAccount\MapMessageHandler;
 use App\Service\Wechat\OfficialAccount\MediaMessageHandler;
+use App\Service\Wechat\OfficialAccount\OfficialAccount;
+use App\Service\Wechat\OfficialAccount\QRCode;
 use App\Service\Wechat\OfficialAccount\TextMessageHandler;
-use EasyWeChat\Factory;
 use EasyWeChat\Kernel\Messages\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OfficialAccountController extends Controller
 {
-    function server(Request $request, $app_id)
+    function serve(Request $request, $app_id)
     {
-        $OfficialAccount = OfficialAccount::query()->findOrFail($app_id);
-        $app = Factory::officialAccount([
-            'app_id' => $OfficialAccount->app_id,
-            'secret' => $OfficialAccount->secret,
-            'token' => $OfficialAccount->token,
-            'aes_key' => $OfficialAccount->aes_key,
-        ]);
+        $app = OfficialAccount::instance($app_id);
         try {
-            //
-            $app->server->push(EventMessageHandler::class, Message::EVENT); // 图片消息
-            $app->server->push(ImageMessageHandler::class, Message::IMAGE); // 图片消息
-            $app->server->push(TextMessageHandler::class, Message::TEXT); // 文本消息
-            $app->server->push(MediaMessageHandler::class, Message::VOICE | Message::VIDEO | Message::SHORT_VIDEO); // 当消息为 三种中任意一种都可触发
+            $app->server->push(EventMessageHandler::class, Message::EVENT);
+            $app->server->push(ImageMessageHandler::class, Message::IMAGE);
+            $app->server->push(TextMessageHandler::class, Message::TEXT);
+            $app->server->push(MediaMessageHandler::class, Message::VOICE | Message::VIDEO | Message::SHORT_VIDEO);
+            $app->server->push(LocationMessageHandler::class, Message::LOCATION);
+            $app->server->push(MapMessageHandler::class, Message::LOCATION);
+            $app->server->push(FileMessageHandler::class, Message::FILE);
+            $app->server->push(LinkMessageHandler::class, Message::LINK);
+
+            $app->server->push(function ($message) use ($app) {
+                return __CLASS__ . '(' . var_export($message, true) . ')';
+            });
+
         } catch (\Exception $e) {
             Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
         }
         return $app->server->serve();
+    }
+
+    function qrcode(Request $request, $original_id)
+    {
+        $Follower = Follower::query()->where('open_id', $request->input('open_id'))->firstOrFail();
+        $OfficialAccount = \App\Models\Wechat\OfficialAccount\OfficialAccount::query()->where('original_id', $original_id)->firstOrFail();
+        $canvas = QRCode::make($OfficialAccount->app_id, $Follower);
+        return $canvas->response();
     }
 }

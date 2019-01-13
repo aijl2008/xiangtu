@@ -16,8 +16,9 @@ class CreateOfficialAccountPromotionsTable extends Migration
         Schema::create('official_account_promotions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('app_id');
+            $table->string('original_id');
             $table->string('poster');
+            $table->string('keywords');
             $table->string('tip');
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateOfficialAccountPromotionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('promotions');
+        Schema::dropIfExists('official_account_promotions');
     }
 }

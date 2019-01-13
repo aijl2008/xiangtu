@@ -9,6 +9,7 @@ Route::get("/vue", "VueController@index");
  * 公开页面，视频播放
  */
 Route::get("/videos/{video}", "VideoController@show")->name('videos.show');
+Route::post("/videos/play/{video}", "VideoController@play")->name('videos.play');
 Route::get("/", "VideoController@index")->name('home');
 /**
  * 管理员登录
@@ -28,6 +29,24 @@ Route::group(
     }
 );
 
+/**
+ * 公众号管理
+ */
+Route::group(
+    [
+        'middleware' => 'auth:admin',
+        'prefix' => 'wechat/official_account',
+        "namespace" => "Wechat\\OfficialAccount",
+        'as' => 'wechat.official_account.'
+    ],
+    function () {
+        Route::resource("/official_accounts", "OfficialAccountController");
+        Route::resource("/events", "EventController");
+        Route::resource("/promotions", "PromotionController");
+        Route::resource("/followers", "FollowerController");
+    }
+);
+
 
 /**
  * 管理页面组
@@ -40,6 +59,7 @@ Route::group(
         'as' => 'admin.'
     ],
     function () {
+        Route::any("/uploader/upload", "UploaderController@upload")->name("uploader.upload");
         /**
          * 首页
          */
@@ -161,8 +181,8 @@ Route::group(
  * 公众号消息接口
  */
 Route::any('/wechat', 'WechatServerController@serve')->name('wechat.serve');
-Route::any('/official_account', 'WechatServerController@official_account')->name('wechat.official_account');
-Route::any('/official_account/qrcode', 'WechatServerController@qrcode')->name('wechat.official_account.qrcode');
+Route::any('/official_account/{original_id}', 'OfficialAccountController@serve')->name('wechat.official_account.serve');
+Route::any('/official_account/{original_id}/qrcode', 'OfficialAccountController@qrcode')->name('wechat.official_account.qrcode');
 
 Route::any('/qr_code/user', 'QRCodeController@user');
 Route::any('/qr_code/video', 'QRCodeController@video');

@@ -9,11 +9,14 @@
 namespace App\Service\Wechat\OfficialAccount;
 
 use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
+use Illuminate\Support\Facades\Log;
 
 class MediaMessageHandler implements EventHandlerInterface
 {
     public function handle($payload = null)
     {
-        return $payload;
+        Log::debug(__METHOD__);
+        LogEvent::log($payload);
+        return "您发送的媒体{$payload['MediaId']}已接收";
     }
 }
